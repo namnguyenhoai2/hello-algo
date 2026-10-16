@@ -1,158 +1,158 @@
-# Space Complexity
+# Độ phức tạp về không gian
 
-<u>Space complexity</u> measures the growth trend of memory space occupied by an algorithm as the data size increases. This concept is very similar to time complexity, except that "running time" is replaced with "occupied memory space".
+<u>Độ phức tạp về không gian</u> đo lường xu hướng tăng của không gian bộ nhớ mà một thuật toán chiếm dụng khi kích thước dữ liệu tăng. Khái niệm này rất giống với độ phức tạp về thời gian, ngoại trừ việc “thời gian chạy” được thay bằng “không gian bộ nhớ đã chiếm dụng”.
 
-## Algorithm-Related Space
+## Không gian liên quan đến thuật toán
 
-The memory space used by an algorithm during execution mainly includes the following types.
+Không gian bộ nhớ được một thuật toán sử dụng trong quá trình thực thi chủ yếu bao gồm các loại sau:
 
-- **Input space**: Used to store the input data of the algorithm.
-- **Temporary space**: Used to store variables, objects, function contexts, and other data during the algorithm's execution.
-- **Output space**: Used to store the output data of the algorithm.
+- **Không gian đầu vào**: Dùng để lưu trữ dữ liệu đầu vào của thuật toán.
+- **Không gian tạm thời**: Dùng để lưu trữ các biến, đối tượng, ngữ cảnh hàm và dữ liệu khác trong quá trình thực thi thuật toán.
+- **Không gian đầu ra**: Dùng để lưu trữ dữ liệu đầu ra của thuật toán.
 
-In general, the scope of space complexity statistics is "temporary space" plus "output space".
+Nhìn chung, phạm vi thống kê độ phức tạp về không gian là “không gian tạm thời” cộng với “không gian đầu ra”.
 
-Temporary space can be further divided into three parts.
+Không gian tạm thời có thể được chia tiếp thành ba phần:
 
-- **Temporary data**: Used to save various constants, variables, objects, etc., during the algorithm's execution.
-- **Stack frame space**: Used to save the context data of called functions. The system creates a stack frame at the top of the stack each time a function is called, and the stack frame space is released after the function returns.
-- **Instruction space**: Used to save compiled program instructions, which are usually ignored in actual statistics.
+- **Dữ liệu tạm thời**: Dùng để lưu các hằng số, biến, đối tượng khác nhau, v.v. trong quá trình thực thi thuật toán.
+- **Không gian khung ngăn xếp**: Dùng để lưu dữ liệu ngữ cảnh của các hàm được gọi. Hệ thống tạo một khung ngăn xếp ở đầu ngăn xếp mỗi khi một hàm được gọi, và giải phóng không gian khung ngăn xếp sau khi hàm trả về.
+- **Không gian chỉ thị**: Dùng để lưu các chỉ thị chương trình đã biên dịch, thường được bỏ qua trong thống kê thực tế.
 
-When analyzing the space complexity of a program, **we usually consider three parts: temporary data, stack frame space, and output data**, as shown in the following figure.
+Khi phân tích độ phức tạp về không gian của một chương trình, **chúng ta thường xem xét ba phần: dữ liệu tạm thời, không gian khung ngăn xếp và dữ liệu đầu ra**, như trong hình dưới đây.
 
-![Algorithm-related space](space_complexity.assets/space_types.png)
+![Không gian liên quan đến thuật toán](space_complexity.assets/space_types.png)
 
-The related code is as follows:
+Mã liên quan như sau:
 
 === "Python"
 
     ```python title=""
     class Node:
-        """Class"""
+        """Lớp"""
         def __init__(self, x: int):
-            self.val: int = x              # Node value
-            self.next: Node | None = None  # Reference to the next node
+            self.val: int = x              # Giá trị nút
+            self.next: Node | None = None  # Tham chiếu đến nút tiếp theo
 
     def function() -> int:
-        """Function"""
-        # Perform some operations...
+        """Hàm"""
+        # Thực hiện một số thao tác...
         return 0
 
-    def algorithm(n) -> int:  # Input data
-        A = 0                 # Temporary data (constant, usually represented by uppercase letters)
-        b = 0                 # Temporary data (variable)
-        node = Node(0)        # Temporary data (object)
-        c = function()        # Stack frame space (function call)
-        return A + b + c      # Output data
+    def algorithm(n) -> int:  # Dữ liệu đầu vào
+        A = 0                 # Dữ liệu tạm thời (hằng số, thường được biểu diễn bằng chữ in hoa)
+        b = 0                 # Dữ liệu tạm thời (biến)
+        node = Node(0)        # Dữ liệu tạm thời (đối tượng)
+        c = function()        # Không gian khung ngăn xếp (lời gọi hàm)
+        return A + b + c      # Dữ liệu đầu ra
     ```
 
 === "C++"
 
     ```cpp title=""
-    /* Structure */
+    /* Cấu trúc */
     struct Node {
         int val;
         Node *next;
         Node(int x) : val(x), next(nullptr) {}
     };
 
-    /* Function */
+    /* Hàm */
     int func() {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0;
     }
 
-    int algorithm(int n) {        // Input data
-        const int a = 0;          // Temporary data (constant)
-        int b = 0;                // Temporary data (variable)
-        Node* node = new Node(0); // Temporary data (object)
-        int c = func();           // Stack frame space (function call)
-        return a + b + c;         // Output data
+    int algorithm(int n) {        // Dữ liệu đầu vào
+        const int a = 0;          // Dữ liệu tạm thời (hằng số)
+        int b = 0;                // Dữ liệu tạm thời (biến)
+        Node* node = new Node(0); // Dữ liệu tạm thời (đối tượng)
+        int c = func();           // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;         // Dữ liệu đầu ra
     }
     ```
 
 === "Java"
 
     ```java title=""
-    /* Class */
+    /* Lớp */
     class Node {
         int val;
         Node next;
         Node(int x) { val = x; }
     }
 
-    /* Function */
+    /* Hàm */
     int function() {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0;
     }
 
-    int algorithm(int n) {        // Input data
-        final int a = 0;          // Temporary data (constant)
-        int b = 0;                // Temporary data (variable)
-        Node node = new Node(0);  // Temporary data (object)
-        int c = function();       // Stack frame space (function call)
-        return a + b + c;         // Output data
+    int algorithm(int n) {        // Dữ liệu đầu vào
+        final int a = 0;          // Dữ liệu tạm thời (hằng số)
+        int b = 0;                // Dữ liệu tạm thời (biến)
+        Node node = new Node(0);  // Dữ liệu tạm thời (đối tượng)
+        int c = function();       // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;         // Dữ liệu đầu ra
     }
     ```
 
 === "C#"
 
     ```csharp title=""
-    /* Class */
+    /* Lớp */
     class Node(int x) {
         int val = x;
         Node next;
     }
 
-    /* Function */
+    /* Hàm */
     int Function() {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0;
     }
 
-    int Algorithm(int n) {        // Input data
-        const int a = 0;          // Temporary data (constant)
-        int b = 0;                // Temporary data (variable)
-        Node node = new(0);       // Temporary data (object)
-        int c = Function();       // Stack frame space (function call)
-        return a + b + c;         // Output data
+    int Algorithm(int n) {        // Dữ liệu đầu vào
+        const int a = 0;          // Dữ liệu tạm thời (hằng số)
+        int b = 0;                // Dữ liệu tạm thời (biến)
+        Node node = new(0);       // Dữ liệu tạm thời (đối tượng)
+        int c = Function();       // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;         // Dữ liệu đầu ra
     }
     ```
 
 === "Go"
 
     ```go title=""
-    /* Structure */
+    /* Cấu trúc */
     type node struct {
         val  int
         next *node
     }
 
-    /* Create node structure */
+    /* Tạo cấu trúc nút */
     func newNode(val int) *node {
         return &node{val: val}
     }
 
-    /* Function */
+    /* Hàm */
     func function() int {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0
     }
 
-    func algorithm(n int) int { // Input data
-        const a = 0             // Temporary data (constant)
-        b := 0                  // Temporary data (variable)
-        newNode(0)              // Temporary data (object)
-        c := function()         // Stack frame space (function call)
-        return a + b + c        // Output data
+    func algorithm(n int) int { // Dữ liệu đầu vào
+        const a = 0             // Dữ liệu tạm thời (hằng số)
+        b := 0                  // Dữ liệu tạm thời (biến)
+        newNode(0)              // Dữ liệu tạm thời (đối tượng)
+        c := function()         // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c        // Dữ liệu đầu ra
     }
     ```
 
 === "Swift"
 
     ```swift title=""
-    /* Class */
+    /* Lớp */
     class Node {
         var val: Int
         var next: Node?
@@ -162,99 +162,99 @@ The related code is as follows:
         }
     }
 
-    /* Function */
+    /* Hàm */
     func function() -> Int {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0
     }
 
-    func algorithm(n: Int) -> Int { // Input data
-        let a = 0             // Temporary data (constant)
-        var b = 0             // Temporary data (variable)
-        let node = Node(x: 0) // Temporary data (object)
-        let c = function()    // Stack frame space (function call)
-        return a + b + c      // Output data
+    func algorithm(n: Int) -> Int { // Dữ liệu đầu vào
+        let a = 0             // Dữ liệu tạm thời (hằng số)
+        var b = 0             // Dữ liệu tạm thời (biến)
+        let node = Node(x: 0) // Dữ liệu tạm thời (đối tượng)
+        let c = function()    // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c      // Dữ liệu đầu ra
     }
     ```
 
 === "JS"
 
     ```javascript title=""
-    /* Class */
+    /* Lớp */
     class Node {
         val;
         next;
         constructor(val) {
-            this.val = val === undefined ? 0 : val; // Node value
-            this.next = null;                       // Reference to the next node
+            this.val = val === undefined ? 0 : val; // Giá trị nút
+            this.next = null;                       // Tham chiếu đến nút tiếp theo
         }
     }
 
-    /* Function */
+    /* Hàm */
     function constFunc() {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
 
-    function algorithm(n) {       // Input data
-        const a = 0;              // Temporary data (constant)
-        let b = 0;                // Temporary data (variable)
-        const node = new Node(0); // Temporary data (object)
-        const c = constFunc();    // Stack frame space (function call)
-        return a + b + c;         // Output data
+    function algorithm(n) {       // Dữ liệu đầu vào
+        const a = 0;              // Dữ liệu tạm thời (hằng số)
+        let b = 0;                // Dữ liệu tạm thời (biến)
+        const node = new Node(0); // Dữ liệu tạm thời (đối tượng)
+        const c = constFunc();    // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;         // Dữ liệu đầu ra
     }
     ```
 
 === "TS"
 
     ```typescript title=""
-    /* Class */
+    /* Lớp */
     class Node {
         val: number;
         next: Node | null;
         constructor(val?: number) {
-            this.val = val === undefined ? 0 : val; // Node value
-            this.next = null;                       // Reference to the next node
+            this.val = val === undefined ? 0 : val; // Giá trị nút
+            this.next = null;                       // Tham chiếu đến nút tiếp theo
         }
     }
 
-    /* Function */
+    /* Hàm */
     function constFunc(): number {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
 
-    function algorithm(n: number): number { // Input data
-        const a = 0;                        // Temporary data (constant)
-        let b = 0;                          // Temporary data (variable)
-        const node = new Node(0);           // Temporary data (object)
-        const c = constFunc();              // Stack frame space (function call)
-        return a + b + c;                   // Output data
+    function algorithm(n: number): number { // Dữ liệu đầu vào
+        const a = 0;                        // Dữ liệu tạm thời (hằng số)
+        let b = 0;                          // Dữ liệu tạm thời (biến)
+        const node = new Node(0);           // Dữ liệu tạm thời (đối tượng)
+        const c = constFunc();              // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;                   // Dữ liệu đầu ra
     }
     ```
 
 === "Dart"
 
     ```dart title=""
-    /* Class */
+    /* Lớp */
     class Node {
       int val;
       Node next;
       Node(this.val, [this.next]);
     }
 
-    /* Function */
+    /* Hàm */
     int function() {
-      // Perform some operations...
+      // Thực hiện một số thao tác...
       return 0;
     }
 
-    int algorithm(int n) {  // Input data
-      const int a = 0;      // Temporary data (constant)
-      int b = 0;            // Temporary data (variable)
-      Node node = Node(0);  // Temporary data (object)
-      int c = function();   // Stack frame space (function call)
-      return a + b + c;     // Output data
+    int algorithm(int n) {  // Dữ liệu đầu vào
+      const int a = 0;      // Dữ liệu tạm thời (hằng số)
+      int b = 0;            // Dữ liệu tạm thời (biến)
+      Node node = Node(0);  // Dữ liệu tạm thời (đối tượng)
+      int c = function();   // Không gian khung ngăn xếp (lời gọi hàm)
+      return a + b + c;     // Dữ liệu đầu ra
     }
     ```
 
@@ -264,113 +264,113 @@ The related code is as follows:
     use std::rc::Rc;
     use std::cell::RefCell;
 
-    /* Structure */
+    /* Cấu trúc */
     struct Node {
         val: i32,
         next: Option<Rc<RefCell<Node>>>,
     }
 
-    /* Create Node structure */
+    /* Tạo cấu trúc Node */
     impl Node {
         fn new(val: i32) -> Self {
             Self { val: val, next: None }
         }
     }
 
-    /* Function */
+    /* Hàm */
     fn function() -> i32 {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0;
     }
 
-    fn algorithm(n: i32) -> i32 {       // Input data
-        const a: i32 = 0;               // Temporary data (constant)
-        let mut b = 0;                  // Temporary data (variable)
-        let node = Node::new(0);        // Temporary data (object)
-        let c = function();             // Stack frame space (function call)
-        return a + b + c;               // Output data
+    fn algorithm(n: i32) -> i32 {       // Dữ liệu đầu vào
+        const a: i32 = 0;               // Dữ liệu tạm thời (hằng số)
+        let mut b = 0;                  // Dữ liệu tạm thời (biến)
+        let node = Node::new(0);        // Dữ liệu tạm thời (đối tượng)
+        let c = function();             // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;               // Dữ liệu đầu ra
     }
     ```
 
 === "C"
 
     ```c title=""
-    /* Function */
+    /* Hàm */
     int func() {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0;
     }
 
-    int algorithm(int n) { // Input data
-        const int a = 0;   // Temporary data (constant)
-        int b = 0;         // Temporary data (variable)
-        int c = func();    // Stack frame space (function call)
-        return a + b + c;  // Output data
+    int algorithm(int n) { // Dữ liệu đầu vào
+        const int a = 0;   // Dữ liệu tạm thời (hằng số)
+        int b = 0;         // Dữ liệu tạm thời (biến)
+        int c = func();    // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c;  // Dữ liệu đầu ra
     }
     ```
 
 === "Kotlin"
 
     ```kotlin title=""
-    /* Class */
+    /* Lớp */
     class Node(var _val: Int) {
         var next: Node? = null
     }
 
-    /* Function */
+    /* Hàm */
     fun function(): Int {
-        // Perform some operations...
+        // Thực hiện một số thao tác...
         return 0
     }
 
-    fun algorithm(n: Int): Int { // Input data
-        val a = 0                // Temporary data (constant)
-        var b = 0                // Temporary data (variable)
-        val node = Node(0)       // Temporary data (object)
-        val c = function()       // Stack frame space (function call)
-        return a + b + c         // Output data
+    fun algorithm(n: Int): Int { // Dữ liệu đầu vào
+        val a = 0                // Dữ liệu tạm thời (hằng số)
+        var b = 0                // Dữ liệu tạm thời (biến)
+        val node = Node(0)       // Dữ liệu tạm thời (đối tượng)
+        val c = function()       // Không gian khung ngăn xếp (lời gọi hàm)
+        return a + b + c         // Dữ liệu đầu ra
     }
     ```
 
 === "Ruby"
 
     ```ruby title=""
-    ### Class ###
+    ### Lớp ###
     class Node
-        attr_accessor :val      # Node value
-        attr_accessor :next     # Reference to the next node
+        attr_accessor :val      # Giá trị của Node
+        attr_accessor :next     # Tham chiếu đến node tiếp theo
 
         def initialize(x)
             @val = x
         end
     end
 
-    ### Function ###
+    ### Hàm ###
     def function
-        # Perform some operations...
+        # Thực hiện một số thao tác...
         0
     end
 
-    ### Algorithm ###
-    def algorithm(n)        # Input data
-        a = 0               # Temporary data (constant)
-        b = 0               # Temporary data (variable)
-        node = Node.new(0)  # Temporary data (object)
-        c = function        # Stack frame space (function call)
-        a + b + c           # Output data
+    ### Thuật toán ###
+    def algorithm(n)        # Dữ liệu đầu vào
+        a = 0               # Dữ liệu tạm thời (hằng số)
+        b = 0               # Dữ liệu tạm thời (biến)
+        node = Node.new(0)  # Dữ liệu tạm thời (đối tượng)
+        c = function        # Không gian frame ngăn xếp (lời gọi hàm)
+        a + b + c           # Dữ liệu đầu ra
     end
     ```
 
-## Calculation Method
+## Phương pháp tính toán
 
-The calculation method for space complexity is roughly the same as for time complexity, except that what we measure changes from the "number of operations" to the "amount of space used".
+Phương pháp tính độ phức tạp không gian nhìn chung tương tự như phương pháp tính độ phức tạp thời gian, ngoại trừ việc đại lượng được đo chuyển từ “số lượng thao tác” sang “lượng không gian được sử dụng”.
 
-Unlike time complexity, **we usually only focus on the worst-case space complexity**. This is because memory space is a hard requirement, and we must ensure that sufficient memory space is reserved for all input data.
+Không giống độ phức tạp thời gian, **chúng ta thường chỉ tập trung vào độ phức tạp không gian trong trường hợp xấu nhất**. Điều này là do không gian bộ nhớ là một yêu cầu bắt buộc, và chúng ta phải đảm bảo dành đủ không gian bộ nhớ cho mọi dữ liệu đầu vào.
 
-Observe the following code. Here, "worst case" in worst-case space complexity has two meanings.
+Hãy quan sát đoạn mã sau. Ở đây, “trường hợp xấu nhất” trong độ phức tạp không gian trường hợp xấu nhất có hai ý nghĩa.
 
-1. **Based on the worst input data**: When $n < 10$, the space complexity is $O(1)$; but when $n > 10$, the initialized array `nums` occupies $O(n)$ space, so the worst-case space complexity is $O(n)$.
-2. **Based on the peak memory during algorithm execution**: For example, before executing the last line, the program occupies $O(1)$ space; when initializing the array `nums`, the program occupies $O(n)$ space, so the worst-case space complexity is $O(n)$.
+1. **Dựa trên dữ liệu đầu vào xấu nhất**: Khi $n < 10$, độ phức tạp không gian là $O(1)$; nhưng khi $n > 10$, mảng được khởi tạo `nums` chiếm không gian $O(n)$, vì vậy độ phức tạp không gian trong trường hợp xấu nhất là $O(n)$.
+2. **Dựa trên lượng bộ nhớ đạt đỉnh trong quá trình thực thi thuật toán**: Ví dụ, trước khi thực thi dòng cuối cùng, chương trình chiếm không gian $O(1)$; khi khởi tạo mảng `nums`, chương trình chiếm không gian $O(n)$, vì vậy độ phức tạp không gian trong trường hợp xấu nhất là $O(n)$.
 
 === "Python"
 
@@ -523,22 +523,22 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
     end
     ```
 
-**In recursive functions, it is necessary to count the stack frame space**. Observe the following code:
+**Trong các hàm đệ quy, cần tính cả không gian frame ngăn xếp**. Hãy quan sát đoạn mã sau:
 
 === "Python"
 
     ```python title=""
     def function() -> int:
-        # Perform some operations
+        # Thực hiện một số thao tác
         return 0
 
     def loop(n: int):
-        """Loop has space complexity of O(1)"""
+        """Vòng lặp có độ phức tạp không gian là O(1)"""
         for _ in range(n):
             function()
 
     def recur(n: int):
-        """Recursion has space complexity of O(n)"""
+        """Đệ quy có độ phức tạp không gian là O(n)"""
         if n == 1:
             return
         return recur(n - 1)
@@ -548,16 +548,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```cpp title=""
     int func() {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     void loop(int n) {
         for (int i = 0; i < n; i++) {
             func();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     void recur(int n) {
         if (n == 1) return;
         recur(n - 1);
@@ -568,16 +568,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```java title=""
     int function() {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     void loop(int n) {
         for (int i = 0; i < n; i++) {
             function();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     void recur(int n) {
         if (n == 1) return;
         recur(n - 1);
@@ -588,16 +588,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```csharp title=""
     int Function() {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     void Loop(int n) {
         for (int i = 0; i < n; i++) {
             Function();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     int Recur(int n) {
         if (n == 1) return 1;
         return Recur(n - 1);
@@ -608,18 +608,18 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```go title=""
     func function() int {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0
     }
 
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     func loop(n int) {
         for i := 0; i < n; i++ {
             function()
         }
     }
 
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     func recur(n int) {
         if n == 1 {
             return
@@ -633,18 +633,18 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
     ```swift title=""
     @discardableResult
     func function() -> Int {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0
     }
 
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     func loop(n: Int) {
         for _ in 0 ..< n {
             function()
         }
     }
 
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     func recur(n: Int) {
         if n == 1 {
             return
@@ -657,16 +657,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```javascript title=""
     function constFunc() {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     function loop(n) {
         for (let i = 0; i < n; i++) {
             constFunc();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     function recur(n) {
         if (n === 1) return;
         return recur(n - 1);
@@ -677,16 +677,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```typescript title=""
     function constFunc(): number {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     function loop(n: number): void {
         for (let i = 0; i < n; i++) {
             constFunc();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     function recur(n: number): void {
         if (n === 1) return;
         return recur(n - 1);
@@ -697,16 +697,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```dart title=""
     int function() {
-      // Perform some operations
+      // Thực hiện một số thao tác
       return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     void loop(int n) {
       for (int i = 0; i < n; i++) {
         function();
       }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     void recur(int n) {
       if (n == 1) return;
       recur(n - 1);
@@ -717,16 +717,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```rust title=""
     fn function() -> i32 {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     fn loop(n: i32) {
         for i in 0..n {
             function();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     fn recur(n: i32) {
         if n == 1 {
             return;
@@ -739,16 +739,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```c title=""
     int func() {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0;
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     void loop(int n) {
         for (int i = 0; i < n; i++) {
             func();
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     void recur(int n) {
         if (n == 1) return;
         recur(n - 1);
@@ -759,16 +759,16 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```kotlin title=""
     fun function(): Int {
-        // Perform some operations
+        // Thực hiện một số thao tác
         return 0
     }
-    /* Loop has space complexity of O(1) */
+    /* Vòng lặp có độ phức tạp không gian là O(1) */
     fun loop(n: Int) {
         for (i in 0..<n) {
             function()
         }
     }
-    /* Recursion has space complexity of O(n) */
+    /* Đệ quy có độ phức tạp không gian là O(n) */
     fun recur(n: Int) {
         if (n == 1) return
         return recur(n - 1)
@@ -779,30 +779,30 @@ Observe the following code. Here, "worst case" in worst-case space complexity ha
 
     ```ruby title=""
     def function
-        # Perform some operations
+        # Thực hiện một số thao tác
         0
     end
 
-    ### Loop has space complexity of O(1) ###
+    ### Vòng lặp có độ phức tạp không gian là O(1) ###
     def loop(n)
         (0...n).each { function }
     end
 
-    ### Recursion has space complexity of O(n) ###
+    ### Đệ quy có độ phức tạp không gian là O(n) ###
     def recur(n)
         return if n == 1
         recur(n - 1)
     end
     ```
 
-The time complexity of both functions `loop()` and `recur()` is $O(n)$, but their space complexities are different.
+Độ phức tạp thời gian của cả hai hàm `loop()` và `recur()` đều là $O(n)$, nhưng độ phức tạp không gian của chúng khác nhau.
 
-- The function `loop()` calls `function()` $n$ times in a loop. In each iteration, `function()` returns and releases its stack frame space, so the space complexity remains $O(1)$.
-- The recursive function `recur()` has $n$ unreturned `recur()` instances existing simultaneously during execution, thus occupying $O(n)$ stack frame space.
+- Hàm `loop()` gọi `function()` $n$ lần trong một vòng lặp. Ở mỗi lần lặp, `function()` trả về và giải phóng không gian của stack frame, vì vậy độ phức tạp không gian vẫn là $O(1)$.
+- Hàm đệ quy `recur()` có $n$ instance `recur()` chưa trả về cùng tồn tại trong quá trình thực thi, do đó chiếm $O(n)$ không gian stack frame.
 
-## Common Types
+## Các loại phổ biến
 
-Let the input data size be $n$. The following figure shows common types of space complexity (arranged from low to high).
+Cho kích thước dữ liệu đầu vào là $n$. Hình sau đây minh họa các loại độ phức tạp không gian phổ biến (được sắp xếp từ thấp đến cao).
 
 $$
 \begin{aligned}
@@ -811,70 +811,70 @@ $$
 \end{aligned}
 $$
 
-![Common types of space complexity](space_complexity.assets/space_complexity_common_types.png)
+![Các loại độ phức tạp không gian phổ biến](space_complexity.assets/space_complexity_common_types.png)
 
-### Constant Order $O(1)$
+### Độ phức tạp hằng số $O(1)$
 
-Constant order is common for constants, variables, and objects whose number is independent of the input data size $n$.
+Độ phức tạp hằng số thường gặp ở các hằng số, biến và đối tượng có số lượng không phụ thuộc vào kích thước dữ liệu đầu vào $n$.
 
-It should be noted that memory occupied by initializing variables or calling functions in a loop is released when entering the next iteration, so it does not accumulate space, and the space complexity remains $O(1)$:
+Cần lưu ý rằng bộ nhớ được sử dụng khi khởi tạo biến hoặc gọi hàm trong một vòng lặp sẽ được giải phóng khi bắt đầu lần lặp tiếp theo, vì vậy nó không tích lũy không gian và độ phức tạp không gian vẫn là $O(1)$:
 
 ```src
 [file]{space_complexity}-[class]{}-[func]{constant}
 ```
 
-### Linear Order $O(n)$
+### Độ phức tạp tuyến tính $O(n)$
 
-Linear order is common in arrays, linked lists, stacks, queues, etc., where the number of elements is proportional to $n$:
+Độ phức tạp tuyến tính thường gặp ở mảng, danh sách liên kết, stack, queue, v.v., trong đó số phần tử tỷ lệ với $n$:
 
 ```src
 [file]{space_complexity}-[class]{}-[func]{linear}
 ```
 
-As shown in the following figure, the recursion depth of this function is $n$, meaning that there are $n$ unreturned `linear_recur()` functions existing simultaneously, using $O(n)$ stack frame space:
+Như minh họa trong hình sau, độ sâu đệ quy của hàm này là $n$, nghĩa là có $n$ hàm `linear_recur()` chưa trả về cùng tồn tại, sử dụng $O(n)$ không gian stack frame:
 
 ```src
 [file]{space_complexity}-[class]{}-[func]{linear_recur}
 ```
 
-![Linear order space complexity generated by recursive function](space_complexity.assets/space_complexity_recursive_linear.png)
+![Độ phức tạp không gian tuyến tính do hàm đệ quy tạo ra](space_complexity.assets/space_complexity_recursive_linear.png)
 
-### Quadratic Order $O(n^2)$
+### Độ phức tạp bậc hai $O(n^2)$
 
-Quadratic order is common in matrices and graphs, where the number of elements is quadratically related to $n$:
+Độ phức tạp bậc hai thường gặp ở ma trận và đồ thị, trong đó số phần tử có quan hệ bậc hai với $n$:
 
 ```src
 [file]{space_complexity}-[class]{}-[func]{quadratic}
 ```
 
-As shown in the following figure, the recursion depth of this function is $n$, and an array is initialized in each recursive function with lengths of $n$, $n-1$, $\dots$, $2$, $1$, with an average length of $n / 2$, thus occupying $O(n^2)$ space overall:
+Như minh họa trong hình sau, độ sâu đệ quy của hàm này là $n$, và một mảng được khởi tạo trong mỗi hàm đệ quy với độ dài lần lượt là $n$, $n-1$, $\dots$, $2$, $1$, có độ dài trung bình là $n / 2$, do đó tổng thể chiếm $O(n^2)$ không gian:
 
 ```src
 [file]{space_complexity}-[class]{}-[func]{quadratic_recur}
 ```
 
-![Quadratic order space complexity generated by recursive function](space_complexity.assets/space_complexity_recursive_quadratic.png)
+![Độ phức tạp không gian bậc hai do hàm đệ quy tạo ra](space_complexity.assets/space_complexity_recursive_quadratic.png)
 
-### Exponential Order $O(2^n)$
+### Độ phức tạp lũy thừa $O(2^n)$
 
-Exponential order is common in binary trees. Observe the following figure: a "full binary tree" with $n$ levels has $2^n - 1$ nodes, occupying $O(2^n)$ space:
+Độ phức tạp lũy thừa thường gặp ở cây nhị phân. Hãy quan sát hình sau: một "cây nhị phân đầy đủ" có $n$ tầng có $2^n - 1$ nút, chiếm $O(2^n)$ không gian:
 
 ```src
 [file]{space_complexity}-[class]{}-[func]{build_tree}
 ```
 
-![Exponential order space complexity generated by full binary tree](space_complexity.assets/space_complexity_exponential.png)
+![Độ phức tạp không gian lũy thừa do cây nhị phân đầy đủ tạo ra](space_complexity.assets/space_complexity_exponential.png)
 
-### Logarithmic Order $O(\log n)$
+### Độ phức tạp logarit $O(\log n)$
 
-Logarithmic order is common in divide-and-conquer algorithms. For example, merge sort: given an input array of length $n$, each recursion divides the array in half from the midpoint, forming a recursion tree of height $\log n$, using $O(\log n)$ stack frame space.
+Độ phức tạp logarit thường gặp trong các thuật toán chia để trị. Ví dụ, merge sort: với một mảng đầu vào có độ dài $n$, mỗi lần đệ quy chia đôi mảng từ điểm giữa, tạo thành một cây đệ quy có chiều cao $\log n$, sử dụng $O(\log n)$ không gian stack frame.
 
-Another example is converting a number to a string. Given a positive integer $n$, it has $\lfloor \log_{10} n \rfloor + 1$ digits, i.e., the corresponding string length is $\lfloor \log_{10} n \rfloor + 1$, so the space complexity is $O(\log_{10} n + 1) = O(\log n)$.
+Một ví dụ khác là chuyển đổi một số thành chuỗi. Với một số nguyên dương $n$, số đó có $\lfloor \log_{10} n \rfloor + 1$ chữ số, tức là độ dài chuỗi tương ứng là $\lfloor \log_{10} n \rfloor + 1$, vì vậy độ phức tạp không gian là $O(\log_{10} n + 1) = O(\log n)$.
 
-## Trading Time for Space
+## Đánh đổi thời gian và không gian
 
-Ideally, we hope that both the time complexity and space complexity of an algorithm can reach optimal. However, in practice, optimizing both time complexity and space complexity simultaneously is usually very difficult.
+Lý tưởng nhất là độ phức tạp thời gian và độ phức tạp không gian của một thuật toán đều đạt mức tối ưu. Tuy nhiên, trên thực tế, việc tối ưu đồng thời cả độ phức tạp thời gian và độ phức tạp không gian thường rất khó.
 
-**Reducing time complexity usually comes at the cost of increasing space complexity, and vice versa**. Sacrificing memory space to improve execution speed is called "trading space for time"; the reverse is called "trading time for space".
+**Việc giảm độ phức tạp thời gian thường phải trả giá bằng việc tăng độ phức tạp không gian, và ngược lại**. Hy sinh không gian bộ nhớ để cải thiện tốc độ thực thi được gọi là "đánh đổi không gian lấy thời gian"; ngược lại được gọi là "đánh đổi thời gian lấy không gian".
 
-The choice of which approach depends on which aspect we value more. In most cases, time is more precious than space, so "trading space for time" is usually the more common strategy. Of course, when the data volume is very large, controlling space complexity is also very important.
+Việc lựa chọn phương pháp nào phụ thuộc vào khía cạnh mà chúng ta coi trọng hơn. Trong hầu hết trường hợp, thời gian quý giá hơn không gian, vì vậy "đánh đổi không gian lấy thời gian" thường là chiến lược phổ biến hơn. Dĩ nhiên, khi khối lượng dữ liệu rất lớn, việc kiểm soát độ phức tạp không gian cũng rất quan trọng.

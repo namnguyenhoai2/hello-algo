@@ -1,9 +1,9 @@
-# Complexity Analysis
+# Phân tích độ phức tạp
 
-![Complexity analysis](../assets/covers/chapter_complexity_analysis.jpg)
+![Phân tích độ phức tạp](../assets/covers/chapter_complexity_analysis.jpg)
 
 !!! abstract
 
-    Complexity analysis is like a space-time guide in the vast universe of algorithms.
+    Phân tích độ phức tạp giống như một kim chỉ nam về thời gian và không gian trong vũ trụ rộng lớn của các thuật toán.
 
-    It leads us to explore deeply within the two dimensions of time and space, seeking more elegant solutions.
+    Nó dẫn dắt chúng ta khám phá sâu vào hai chiều thời gian và không gian, tìm kiếm những lời giải thanh thoát hơn.

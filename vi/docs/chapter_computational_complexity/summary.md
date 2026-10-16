@@ -1,55 +1,55 @@
-# Summary
+# Tóm tắt
 
-### Key Review
+### Đánh giá chính
 
-**Algorithm Efficiency Assessment**
+**Đánh giá hiệu quả thuật toán**
 
-- Time efficiency and space efficiency are the two primary evaluation metrics for measuring algorithm performance.
-- We can evaluate algorithm efficiency through actual testing, but it is difficult to eliminate the influence of the testing environment, and it consumes substantial computational resources.
-- Complexity analysis can overcome the limitations of actual testing. Its results apply across running platforms, and it can reveal algorithm efficiency under different data scales.
+- Hiệu quả về thời gian và hiệu quả về không gian là hai chỉ số đánh giá chính để đo lường hiệu năng của thuật toán.
+- Chúng ta có thể đánh giá hiệu quả thuật toán thông qua việc kiểm thử thực tế, nhưng rất khó loại bỏ ảnh hưởng của môi trường kiểm thử, đồng thời phương pháp này tiêu tốn đáng kể tài nguyên tính toán.
+- Phân tích độ phức tạp có thể khắc phục những hạn chế của việc kiểm thử thực tế. Kết quả phân tích có thể áp dụng trên nhiều nền tảng chạy khác nhau và cho thấy hiệu quả của thuật toán ở các quy mô dữ liệu khác nhau.
 
-**Time Complexity**
+**Độ phức tạp thời gian**
 
-- Time complexity is used to measure the trend of algorithm runtime as data volume increases. It can effectively evaluate algorithm efficiency, but it may be less informative in certain situations, such as when the input data volume is small or when time complexities are identical, making it impossible to precisely compare algorithm efficiency.
-- Worst-case time complexity is represented using Big $O$ notation, corresponding to the asymptotic upper bound of a function, reflecting the growth level of the number of operations $T(n)$ as $n$ approaches positive infinity.
-- Deriving time complexity involves two steps: first, counting the number of operations, then determining the asymptotic upper bound.
-- Common time complexities arranged from low to high include $O(1)$, $O(\log n)$, $O(n)$, $O(n \log n)$, $O(n^2)$, $O(2^n)$, and $O(n!)$.
-- The time complexity of some algorithms is not fixed, but rather depends on the distribution of input data. Time complexity is divided into worst-case, best-case, and average-case time complexity. Best-case time complexity is rarely used because input data generally needs to satisfy strict conditions to achieve the best case.
-- Average time complexity reflects the algorithm's runtime efficiency under random data input, and is closest to the algorithm's performance in practical applications. Calculating average time complexity requires analyzing the input data distribution and the resulting mathematical expectation.
+- Độ phức tạp thời gian được dùng để đo xu hướng thay đổi của thời gian chạy thuật toán khi khối lượng dữ liệu tăng lên. Nó có thể đánh giá hiệu quả thuật toán một cách hiệu quả, nhưng có thể kém hữu ích trong một số tình huống, chẳng hạn khi khối lượng dữ liệu đầu vào nhỏ hoặc khi các độ phức tạp thời gian giống nhau, khiến không thể so sánh chính xác hiệu quả của các thuật toán.
+- Độ phức tạp thời gian trong trường hợp xấu nhất được biểu diễn bằng ký hiệu Big $O$, tương ứng với cận trên tiệm cận của một hàm, phản ánh mức độ tăng của số phép toán $T(n)$ khi $n$ tiến đến dương vô cùng.
+- Việc suy ra độ phức tạp thời gian gồm hai bước: trước tiên đếm số phép toán, sau đó xác định cận trên tiệm cận.
+- Các độ phức tạp thời gian phổ biến, được sắp xếp từ thấp đến cao, gồm $O(1)$, $O(\log n)$, $O(n)$, $O(n \log n)$, $O(n^2)$, $O(2^n)$ và $O(n!)$.
+- Độ phức tạp thời gian của một số thuật toán không cố định mà phụ thuộc vào sự phân bố của dữ liệu đầu vào. Độ phức tạp thời gian được chia thành độ phức tạp thời gian trong trường hợp xấu nhất, trường hợp tốt nhất và trường hợp trung bình. Độ phức tạp thời gian trong trường hợp tốt nhất hiếm khi được sử dụng vì dữ liệu đầu vào thường phải thỏa mãn các điều kiện nghiêm ngặt mới đạt được trường hợp tốt nhất.
+- Độ phức tạp thời gian trung bình phản ánh hiệu quả thời gian chạy của thuật toán khi dữ liệu đầu vào là ngẫu nhiên và gần với hiệu năng của thuật toán trong các ứng dụng thực tế nhất. Việc tính độ phức tạp thời gian trung bình đòi hỏi phải phân tích phân bố dữ liệu đầu vào và kỳ vọng toán học tương ứng.
 
-**Space Complexity**
+**Độ phức tạp không gian**
 
-- Space complexity serves a similar purpose to time complexity, used to measure the trend of algorithm memory usage as data volume increases.
-- The memory space related to algorithm execution can be divided into input space, temporary space, and output space. Typically, input space is not included in space complexity calculations. Temporary space can be divided into temporary data, stack frame space, and instruction space, where stack frame space usually affects space complexity only in recursive functions.
-- We typically only focus on worst-case space complexity, which is the space complexity of an algorithm under worst-case input data and worst-case runtime.
-- Common space complexities arranged from low to high include $O(1)$, $O(\log n)$, $O(n)$, $O(n^2)$, and $O(2^n)$.
+- Độ phức tạp không gian có mục đích tương tự độ phức tạp thời gian, được dùng để đo xu hướng thay đổi của mức sử dụng bộ nhớ của thuật toán khi khối lượng dữ liệu tăng lên.
+- Không gian bộ nhớ liên quan đến quá trình thực thi thuật toán có thể được chia thành không gian đầu vào, không gian tạm thời và không gian đầu ra. Thông thường, không gian đầu vào không được tính vào độ phức tạp không gian. Không gian tạm thời có thể được chia thành dữ liệu tạm thời, không gian stack frame và không gian lệnh; trong đó, không gian stack frame thường chỉ ảnh hưởng đến độ phức tạp không gian trong các hàm đệ quy.
+- Thông thường, chúng ta chỉ quan tâm đến độ phức tạp không gian trong trường hợp xấu nhất, tức là độ phức tạp không gian của thuật toán với dữ liệu đầu vào và thời gian chạy đều ở trường hợp xấu nhất.
+- Các độ phức tạp không gian phổ biến, được sắp xếp từ thấp đến cao, gồm $O(1)$, $O(\log n)$, $O(n)$, $O(n^2)$ và $O(2^n)$.
 
-### Q & A
+### Hỏi & Đáp
 
-**Q**: Is the space complexity of tail recursion $O(1)$?
+**Q**: Độ phức tạp không gian của đệ quy đuôi có phải là $O(1)$ không?
 
-Theoretically, the space complexity of tail recursive functions can be optimized to $O(1)$. However, most programming languages (such as Java, Python, C++, Go, C#, etc.) do not support automatic tail recursion optimization, so the space complexity is generally considered to be $O(n)$.
+Về mặt lý thuyết, độ phức tạp không gian của các hàm đệ quy đuôi có thể được tối ưu xuống $O(1)$. Tuy nhiên, hầu hết các ngôn ngữ lập trình (chẳng hạn như Java, Python, C++, Go, C#, v.v.) không hỗ trợ tự động tối ưu hóa đệ quy đuôi, nên độ phức tạp không gian thường được xem là $O(n)$.
 
-**Q**: What is the difference between the terms function and method?
+**Q**: Sự khác biệt giữa các thuật ngữ hàm và phương thức là gì?
 
-A <u>function</u> can be executed independently, with all parameters passed explicitly. A <u>method</u> is associated with an object, is implicitly bound to the object that invokes it, and can operate on data contained in class instances.
+Một <u>hàm</u> có thể được thực thi độc lập, với tất cả tham số được truyền một cách tường minh. Một <u>phương thức</u> được liên kết với một đối tượng, được liên kết ngầm với đối tượng gọi nó và có thể thao tác trên dữ liệu được chứa trong các thể hiện của lớp.
 
-The following examples use several common programming languages for illustration.
+Các ví dụ sau sử dụng một số ngôn ngữ lập trình phổ biến để minh họa.
 
-- C is a procedural programming language without object-oriented concepts, so it only has functions. However, we can simulate object-oriented programming by creating structures (struct), and functions associated with structures are equivalent to methods in other programming languages.
-- Java and C# are object-oriented programming languages where code blocks (methods) are typically part of a class. Static methods behave like functions because they are bound to the class and cannot access specific instance variables.
-- C++ and Python support both procedural programming (functions) and object-oriented programming (methods).
+- C là một ngôn ngữ lập trình thủ tục không có các khái niệm hướng đối tượng, vì vậy nó chỉ có các hàm. Tuy nhiên, chúng ta có thể mô phỏng lập trình hướng đối tượng bằng cách tạo các cấu trúc (struct), và các hàm liên kết với cấu trúc tương đương với các phương thức trong những ngôn ngữ lập trình khác.
+- Java và C# là các ngôn ngữ lập trình hướng đối tượng, trong đó các khối mã (phương thức) thường là một phần của một lớp. Các phương thức tĩnh hoạt động như các hàm vì chúng được liên kết với lớp và không thể truy cập các biến thể hiện cụ thể.
+- C++ và Python hỗ trợ cả lập trình thủ tục (hàm) lẫn lập trình hướng đối tượng (phương thức).
 
-**Q**: Does the diagram for "common space complexity types" reflect the absolute size of occupied space?
+**Q**: Biểu đồ về “các loại độ phức tạp không gian phổ biến” có phản ánh kích thước tuyệt đối của không gian bị chiếm dụng không?
 
-No, the diagram shows space complexity, which reflects growth trends rather than the absolute size of occupied space.
+Không, biểu đồ thể hiện độ phức tạp không gian, phản ánh xu hướng tăng trưởng thay vì kích thước tuyệt đối của không gian bị chiếm dụng.
 
-Assuming $n = 8$, you might find that the values of each curve do not correspond to the functions. This is because each curve contains a constant term used to compress the value range into a visually comfortable range.
+Giả sử $n = 8$, bạn có thể nhận thấy giá trị của mỗi đường cong không tương ứng với các hàm. Điều này là do mỗi đường cong chứa một hằng số, được dùng để nén phạm vi giá trị vào một khoảng trực quan dễ quan sát.
 
-In practice, because we generally do not know the "constant-term" cost of each method, we usually cannot choose the optimal solution for cases like $n = 8$ based on complexity alone. But for $n = 8^5$, the choice is straightforward, because the growth trend already dominates.
+Trong thực tế, vì chúng ta thường không biết chi phí “hạng tử hằng” của mỗi phương pháp, nên thường không thể chỉ dựa vào độ phức tạp để chọn giải pháp tối ưu cho các trường hợp như $n = 8$. Nhưng với $n = 8^5$, lựa chọn trở nên rõ ràng, vì xu hướng tăng trưởng đã chi phối.
 
-**Q**: Are there situations where algorithms are designed to sacrifice time (or space) based on actual use cases?
+**Q**: Có những trường hợp nào thuật toán được thiết kế để đánh đổi thời gian (hoặc không gian) dựa trên các trường hợp sử dụng thực tế không?
 
-In practical applications, most situations choose to sacrifice space for time. For example, with database indexes, we typically choose to build B+ trees or hash indexes, occupying substantial memory space in exchange for efficient queries of $O(\log n)$ or even $O(1)$.
+Trong các ứng dụng thực tế, phần lớn các trường hợp chọn đánh đổi không gian để lấy thời gian. Ví dụ, với các index cơ sở dữ liệu, chúng ta thường chọn xây dựng cây B+ hoặc hash index, sử dụng một lượng lớn không gian bộ nhớ để đổi lấy các truy vấn hiệu quả với độ phức tạp $O(\log n)$ hoặc thậm chí $O(1)$.
 
-In scenarios where space resources are precious, time may be sacrificed for space. For example, in embedded development, device memory is precious, and engineers may forgo using hash tables and choose to use array sequential search to save memory usage, at the cost of slower searches.
+Trong những tình huống tài nguyên không gian khan hiếm, thời gian có thể được đánh đổi để tiết kiệm không gian. Ví dụ, trong phát triển hệ thống nhúng, bộ nhớ thiết bị rất quý giá, nên các kỹ sư có thể không sử dụng hash table mà chọn tìm kiếm tuần tự trên mảng để tiết kiệm bộ nhớ, đổi lại tốc độ tìm kiếm chậm hơn.

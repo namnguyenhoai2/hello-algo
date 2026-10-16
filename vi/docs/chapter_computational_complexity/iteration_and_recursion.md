@@ -1,194 +1,194 @@
-# Iteration and Recursion
+# Lặp và đệ quy
 
-In algorithms, repeatedly executing a task is very common and closely related to complexity analysis. Therefore, before introducing time complexity and space complexity, let's first understand how to implement repeated task execution in programs, namely the two basic program control structures: iteration and recursion.
+Trong các thuật toán, việc thực thi lặp đi lặp lại một tác vụ là rất phổ biến và có liên quan chặt chẽ đến việc phân tích độ phức tạp. Vì vậy, trước khi giới thiệu độ phức tạp thời gian và độ phức tạp không gian, trước tiên hãy tìm hiểu cách triển khai việc thực thi lặp lại các tác vụ trong chương trình, cụ thể là hai cấu trúc điều khiển chương trình cơ bản: lặp và đệ quy.
 
-## Iteration
+## Lặp
 
-<u>Iteration</u> is a control structure for repeatedly executing a task. In iteration, a program repeatedly executes a segment of code under certain conditions until those conditions are no longer satisfied.
+<u>Lặp</u> là một cấu trúc điều khiển dùng để thực thi lặp đi lặp lại một tác vụ. Trong phép lặp, chương trình liên tục thực thi một đoạn mã khi thỏa mãn các điều kiện nhất định, cho đến khi các điều kiện đó không còn được thỏa mãn.
 
-### For Loop
+### Vòng lặp For
 
-The `for` loop is one of the most common forms of iteration, **suitable for use when the number of iterations is known in advance**.
+Vòng lặp `for` là một trong những dạng lặp phổ biến nhất, **phù hợp khi đã biết trước số lần lặp**.
 
-The following function implements the summation $1 + 2 + \dots + n$ using a `for` loop, with the result stored in the variable `res`. Note that in Python, `range(a, b)` corresponds to a "left-closed, right-open" interval, with the traversal range being $a, a + 1, \dots, b-1$:
+Hàm sau đây sử dụng vòng lặp `for` để tính tổng $1 + 2 + \dots + n$, với kết quả được lưu trong biến `res`. Lưu ý rằng trong Python, `range(a, b)` tương ứng với một khoảng "đóng trái, mở phải", trong đó phạm vi duyệt là $a, a + 1, \dots, b-1$:
 
 ```src
 [file]{iteration}-[class]{}-[func]{for_loop}
 ```
 
-The figure below shows the flowchart of this summation function.
+Hình dưới đây minh họa lưu đồ của hàm tính tổng này.
 
-![Flowchart of the summation function](iteration_and_recursion.assets/iteration.png)
+![Lưu đồ của hàm tính tổng](iteration_and_recursion.assets/iteration.png)
 
-The number of operations in this summation function is proportional to the input data size $n$, or has a "linear relationship". In fact, **time complexity describes precisely this "linear relationship"**. Related content will be introduced in detail in the next section.
+Số phép toán trong hàm tính tổng này tỷ lệ với kích thước dữ liệu đầu vào $n$, hay có "mối quan hệ tuyến tính". Trên thực tế, **độ phức tạp thời gian mô tả chính xác "mối quan hệ tuyến tính" này**. Nội dung liên quan sẽ được giới thiệu chi tiết trong phần tiếp theo.
 
-### While Loop
+### Vòng lặp While
 
-Similar to the `for` loop, the `while` loop is also a method for implementing iteration. In a `while` loop, the program first checks the condition in each round; if the condition is true, it continues execution, otherwise it ends the loop.
+Tương tự vòng lặp `for`, vòng lặp `while` cũng là một phương pháp triển khai phép lặp. Trong vòng lặp `while`, chương trình kiểm tra điều kiện ở mỗi vòng; nếu điều kiện đúng, chương trình tiếp tục thực thi, nếu không thì kết thúc vòng lặp.
 
-Below we use a `while` loop to implement the summation $1 + 2 + \dots + n$:
+Dưới đây, chúng ta sử dụng vòng lặp `while` để tính tổng $1 + 2 + \dots + n$:
 
 ```src
 [file]{iteration}-[class]{}-[func]{while_loop}
 ```
 
-**The `while` loop has greater flexibility than the `for` loop**. In a `while` loop, we can freely design the initialization and update steps of the condition variable.
+**Vòng lặp `while` linh hoạt hơn vòng lặp `for`**. Trong vòng lặp `while`, chúng ta có thể tự do thiết kế bước khởi tạo và bước cập nhật của biến điều kiện.
 
-For example, in the following code, the condition variable $i$ is updated twice per round, which is not convenient to implement using a `for` loop:
+Ví dụ, trong đoạn mã sau, biến điều kiện $i$ được cập nhật hai lần trong mỗi vòng, điều này không thuận tiện khi triển khai bằng vòng lặp `for`:
 
 ```src
 [file]{iteration}-[class]{}-[func]{while_loop_ii}
 ```
 
-Overall, **`for` loops have more compact code, while `while` loops are more flexible**; both can implement iterative structures. The choice of which to use should be determined based on the requirements of the specific problem.
+Nhìn chung, **vòng lặp `for` có mã ngắn gọn hơn, trong khi vòng lặp `while` linh hoạt hơn**; cả hai đều có thể triển khai cấu trúc lặp. Việc lựa chọn sử dụng loại nào nên dựa trên yêu cầu của bài toán cụ thể.
 
-### Nested Loops
+### Vòng lặp lồng nhau
 
-We can nest one loop structure inside another. Below is an example using `for` loops:
+Chúng ta có thể lồng một cấu trúc vòng lặp bên trong một cấu trúc vòng lặp khác. Dưới đây là một ví dụ sử dụng các vòng lặp `for`:
 
 ```src
 [file]{iteration}-[class]{}-[func]{nested_for_loop}
 ```
 
-The figure below shows the flowchart of this nested loop.
+Hình dưới đây minh họa lưu đồ của vòng lặp lồng nhau này.
 
-![Flowchart of nested loops](iteration_and_recursion.assets/nested_iteration.png)
+![Lưu đồ của các vòng lặp lồng nhau](iteration_and_recursion.assets/nested_iteration.png)
 
-In this case, the number of operations of the function is proportional to $n^2$, or the algorithm's running time has a "quadratic relationship" with the input data size $n$.
+Trong trường hợp này, số phép toán của hàm tỷ lệ với $n^2$, hay thời gian chạy của thuật toán có "mối quan hệ bậc hai" với kích thước dữ liệu đầu vào $n$.
 
-We can continue adding nested loops, where each additional level of nesting can be viewed as an increase in dimensionality, raising the time complexity to a "cubic relationship", a "quartic relationship", and so on.
+Chúng ta có thể tiếp tục thêm các vòng lặp lồng nhau, trong đó mỗi cấp độ lồng nhau bổ sung có thể được xem là sự gia tăng số chiều, làm độ phức tạp thời gian tăng lên thành "mối quan hệ bậc ba", "mối quan hệ bậc bốn", v.v.
 
-## Recursion
+## Đệ quy
 
-<u>Recursion</u> is an algorithmic strategy that solves problems by having a function call itself. It mainly consists of two phases.
+<u>Đệ quy</u> là một chiến lược thuật toán giải quyết bài toán bằng cách để một hàm tự gọi chính nó. Chiến lược này chủ yếu gồm hai giai đoạn.
 
-1. **Descend**: The program continuously calls itself deeper, usually passing in smaller or more simplified parameters, until reaching a "termination condition".
-2. **Ascend**: After triggering the "termination condition", the program returns layer by layer from the deepest recursive function, aggregating the result of each layer.
+1. **Đi xuống**: Chương trình liên tục tự gọi sâu hơn, thường truyền vào các tham số nhỏ hơn hoặc đơn giản hơn, cho đến khi đạt đến "điều kiện kết thúc".
+2. **Đi lên**: Sau khi đạt đến "điều kiện kết thúc", chương trình lần lượt quay trở về từ hàm đệ quy sâu nhất, tổng hợp kết quả của từng tầng.
 
-From an implementation perspective, recursive code mainly consists of three elements.
+Xét về cách triển khai, mã đệ quy chủ yếu gồm ba thành phần.
 
-1. **Termination condition**: Used to determine when to switch from "descending" to "ascending".
-2. **Recursive call**: Corresponds to "descending", where the function calls itself, usually with smaller or more simplified parameters.
-3. **Return result**: Corresponds to "ascending", returning the result of the current recursion level to the previous layer.
+1. **Điều kiện kết thúc**: Dùng để xác định thời điểm chuyển từ "đi xuống" sang "đi lên".
+2. **Lời gọi đệ quy**: Tương ứng với "đi xuống", khi hàm tự gọi chính nó, thường với các tham số nhỏ hơn hoặc đơn giản hơn.
+3. **Trả về kết quả**: Tương ứng với "đi lên", trả về kết quả của cấp đệ quy hiện tại cho tầng trước đó.
 
-Observe the following code. We only need to call the function `recur(n)` to complete the calculation of $1 + 2 + \dots + n$:
+Hãy quan sát đoạn mã sau. Chúng ta chỉ cần gọi hàm `recur(n)` để hoàn tất việc tính $1 + 2 + \dots + n$:
 
 ```src
 [file]{recursion}-[class]{}-[func]{recur}
 ```
 
-The figure below shows the recursive process of this function.
+Hình dưới đây minh họa quá trình đệ quy của hàm này.
 
-![Recursive process of the summation function](iteration_and_recursion.assets/recursion_sum.png)
+![Quá trình đệ quy của hàm tính tổng](iteration_and_recursion.assets/recursion_sum.png)
 
-Although from a computational perspective, iteration and recursion can achieve the same results, **they represent two completely different paradigms for thinking about and solving problems**.
+Mặc dù xét về mặt tính toán, lặp và đệ quy có thể đạt được cùng một kết quả, **chúng đại diện cho hai paradigm hoàn toàn khác nhau trong cách tư duy và giải quyết vấn đề**.
 
-- **Iteration**: Solves problems "bottom-up". Starting from the most basic steps, these steps are then repeatedly executed or accumulated until the task is complete.
-- **Recursion**: Solves problems "top-down". The original problem is decomposed into smaller subproblems that have the same form as the original problem. These subproblems continue to be decomposed into even smaller subproblems until reaching the base case (where the solution is known).
+- **Lặp**: Giải quyết bài toán theo hướng "từ dưới lên". Bắt đầu từ những bước cơ bản nhất, sau đó thực thi hoặc tích lũy các bước này lặp đi lặp lại cho đến khi hoàn thành tác vụ.
+- **Đệ quy**: Giải quyết bài toán theo hướng "từ trên xuống". Bài toán ban đầu được phân tách thành các bài toán con có cùng dạng với bài toán ban đầu. Các bài toán con này tiếp tục được phân tách thành những bài toán con nhỏ hơn nữa cho đến khi đạt đến trường hợp cơ sở (khi đã biết lời giải).
 
-Taking the above summation function as an example, let the problem be $f(n) = 1 + 2 + \dots + n$.
+Lấy hàm tính tổng ở trên làm ví dụ, giả sử bài toán là $f(n) = 1 + 2 + \dots + n$.
 
-- **Iteration**: Simulates the summation process in a loop, traversing from $1$ to $n$, performing the summation operation in each round to obtain $f(n)$.
-- **Recursion**: Decomposes the problem into the subproblem $f(n) = n + f(n-1)$, continuously decomposing (recursively) until terminating at the base case $f(1) = 1$.
+- **Lặp**: Mô phỏng quá trình tính tổng trong một vòng lặp, duyệt từ $1$ đến $n$, thực hiện phép cộng ở mỗi vòng để thu được $f(n)$.
+- **Đệ quy**: Phân tách bài toán thành bài toán con $f(n) = n + f(n-1)$, liên tục phân tách (đệ quy) cho đến khi kết thúc tại trường hợp cơ sở $f(1) = 1$.
 
-### Call Stack
+### Ngăn xếp lời gọi
 
-Each time a recursive function calls itself, the system allocates memory for the newly invoked function to store local variables, call addresses, and other information. This leads to two consequences.
+Mỗi khi một hàm đệ quy tự gọi chính nó, hệ thống cấp phát bộ nhớ cho hàm mới được gọi để lưu trữ các biến cục bộ, địa chỉ lời gọi và các thông tin khác. Điều này dẫn đến hai hệ quả.
 
-- The function's context data is stored in a memory area called "stack frame space", which is not released until the function returns. Therefore, **recursion usually consumes more memory space than iteration**.
-- Recursive function calls incur additional overhead. **Therefore, recursion is usually less time-efficient than loops**.
+- Dữ liệu ngữ cảnh của hàm được lưu trong một vùng bộ nhớ gọi là "không gian khung ngăn xếp", và chỉ được giải phóng khi hàm trả về. Do đó, **đệ quy thường tiêu tốn nhiều không gian bộ nhớ hơn lặp**.
+- Lời gọi hàm đệ quy phát sinh chi phí bổ sung. **Vì vậy, đệ quy thường kém hiệu quả về thời gian hơn vòng lặp**.
 
-As shown in the figure below, before the termination condition is triggered, there are $n$ unreturned recursive functions existing simultaneously, with a **recursion depth of $n$**.
+Như trong hình dưới đây, trước khi điều kiện kết thúc được kích hoạt, có đồng thời $n$ hàm đệ quy chưa trả về, với **độ sâu đệ quy là $n$**.
 
-![Recursion call depth](iteration_and_recursion.assets/recursion_sum_depth.png)
+![Độ sâu lời gọi đệ quy](iteration_and_recursion.assets/recursion_sum_depth.png)
 
-In practice, the recursion depth allowed by programming languages is usually limited, and excessively deep recursion may lead to stack overflow errors.
+Trên thực tế, độ sâu đệ quy được các ngôn ngữ lập trình cho phép thường bị giới hạn, và đệ quy quá sâu có thể dẫn đến lỗi tràn ngăn xếp.
 
-### Tail Recursion
+### Đệ quy đuôi
 
-Interestingly, **if a function makes the recursive call as the very last step before returning**, the compiler or interpreter may optimize it so that its space efficiency is comparable to iteration. This case is called <u>tail recursion</u>.
+Điều thú vị là **nếu một hàm thực hiện lời gọi đệ quy ngay ở bước cuối cùng trước khi trả về**, compiler hoặc interpreter có thể tối ưu hóa hàm để hiệu quả sử dụng không gian tương đương với phép lặp. Trường hợp này được gọi là <u>đệ quy đuôi</u>.
 
-- **Regular recursion**: When a function returns to the previous level, it needs to continue executing code, so the system needs to save the context of the previous layer's call.
-- **Tail recursion**: The recursive call is the last operation before the function returns, meaning that after returning to the previous level, there is no need to continue executing other operations, so the system does not need to save the context of the previous layer's function.
+- **Đệ quy thông thường**: Khi một hàm quay về cấp trước đó, nó cần tiếp tục thực thi mã, vì vậy hệ thống cần lưu ngữ cảnh của lời gọi ở tầng trước.
+- **Đệ quy đuôi**: Lời gọi đệ quy là phép toán cuối cùng trước khi hàm trả về, nghĩa là sau khi quay về cấp trước đó, hàm không cần tiếp tục thực hiện phép toán nào khác, nên hệ thống không cần lưu ngữ cảnh của hàm ở tầng trước.
 
-Taking the calculation of $1 + 2 + \dots + n$ as an example, we can set the result variable `res` as a function parameter to implement tail recursion:
+Lấy việc tính $1 + 2 + \dots + n$ làm ví dụ, chúng ta có thể đặt biến kết quả `res` làm tham số của hàm để triển khai đệ quy đuôi:
 
 ```src
 [file]{recursion}-[class]{}-[func]{tail_recur}
 ```
 
-The execution process of tail recursion is shown in the figure below. Comparing regular recursion and tail recursion, the summation operation is performed at different points.
+Quá trình thực thi đệ quy đuôi được minh họa trong hình dưới đây. So sánh đệ quy thông thường với đệ quy đuôi, phép tính tổng được thực hiện ở những thời điểm khác nhau.
 
-- **Regular recursion**: The summation operation is performed during the "ascending" process, requiring an additional summation operation after each layer returns.
-- **Tail recursion**: The summation operation is performed during the "descending" process; the "ascending" process only needs to return layer by layer.
+- **Đệ quy thông thường**: Phép tính tổng được thực hiện trong quá trình "đi lên", yêu cầu thực hiện thêm một phép cộng sau khi mỗi tầng trả về.
+- **Đệ quy đuôi**: Phép tính tổng được thực hiện trong quá trình "đi xuống"; quá trình "đi lên" chỉ cần lần lượt trả về qua từng tầng.
 
-![Tail recursion process](iteration_and_recursion.assets/tail_recursion_sum.png)
+![Quá trình đệ quy đuôi](iteration_and_recursion.assets/tail_recursion_sum.png)
 
 !!! tip
 
-    Please note that many compilers or interpreters do not support tail recursion optimization. For example, Python does not support tail recursion optimization by default, so even if a function is in tail recursive form, it may still encounter stack overflow issues.
+    Lưu ý rằng nhiều compiler hoặc interpreter không hỗ trợ tối ưu hóa đệ quy đuôi. Ví dụ, Python mặc định không hỗ trợ tối ưu hóa đệ quy đuôi, vì vậy ngay cả khi một hàm có dạng đệ quy đuôi, hàm đó vẫn có thể gặp vấn đề tràn ngăn xếp.
 
-### Recursion Tree
+### Cây đệ quy
 
-When dealing with algorithmic problems related to "divide and conquer", recursion often provides a more intuitive approach and more readable code than iteration. Taking the "Fibonacci sequence" as an example.
+Khi xử lý các bài toán thuật toán liên quan đến "chia để trị", đệ quy thường cung cấp cách tiếp cận trực quan hơn và mã dễ đọc hơn so với lặp. Hãy lấy "dãy Fibonacci" làm ví dụ.
 
 !!! question
 
-    Given a Fibonacci sequence $0, 1, 1, 2, 3, 5, 8, 13, \dots$, find the $n$-th number in the sequence.
+    Cho dãy Fibonacci $0, 1, 1, 2, 3, 5, 8, 13, \dots$, hãy tìm số thứ $n$ trong dãy.
 
-Let the $n$-th number of the Fibonacci sequence be $f(n)$. Two conclusions can be easily obtained.
+Gọi số thứ $n$ của dãy Fibonacci là $f(n)$. Chúng ta có thể dễ dàng rút ra hai kết luận.
 
-- The first two numbers of the sequence are $f(1) = 0$ and $f(2) = 1$.
-- Each number in the sequence is the sum of the previous two numbers, i.e., $f(n) = f(n - 1) + f(n - 2)$.
+- Hai số đầu tiên của dãy là $f(1) = 0$ và $f(2) = 1$.
+- Mỗi số trong dãy là tổng của hai số liền trước, tức là $f(n) = f(n - 1) + f(n - 2)$.
 
-Following the recurrence relation to make recursive calls, with the first two numbers as termination conditions, we can write the recursive code. Calling `fib(n)` will give us the $n$-th number of the Fibonacci sequence:
+Dựa trên quan hệ truy hồi để thực hiện các lời gọi đệ quy, với hai số đầu tiên làm điều kiện kết thúc, chúng ta có thể viết mã đệ quy. Gọi `fib(n)` sẽ cho chúng ta số thứ $n$ của dãy Fibonacci:
 
 ```src
 [file]{recursion}-[class]{}-[func]{fib}
 ```
 
-Observing the above code, we make two recursive calls within the function, **meaning that one call produces two call branches**. As shown in the figure below, this repeated recursive calling eventually produces a <u>recursion tree</u> with $n$ levels.
+Quan sát đoạn mã trên, chúng ta thực hiện hai lời gọi đệ quy bên trong hàm, **nghĩa là một lời gọi tạo ra hai nhánh lời gọi**. Như trong hình dưới đây, các lời gọi đệ quy lặp lại này cuối cùng tạo ra một <u>cây đệ quy</u> gồm $n$ cấp.
 
-![Recursion tree of the Fibonacci sequence](iteration_and_recursion.assets/recursion_tree.png)
+![Cây đệ quy của dãy Fibonacci](iteration_and_recursion.assets/recursion_tree.png)
 
-Fundamentally, recursion embodies the paradigm of "decomposing a problem into smaller subproblems", and this divide-and-conquer strategy is crucial.
+Về bản chất, đệ quy thể hiện mô hình “phân rã một bài toán thành các bài toán con nhỏ hơn”, và chiến lược chia để trị này đóng vai trò rất quan trọng.
 
-- From an algorithmic perspective, many important algorithmic strategies such as searching, sorting, backtracking, divide and conquer, and dynamic programming directly or indirectly apply this way of thinking.
-- From a data structure perspective, recursion is naturally suited for handling problems related to linked lists, trees, and graphs, because they are well-suited for analysis using divide-and-conquer thinking.
+- Xét từ góc độ thuật toán, nhiều chiến lược thuật toán quan trọng như tìm kiếm, sắp xếp, quay lui, chia để trị và quy hoạch động đều trực tiếp hoặc gián tiếp áp dụng cách tư duy này.
+- Xét từ góc độ cấu trúc dữ liệu, đệ quy tự nhiên phù hợp với việc xử lý các bài toán liên quan đến danh sách liên kết, cây và đồ thị, vì những cấu trúc này rất phù hợp để phân tích bằng tư duy chia để trị.
 
-## Comparison of the Two
+## So sánh hai phương pháp
 
-Summarizing the above content, as shown in the table below, iteration and recursion differ in implementation, performance, and applicability.
+Tóm tắt nội dung trên, như trong bảng dưới đây, lặp và đệ quy khác nhau về cách triển khai, hiệu năng và khả năng áp dụng.
 
-<p align="center"> Table <id> &nbsp; Comparison of iteration and recursion characteristics </p>
+<p align="center"> Bảng <id> &nbsp; So sánh các đặc điểm của lặp và đệ quy </p>
 
-|                | Iteration                                                | Recursion                                                                              |
+|                | Lặp                                                      | Đệ quy                                                                                  |
 | -------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Implementation | Loop structure                                           | Function calls itself                                                                  |
-| Time efficiency | Generally more efficient, no function call overhead      | Each function call incurs overhead                                                     |
-| Memory usage   | Usually uses a fixed amount of memory space              | Accumulated function calls may use a large amount of stack frame space                 |
-| Suitable problems | Suitable for simple loop tasks, with intuitive and readable code | Suitable for subproblem decomposition, such as trees, graphs, divide and conquer, backtracking, etc., with concise and clear code structure |
+| Cách triển khai | Cấu trúc vòng lặp                                       | Hàm tự gọi chính nó                                                                     |
+| Hiệu quả thời gian | Nhìn chung hiệu quả hơn, không có overhead khi gọi hàm | Mỗi lần gọi hàm đều phát sinh overhead                                                  |
+| Mức sử dụng bộ nhớ | Thường sử dụng một lượng bộ nhớ cố định               | Các lần gọi hàm tích lũy có thể sử dụng nhiều không gian stack frame                    |
+| Bài toán phù hợp | Phù hợp với các tác vụ vòng lặp đơn giản, có code trực quan và dễ đọc | Phù hợp với việc phân rã bài toán thành các bài toán con, chẳng hạn như cây, đồ thị, chia để trị, quay lui, v.v.; cấu trúc code ngắn gọn và rõ ràng |
 
 !!! tip
 
-    If you find the following content difficult to understand, you can review it after reading the "Stack" chapter.
+    Nếu bạn thấy nội dung dưới đây khó hiểu, bạn có thể xem lại sau khi đọc chương “Stack”.
 
-What is the intrinsic relationship between iteration and recursion? Taking the above recursive function as an example, the summation operation is performed during the "ascending" phase of recursion. This means that the function called first actually completes its summation operation last, **and this working mechanism is similar to the "last-in, first-out" principle of stacks**.
+Mối quan hệ bản chất giữa lặp và đệ quy là gì? Lấy hàm đệ quy ở trên làm ví dụ, phép tính tổng được thực hiện trong giai đoạn “đi lên” của đệ quy. Điều này có nghĩa là hàm được gọi đầu tiên thực tế lại hoàn tất phép tính tổng sau cùng, **và cơ chế hoạt động này tương tự nguyên tắc “vào sau, ra trước” của stack**.
 
-In fact, recursive terminology such as "call stack" and "stack frame space" already hints at the close relationship between recursion and stacks.
+Trên thực tế, các thuật ngữ trong đệ quy như “call stack” và “stack frame space” đã gợi ý về mối quan hệ chặt chẽ giữa đệ quy và stack.
 
-1. **Descend**: When a function is called, the system allocates a new stack frame on the "call stack" for that function to store the function's local variables, parameters, return address, and other data.
-2. **Ascend**: When the function completes execution and returns, the corresponding stack frame is removed from the "call stack", restoring the execution environment of the previous function.
+1. **Đi xuống**: Khi một hàm được gọi, hệ thống cấp phát một stack frame mới trên “call stack” cho hàm đó để lưu các biến cục bộ, tham số, địa chỉ trả về và dữ liệu khác của hàm.
+2. **Đi lên**: Khi hàm hoàn tất việc thực thi và trả về, stack frame tương ứng sẽ được xóa khỏi “call stack”, khôi phục môi trường thực thi của hàm trước đó.
 
-Therefore, **we can use an explicit stack to simulate the behavior of the call stack**, thus transforming recursion into iterative form:
+Do đó, **chúng ta có thể sử dụng một stack tường minh để mô phỏng hành vi của call stack**, từ đó chuyển đệ quy thành dạng lặp:
 
 ```src
 [file]{recursion}-[class]{}-[func]{for_loop_recur}
 ```
 
-Observing the above code, when recursion is transformed into iteration, the code becomes more complex. Although iteration and recursion can be converted into each other in many cases, it may not be worthwhile to do so for the following two reasons.
+Quan sát code trên, khi chuyển đệ quy thành lặp, code trở nên phức tạp hơn. Mặc dù trong nhiều trường hợp lặp và đệ quy có thể chuyển đổi cho nhau, việc này có thể không đáng thực hiện vì hai lý do sau:
 
-- The transformed code may be more difficult to understand and less readable.
-- For some complex problems, simulating the behavior of the system call stack can be very difficult.
+- Code sau khi chuyển đổi có thể khó hiểu hơn và kém dễ đọc hơn.
+- Với một số bài toán phức tạp, việc mô phỏng hành vi của call stack do hệ thống quản lý có thể rất khó khăn.
 
-In summary, **choosing between iteration and recursion depends on the nature of the specific problem**. In programming practice, it is crucial to weigh the pros and cons of both and choose the appropriate method based on the context.
+Tóm lại, **việc lựa chọn giữa lặp và đệ quy phụ thuộc vào bản chất của bài toán cụ thể**. Trong thực hành lập trình, việc cân nhắc ưu và nhược điểm của cả hai phương pháp, rồi lựa chọn phương pháp phù hợp dựa trên bối cảnh, là điều rất quan trọng.
