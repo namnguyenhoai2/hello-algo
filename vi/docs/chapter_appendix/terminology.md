@@ -4,133 +4,133 @@ Bảng sau đây liệt kê các thuật ngữ quan trọng xuất hiện trong 
 
 <p align="center"> Bảng <id> &nbsp; Các thuật ngữ quan trọng trong Cấu trúc dữ liệu và Giải thuật </p>
 
-| Tiếng Anh                    |
-| ---------------------------- |
-| giải thuật                   |
-| cấu trúc dữ liệu             |
-| mã                           |
-| tệp                          |
-| hàm                          |
-| phương thức                  |
-| biến                         |
-| phân tích độ phức tạp tiệm cận |
-| độ phức tạp thời gian        |
-| độ phức tạp không gian       |
-| vòng lặp                     |
-| lần lặp                      |
-| đệ quy                       |
-| đệ quy đuôi                  |
-| cây đệ quy                   |
-| ký hiệu big-$O$              |
-| cận trên tiệm cận            |
-| dấu và độ lớn                |
-| bù 1                         |
-| bù 2                         |
-| mảng                         |
-| chỉ số                       |
-| danh sách liên kết           |
-| nút danh sách liên kết, nút danh sách |
-| nút đầu                      |
-| nút cuối                     |
-| danh sách                    |
-| mảng động                    |
-| đĩa cứng                     |
-| bộ nhớ truy cập ngẫu nhiên (RAM) |
-| bộ nhớ đệm                   |
-| lỗi bộ nhớ đệm               |
-| tỷ lệ truy cập bộ nhớ đệm   |
-| ngăn xếp                     |
-| đỉnh ngăn xếp                |
-| đáy ngăn xếp                 |
-| hàng đợi                     |
-| hàng đợi hai đầu             |
-| đầu trước của hàng đợi       |
-| đầu sau của hàng đợi         |
-| bảng băm                     |
-| tập hợp băm                  |
-| nhóm                         |
-| hàm băm                      |
-| xung đột băm                 |
-| hệ số tải                    |
-| nối kết riêng biệt           |
-| định địa chỉ mở              |
-| thăm dò tuyến tính           |
-| xóa lười                     |
-| cây nhị phân                 |
-| nút cây                      |
-| nút con trái                 |
-| nút con phải                 |
-| nút cha                      |
-| cây con trái                 |
-| cây con phải                 |
-| nút gốc                      |
-| nút lá                       |
-| cạnh                         |
-| mức                          |
-| bậc                          |
-| chiều cao                    |
-| độ sâu                       |
-| cây nhị phân hoàn hảo        |
-| cây nhị phân đầy đủ          |
-| cây nhị phân đầy             |
-| cây nhị phân cân bằng        |
-| cây tìm kiếm nhị phân        |
-| cây AVL                      |
-| cây đỏ-đen                  |
-| duyệt theo mức               |
-| duyệt theo chiều rộng        |
-| duyệt theo chiều sâu         |
-| duyệt tiền thứ tự            |
-| duyệt trung thứ tự           |
-| duyệt hậu thứ tự             |
-| cây tìm kiếm nhị phân cân bằng |
-| hệ số cân bằng               |
-| đống                         |
-| đống cực đại                |
-| đống cực tiểu               |
-| hàng đợi ưu tiên             |
-| tạo đống                     |
-| bài toán top-$k$             |
-| đồ thị                       |
-| đỉnh                         |
-| đồ thị vô hướng              |
-| đồ thị có hướng              |
-| đồ thị liên thông            |
-| đồ thị không liên thông      |
-| đồ thị có trọng số           |
-| tính kề                      |
-| đường đi                     |
-| bậc vào                      |
-| bậc ra                       |
-| ma trận kề                   |
-| danh sách kề                 |
-| tìm kiếm theo chiều rộng     |
-| tìm kiếm theo chiều sâu      |
-| tìm kiếm nhị phân            |
-| giải thuật tìm kiếm          |
-| giải thuật sắp xếp           |
-| sắp xếp chọn                 |
-| sắp xếp nổi bọt              |
-| sắp xếp chèn                |
-| sắp xếp nhanh                |
-| sắp xếp trộn                 |
-| sắp xếp vun đống             |
-| sắp xếp theo nhóm            |
-| sắp xếp đếm                 |
-| sắp xếp cơ số                |
-| chia để trị                 |
-| bài toán Tháp Hà Nội         |
-| giải thuật quay lui          |
-| ràng buộc                    |
-| lời giải                     |
-| trạng thái                   |
-| cắt tỉa                      |
-| bài toán hoán vị             |
-| bài toán tổng tập con        |
-| bài toán $n$-quân hậu        |
-| lập trình động               |
-| trạng thái ban đầu           |
-| phương trình chuyển trạng thái |
-| bài toán cái túi             |
-| bài toán khoảng cách chỉnh sửa |
-| giải thuật tham lam          |
+| English                        | Tiếng Việt                    |
+| ------------------------------ | ---------------------------- |
+| algorithm                      | giải thuật                   |
+| data structure                 | cấu trúc dữ liệu             |
+| code                           | mã                           |
+| file                           | tệp                          |
+| function                       | hàm                          |
+| method                         | phương thức                  |
+| variable                       | biến                         |
+| asymptotic complexity analysis | phân tích độ phức tạp tiệm cận |
+| time complexity                | độ phức tạp thời gian        |
+| space complexity               | độ phức tạp không gian       |
+| loop                           | vòng lặp                     |
+| iteration                      | lần lặp                      |
+| recursion                      | đệ quy                       |
+| tail recursion                 | đệ quy đuôi                  |
+| recursion tree                 | cây đệ quy                   |
+| big-$O$ notation               | ký hiệu big-$O$              |
+| asymptotic upper bound         | cận trên tiệm cận            |
+| sign-magnitude                 | dấu và độ lớn                |
+| 1’s complement                 | bù 1                         |
+| 2’s complement                 | bù 2                         |
+| array                          | mảng                         |
+| index                          | chỉ số                       |
+| linked list                    | danh sách liên kết           |
+| linked list node, list node    | nút danh sách liên kết, nút danh sách |
+| head node                      | nút đầu                      |
+| tail node                      | nút cuối                     |
+| list                           | danh sách                    |
+| dynamic array                  | mảng động                    |
+| hard disk                      | đĩa cứng                     |
+| random-access memory (RAM)     | bộ nhớ truy cập ngẫu nhiên (RAM) |
+| cache memory                   | bộ nhớ đệm                   |
+| cache miss                     | lỗi bộ nhớ đệm               |
+| cache hit rate                 | tỷ lệ truy cập bộ nhớ đệm   |
+| stack                          | ngăn xếp                     |
+| top of the stack               | đỉnh ngăn xếp                |
+| bottom of the stack            | đáy ngăn xếp                 |
+| queue                          | hàng đợi                     |
+| double-ended queue             | hàng đợi hai đầu             |
+| front of the queue             | đầu trước của hàng đợi       |
+| rear of the queue              | đầu sau của hàng đợi         |
+| hash table                     | bảng băm                     |
+| hash set                       | tập hợp băm                  |
+| bucket                         | nhóm                         |
+| hash function                  | hàm băm                      |
+| hash collision                 | xung đột băm                 |
+| load factor                    | hệ số tải                    |
+| separate chaining              | nối kết riêng biệt           |
+| open addressing                | định địa chỉ mở              |
+| linear probing                 | thăm dò tuyến tính           |
+| lazy deletion                  | xóa lười                     |
+| binary tree                    | cây nhị phân                 |
+| tree node                      | nút cây                      |
+| left-child node                | nút con trái                 |
+| right-child node               | nút con phải                 |
+| parent node                    | nút cha                      |
+| left subtree                   | cây con trái                 |
+| right subtree                  | cây con phải                 |
+| root node                      | nút gốc                      |
+| leaf node                      | nút lá                       |
+| edge                           | cạnh                         |
+| level                          | mức                          |
+| degree                         | bậc                          |
+| height                         | chiều cao                    |
+| depth                          | độ sâu                       |
+| perfect binary tree            | cây nhị phân hoàn hảo        |
+| complete binary tree           | cây nhị phân đầy đủ          |
+| full binary tree               | cây nhị phân đầy             |
+| balanced binary tree           | cây nhị phân cân bằng        |
+| binary search tree             | cây tìm kiếm nhị phân        |
+| AVL tree                       | cây AVL                      |
+| red-black tree                 | cây đỏ-đen                  |
+| level-order traversal          | duyệt theo mức               |
+| breadth-first traversal        | duyệt theo chiều rộng        |
+| depth-first traversal          | duyệt theo chiều sâu         |
+| pre-order traversal            | duyệt tiền thứ tự            |
+| in-order traversal             | duyệt trung thứ tự           |
+| post-order traversal           | duyệt hậu thứ tự             |
+| balanced binary search tree    | cây tìm kiếm nhị phân cân bằng |
+| balance factor                 | hệ số cân bằng               |
+| heap                           | đống                         |
+| max heap                       | đống cực đại                |
+| min heap                       | đống cực tiểu               |
+| priority queue                 | hàng đợi ưu tiên             |
+| heapify                        | tạo đống                     |
+| top-$k$ problem                | bài toán top-$k$             |
+| graph                          | đồ thị                       |
+| vertex                         | đỉnh                         |
+| undirected graph               | đồ thị vô hướng              |
+| directed graph                 | đồ thị có hướng              |
+| connected graph                | đồ thị liên thông            |
+| disconnected graph             | đồ thị không liên thông      |
+| weighted graph                 | đồ thị có trọng số           |
+| adjacency                      | tính kề                      |
+| path                           | đường đi                     |
+| in-degree                      | bậc vào                      |
+| out-degree                     | bậc ra                       |
+| adjacency matrix               | ma trận kề                   |
+| adjacency list                 | danh sách kề                 |
+| breadth-first search           | tìm kiếm theo chiều rộng     |
+| depth-first search             | tìm kiếm theo chiều sâu      |
+| binary search                  | tìm kiếm nhị phân            |
+| searching algorithm            | giải thuật tìm kiếm          |
+| sorting algorithm              | giải thuật sắp xếp           |
+| selection sort                 | sắp xếp chọn                 |
+| bubble sort                    | sắp xếp nổi bọt              |
+| insertion sort                 | sắp xếp chèn                |
+| quick sort                     | sắp xếp nhanh                |
+| merge sort                     | sắp xếp trộn                 |
+| heap sort                      | sắp xếp vun đống             |
+| bucket sort                    | sắp xếp theo nhóm            |
+| counting sort                  | sắp xếp đếm                 |
+| radix sort                     | sắp xếp cơ số                |
+| divide and conquer             | chia để trị                 |
+| Tower of Hanoi problem         | bài toán Tháp Hà Nội         |
+| backtracking algorithm         | giải thuật quay lui          |
+| constraint                     | ràng buộc                    |
+| solution                       | lời giải                     |
+| state                          | trạng thái                   |
+| pruning                        | cắt tỉa                      |
+| permutations problem           | bài toán hoán vị             |
+| subset-sum problem             | bài toán tổng tập con        |
+| $n$-queens problem             | bài toán $n$-quân hậu        |
+| dynamic programming            | lập trình động               |
+| initial state                  | trạng thái ban đầu           |
+| state-transition equation      | phương trình chuyển trạng thái |
+| knapsack problem               | bài toán cái túi             |
+| edit distance problem          | bài toán khoảng cách chỉnh sửa |
+| greedy algorithm               | giải thuật tham lam          |

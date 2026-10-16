@@ -1,106 +1,106 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### How Arrays and Linked Lists Find an Element
+### Cách mảng và danh sách liên kết tìm một phần tử
 
-An array and a singly linked list both store `[A, B, C, D, E]` in order. You now need to access the fourth element, `D`:
-
-<!-- numbered-subquestions -->
-
-1. Which index can the array use directly?
-2. Starting from the head node `A`, which nodes are visited in order as you follow `next`?
-3. As the requested element moves farther toward the end, how does the number of steps change for each structure? Which structure is better for repeated access by position, and why?
-
-??? success "Answer"
-
-    1. With zero-based indexing, the fourth element has index 3, so the array can access `arr[3]` directly.
-
-    2. The singly linked list must start at the head. Its access path is `A → B → C → D`, requiring three moves through `next`.
-
-    3. An array can locate an element directly from its starting address and index, so access by position has a time complexity of $O(1)$.
-        To access the $k$th node, a singly linked list must start at the head node and follow `next` $k-1$ times,
-        which takes $O(n)$ time in the worst case.
-
-        This comparison concerns only access by position; it does not mean that linked lists are slower for every operation.
-
-### How Arrays and Linked Lists Insert an Element
-
-An array and a singly linked list both store `A, B, C, D`. You now need to insert `X` after `B`:
-
-- The array has capacity 5 and is currently `[A, B, C, D, _]`.
-- The linked list is `A → B → C → D`, and you already have a reference to node `B`.
+Mảng và danh sách liên kết đơn đều lưu trữ `[A, B, C, D, E]` theo thứ tự. Bây giờ bạn cần truy cập phần tử thứ tư, `D`:
 
 <!-- numbered-subquestions -->
 
-1. Which elements must the array move? Write the array after insertion.
-2. In what order should the linked list update `X.next` and `B.next`? Write the linked list after insertion.
-3. When comparing insertion efficiency, why is it important to state that "you already have a reference to node B"?
+1. Mảng có thể sử dụng trực tiếp chỉ mục nào?
+2. Bắt đầu từ nút đầu `A`, những nút nào được duyệt theo thứ tự khi bạn lần theo `next`?
+3. Khi phần tử được yêu cầu nằm càng xa về cuối, số bước thay đổi như thế nào đối với mỗi cấu trúc? Cấu trúc nào phù hợp hơn cho việc truy cập lặp lại theo vị trí, và vì sao?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The array first moves `D` one position to the right, then moves `C` one position to the right, and finally places `X` at index 2,
-        producing `[A, B, X, C, D]`.
+    1. Với indexing bắt đầu từ 0, phần tử thứ tư có chỉ mục là 3, nên mảng có thể truy cập trực tiếp `arr[3]`.
 
-    2. `B.next` originally points to `C`. First set `X.next = B.next`, making `X` point to `C`;
-        then set `B.next = X`. The result is `A → B → X → C → D`.
-        If `B.next` is overwritten first without saving the original link, `C` may become unreachable.
+    2. Danh sách liên kết đơn phải bắt đầu từ đầu danh sách. Đường đi truy cập của nó là `A → B → C → D`, cần đi qua `next` ba lần.
 
-    3. Once the location of `B` is known, insertion into the linked list only changes two links and takes $O(1)$ time.
-        If `B` must first be found from the head, that search alone may take $O(n)$ time.
+    3. Mảng có thể xác định trực tiếp vị trí của một phần tử từ địa chỉ bắt đầu và chỉ mục của nó, nên việc truy cập theo vị trí có độ phức tạp thời gian là $O(1)$.
+        Để truy cập nút thứ $k$, danh sách liên kết đơn phải bắt đầu từ nút đầu và lần theo `next` $k-1$ lần,
+        mất $O(n)$ thời gian trong trường hợp xấu nhất.
 
-### How a List's Capacity Grows
+        So sánh này chỉ xét việc truy cập theo vị trí; điều đó không có nghĩa là danh sách liên kết chậm hơn trong mọi thao tác.
 
-An array-based list currently contains `[A, B, C]`, with length `size = 3` and capacity `capacity = 4`.
-When there is not enough capacity, a new array with twice the old capacity is created.
+### Cách mảng và danh sách liên kết chèn một phần tử
+
+Mảng và danh sách liên kết đơn đều lưu trữ `A, B, C, D`. Bây giờ bạn cần chèn `X` sau `B`:
+
+- Mảng có capacity là 5 và hiện đang là `[A, B, C, D, _]`.
+- Danh sách liên kết là `A → B → C → D`, và bạn đã có một reference đến nút `B`.
 
 <!-- numbered-subquestions -->
 
-1. After appending `D`, what are the list's length and capacity? Is capacity expansion needed?
-2. When `E` is appended next, what does the capacity become? How many existing elements must be copied?
-3. The length of the underlying array cannot change. Why does the list's capacity nevertheless appear able to grow?
+1. Mảng phải di chuyển những phần tử nào? Viết mảng sau khi chèn.
+2. Danh sách liên kết nên cập nhật `X.next` và `B.next` theo thứ tự nào? Viết danh sách liên kết sau khi chèn.
+3. Khi so sánh hiệu quả chèn, vì sao cần nêu rõ rằng “bạn đã có một reference đến nút B”?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. `D` fits in the last empty position. The contents are now `[A, B, C, D]`,
-        with `size = 4` and `capacity = 4`, so no capacity expansion is needed.
+    1. Trước tiên, mảng di chuyển `D` sang phải một vị trí, sau đó di chuyển `C` sang phải một vị trí, rồi đặt `X` tại chỉ mục 2,
+        tạo thành `[A, B, X, C, D]`.
 
-    2. There is no empty position when `E` is appended, so a new array with capacity 8 must be created.
-        The four existing elements `A, B, C, D` are copied into it before `E` is added.
-        The result is `size = 5` and `capacity = 8`.
+    2. Ban đầu, `B.next` trỏ đến `C`. Trước tiên đặt `X.next = B.next`, khiến `X` trỏ đến `C`;
+        sau đó đặt `B.next = X`. Kết quả là `A → B → X → C → D`.
+        Nếu `B.next` bị ghi đè trước mà không lưu liên kết ban đầu, `C` có thể trở nên không thể truy cập.
 
-    3. The original array itself does not grow. The list creates a larger new array, copies the existing elements,
-        and then uses the new array as its underlying storage. From the user's perspective, the capacity has grown.
+    3. Khi đã biết vị trí của `B`, việc chèn vào danh sách liên kết chỉ thay đổi hai liên kết và mất thời gian $O(1)$.
+        Nếu trước tiên phải tìm `B` từ đầu danh sách, riêng việc tìm kiếm đó có thể mất thời gian $O(n)$.
 
-## Programming Exercises
+### Capacity của danh sách tăng như thế nào
 
-### Add One to a Large Integer Stored as an Array
+Một danh sách dựa trên mảng hiện chứa `[A, B, C]`, có length là `size = 3` và capacity là `capacity = 4`.
+Khi không còn đủ capacity, một mảng mới có capacity gấp đôi capacity cũ sẽ được tạo.
 
-The array `digits` stores the decimal digits of a non-negative integer from left to right. For example, `[3, 0, 8]` represents 308.
-The number 0 is represented by `[0]`; for every other input, the first digit is not 0.
+<!-- numbered-subquestions -->
 
-Simulate decimal column addition to add 1 to this integer, and return the result in the same array format.
-You may modify `digits` directly. If a new carry appears at the front, you may return a longer array.
+1. Sau khi thêm `D` vào cuối, length và capacity của danh sách là bao nhiêu? Có cần mở rộng capacity không?
+2. Khi tiếp theo thêm `E` vào cuối, capacity trở thành bao nhiêu? Có bao nhiêu phần tử hiện có phải được sao chép?
+3. Length của mảng nền không thể thay đổi. Vậy tại sao capacity của danh sách dường như vẫn có thể tăng?
 
-??? tip "Hints"
+??? success "Đáp án"
 
-    1. Start with the last digit of the array, just as in ordinary column addition
-    2. If the current digit is less than 9, add one and return immediately
-    3. If the current digit is 9, change it to 0; if every digit is 9, place a 1 at the front
+    1. `D` vừa với vị trí trống cuối cùng. Nội dung hiện tại là `[A, B, C, D]`,
+        với `size = 4` và `capacity = 4`, nên không cần mở rộng capacity.
+
+    2. Khi thêm `E` vào cuối, không còn vị trí trống nào, nên phải tạo một mảng mới có capacity là 8.
+        Bốn phần tử hiện có `A, B, C, D` được sao chép vào đó trước khi thêm `E`.
+        Kết quả là `size = 5` và `capacity = 8`.
+
+    3. Bản thân mảng ban đầu không tăng kích thước. Danh sách tạo một mảng mới lớn hơn, sao chép các phần tử hiện có,
+        rồi dùng mảng mới làm vùng lưu trữ nền. Từ góc nhìn của người dùng, capacity đã tăng.
+
+## Bài tập lập trình
+
+### Cộng một vào số nguyên lớn được lưu dưới dạng mảng
+
+Mảng `digits` lưu các chữ số thập phân của một số nguyên không âm từ trái sang phải. Ví dụ, `[3, 0, 8]` biểu diễn 308.
+Số 0 được biểu diễn bằng `[0]`; với mọi đầu vào khác, chữ số đầu tiên không phải là 0.
+
+Mô phỏng phép cộng theo cột trong hệ thập phân để cộng 1 vào số nguyên này, rồi trả về kết quả ở cùng định dạng mảng.
+Bạn có thể sửa đổi trực tiếp `digits`. Nếu xuất hiện carry mới ở đầu, bạn có thể trả về một mảng dài hơn.
+
+??? tip "Gợi ý"
+
+    1. Bắt đầu với chữ số cuối cùng của mảng, giống như khi cộng theo cột thông thường
+    2. Nếu chữ số hiện tại nhỏ hơn 9, hãy cộng 1 rồi trả về ngay
+    3. Nếu chữ số hiện tại là 9, đổi nó thành 0; nếu mọi chữ số đều là 9, đặt 1 ở đầu
 
 [LeetCode](https://leetcode.com/problems/plus-one/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
 
-### Reverse a Singly Linked List
+### Đảo ngược danh sách liên kết đơn
 
-You are given the head node `head` of a singly linked list. Each node contains a value and a `next` reference to the following node.
+Bạn được cung cấp nút đầu `head` của một danh sách liên kết đơn. Mỗi nút chứa một giá trị và một reference `next` đến nút tiếp theo.
 
-Use an iterative approach to reverse all links between the nodes, and return the new head node.
-Do not create any new linked list nodes.
+Sử dụng cách tiếp cận lặp để đảo ngược tất cả liên kết giữa các nút, rồi trả về nút đầu mới.
+Không tạo bất kỳ nút mới nào cho danh sách liên kết.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. First draw three connected nodes and the two pointers prev and cur on paper
-    2. Before changing cur.next, save the original next node in nxt
-    3. After reversing cur.next, set prev = cur and then cur = nxt to continue with the next node in the original list
+    1. Trước tiên, hãy vẽ ba nút được nối với nhau cùng hai con trỏ prev và cur trên giấy
+    2. Trước khi thay đổi cur.next, hãy lưu nút next ban đầu vào nxt
+    3. Sau khi đảo ngược cur.next, đặt prev = cur rồi đặt cur = nxt để tiếp tục với nút tiếp theo trong danh sách ban đầu
 
 [LeetCode](https://leetcode.com/problems/reverse-linked-list/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

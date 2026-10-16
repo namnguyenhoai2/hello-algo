@@ -1,86 +1,87 @@
-# Summary
+# Tóm tắt
 
-### Key Review
+### Nội dung ôn tập chính
 
-- Arrays and linked lists are two fundamental data structures, representing two different ways data can be stored in computer memory: contiguous storage and scattered storage. Their strengths and weaknesses complement each other.
-- Arrays support random access and use less memory; however, inserting and deleting elements is inefficient, and the length is immutable after initialization.
-- Linked lists achieve efficient insertion and deletion of nodes by modifying references (pointers), and can flexibly adjust length; however, node access is inefficient and memory consumption is higher. Common linked list types include singly linked lists, circular linked lists, and doubly linked lists.
-- A list is an ordered collection of elements that supports insertion, deletion, search, and modification, typically implemented based on dynamic arrays. It retains the advantages of arrays while allowing flexible adjustment of length.
-- The emergence of lists has greatly improved the practicality of arrays, but it may also waste some memory space.
-- During program execution, data is primarily stored in memory. Arrays provide higher memory space efficiency, while linked lists offer greater flexibility in memory usage.
-- Caches provide fast data access to the CPU through mechanisms such as cache lines, prefetching, and spatial and temporal locality, significantly improving program execution efficiency.
-- Because arrays have higher cache hit rates, they are generally more efficient than linked lists. When choosing a data structure, appropriate selection should be made based on specific requirements and scenarios.
+- Mảng và danh sách liên kết là hai cấu trúc dữ liệu nền tảng, đại diện cho hai cách khác nhau để lưu trữ dữ liệu trong bộ nhớ máy tính: lưu trữ liên tục và lưu trữ phân tán. Ưu điểm và nhược điểm của chúng bổ trợ cho nhau.
+- Mảng hỗ trợ truy cập ngẫu nhiên và sử dụng ít bộ nhớ hơn; tuy nhiên, việc chèn và xóa phần tử không hiệu quả, đồng thời độ dài không thể thay đổi sau khi khởi tạo.
+- Danh sách liên kết đạt hiệu quả cao khi chèn và xóa node bằng cách sửa đổi các tham chiếu (pointer), đồng thời có thể điều chỉnh độ dài linh hoạt; tuy nhiên, việc truy cập node kém hiệu quả và mức tiêu thụ bộ nhớ cao hơn. Các loại danh sách liên kết phổ biến gồm danh sách liên kết đơn, danh sách liên kết vòng và danh sách liên kết đôi.
+- Danh sách là một tập hợp các phần tử có thứ tự, hỗ trợ chèn, xóa, tìm kiếm và sửa đổi, thường được triển khai dựa trên mảng động. Danh sách giữ lại các ưu điểm của mảng, đồng thời cho phép điều chỉnh độ dài linh hoạt.
+- Sự xuất hiện của danh sách đã cải thiện đáng kể tính thực tiễn của mảng, nhưng cũng có thể gây lãng phí một phần không gian bộ nhớ.
+- Trong quá trình chương trình thực thi, dữ liệu chủ yếu được lưu trữ trong bộ nhớ. Mảng có hiệu quả sử dụng không gian bộ nhớ cao hơn, trong khi danh sách liên kết linh hoạt hơn trong việc sử dụng bộ nhớ.
+- Cache cung cấp cho CPU khả năng truy cập dữ liệu nhanh thông qua các cơ chế như cache line, prefetching, locality theo không gian và locality theo thời gian, từ đó cải thiện đáng kể hiệu suất thực thi của chương trình.
+- Vì mảng có tỷ lệ cache hit cao hơn nên nhìn chung hiệu quả hơn danh sách liên kết. Khi lựa chọn cấu trúc dữ liệu, cần lựa chọn phù hợp dựa trên yêu cầu và tình huống cụ thể.
 
-### Q & A
+### Hỏi & Đáp
 
-**Q**: Does storing an array on the stack versus on the heap affect time efficiency and space efficiency?
+**Q**: Việc lưu trữ một mảng trên stack thay vì trên heap có ảnh hưởng đến hiệu quả về thời gian và không gian không?
 
-Arrays stored on the stack and on the heap are both stored in contiguous memory space, so data operation efficiency is basically the same. However, the stack and heap have their own characteristics, leading to the following differences.
+Mảng được lưu trữ trên stack và trên heap đều nằm trong vùng nhớ liên tục, vì vậy hiệu quả thao tác dữ liệu về cơ bản là như nhau. Tuy nhiên, stack và heap có những đặc điểm riêng, dẫn đến các khác biệt sau.
 
-1. Allocation and deallocation efficiency: The stack is a relatively small piece of memory, with allocation automatically handled by the compiler; the heap is relatively larger and can be dynamically allocated in code, more prone to fragmentation. Therefore, allocation and deallocation operations on the heap are usually slower than on the stack.
-2. Size limitations: Stack memory is relatively small, and the heap size is generally limited by available memory. Therefore, the heap is more suitable for storing large arrays.
-3. Flexibility: The size of an array on the stack must be determined at compile time, while the size of an array on the heap can be determined dynamically at runtime.
+1. Hiệu quả cấp phát và giải phóng: Stack là một vùng bộ nhớ tương đối nhỏ, việc cấp phát được compiler tự động xử lý; heap tương đối lớn hơn và có thể được cấp phát động trong code, đồng thời dễ bị phân mảnh hơn. Vì vậy, các thao tác cấp phát và giải phóng trên heap thường chậm hơn trên stack.
+2. Giới hạn kích thước: Bộ nhớ stack tương đối nhỏ, còn kích thước heap nhìn chung bị giới hạn bởi bộ nhớ khả dụng. Vì vậy, heap phù hợp hơn để lưu trữ các mảng lớn.
+3. Tính linh hoạt: Kích thước của mảng trên stack phải được xác định tại thời điểm biên dịch, trong khi kích thước của mảng trên heap có thể được xác định động trong runtime.
 
-**Q**: Why do arrays require elements of the same type, while linked lists do not emphasize this requirement?
+**Q**: Tại sao mảng yêu cầu các phần tử có cùng kiểu, trong khi danh sách liên kết lại không nhấn mạnh yêu cầu này?
 
-Linked lists are composed of nodes, with nodes connected through references (pointers), and each node can store different types of data, such as `int`, `double`, `string`, `object`, etc.
+Danh sách liên kết được tạo thành từ các node, các node được kết nối thông qua các tham chiếu (pointer), và mỗi node có thể lưu trữ các kiểu dữ liệu khác nhau, chẳng hạn như `int`, `double`, `string`, `object`, v.v.
 
-In contrast, array elements must be of the same type so that their positions can be determined by calculating offsets. For example, if an array contains both `int` and `long` types, with individual elements occupying 4 bytes and 8 bytes respectively, then the following formula cannot be used to calculate the offset, because the array contains two different "element sizes".
+Ngược lại, các phần tử của mảng phải có cùng kiểu để vị trí của chúng có thể được xác định bằng cách tính offset. Ví dụ, nếu một mảng chứa cả kiểu `int` và `long`, trong đó mỗi phần tử lần lượt chiếm 4 byte và 8 byte, thì không thể sử dụng công thức sau để tính offset, vì mảng chứa hai “kích thước phần tử” khác nhau.
 
 ```shell
-# element address = array base address (address of the first element) + element size * element index
+# địa chỉ phần tử = địa chỉ cơ sở của mảng (địa chỉ của phần tử đầu tiên) + kích thước phần tử * chỉ số phần tử
 ```
 
-**Q**: After deleting node `P`, do we need to set `P.next` to `None`?
 
-It is not necessary to modify `P.next`. From the perspective of the linked list, traversing from the head node to the tail node will no longer encounter `P`. This means that node `P` has been removed from the linked list, and it doesn't matter where node `P` points to at this time—it won't affect the linked list.
+**Q**: Sau khi xóa node `P`, chúng ta có cần đặt `P.next` thành `None` không?
 
-From an algorithms-and-problem-solving perspective, leaving the pointer connected is fine as long as the program logic is correct. From a standard-library implementation perspective, explicitly disconnecting it is safer and clearer. If it is not disconnected and the deleted node is not reclaimed properly, it may affect the reclamation of successor nodes.
+Không cần sửa đổi `P.next`. Xét từ góc độ danh sách liên kết, khi duyệt từ node đầu đến node cuối, chúng ta sẽ không còn gặp `P`. Điều này có nghĩa là node `P` đã được xóa khỏi danh sách liên kết, và tại thời điểm này, `P` trỏ đến đâu không quan trọng—nó sẽ không ảnh hưởng đến danh sách liên kết.
 
-**Q**: In a linked list, the time complexity of insertion and deletion operations is $O(1)$. However, both insertion and deletion require $O(n)$ time to find the element; why isn't the time complexity $O(n)$?
+Từ góc độ thuật toán và giải quyết bài toán, việc giữ pointer được kết nối là không vấn đề miễn là logic chương trình chính xác. Từ góc độ triển khai standard library, việc chủ động ngắt kết nối sẽ an toàn và rõ ràng hơn. Nếu không ngắt kết nối và node đã xóa không được thu hồi đúng cách, điều này có thể ảnh hưởng đến việc thu hồi các node kế tiếp.
 
-If the element is first found and then deleted, the time complexity is indeed $O(n)$. However, the advantage of $O(1)$ insertion and deletion in linked lists can be demonstrated in other applications. For example, a deque is well-suited for linked list implementation, where we maintain pointer variables always pointing to the head and tail nodes, with each insertion and deletion operation being $O(1)$.
+**Q**: Trong danh sách liên kết, độ phức tạp thời gian của thao tác chèn và xóa là $O(1)$. Tuy nhiên, cả thao tác chèn và xóa đều cần $O(n)$ thời gian để tìm phần tử; tại sao độ phức tạp thời gian lại không phải là $O(n)$?
 
-**Q**: In the diagram "Linked List Definition and Storage Methods", does the light blue pointer node occupy a single memory address, or does it share equally with the node value?
+Nếu trước tiên tìm phần tử rồi mới xóa, độ phức tạp thời gian thực sự là $O(n)$. Tuy nhiên, ưu điểm chèn và xóa trong $O(1)$ của danh sách liên kết có thể được thể hiện trong các ứng dụng khác. Ví dụ, deque rất phù hợp để triển khai bằng danh sách liên kết; khi đó, chúng ta duy trì các biến pointer luôn trỏ đến node đầu và node cuối, với mỗi thao tác chèn và xóa đều có độ phức tạp $O(1)$.
 
-This diagram is a qualitative representation; a quantitative representation requires analysis based on the specific situation.
+**Q**: Trong sơ đồ “Định nghĩa danh sách liên kết và các phương thức lưu trữ”, node pointer màu xanh nhạt chiếm một địa chỉ bộ nhớ riêng hay chia đều với giá trị của node?
 
-- Different types of node values occupy different amounts of space, such as `int`, `long`, `double`, and instance objects, etc.
-- The amount of memory space occupied by pointer variables depends on the operating system and compilation environment used, usually 8 bytes or 4 bytes.
+Sơ đồ này là biểu diễn định tính; để biểu diễn định lượng, cần phân tích dựa trên tình huống cụ thể.
 
-**Q**: Is appending an element at the end of a list always $O(1)$?
+- Các kiểu giá trị node khác nhau chiếm lượng không gian khác nhau, chẳng hạn như `int`, `long`, `double` và các đối tượng instance, v.v.
+- Lượng không gian bộ nhớ mà các biến pointer chiếm dụng phụ thuộc vào hệ điều hành và môi trường biên dịch được sử dụng, thường là 8 byte hoặc 4 byte.
 
-If appending an element exceeds the list length, the list must first be expanded before adding. The system allocates a new block of memory and moves all elements from the original list to it, in which case the time complexity becomes $O(n)$.
+**Q**: Việc thêm một phần tử vào cuối danh sách có phải luôn là $O(1)$ không?
 
-**Q**: "The emergence of lists has greatly improved the practicality of arrays, but may result in some wasted memory space"—does this space waste refer to the memory occupied by additional variables such as capacity, length, and expansion factor?
+Nếu việc thêm phần tử khiến độ dài danh sách bị vượt quá, trước tiên danh sách phải được mở rộng rồi mới thêm phần tử. Hệ thống sẽ cấp phát một vùng bộ nhớ mới và di chuyển tất cả phần tử từ danh sách ban đầu sang đó; khi này, độ phức tạp thời gian trở thành $O(n)$.
 
-This space waste mainly has two aspects: on one hand, lists typically set an initial length, which we may not need to fully utilize; on the other hand, to prevent frequent expansion, expansion generally multiplies by a coefficient, such as $\times 1.5$. As a result, there will be many empty positions that we typically cannot completely fill.
+**Q**: “Sự xuất hiện của danh sách đã cải thiện đáng kể tính thực tiễn của mảng, nhưng có thể gây lãng phí một phần không gian bộ nhớ”—sự lãng phí không gian này có phải nói đến phần bộ nhớ do các biến bổ sung như capacity, length và hệ số mở rộng chiếm dụng không?
 
-**Q**: In Python, after initializing `n = [1, 2, 3]`, the addresses of these 3 elements are contiguous, but initializing `m = [2, 1, 3]` reveals that each element's id is not continuous; rather, they are the same as those in `n`. Since the addresses of these elements are not contiguous, is `m` still an array?
+Sự lãng phí không gian này chủ yếu có hai khía cạnh: một mặt, danh sách thường đặt một độ dài ban đầu mà chúng ta có thể không cần sử dụng hết; mặt khác, để tránh việc mở rộng thường xuyên, việc mở rộng thường nhân với một hệ số, chẳng hạn như $\times 1.5$. Do đó, sẽ có nhiều vị trí trống mà thông thường chúng ta không thể lấp đầy hoàn toàn.
 
-If we replace list elements with linked list nodes `n = [n1, n2, n3, n4, n5]`, usually these 5 node objects are also scattered throughout memory. However, given a list index, we can still obtain the node memory address in $O(1)$ time, thereby accessing the corresponding node. This is because the array stores references to nodes, not the nodes themselves.
+**Q**: Trong Python, sau khi khởi tạo `n = [1, 2, 3]`, địa chỉ của 3 phần tử này là liên tục, nhưng khi khởi tạo `m = [2, 1, 3]`, chúng ta nhận thấy id của mỗi phần tử không liên tục; thay vào đó, chúng giống với các phần tử trong `n`. Vì địa chỉ của các phần tử này không liên tục, `m` có còn là một mảng không?
 
-Unlike many languages, numbers in Python are wrapped as objects, and lists store not the numbers themselves, but references to the numbers. Therefore, we find that the same numbers in two arrays have the same id, and the memory addresses of these numbers need not be contiguous.
+Nếu thay thế các phần tử của list bằng các node danh sách liên kết `n = [n1, n2, n3, n4, n5]`, thông thường 5 object node này cũng được phân tán trong bộ nhớ. Tuy nhiên, với một chỉ số của list, chúng ta vẫn có thể lấy địa chỉ bộ nhớ của node trong $O(1)$ thời gian, từ đó truy cập node tương ứng. Điều này là vì mảng lưu trữ các tham chiếu đến node, chứ không lưu trữ chính các node.
 
-**Q**: C++ STL has `std::list` which has already implemented a doubly linked list, but it seems that some algorithm books don't use it directly. Is there a limitation?
+Không giống nhiều ngôn ngữ khác, các số trong Python được bọc thành object, còn list không lưu trữ chính các số mà lưu trữ các tham chiếu đến số. Vì vậy, chúng ta nhận thấy các số giống nhau trong hai mảng có cùng id, và địa chỉ bộ nhớ của các số này không nhất thiết phải liên tục.
 
-On one hand, we often prefer to use arrays for implementing algorithms and only use linked lists when necessary, mainly for two reasons.
+**Q**: C++ STL có `std::list`, vốn đã triển khai danh sách liên kết đôi, nhưng có vẻ một số sách về thuật toán không sử dụng trực tiếp nó. Có giới hạn nào không?
 
-- Space overhead: Since each element requires two additional pointers (one for the previous element and one for the next element), `std::list` typically consumes more space than `std::vector`.
-- Cache unfriendliness: Since data is not stored contiguously, `std::list` has lower cache utilization. In general, `std::vector` has better performance.
+Một mặt, chúng ta thường ưu tiên sử dụng mảng để triển khai thuật toán và chỉ sử dụng danh sách liên kết khi cần thiết, chủ yếu vì hai lý do.
 
-On the other hand, cases where linked lists are necessary mainly involve binary trees and graphs. Stacks and queues usually use the `stack` and `queue` provided by the programming language, rather than linked lists.
+- Overhead về không gian: Vì mỗi phần tử cần thêm hai pointer (một pointer đến phần tử trước và một pointer đến phần tử sau), `std::list` thường tiêu tốn nhiều không gian hơn `std::vector`.
+- Không thân thiện với cache: Vì dữ liệu không được lưu trữ liên tục, `std::list` có hiệu suất sử dụng cache thấp hơn. Nhìn chung, `std::vector` có hiệu năng tốt hơn.
 
-**Q**: Does the operation `res = [[0]] * n` create a 2D list where each `[0]` is independent?
+Mặt khác, các trường hợp cần danh sách liên kết chủ yếu liên quan đến cây nhị phân và đồ thị. Stack và queue thường sử dụng `stack` và `queue` do ngôn ngữ lập trình cung cấp, thay vì danh sách liên kết.
 
-No, they are not independent. In this 2D list, all the `[0]` are actually references to the same object. If we modify one element, we will find that all corresponding elements change accordingly.
+**Q**: Thao tác `res = [[0]] * n` có tạo ra một list 2D trong đó mỗi `[0]` là độc lập không?
 
-If we want each `[0]` in the 2D list to be independent, we can use `res = [[0] for _ in range(n)]` to achieve this. The principle of this approach is to initialize $n$ independent `[0]` list objects.
+Không, chúng không độc lập. Trong list 2D này, tất cả `[0]` thực chất đều là các tham chiếu đến cùng một object. Nếu sửa đổi một phần tử, chúng ta sẽ nhận thấy tất cả phần tử tương ứng đều thay đổi theo.
 
-**Q**: Does the operation `res = [0] * n` create a list where each integer 0 is independent?
+Nếu muốn mỗi `[0]` trong list 2D là độc lập, chúng ta có thể sử dụng `res = [[0] for _ in range(n)]` để đạt được điều này. Nguyên lý của cách tiếp cận này là khởi tạo $n$ object list `[0]` độc lập.
 
-In this list, all the integer zeros reference the same object. This is because Python uses a caching mechanism for small integers (typically -5 to 256) to maximize object reuse and improve performance.
+**Q**: Thao tác `res = [0] * n` có tạo ra một list trong đó mỗi số nguyên 0 là độc lập không?
 
-Although they all reference the same object, we can still modify each element in the list independently. This is because Python integers are "immutable objects". When we modify an element, we actually switch that element to reference a different object, rather than changing the original object itself.
+Trong list này, tất cả số 0 nguyên đều tham chiếu đến cùng một object. Điều này là vì Python sử dụng cơ chế caching cho các số nguyên nhỏ (thường từ -5 đến 256) nhằm tối đa hóa việc tái sử dụng object và cải thiện hiệu năng.
 
-However, when list elements are "mutable objects" (such as lists, dictionaries, or class instances), modifying an element directly changes the object itself, and all elements referencing that object will have the same change.
+Mặc dù tất cả đều tham chiếu đến cùng một object, chúng ta vẫn có thể sửa đổi từng phần tử trong list một cách độc lập. Điều này là vì số nguyên trong Python là “object bất biến”. Khi sửa đổi một phần tử, thực chất chúng ta chuyển phần tử đó sang tham chiếu đến một object khác, thay vì thay đổi chính object ban đầu.
+
+Tuy nhiên, khi các phần tử trong danh sách là “đối tượng có thể thay đổi” (mutable objects), chẳng hạn như list, dictionary hoặc các instance của class, việc sửa đổi trực tiếp một phần tử sẽ làm thay đổi chính đối tượng đó, và tất cả các phần tử tham chiếu đến đối tượng đó cũng sẽ có cùng thay đổi.

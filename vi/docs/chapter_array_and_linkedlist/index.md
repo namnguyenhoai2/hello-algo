@@ -1,9 +1,9 @@
-# Arrays and Linked Lists
+# Mảng và Danh sách liên kết
 
-![Arrays and Linked Lists](../assets/covers/chapter_array_and_linkedlist.jpg)
+![Mảng và Danh sách liên kết](../assets/covers/chapter_array_and_linkedlist.jpg)
 
 !!! abstract
 
-    The world of data structures is like a solid brick wall.
+    Thế giới của các cấu trúc dữ liệu giống như một bức tường gạch vững chắc.
 
-    The bricks of an array are neatly aligned, each pressed tightly against the next. The bricks of a linked list are scattered about, with connecting vines weaving freely through the gaps between them.
+    Những viên gạch của một mảng được xếp thẳng hàng ngay ngắn, mỗi viên ép chặt vào viên kế tiếp. Những viên gạch của một danh sách liên kết nằm rải rác, với những dây leo kết nối đan xen tự do qua các khoảng trống giữa chúng.

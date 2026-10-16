@@ -1,71 +1,71 @@
-# Random-Access Memory and Cache *
+# Bộ nhớ truy cập ngẫu nhiên và Cache *
 
-In the first two sections of this chapter, we explored arrays and linked lists, two fundamental and important data structures that represent two physical layouts: "contiguous storage" and "distributed storage", respectively.
+Trong hai phần đầu của chương này, chúng ta đã tìm hiểu về mảng và danh sách liên kết, hai cấu trúc dữ liệu cơ bản và quan trọng, lần lượt biểu diễn hai cách bố trí vật lý: “lưu trữ liền kề” và “lưu trữ phân tán”.
 
-In fact, **physical structure largely determines the efficiency with which programs utilize memory and cache**, which in turn affects the overall performance of algorithmic programs.
+Trên thực tế, **cấu trúc vật lý phần lớn quyết định mức độ hiệu quả mà chương trình sử dụng bộ nhớ và cache**, từ đó ảnh hưởng đến hiệu năng tổng thể của các chương trình thuật toán.
 
-## Computer Storage Devices
+## Thiết bị lưu trữ của máy tính
 
-Computers include three types of storage devices: <u>hard disk</u>, <u>random-access memory (RAM)</u>, and <u>cache memory</u>. The following table shows their different roles and performance characteristics in a computer system.
+Máy tính bao gồm ba loại thiết bị lưu trữ: <u>ổ cứng</u>, <u>bộ nhớ truy cập ngẫu nhiên (RAM)</u>, và <u>bộ nhớ cache</u>. Bảng sau đây cho thấy vai trò và đặc điểm hiệu năng khác nhau của chúng trong một hệ thống máy tính.
 
-<p align="center"> Table <id> &nbsp; Computer Storage Devices </p>
+<p align="center"> Bảng <id> &nbsp; Thiết bị lưu trữ của máy tính </p>
 
-|                | Hard Disk                                                     | RAM                                              | Cache                                                          |
+|                | Ổ cứng                                                       | RAM                                              | Cache                                                          |
 | -------------- | ------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------- |
-| Purpose        | Long-term storage of data, including operating systems, programs, and files | Temporary storage of currently running programs and data being processed | Storage of frequently accessed data and instructions to reduce CPU's accesses to memory |
-| Volatility     | Data is not lost after power-off                             | Data is lost after power-off                    | Data is lost after power-off                                  |
-| Capacity       | Large, on the order of terabytes (TB)                        | Small, on the order of gigabytes (GB)           | Very small, on the order of megabytes (MB)                    |
-| Speed          | Slow, hundreds to thousands of MB/s                          | Fast, tens of GB/s                              | Very fast, tens to hundreds of GB/s                           |
-| Cost (CNY/GB)  | Inexpensive, from a few tenths of a yuan to a few yuan per GB | Expensive, from tens to hundreds of yuan per GB | Very expensive, effectively bundled with the CPU package      |
+| Mục đích       | Lưu trữ dữ liệu dài hạn, bao gồm hệ điều hành, chương trình và tệp | Lưu trữ tạm thời các chương trình đang chạy và dữ liệu đang được xử lý | Lưu trữ dữ liệu và chỉ thị được truy cập thường xuyên để giảm số lần CPU truy cập bộ nhớ |
+| Tính biến động | Dữ liệu không bị mất sau khi tắt nguồn                         | Dữ liệu bị mất sau khi tắt nguồn                  | Dữ liệu bị mất sau khi tắt nguồn                                |
+| Dung lượng     | Lớn, ở mức terabyte (TB)                                      | Nhỏ, ở mức gigabyte (GB)                         | Rất nhỏ, ở mức megabyte (MB)                                  |
+| Tốc độ         | Chậm, hàng trăm đến hàng nghìn MB/s                           | Nhanh, hàng chục GB/s                            | Rất nhanh, hàng chục đến hàng trăm GB/s                        |
+| Chi phí (CNY/GB) | Rẻ, từ vài phần mười nhân dân tệ đến vài nhân dân tệ mỗi GB | Đắt, từ hàng chục đến hàng trăm nhân dân tệ mỗi GB | Rất đắt, trên thực tế được tích hợp trong package CPU         |
 
-We can imagine the computer storage system as a pyramid, as shown in the diagram below. Storage devices closer to the top are faster, have smaller capacity, and are more expensive. This multi-layered design is deliberate, the result of careful consideration by computer scientists and engineers.
+Chúng ta có thể hình dung hệ thống lưu trữ của máy tính như một kim tự tháp, như minh họa bên dưới. Các thiết bị lưu trữ càng gần đỉnh thì càng nhanh, có dung lượng càng nhỏ và càng đắt. Thiết kế nhiều tầng này là có chủ đích, là kết quả của sự cân nhắc kỹ lưỡng từ các nhà khoa học máy tính và kỹ sư.
 
-- **Hard disk cannot be easily replaced by RAM**. First, data in memory is lost after power-off, making it unsuitable for long-term data storage. Second, memory is tens of times more expensive than hard disk, which makes it difficult to popularize in the consumer market.
-- **Cache cannot simultaneously achieve large capacity and high speed**. As the capacity of L1, L2, and L3 caches increases, their physical size becomes larger, and the physical distance between them and the CPU core increases, resulting in longer data transmission time and higher element access latency. With current technology, the multi-layered cache structure represents the best balance point between capacity, speed, and cost.
+- **Ổ cứng không thể dễ dàng được thay thế bằng RAM**. Thứ nhất, dữ liệu trong bộ nhớ bị mất sau khi tắt nguồn, nên không phù hợp để lưu trữ dữ liệu dài hạn. Thứ hai, bộ nhớ đắt hơn ổ cứng hàng chục lần, khiến việc phổ biến nó trên thị trường tiêu dùng trở nên khó khăn.
+- **Cache không thể đồng thời đạt được dung lượng lớn và tốc độ cao**. Khi dung lượng của cache L1, L2 và L3 tăng lên, kích thước vật lý của chúng cũng lớn hơn, đồng thời khoảng cách vật lý giữa chúng và lõi CPU tăng lên, dẫn đến thời gian truyền dữ liệu lâu hơn và độ trễ truy cập phần tử cao hơn. Với công nghệ hiện nay, cấu trúc cache nhiều tầng thể hiện điểm cân bằng tốt nhất giữa dung lượng, tốc độ và chi phí.
 
-![Computer Storage System](ram_and_cache.assets/storage_pyramid.png)
+![Hệ thống lưu trữ của máy tính](ram_and_cache.assets/storage_pyramid.png)
 
 !!! tip
 
-    The storage hierarchy of computers embodies a delicate balance among speed, capacity, and cost. In fact, such trade-offs are common across all industrial fields, requiring us to find the optimal balance point between different advantages and constraints.
+    Hệ thống phân cấp lưu trữ của máy tính thể hiện sự cân bằng tinh tế giữa tốc độ, dung lượng và chi phí. Trên thực tế, những đánh đổi như vậy phổ biến trong mọi lĩnh vực công nghiệp, đòi hỏi chúng ta phải tìm ra điểm cân bằng tối ưu giữa các ưu thế và ràng buộc khác nhau.
 
-In summary, **hard disks are used for long-term storage of large amounts of data, RAM is used to temporarily store the data being processed during program execution, and cache is used to store frequently accessed data and instructions**, thereby improving program execution efficiency. The three work together to keep the computer system running efficiently.
+Tóm lại, **ổ cứng được dùng để lưu trữ dài hạn lượng lớn dữ liệu, RAM được dùng để tạm thời lưu trữ dữ liệu đang được xử lý trong quá trình thực thi chương trình, còn cache được dùng để lưu trữ dữ liệu và chỉ thị được truy cập thường xuyên**, từ đó nâng cao hiệu quả thực thi chương trình. Ba thành phần này phối hợp với nhau để duy trì hoạt động hiệu quả của hệ thống máy tính.
 
-As shown in the diagram below, during program execution, data is read from the hard disk into RAM for CPU computation. Cache can be viewed as part of the CPU. **By intelligently loading data from RAM**, it provides the CPU with high-speed access to data, significantly improving program execution efficiency and reducing reliance on slower RAM.
+Như minh họa trong sơ đồ bên dưới, trong quá trình thực thi chương trình, dữ liệu được đọc từ ổ cứng vào RAM để CPU tính toán. Cache có thể được xem là một phần của CPU. **Bằng cách tải dữ liệu một cách thông minh từ RAM**, cache cung cấp cho CPU khả năng truy cập dữ liệu tốc độ cao, cải thiện đáng kể hiệu quả thực thi chương trình và giảm sự phụ thuộc vào RAM chậm hơn.
 
-![Data Flow Among Hard Disk, RAM, and Cache](ram_and_cache.assets/computer_storage_devices.png)
+![Luồng dữ liệu giữa ổ cứng, RAM và Cache](ram_and_cache.assets/computer_storage_devices.png)
 
-## Memory Efficiency of Data Structures
+## Hiệu quả sử dụng bộ nhớ của các cấu trúc dữ liệu
 
-In terms of memory space utilization, arrays and linked lists each have advantages and limitations.
+Xét về mức độ sử dụng không gian bộ nhớ, mảng và danh sách liên kết đều có ưu điểm và hạn chế riêng.
 
-On one hand, **memory is limited, and the same memory cannot be shared by multiple programs**, so we hope data structures can utilize space as efficiently as possible. Array elements are tightly packed and do not require additional space to store references (pointers) between linked list nodes, thus having higher space efficiency. However, arrays need to allocate sufficient contiguous memory space at once, which may lead to memory waste, and array expansion requires additional time and space costs. In comparison, linked lists perform dynamic memory allocation and deallocation on a "node" basis, providing greater flexibility.
+Một mặt, **bộ nhớ có giới hạn và cùng một vùng bộ nhớ không thể được nhiều chương trình chia sẻ**, vì vậy chúng ta mong muốn các cấu trúc dữ liệu sử dụng không gian hiệu quả nhất có thể. Các phần tử mảng được xếp liền kề và không cần thêm không gian để lưu trữ các tham chiếu (con trỏ) giữa các node của danh sách liên kết, nên có hiệu quả sử dụng không gian cao hơn. Tuy nhiên, mảng cần cấp phát đủ một vùng bộ nhớ liền kề ngay từ đầu, điều này có thể dẫn đến lãng phí bộ nhớ; việc mở rộng mảng cũng đòi hỏi thêm thời gian và không gian. Ngược lại, danh sách liên kết thực hiện cấp phát và giải phóng bộ nhớ động theo từng “node”, nên linh hoạt hơn.
 
-On the other hand, during program execution, **as memory is repeatedly allocated and freed, the degree of fragmentation of free memory becomes increasingly severe**, leading to reduced memory utilization efficiency. Arrays, due to their contiguous storage approach, are relatively less prone to memory fragmentation. Conversely, linked list elements are distributed in storage, and frequent insertion and deletion operations are more likely to cause memory fragmentation.
+Mặt khác, trong quá trình thực thi chương trình, **khi bộ nhớ liên tục được cấp phát và giải phóng, mức độ phân mảnh của bộ nhớ trống ngày càng nghiêm trọng**, dẫn đến hiệu quả sử dụng bộ nhớ giảm. Do sử dụng phương thức lưu trữ liền kề, mảng tương đối ít có khả năng gây phân mảnh bộ nhớ hơn. Ngược lại, các phần tử của danh sách liên kết được phân tán trong bộ nhớ, nên các thao tác chèn và xóa thường xuyên dễ gây phân mảnh bộ nhớ hơn.
 
-## Cache Efficiency of Data Structures
+## Hiệu quả sử dụng cache của các cấu trúc dữ liệu
 
-Although cache has much smaller space capacity than memory, it is much faster than memory and plays a crucial role in program execution speed. Since cache capacity is limited and can only store a small portion of frequently accessed data, when the CPU attempts to access data that is not in the cache, a <u>cache miss</u> occurs, and the CPU must load the required data from the slower memory.
+Mặc dù cache có dung lượng nhỏ hơn nhiều so với bộ nhớ, nó nhanh hơn bộ nhớ rất nhiều và đóng vai trò quan trọng đối với tốc độ thực thi chương trình. Vì dung lượng cache có giới hạn và chỉ có thể lưu trữ một phần nhỏ dữ liệu được truy cập thường xuyên, khi CPU cố gắng truy cập dữ liệu không có trong cache, <u>cache miss</u> xảy ra, và CPU phải tải dữ liệu cần thiết từ bộ nhớ chậm hơn.
 
-Clearly, **the fewer "cache misses," the higher the efficiency of CPU data reads and writes**, and the better the program performance. We call the proportion of data that the CPU successfully obtains from the cache the <u>cache hit rate</u>, a metric typically used to measure cache efficiency.
+Rõ ràng, **càng ít “cache miss” thì hiệu quả đọc và ghi dữ liệu của CPU càng cao**, đồng thời hiệu năng chương trình càng tốt. Chúng ta gọi tỷ lệ dữ liệu mà CPU lấy thành công từ cache là <u>cache hit rate</u>, một chỉ số thường được dùng để đo lường hiệu quả của cache.
 
-To achieve the highest efficiency possible, cache employs the following data loading mechanisms.
+Để đạt hiệu quả cao nhất có thể, cache sử dụng các cơ chế tải dữ liệu sau:
 
-- **Cache lines**: The cache does not store and load data on a byte-by-byte basis, but rather as cache lines. Compared to byte-by-byte transmission, cache line transmission is more efficient.
-- **Prefetching mechanism**: The processor attempts to predict data access patterns (e.g., sequential access, fixed-stride jumping access, etc.) and loads data into the cache according to specific patterns, thereby improving hit rate.
-- **Spatial locality**: If a piece of data is accessed, nearby data may also be accessed in the near future. Therefore, when the cache loads a particular piece of data, it also loads nearby data to improve hit rate.
-- **Temporal locality**: If a piece of data is accessed, it is likely to be accessed again in the near future. Cache leverages this principle by retaining recently accessed data to improve hit rate.
+- **Cache line**: Cache không lưu trữ và tải dữ liệu theo từng byte, mà theo các cache line. So với việc truyền từng byte, truyền theo cache line hiệu quả hơn.
+- **Cơ chế prefetching**: Bộ xử lý cố gắng dự đoán các mẫu truy cập dữ liệu (ví dụ: truy cập tuần tự, truy cập nhảy với bước cố định, v.v.) và tải dữ liệu vào cache theo các mẫu cụ thể, từ đó cải thiện hit rate.
+- **Tính cục bộ không gian**: Nếu một phần dữ liệu được truy cập, dữ liệu lân cận cũng có thể được truy cập trong tương lai gần. Vì vậy, khi cache tải một phần dữ liệu cụ thể, nó cũng tải dữ liệu lân cận để cải thiện hit rate.
+- **Tính cục bộ thời gian**: Nếu một phần dữ liệu được truy cập, nhiều khả năng nó sẽ được truy cập lại trong tương lai gần. Cache tận dụng nguyên tắc này bằng cách giữ lại dữ liệu vừa được truy cập để cải thiện hit rate.
 
-In fact, **arrays and linked lists differ in how efficiently they utilize cache**, mainly in the following respects.
+Trên thực tế, **mảng và danh sách liên kết khác nhau về mức độ hiệu quả khi sử dụng cache**, chủ yếu ở các khía cạnh sau:
 
-- **Space occupied**: Linked-list elements occupy more space than array elements, so less useful data can fit in the cache.
-- **Cache lines**: Linked list data are scattered throughout memory, while cache loads "by lines," so the proportion of invalid data loaded is higher.
-- **Prefetching mechanism**: Arrays have more "predictable" data access patterns than linked lists, making it easier for the system to guess which data will be loaded next.
-- **Spatial locality**: Arrays are stored in centralized memory space, so data near loaded data is more likely to be accessed soon.
+- **Không gian chiếm dụng**: Các phần tử của danh sách liên kết chiếm nhiều không gian hơn các phần tử mảng, do đó cache chứa được ít dữ liệu hữu ích hơn.
+- **Cache line**: Dữ liệu của danh sách liên kết nằm rải rác trong bộ nhớ, trong khi cache tải dữ liệu “theo line”, nên tỷ lệ dữ liệu không hợp lệ được tải vào cao hơn.
+- **Cơ chế prefetching**: Các mẫu truy cập dữ liệu của mảng “dễ dự đoán” hơn danh sách liên kết, khiến hệ thống dễ đoán dữ liệu nào sẽ được tải tiếp theo hơn.
+- **Tính cục bộ không gian**: Mảng được lưu trữ trong một vùng bộ nhớ tập trung, vì vậy dữ liệu gần dữ liệu đã tải có nhiều khả năng sớm được truy cập hơn.
 
-Overall, **arrays have higher cache hit rates, thus they usually outperform linked lists in operation efficiency**. This makes data structures implemented based on arrays more popular when solving algorithmic problems.
+Nhìn chung, **mảng có hit rate cao hơn, vì vậy thường có hiệu quả thao tác tốt hơn danh sách liên kết**. Điều này khiến các cấu trúc dữ liệu được triển khai dựa trên mảng trở nên phổ biến hơn khi giải các bài toán thuật toán.
 
-It is important to note that **high cache efficiency does not mean arrays are superior to linked lists in all cases**. In practical applications, which data structure to choose should be determined based on specific requirements. For example, both arrays and linked lists can implement the "stack" data structure (which will be discussed in detail in the next chapter), but they are suitable for different scenarios.
+Điều quan trọng cần lưu ý là **hiệu quả sử dụng cache cao không có nghĩa mảng vượt trội hơn danh sách liên kết trong mọi trường hợp**. Trong các ứng dụng thực tế, việc lựa chọn cấu trúc dữ liệu nào cần dựa trên yêu cầu cụ thể. Ví dụ, cả mảng và danh sách liên kết đều có thể triển khai cấu trúc dữ liệu “stack” (sẽ được thảo luận chi tiết trong chương tiếp theo), nhưng chúng phù hợp với những tình huống khác nhau.
 
-- When solving algorithm problems, we tend to prefer stack implementations based on arrays, because they provide higher operation efficiency and the ability of random access, at the cost of needing to pre-allocate a certain amount of memory space for the array.
-- If the data volume is very large, the dynamic nature is high, and the expected size of the stack is difficult to estimate, then a stack implementation based on linked lists is more suitable. Linked lists can distribute large amounts of data across different parts of memory and avoid the additional overhead produced by array expansion.
+- Khi giải các bài toán thuật toán, chúng ta thường ưu tiên triển khai stack dựa trên mảng, vì chúng mang lại hiệu quả thao tác cao hơn và khả năng truy cập ngẫu nhiên, đổi lại cần cấp phát trước một lượng không gian bộ nhớ nhất định cho mảng.
+- Nếu lượng dữ liệu rất lớn, tính biến động cao và khó ước tính kích thước stack dự kiến, thì triển khai stack dựa trên danh sách liên kết sẽ phù hợp hơn. Danh sách liên kết có thể phân phối lượng lớn dữ liệu đến các vùng khác nhau trong bộ nhớ và tránh phần chi phí bổ sung do việc mở rộng mảng tạo ra.
