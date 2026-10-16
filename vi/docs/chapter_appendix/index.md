@@ -1,3 +1,3 @@
-# Appendix
+# Phụ lục
 
-![Appendix](../assets/covers/chapter_appendix.jpg)
+![Phụ lục](../assets/covers/chapter_appendix.jpg)
