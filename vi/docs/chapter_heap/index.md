@@ -4,6 +4,6 @@
 
 !!! abstract
 
-    Heaps are like mountain peaks, rising layer upon layer, each with a distinct shape.
+    Heap giống như những đỉnh núi, vươn lên theo từng lớp, mỗi đỉnh mang một hình dạng riêng biệt.
 
-    The peaks rise and fall at varying heights, yet the tallest peak always catches the eye first.
+    Các đỉnh nhấp nhô ở những độ cao khác nhau, nhưng đỉnh cao nhất luôn thu hút ánh nhìn đầu tiên.

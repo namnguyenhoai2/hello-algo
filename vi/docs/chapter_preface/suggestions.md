@@ -1,239 +1,228 @@
-# How to Use This Book
+# Cách sử dụng cuốn sách này
 
 !!! tip
 
-    For the best reading experience, it is recommended that you read through this section.
+    Để có trải nghiệm đọc tốt nhất, bạn nên đọc kỹ phần này.
 
-## Writing Style Conventions
+## Quy ước về phong cách viết
 
-- Sections marked with `*` after the title are optional and somewhat more challenging. If you're short on time, you can skip them on your first pass.
-- Technical terms are shown in bold (in the print and PDF editions) or underlined (in the web edition), such as <u>array</u>. They are worth remembering, as they will help when reading technical literature.
-- Key content and summary statements will be **bolded**, and such text deserves special attention.
-- Words and phrases with specific meanings will be marked with "quotation marks" to avoid ambiguity.
-- When terminology differs across programming languages, this book follows Python conventions; for example, it uses `None` to represent "null".
-- This book partially relaxes conventional programming-language comment styles in favor of a more compact layout. Comments are mainly divided into three types: title comments, content comments, and multi-line comments.
+- Các phần có `*` sau tiêu đề là phần tùy chọn và có phần khó hơn. Nếu không có nhiều thời gian, bạn có thể bỏ qua trong lần đọc đầu tiên.
+- Các thuật ngữ kỹ thuật được in đậm (trong bản in và bản PDF) hoặc gạch chân (trong bản web), chẳng hạn như <u>mảng</u>. Bạn nên ghi nhớ chúng, vì chúng sẽ giúp ích khi đọc các tài liệu kỹ thuật.
+- Nội dung quan trọng và các câu tóm tắt sẽ được **in đậm**, vì vậy bạn nên đặc biệt chú ý đến những phần này.
+- Các từ và cụm từ có ý nghĩa cụ thể sẽ được đặt trong “dấu ngoặc kép” để tránh mơ hồ.
+- Khi thuật ngữ khác nhau giữa các ngôn ngữ lập trình, cuốn sách này sử dụng quy ước của Python; chẳng hạn, sách dùng `None` để biểu thị “null”.
+- Cuốn sách này nới lỏng một phần các quy ước thông thường về phong cách comment của ngôn ngữ lập trình để có bố cục cô đọng hơn. Comment chủ yếu được chia thành ba loại: comment tiêu đề, comment nội dung và comment nhiều dòng.
 
 === "Python"
 
     ```python title=""
-    """Title comment, used to label functions, classes, test cases, etc."""
+    """Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v."""
 
-    # Content comment, used to explain code in detail
+    # Comment nội dung, dùng để giải thích chi tiết về code
 
     """
-    Multi-line
-    comment
+    Comment nhiều dòng
     """
     ```
 
 === "C++"
 
     ```cpp title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Java"
 
     ```java title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "C#"
 
     ```csharp title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Go"
 
     ```go title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Swift"
 
     ```swift title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "JS"
 
     ```javascript title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "TS"
 
     ```typescript title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Dart"
 
     ```dart title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Rust"
 
     ```rust title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
-    // Multi-line
-    // comment
+    // Comment nhiều dòng
+    // 
     ```
 
 === "C"
 
     ```c title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Kotlin"
 
     ```kotlin title=""
-    /* Title comment, used to label functions, classes, test cases, etc. */
+    /* Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. */
 
-    // Content comment, used to explain code in detail
+    // Comment nội dung, dùng để giải thích chi tiết về code
 
     /**
-     * Multi-line
-     * comment
+     * Comment nhiều dòng
      */
     ```
 
 === "Ruby"
 
     ```ruby title=""
-    ### Title comment, used to label functions, classes, test cases, etc. ###
+    ### Comment tiêu đề, dùng để gắn nhãn cho các hàm, class, test case, v.v. ###
 
-    # Content comment, used to explain code in detail
+    # Comment nội dung, dùng để giải thích chi tiết về code
 
-    # Multi-line
-    # comment
+    # Comment nhiều dòng
+    # 
     ```
 
-## Learning Efficiently with Animated Illustrations
+## Học hiệu quả với hình minh họa động
 
-Compared with plain text, videos and images have higher information density and a clearer structure, making them easier to understand. In this book, **key concepts and challenging topics are presented mainly through animated illustrations**, with text serving as explanation and supplement.
+So với văn bản thuần túy, video và hình ảnh có mật độ thông tin cao hơn cùng cấu trúc rõ ràng hơn, nên dễ hiểu hơn. Trong cuốn sách này, **các khái niệm quan trọng và chủ đề khó chủ yếu được trình bày thông qua hình minh họa động**, còn văn bản đóng vai trò giải thích và bổ sung.
 
-If, while reading this book, you encounter an animated illustration like the one shown below, **treat the illustration as primary and the text as supplementary**, and use both together to understand the content.
+Nếu trong khi đọc cuốn sách này, bạn bắt gặp một hình minh họa động như hình dưới đây, **hãy xem hình minh họa là nội dung chính và văn bản là phần bổ trợ**, đồng thời kết hợp cả hai để hiểu nội dung.
 
-![Example of animated illustrations](../index.assets/animation.gif)
+![Ví dụ về hình minh họa động](../index.assets/animation.gif)
 
-## Deepening Understanding Through Code Practice
+## Hiểu sâu hơn thông qua thực hành code
 
-The accompanying code for this book is hosted in the [GitHub repository](https://github.com/krahets/hello-algo). As shown in the figure below, **the source code comes with test cases and can be run with one click**.
+Code đi kèm cuốn sách này được lưu trữ trong [kho lưu trữ GitHub](https://github.com/krahets/hello-algo). Như hình dưới đây cho thấy, **source code đi kèm các test case và có thể chạy chỉ bằng một cú nhấp chuột**.
 
-If time permits, **it is recommended that you type out the code yourself**. If you have limited study time, please at least read through and run all the code.
+Nếu có thời gian, **bạn nên tự gõ code**. Nếu thời gian học hạn chế, ít nhất hãy đọc kỹ và chạy toàn bộ code.
 
-Compared with simply reading code, writing it yourself often brings greater rewards. **Hands-on practice is where real learning happens**.
+So với việc chỉ đọc code, tự viết code thường mang lại nhiều lợi ích hơn. **Học thật sự diễn ra qua thực hành**.
 
-![Example of running code](../index.assets/running_code.gif)
+![Ví dụ chạy code](../index.assets/running_code.gif)
 
-Getting the code running mainly involves three preliminary steps.
+Để chạy được code, về cơ bản cần thực hiện ba bước chuẩn bị.
 
-**Step 1: Install the local programming environment**. Please follow the [tutorial](https://www.hello-algo.com/chapter_appendix/installation/) in the appendix. If it is already installed, you can skip this step.
+**Bước 1: Cài đặt môi trường lập trình cục bộ**. Hãy làm theo [hướng dẫn](https://www.hello-algo.com/chapter_appendix/installation/) trong phần phụ lục. Nếu đã cài đặt rồi, bạn có thể bỏ qua bước này.
 
-**Step 2: Clone or download the code repository**. Visit the [GitHub repository](https://github.com/krahets/hello-algo). If you have already installed [Git](https://git-scm.com/downloads), you can clone this repository with the following command:
+**Bước 2: Clone hoặc tải xuống repository chứa code**. Truy cập [kho lưu trữ GitHub](https://github.com/krahets/hello-algo). Nếu đã cài đặt [Git](https://git-scm.com/downloads), bạn có thể clone repository này bằng lệnh sau:
 
 ```shell
 git clone https://github.com/krahets/hello-algo.git
 ```
 
-Alternatively, you can click the "Download ZIP" button shown below to download a ZIP archive of the repository directly and then extract it locally.
+Ngoài ra, bạn có thể nhấp vào nút “Download ZIP” như hình dưới đây để tải trực tiếp kho lưu trữ dưới dạng tệp ZIP, sau đó giải nén tại máy.
 
-![Clone repository and download code](suggestions.assets/download_code.png)
+![Clone repository và tải code](suggestions.assets/download_code.png)
 
-**Step 3: Run the source code**. As shown in the figure below, for code blocks with file names at the top, we can find the corresponding source code files in the `codes` folder of the repository. The source code files can be run with one click, which will help you save unnecessary debugging time and allow you to focus on learning content.
+**Bước 3: Chạy source code**. Như hình dưới đây cho thấy, đối với các khối code có tên tệp ở phía trên, chúng ta có thể tìm thấy các tệp source code tương ứng trong thư mục `codes` của repository. Các tệp source code có thể chạy chỉ bằng một cú nhấp chuột, giúp bạn tiết kiệm thời gian debug không cần thiết và tập trung vào việc học nội dung.
 
-![Code blocks and corresponding source code files](suggestions.assets/code_md_to_repo.png)
+![Các khối code và tệp source code tương ứng](suggestions.assets/code_md_to_repo.png)
 
-In addition to running code locally, **the web version also supports visual execution of Python code** (implemented based on [pythontutor](https://pythontutor.com/)). As shown in the figure below, you can click "Visual Run" below the code block to expand the view and observe the execution process of the algorithm code; you can also click "Full Screen View" for a better viewing experience.
+Ngoài việc chạy code cục bộ, **phiên bản web còn hỗ trợ thực thi Python code trực quan** (được triển khai dựa trên [pythontutor](https://pythontutor.com/)). Như hình dưới đây cho thấy, bạn có thể nhấp vào “Visual Run” bên dưới khối code để mở rộng khung hiển thị và quan sát quá trình thực thi của algorithm code; bạn cũng có thể nhấp vào “Full Screen View” để có trải nghiệm xem tốt hơn.
 
-![Visual running of Python code](suggestions.assets/pythontutor_example.png)
+![Chạy Python code trực quan](suggestions.assets/pythontutor_example.png)
 
-## Growing Together Through Questions and Discussions
+## Cùng nhau tiến bộ qua câu hỏi và thảo luận
 
-When reading this book, please do not skip over points that you still do not fully understand. **Feel free to ask your questions in the comments section**, and my friends and I will do our best to answer them, usually within two days.
+Khi đọc cuốn sách này, đừng bỏ qua những điểm mà bạn vẫn chưa hiểu đầy đủ. **Bạn cứ thoải mái đặt câu hỏi trong phần bình luận**, tôi và các bạn của mình sẽ cố gắng hết sức để trả lời, thường là trong vòng hai ngày.
 
-As shown in the figure below, the web version has a comments section at the bottom of each chapter. I encourage you to pay close attention to the discussions there. On the one hand, you can learn about the problems that others encounter, thereby filling gaps in your own understanding and prompting deeper thought. On the other hand, I hope you will generously answer other readers' questions, share your insights, and help others improve.
+Như hình dưới đây cho thấy, phiên bản web có phần bình luận ở cuối mỗi chương. Tôi khuyến khích bạn chú ý theo dõi các cuộc thảo luận ở đó. Một mặt, bạn có thể tìm hiểu những vấn đề mà người khác gặp phải, từ đó bổ sung những điểm còn thiếu trong hiểu biết của mình và thúc đẩy suy nghĩ sâu hơn. Mặt khác, tôi hy vọng bạn sẽ sẵn lòng trả lời câu hỏi của những độc giả khác, chia sẻ hiểu biết của mình và giúp đỡ người khác tiến bộ.
 
-![Example of comments section](../index.assets/comment.gif)
+![Ví dụ về phần bình luận](../index.assets/comment.gif)
 
-## Algorithm Learning Roadmap
+## Lộ trình học algorithm
 
-Overall, we can divide the process of learning data structures and algorithms into three stages.
+Nhìn chung, chúng ta có thể chia quá trình học cấu trúc dữ liệu và algorithm thành ba giai đoạn.
 
-1. **Stage 1: Algorithm introduction**. We need to familiarize ourselves with the characteristics and usage of various data structures, and learn the principles, processes, uses, and efficiency of different algorithms.
-2. **Stage 2: Practice algorithm problems**. It is recommended to start with popular problems and solve at least 100 of them first, so that you become familiar with mainstream algorithm questions. When you first begin practicing problems, "knowledge forgetting" may feel like a challenge, but rest assured, this is very normal. We can review problems according to the "Ebbinghaus forgetting curve", and after 3-5 rounds of repetition, they usually stick firmly in memory. For recommended problem lists and practice plans, please see this [GitHub repository](https://github.com/krahets/LeetCode-Book).
-3. **Stage 3: Building a knowledge system**. In terms of learning, we can read algorithm column articles, problem-solving frameworks, and algorithm textbooks to continuously enrich our knowledge system. In terms of practicing problems, we can try advanced problem-solving strategies, such as categorization by topic, one problem multiple solutions, one solution multiple problems, etc. Related problem-solving insights can be found in various communities.
+1. **Giai đoạn 1: Nhập môn algorithm**. Chúng ta cần làm quen với đặc điểm và cách sử dụng của nhiều cấu trúc dữ liệu khác nhau, đồng thời học các nguyên lý, quy trình, công dụng và hiệu suất của những algorithm khác nhau.
+2. **Giai đoạn 2: Luyện tập các bài toán algorithm**. Bạn nên bắt đầu với những bài toán phổ biến và giải ít nhất 100 bài trước, để làm quen với các dạng câu hỏi algorithm phổ biến. Khi mới bắt đầu luyện tập, việc “quên kiến thức” có thể khiến bạn cảm thấy khó khăn, nhưng hãy yên tâm, điều này hoàn toàn bình thường. Chúng ta có thể ôn lại các bài toán theo “đường cong lãng quên Ebbinghaus”; sau 3-5 vòng lặp lại, kiến thức thường sẽ được ghi nhớ vững chắc. Để xem danh sách bài toán và kế hoạch luyện tập được đề xuất, hãy tham khảo [kho lưu trữ GitHub](https://github.com/krahets/LeetCode-Book).
+3. **Giai đoạn 3: Xây dựng hệ thống kiến thức**. Về việc học, chúng ta có thể đọc các bài viết trong chuyên mục algorithm, các framework giải bài và giáo trình algorithm để không ngừng làm phong phú hệ thống kiến thức. Về việc luyện tập, chúng ta có thể thử các chiến lược giải bài nâng cao, chẳng hạn như phân loại theo chủ đề, một bài nhiều cách giải, một cách giải cho nhiều bài, v.v. Bạn có thể tìm thấy những chia sẻ liên quan đến việc giải bài trong nhiều cộng đồng khác nhau.
 
-As shown in the figure below, the content of this book mainly covers "Stage 1", aiming to help you more efficiently carry out Stage 2 and Stage 3 learning.
+Như minh họa trong hình dưới đây, nội dung của cuốn sách này chủ yếu bao quát “Giai đoạn 1”, nhằm giúp bạn thực hiện việc học ở Giai đoạn 2 và Giai đoạn 3 hiệu quả hơn.
 
-![Algorithm learning roadmap](suggestions.assets/learning_route.png)
+![Lộ trình học thuật toán](suggestions.assets/learning_route.png)

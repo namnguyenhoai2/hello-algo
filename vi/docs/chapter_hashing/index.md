@@ -1,9 +1,9 @@
-# Hashing
+# Băm
 
-![Hashing](../assets/covers/chapter_hashing.jpg)
+![Băm](../assets/covers/chapter_hashing.jpg)
 
 !!! abstract
 
-    In the world of computing, a hash table is like a clever librarian.
+    Trong thế giới máy tính, hash table (bảng băm) giống như một thủ thư thông minh.
 
-    It knows how to compute call numbers, allowing it to quickly locate the desired book.
+    Nó biết cách tính số định danh, nhờ đó có thể nhanh chóng tìm được cuốn sách mong muốn.

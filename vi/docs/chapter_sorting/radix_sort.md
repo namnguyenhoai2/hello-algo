@@ -1,41 +1,41 @@
-# Radix Sort
+# Sắp xếp cơ số
 
-The previous section introduced counting sort, which is suitable when the number of items $n$ is large but the value range $m$ is small. Suppose we need to sort $n = 10^6$ student IDs, each of which is an 8-digit number. Then the value range $m = 10^8$ is very large. Using counting sort would require a large amount of memory, whereas radix sort avoids this problem.
+Phần trước đã giới thiệu counting sort, phù hợp khi số lượng phần tử $n$ lớn nhưng phạm vi giá trị $m$ nhỏ. Giả sử chúng ta cần sắp xếp $n = 10^6$ mã số sinh viên, mỗi mã là một số có 8 chữ số. Khi đó, phạm vi giá trị $m = 10^8$ rất lớn. Việc sử dụng counting sort sẽ đòi hỏi một lượng bộ nhớ lớn, trong khi radix sort tránh được vấn đề này.
 
-<u>Radix sort</u> is based on the same core idea as counting sort: it also sorts by counting occurrences. Building on this, radix sort exploits the positional relationship among digits and sorts them one digit at a time to obtain the final result.
+<u>Sắp xếp cơ số</u> dựa trên cùng một ý tưởng cốt lõi với counting sort: cũng sắp xếp bằng cách đếm số lần xuất hiện. Dựa trên đó, radix sort tận dụng mối quan hệ về vị trí giữa các chữ số và sắp xếp từng chữ số một để thu được kết quả cuối cùng.
 
-## Algorithm Flow
+## Quy trình thuật toán
 
-Taking student ID data as an example, assume the lowest digit is the $1$st digit and the highest digit is the $8$th digit. The flow of radix sort is shown in the figure below.
+Lấy dữ liệu mã số sinh viên làm ví dụ, giả sử chữ số thấp nhất là chữ số thứ $1$ và chữ số cao nhất là chữ số thứ $8$. Quy trình của radix sort được minh họa trong hình dưới đây.
 
-1. Initialize the digit $k = 1$.
-2. Perform "counting sort" on the $k$th digit of the student IDs. After completion, the data will be sorted from smallest to largest according to the $k$th digit.
-3. Increase $k$ by $1$, then return to step `2.` and continue iterating until all digits are sorted, at which point the process ends.
+1. Khởi tạo chữ số $k = 1$.
+2. Thực hiện "counting sort" trên chữ số thứ $k$ của các mã số sinh viên. Sau khi hoàn tất, dữ liệu sẽ được sắp xếp từ nhỏ đến lớn theo chữ số thứ $k$.
+3. Tăng $k$ lên $1$, sau đó quay lại bước `2.` và tiếp tục lặp cho đến khi tất cả các chữ số được sắp xếp; khi đó, quá trình kết thúc.
 
-![Radix sort algorithm flow](radix_sort.assets/radix_sort_overview.png)
+![Quy trình thuật toán sắp xếp cơ số](radix_sort.assets/radix_sort_overview.png)
 
-Next, let us look at the code. For a number $x$ in base $d$, its $k$th digit $x_k$ can be obtained with the following formula:
+Tiếp theo, hãy xem xét đoạn mã. Với một số $x$ trong hệ cơ số $d$, chữ số thứ $k$ $x_k$ của nó có thể được tính bằng công thức sau:
 
 $$
 x_k = \lfloor\frac{x}{d^{k-1}}\rfloor \bmod d
 $$
 
-Here, $\lfloor a \rfloor$ denotes rounding the floating-point number $a$ down, and $\bmod \: d$ denotes taking the remainder modulo $d$. For student ID data, $d = 10$ and $k \in [1, 8]$.
+Trong đó, $\lfloor a \rfloor$ biểu thị việc làm tròn số thực $a$ xuống, còn $\bmod \: d$ biểu thị phép lấy phần dư theo modulo $d$. Đối với dữ liệu mã số sinh viên, $d = 10$ và $k \in [1, 8]$.
 
-Additionally, we need to slightly modify the counting sort code to make it sort based on the $k$th digit of the number:
+Ngoài ra, chúng ta cần sửa đổi một chút mã counting sort để nó sắp xếp dựa trên chữ số thứ $k$ của số:
 
 ```src
 [file]{radix_sort}-[class]{}-[func]{radix_sort}
 ```
 
-!!! question "Why start sorting from the lowest digit?"
+!!! question "Tại sao bắt đầu sắp xếp từ chữ số thấp nhất?"
 
-    In successive sorting passes, a later pass overrides the result of an earlier one. For example, if the first pass yields $a < b$ but the second yields $a > b$, then the result of the second pass prevails. Because higher-order digits have higher priority than lower-order digits, we should sort the lower digits first and then the higher digits.
+    Trong các lượt sắp xếp liên tiếp, lượt sau sẽ ghi đè lên kết quả của lượt trước. Ví dụ, nếu lượt đầu tiên cho kết quả $a < b$ nhưng lượt thứ hai cho kết quả $a > b$, thì kết quả của lượt thứ hai sẽ được ưu tiên. Vì các chữ số ở hàng cao hơn có độ ưu tiên cao hơn các chữ số ở hàng thấp hơn, chúng ta nên sắp xếp các chữ số thấp hơn trước, sau đó mới sắp xếp các chữ số cao hơn.
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-Compared with counting sort, radix sort is suitable for larger value ranges, **but only when the data can be represented with a fixed number of digits and that digit count is not too large**. For example, floating-point numbers are not well suited to radix sort because the digit count $k$ can be too large, potentially leading to time complexity $O(nk) \gg O(n^2)$.
+So với counting sort, radix sort phù hợp với các phạm vi giá trị lớn hơn, **nhưng chỉ khi dữ liệu có thể được biểu diễn bằng một số chữ số cố định và số chữ số đó không quá lớn**. Ví dụ, số thực dấu phẩy động không phù hợp với radix sort vì số chữ số $k$ có thể quá lớn, có khả năng dẫn đến độ phức tạp thời gian $O(nk) \gg O(n^2)$.
 
-- **Time complexity of $O(nk)$, non-adaptive sorting**: Let the number of items be $n$, let the values be represented in base $d$, and let the maximum number of digits be $k$. Counting sort on one digit takes $O(n + d)$ time, so sorting all $k$ digits takes $O((n + d)k)$ time. In practice, $d$ and $k$ are usually relatively small, so the overall time complexity approaches $O(n)$.
-- **Space complexity of $O(n + d)$, non-in-place sorting**: Same as counting sort, radix sort requires auxiliary arrays `res` and `counter` of lengths $n$ and $d$.
-- **Stable sort**: When counting sort is stable, radix sort is also stable; when counting sort is unstable, radix sort cannot guarantee correct sorting results.
+- **Độ phức tạp thời gian $O(nk)$, sắp xếp không thích nghi**: Gọi số lượng phần tử là $n$, biểu diễn các giá trị trong hệ cơ số $d$, và gọi số chữ số tối đa là $k$. Counting sort trên một chữ số mất thời gian $O(n + d)$, vì vậy việc sắp xếp cả $k$ chữ số mất thời gian $O((n + d)k)$. Trong thực tế, $d$ và $k$ thường tương đối nhỏ, nên độ phức tạp thời gian tổng thể tiến gần đến $O(n)$.
+- **Độ phức tạp không gian $O(n + d)$, sắp xếp không tại chỗ**: Giống như counting sort, radix sort yêu cầu các mảng phụ `res` và `counter` có độ dài lần lượt là $n$ và $d$.
+- **Sắp xếp ổn định**: Khi counting sort ổn định, radix sort cũng ổn định; khi counting sort không ổn định, radix sort không thể đảm bảo kết quả sắp xếp chính xác.

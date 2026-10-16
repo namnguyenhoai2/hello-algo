@@ -1,31 +1,31 @@
-# Summary
+# Tóm tắt
 
-### Key Review
+### Nội dung chính
 
-- A stack is a data structure that follows the LIFO principle and can be implemented using arrays or linked lists.
-- In terms of time efficiency, the array implementation of a stack has higher average efficiency, but during expansion, the time complexity of a single push operation degrades to $O(n)$. In contrast, the linked-list implementation of a stack offers more stable performance.
-- In terms of space efficiency, the array implementation of a stack may lead to some degree of space wastage. However, it should be noted that the memory space occupied by linked list nodes is larger than that of array elements.
-- A queue is a data structure that follows the FIFO principle and can also be implemented using arrays or linked lists. The conclusions regarding time efficiency and space efficiency comparisons for queues are similar to those for stacks mentioned above.
-- A deque is a queue with greater flexibility that allows adding and removing elements at both ends.
+- Stack là một cấu trúc dữ liệu tuân theo nguyên tắc LIFO và có thể được triển khai bằng mảng hoặc danh sách liên kết.
+- Về hiệu quả thời gian, triển khai stack bằng mảng có hiệu quả trung bình cao hơn, nhưng trong quá trình mở rộng, độ phức tạp thời gian của một thao tác push đơn lẻ sẽ giảm xuống còn $O(n)$. Ngược lại, triển khai stack bằng danh sách liên kết mang lại hiệu năng ổn định hơn.
+- Về hiệu quả không gian, triển khai stack bằng mảng có thể dẫn đến một mức độ lãng phí không gian nhất định. Tuy nhiên, cần lưu ý rằng không gian bộ nhớ mà các node của danh sách liên kết chiếm dụng lớn hơn không gian của các phần tử mảng.
+- Queue là một cấu trúc dữ liệu tuân theo nguyên tắc FIFO và cũng có thể được triển khai bằng mảng hoặc danh sách liên kết. Các kết luận về so sánh hiệu quả thời gian và hiệu quả không gian của queue tương tự như đối với stack đã đề cập ở trên.
+- Deque là một queue linh hoạt hơn, cho phép thêm và xóa phần tử ở cả hai đầu.
 
-### Q & A
+### Hỏi & Đáp
 
-**Q**: Is the browser's forward and backward functionality implemented with a doubly linked list?
+**Q**: Chức năng tiến và lùi của trình duyệt có được triển khai bằng danh sách liên kết kép không?
 
-The browser's forward and backward behavior is essentially an application of a "stack." When a user visits a new page, that page is added to the top of the stack; when the user clicks the back button, that page is popped from the top of the stack. A deque can conveniently support some additional operations, as mentioned in the "Deque" section.
+Hành vi tiến và lùi của trình duyệt về cơ bản là một ứng dụng của “stack”. Khi người dùng truy cập một trang mới, trang đó được thêm vào đỉnh stack; khi người dùng nhấp vào nút quay lại, trang đó được lấy ra khỏi đỉnh stack. Deque có thể hỗ trợ thuận tiện một số thao tác bổ sung, như đã đề cập trong phần “Deque”.
 
-**Q**: After popping from the stack, do we need to free the memory of the popped node?
+**Q**: Sau khi lấy một node ra khỏi stack, chúng ta có cần giải phóng bộ nhớ của node đó không?
 
-If the popped node will still be needed later, then memory does not need to be freed. If it won't be used afterward, languages like Java and Python have automatic garbage collection, so manual memory deallocation is not required; in C and C++, manual memory deallocation is necessary.
+Nếu node đã lấy ra vẫn sẽ được cần đến sau này thì không cần giải phóng bộ nhớ. Nếu node đó không được sử dụng nữa, các ngôn ngữ như Java và Python có cơ chế thu gom rác tự động, nên không cần tự giải phóng bộ nhớ; trong C và C++, cần tự giải phóng bộ nhớ.
 
-**Q**: A deque seems like two stacks joined together. What is its purpose?
+**Q**: Deque có vẻ giống như hai stack được ghép lại với nhau. Mục đích của nó là gì?
 
-A deque is like a combination of a stack and a queue, or two stacks joined together. It combines the logic of both, so it can support all applications of stacks and queues while offering greater flexibility.
+Deque giống như sự kết hợp giữa stack và queue, hoặc hai stack được ghép lại với nhau. Nó kết hợp logic của cả hai, nhờ đó có thể hỗ trợ mọi ứng dụng của stack và queue, đồng thời mang lại sự linh hoạt cao hơn.
 
-**Q**: How are undo and redo specifically implemented?
+**Q**: Undo và redo được triển khai cụ thể như thế nào?
 
-Use two stacks: stack `A` for undo and stack `B` for redo.
+Sử dụng hai stack: stack `A` cho undo và stack `B` cho redo.
 
-1. Whenever the user performs an operation, push this operation onto stack `A` and clear stack `B`.
-2. When the user performs "undo," pop the most recent operation from stack `A` and push it onto stack `B`.
-3. When the user performs "redo," pop the most recent operation from stack `B` and push it onto stack `A`.
+1. Mỗi khi người dùng thực hiện một thao tác, hãy push thao tác đó vào stack `A` và xóa stack `B`.
+2. Khi người dùng thực hiện “undo”, hãy pop thao tác gần nhất khỏi stack `A` rồi push thao tác đó vào stack `B`.
+3. Khi người dùng thực hiện “redo”, hãy pop thao tác gần nhất khỏi stack `B` rồi push thao tác đó vào stack `A`.

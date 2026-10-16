@@ -1,46 +1,46 @@
-# Insertion Sort
+# Sắp xếp chèn
 
-<u>Insertion sort</u> is a simple sorting algorithm that works very similarly to the process of manually sorting a deck of cards.
+<u>Sắp xếp chèn</u> là một thuật toán sắp xếp đơn giản, hoạt động rất giống với quy trình sắp xếp thủ công một bộ bài.
 
-Specifically, we select a base element from the unsorted portion, compare it one by one with the elements in the sorted portion to its left, and insert it into the correct position.
+Cụ thể, chúng ta chọn một phần tử cơ sở từ phần chưa được sắp xếp, lần lượt so sánh phần tử đó với các phần tử trong phần đã được sắp xếp ở bên trái, rồi chèn nó vào đúng vị trí.
 
-The figure below illustrates how an element is inserted into an array. Let the base element be `base`. We need to shift all elements between the target index and `base` one position to the right, and then assign `base` to the target index.
+Hình bên dưới minh họa cách chèn một phần tử vào mảng. Gọi phần tử cơ sở là `base`. Chúng ta cần dịch tất cả các phần tử nằm giữa chỉ số đích và `base` sang phải một vị trí, sau đó gán `base` vào chỉ số đích.
 
-![Single insertion operation](insertion_sort.assets/insertion_operation.png)
+![Một thao tác chèn đơn lẻ](insertion_sort.assets/insertion_operation.png)
 
-## Algorithm Flow
+## Quy trình của thuật toán
 
-The overall flow of insertion sort is shown in the figure below.
+Quy trình tổng thể của sắp xếp chèn được minh họa trong hình bên dưới.
 
-1. Initially, the first element of the array is already sorted.
-2. Select the second element of the array as `base`, and after inserting it into the correct position, **the first 2 elements of the array are sorted**.
-3. Select the third element as `base`, and after inserting it into the correct position, **the first 3 elements of the array are sorted**.
-4. And so on. In the last round, select the last element as `base`, and after inserting it into the correct position, **all elements are sorted**.
+1. Ban đầu, phần tử đầu tiên của mảng đã được sắp xếp.
+2. Chọn phần tử thứ hai của mảng làm `base`, sau khi chèn phần tử đó vào đúng vị trí, **2 phần tử đầu tiên của mảng đã được sắp xếp**.
+3. Chọn phần tử thứ ba làm `base`, sau khi chèn phần tử đó vào đúng vị trí, **3 phần tử đầu tiên của mảng đã được sắp xếp**.
+4. Cứ tiếp tục như vậy. Ở lượt cuối, chọn phần tử cuối cùng làm `base`, sau khi chèn phần tử đó vào đúng vị trí, **tất cả các phần tử đều đã được sắp xếp**.
 
-![Insertion sort flow](insertion_sort.assets/insertion_sort_overview.png)
+![Quy trình sắp xếp chèn](insertion_sort.assets/insertion_sort_overview.png)
 
-Example code is as follows:
+Mã ví dụ như sau:
 
 ```src
 [file]{insertion_sort}-[class]{}-[func]{insertion_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity of $O(n^2)$, adaptive sorting**: In the worst case, the insertion operations require $n - 1$, $n-2$, $\dots$, $2$, and $1$ iterations, respectively, summing to $(n - 1) n / 2$, so the time complexity is $O(n^2)$. When the data is already sorted, each insertion operation terminates early. When the input array is completely sorted, insertion sort achieves its best-case time complexity of $O(n)$.
-- **Space complexity of $O(1)$, in-place sorting**: Pointers $i$ and $j$ use a constant amount of extra space.
-- **Stable sorting**: During insertion, we place elements to the right of equal elements, so their relative order is unchanged.
+- **Độ phức tạp thời gian $O(n^2)$, sắp xếp thích nghi**: Trong trường hợp xấu nhất, các thao tác chèn lần lượt cần $n - 1$, $n-2$, $\dots$, $2$ và $1$ lần lặp, tổng cộng là $(n - 1) n / 2$, vì vậy độ phức tạp thời gian là $O(n^2)$. Khi dữ liệu đã được sắp xếp, mỗi thao tác chèn sẽ kết thúc sớm. Khi mảng đầu vào đã được sắp xếp hoàn toàn, sắp xếp chèn đạt độ phức tạp thời gian trong trường hợp tốt nhất là $O(n)$.
+- **Độ phức tạp không gian $O(1)$, sắp xếp tại chỗ**: Các con trỏ $i$ và $j$ chỉ sử dụng một lượng không gian bổ sung không đổi.
+- **Sắp xếp ổn định**: Trong quá trình chèn, chúng ta đặt các phần tử vào bên phải các phần tử bằng chúng, nên thứ tự tương đối của chúng không thay đổi.
 
-## Advantages of Insertion Sort
+## Ưu điểm của sắp xếp chèn
 
-The time complexity of insertion sort is $O(n^2)$, while the time complexity of quick sort, which we will learn about next, is $O(n \log n)$. Although insertion sort has a higher time complexity, **it is usually faster on small datasets**.
+Độ phức tạp thời gian của sắp xếp chèn là $O(n^2)$, trong khi độ phức tạp thời gian của quick sort, thuật toán mà chúng ta sẽ học tiếp theo, là $O(n \log n)$. Mặc dù sắp xếp chèn có độ phức tạp thời gian cao hơn, **nó thường nhanh hơn trên các tập dữ liệu nhỏ**.
 
-This conclusion is similar to the one about when linear search and binary search are applicable. Algorithms such as quick sort, with $O(n \log n)$ complexity, are divide-and-conquer sorting algorithms and often involve more primitive operations. When the dataset is small, the values of $n^2$ and $n \log n$ are relatively close, so asymptotic complexity does not dominate; instead, the number of primitive operations per round becomes the deciding factor.
+Kết luận này tương tự như kết luận về trường hợp áp dụng linear search và binary search. Các thuật toán như quick sort, có độ phức tạp $O(n \log n)$, là các thuật toán sắp xếp chia để trị và thường bao gồm nhiều thao tác nguyên thủy hơn. Khi tập dữ liệu nhỏ, các giá trị $n^2$ và $n \log n$ tương đối gần nhau, vì vậy độ phức tạp tiệm cận không còn mang tính quyết định; thay vào đó, số lượng thao tác nguyên thủy trong mỗi lượt trở thành yếu tố quyết định.
 
-In fact, the built-in sorting functions of many programming languages (such as Java) use insertion sort. The general idea is: for large arrays, use divide-and-conquer sorting algorithms such as quick sort; for short arrays, use insertion sort directly.
+Trên thực tế, các hàm sắp xếp tích hợp sẵn của nhiều ngôn ngữ lập trình (chẳng hạn như Java) sử dụng sắp xếp chèn. Ý tưởng chung là: với các mảng lớn, sử dụng các thuật toán sắp xếp chia để trị như quick sort; với các mảng ngắn, sử dụng trực tiếp sắp xếp chèn.
 
-Although bubble sort, selection sort, and insertion sort all have a time complexity of $O(n^2)$, in actual situations, **insertion sort is used significantly more frequently than bubble sort and selection sort**, mainly for the following reasons.
+Mặc dù bubble sort, selection sort và insertion sort đều có độ phức tạp thời gian là $O(n^2)$, trong thực tế, **insertion sort được sử dụng thường xuyên hơn đáng kể so với bubble sort và selection sort**, chủ yếu vì những lý do sau.
 
-- Bubble sort is implemented through element swaps, which require a temporary variable and involve 3 primitive operations; insertion sort is implemented through element assignment and requires only 1 primitive operation. Therefore, **bubble sort usually has higher computational overhead than insertion sort**.
-- Selection sort has a time complexity of $O(n^2)$ in any case. **If given a set of partially ordered data, insertion sort is usually more efficient than selection sort**.
-- Selection sort is unstable and cannot be applied to multi-level sorting.
+- Bubble sort được triển khai bằng cách hoán đổi các phần tử, thao tác này cần một biến tạm thời và bao gồm 3 thao tác nguyên thủy; insertion sort được triển khai bằng cách gán phần tử và chỉ cần 1 thao tác nguyên thủy. Vì vậy, **bubble sort thường có chi phí tính toán cao hơn insertion sort**.
+- Selection sort có độ phức tạp thời gian là $O(n^2)$ trong mọi trường hợp. **Nếu được cung cấp một tập dữ liệu đã được sắp xếp một phần, insertion sort thường hiệu quả hơn selection sort**.
+- Selection sort không ổn định và không thể áp dụng cho việc sắp xếp nhiều cấp.

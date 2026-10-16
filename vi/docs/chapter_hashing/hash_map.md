@@ -1,107 +1,107 @@
-# Hash Table
+# Bảng băm
 
-A <u>hash table</u>, also known as a <u>hash map</u>, stores mappings from keys `key` to values `value`, enabling efficient lookups. Specifically, given a key `key`, we can retrieve the corresponding value `value` from a hash table in $O(1)$ time.
+Một <u>bảng băm</u>, còn được gọi là <u>hash map</u>, lưu trữ ánh xạ từ khóa `key` đến giá trị `value`, cho phép tra cứu hiệu quả. Cụ thể, với một khóa `key`, ta có thể lấy giá trị tương ứng `value` từ bảng băm trong thời gian $O(1)$.
 
-As shown below, suppose we have $n$ students, each with two pieces of information: a name and a student ID. If we want to support the query "given a student ID, return the corresponding name," we can use the hash table shown below.
+Như minh họa bên dưới, giả sử có $n$ sinh viên, mỗi sinh viên có hai thông tin: tên và mã sinh viên. Nếu muốn hỗ trợ truy vấn “cho trước một mã sinh viên, trả về tên tương ứng”, ta có thể sử dụng bảng băm như bên dưới.
 
-![Abstract representation of a hash table](hash_map.assets/hash_table_lookup.png)
+![Biểu diễn trừu tượng của bảng băm](hash_map.assets/hash_table_lookup.png)
 
-In addition to hash tables, arrays and linked lists can also implement query functionality. Their efficiency comparison is shown in the following table.
+Ngoài bảng băm, mảng và linked list cũng có thể triển khai chức năng truy vấn. So sánh hiệu năng của chúng được trình bày trong bảng sau.
 
-- **Adding elements**: Simply add elements to the end of the array (linked list), using $O(1)$ time.
-- **Querying elements**: Since the array (linked list) is unordered, all elements need to be traversed, using $O(n)$ time.
-- **Deleting elements**: The element must first be located, then deleted from the array (linked list), using $O(n)$ time.
+- **Thêm phần tử**: Chỉ cần thêm phần tử vào cuối mảng (linked list), mất thời gian $O(1)$.
+- **Truy vấn phần tử**: Vì mảng (linked list) không có thứ tự, cần duyệt qua tất cả phần tử, mất thời gian $O(n)$.
+- **Xóa phần tử**: Trước tiên phải xác định vị trí của phần tử, sau đó xóa phần tử khỏi mảng (linked list), mất thời gian $O(n)$.
 
-<p align="center"> Table <id> &nbsp; Comparison of element query efficiency </p>
+<p align="center"> Bảng <id> &nbsp; So sánh hiệu năng truy vấn phần tử </p>
 
-|                 | Array  | Linked List | Hash Table |
+|                 | Mảng  | Linked List | Bảng băm |
 | --------------- | ------ | ----------- | ---------- |
-| Find element    | $O(n)$ | $O(n)$      | $O(1)$     |
-| Add element     | $O(1)$ | $O(1)$      | $O(1)$     |
-| Delete element  | $O(n)$ | $O(n)$      | $O(1)$     |
+| Tìm phần tử    | $O(n)$ | $O(n)$      | $O(1)$     |
+| Thêm phần tử     | $O(1)$ | $O(1)$      | $O(1)$     |
+| Xóa phần tử  | $O(n)$ | $O(n)$      | $O(1)$     |
 
-As we can see, **insertion, deletion, lookup, and update operations in a hash table all have time complexity $O(1)$**, making hash tables highly efficient.
+Như ta có thể thấy, **các thao tác chèn, xóa, tra cứu và cập nhật trong bảng băm đều có độ phức tạp thời gian là $O(1)$**, khiến bảng băm trở nên rất hiệu quả.
 
-## Common Hash Table Operations
+## Các thao tác phổ biến trên bảng băm
 
-Common operations on hash tables include: initialization, query operations, adding key-value pairs, and deleting key-value pairs. Example code is as follows:
+Các thao tác phổ biến trên bảng băm gồm: khởi tạo, truy vấn, thêm các cặp khóa-giá trị và xóa các cặp khóa-giá trị. Mã ví dụ như sau:
 
 === "Python"
 
     ```python title="hash_map.py"
-    # Initialize hash table
+    # Khởi tạo bảng băm
     hmap: dict = {}
 
-    # Add operation
-    # Add key-value pair (key, value) to hash table
+    # Thao tác thêm
+    # Thêm cặp khóa-giá trị (key, value) vào bảng băm
     hmap[12836] = "XiaoHa"
     hmap[15937] = "XiaoLuo"
     hmap[16750] = "XiaoSuan"
     hmap[13276] = "XiaoFa"
     hmap[10583] = "XiaoYa"
 
-    # Query operation
-    # Input key into hash table to get value
+    # Thao tác truy vấn
+    # Nhập khóa vào bảng băm để lấy giá trị
     name: str = hmap[15937]
 
-    # Delete operation
-    # Delete key-value pair (key, value) from hash table
+    # Thao tác xóa
+    # Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     hmap.pop(10583)
     ```
 
 === "C++"
 
     ```cpp title="hash_map.cpp"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     unordered_map<int, string> map;
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map[12836] = "XiaoHa";
     map[15937] = "XiaoLuo";
     map[16750] = "XiaoSuan";
     map[13276] = "XiaoFa";
     map[10583] = "XiaoYa";
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     string name = map[15937];
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.erase(10583);
     ```
 
 === "Java"
 
     ```java title="hash_map.java"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     Map<Integer, String> map = new HashMap<>();
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map.put(12836, "XiaoHa");
     map.put(15937, "XiaoLuo");
     map.put(16750, "XiaoSuan");
     map.put(13276, "XiaoFa");
     map.put(10583, "XiaoYa");
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     String name = map.get(15937);
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.remove(10583);
     ```
 
 === "C#"
 
     ```csharp title="hash_map.cs"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     Dictionary<int, string> map = new() {
-        /* Add operation */
-        // Add key-value pair (key, value) to hash table
+        /* Thao tác thêm */
+        // Thêm cặp khóa-giá trị (key, value) vào bảng băm
         { 12836, "XiaoHa" },
         { 15937, "XiaoLuo" },
         { 16750, "XiaoSuan" },
@@ -109,90 +109,90 @@ Common operations on hash tables include: initialization, query operations, addi
         { 10583, "XiaoYa" }
     };
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     string name = map[15937];
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.Remove(10583);
     ```
 
 === "Go"
 
     ```go title="hash_map_test.go"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     hmap := make(map[int]string)
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     hmap[12836] = "XiaoHa"
     hmap[15937] = "XiaoLuo"
     hmap[16750] = "XiaoSuan"
     hmap[13276] = "XiaoFa"
     hmap[10583] = "XiaoYa"
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     name := hmap[15937]
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     delete(hmap, 10583)
     ```
 
 === "Swift"
 
     ```swift title="hash_map.swift"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     var map: [Int: String] = [:]
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map[12836] = "XiaoHa"
     map[15937] = "XiaoLuo"
     map[16750] = "XiaoSuan"
     map[13276] = "XiaoFa"
     map[10583] = "XiaoYa"
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     let name = map[15937]!
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.removeValue(forKey: 10583)
     ```
 
 === "JS"
 
     ```javascript title="hash_map.js"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     const map = new Map();
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map.set(12836, 'XiaoHa');
     map.set(15937, 'XiaoLuo');
     map.set(16750, 'XiaoSuan');
     map.set(13276, 'XiaoFa');
     map.set(10583, 'XiaoYa');
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     let name = map.get(15937);
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.delete(10583);
     ```
 
 === "TS"
 
     ```typescript title="hash_map.ts"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     const map = new Map<number, string>();
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map.set(12836, 'XiaoHa');
     map.set(15937, 'XiaoLuo');
     map.set(16750, 'XiaoSuan');
@@ -201,13 +201,13 @@ Common operations on hash tables include: initialization, query operations, addi
     console.info('\nAfter adding, hash table is\nKey -> Value');
     console.info(map);
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     let name = map.get(15937);
     console.info('\nInput student ID 15937, queried name ' + name);
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.delete(10583);
     console.info('\nAfter deleting 10583, hash table is\nKey -> Value');
     console.info(map);
@@ -216,23 +216,23 @@ Common operations on hash tables include: initialization, query operations, addi
 === "Dart"
 
     ```dart title="hash_map.dart"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     Map<int, String> map = {};
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map[12836] = "XiaoHa";
     map[15937] = "XiaoLuo";
     map[16750] = "XiaoSuan";
     map[13276] = "XiaoFa";
     map[10583] = "XiaoYa";
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     String name = map[15937];
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.remove(10583);
     ```
 
@@ -241,95 +241,95 @@ Common operations on hash tables include: initialization, query operations, addi
     ```rust title="hash_map.rs"
     use std::collections::HashMap;
 
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     let mut map: HashMap<i32, String> = HashMap::new();
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map.insert(12836, "XiaoHa".to_string());
     map.insert(15937, "XiaoLuo".to_string());
     map.insert(16750, "XiaoSuan".to_string());
     map.insert(13276, "XiaoFa".to_string());
     map.insert(10583, "XiaoYa".to_string());
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     let _name: Option<&String> = map.get(&15937);
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     let _removed_value: Option<String> = map.remove(&10583);
     ```
 
 === "C"
 
     ```c title="hash_map.c"
-    // C does not provide a built-in hash table
+    // C không cung cấp bảng băm tích hợp sẵn
     ```
 
 === "Kotlin"
 
     ```kotlin title="hash_map.kt"
-    /* Initialize hash table */
+    /* Khởi tạo bảng băm */
     val map = HashMap<Int,String>()
 
-    /* Add operation */
-    // Add key-value pair (key, value) to hash table
+    /* Thao tác thêm */
+    // Thêm cặp khóa-giá trị (key, value) vào bảng băm
     map[12836] = "XiaoHa"
     map[15937] = "XiaoLuo"
     map[16750] = "XiaoSuan"
     map[13276] = "XiaoFa"
     map[10583] = "XiaoYa"
 
-    /* Query operation */
-    // Input key into hash table to get value
+    /* Thao tác truy vấn */
+    // Nhập khóa vào bảng băm để lấy giá trị
     val name = map[15937]
 
-    /* Delete operation */
-    // Delete key-value pair (key, value) from hash table
+    /* Thao tác xóa */
+    // Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     map.remove(10583)
     ```
 
 === "Ruby"
 
     ```ruby title="hash_map.rb"
-    # Initialize hash table
+    # Khởi tạo bảng băm
     hmap = {}
 
-    # Add operation
-    # Add key-value pair (key, value) to hash table
+    # Thao tác thêm
+    # Thêm cặp khóa-giá trị (key, value) vào bảng băm
     hmap[12836] = "XiaoHa"
     hmap[15937] = "XiaoLuo"
     hmap[16750] = "XiaoSuan"
     hmap[13276] = "XiaoFa"
     hmap[10583] = "XiaoYa"
 
-    # Query operation
-    # Input key into hash table to get value
+    # Thao tác truy vấn
+    # Nhập khóa vào bảng băm để lấy giá trị
     name = hmap[15937]
 
-    # Delete operation
-    # Delete key-value pair (key, value) from hash table
+    # Thao tác xóa
+    # Xóa cặp khóa-giá trị (key, value) khỏi bảng băm
     hmap.delete(10583)
     ```
 
-??? pythontutor "Visualized Execution"
+??? pythontutor "Thực thi trực quan"
 
     https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20%23%20%E5%88%9D%E5%A7%8B%E5%8C%96%E5%93%88%E5%B8%8C%E8%A1%A8%0A%20%20%20%20hmap%20%3D%20%7B%7D%0A%20%20%20%20%0A%20%20%20%20%23%20%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C%0A%20%20%20%20%23%20%E5%9C%A8%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E6%B7%BB%E5%8A%A0%E9%94%AE%E5%80%BC%E5%AF%B9%20%28key,%20value%29%0A%20%20%20%20hmap%5B12836%5D%20%3D%20%22%E5%B0%8F%E5%93%88%22%0A%20%20%20%20hmap%5B15937%5D%20%3D%20%22%E5%B0%8F%E5%95%B0%22%0A%20%20%20%20hmap%5B16750%5D%20%3D%20%22%E5%B0%8F%E7%AE%97%22%0A%20%20%20%20hmap%5B13276%5D%20%3D%20%22%E5%B0%8F%E6%B3%95%22%0A%20%20%20%20hmap%5B10583%5D%20%3D%20%22%E5%B0%8F%E9%B8%AD%22%0A%20%20%20%20%0A%20%20%20%20%23%20%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C%0A%20%20%20%20%23%20%E5%90%91%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E8%BE%93%E5%85%A5%E9%94%AE%20key%20%EF%BC%8C%E5%BE%97%E5%88%B0%E5%80%BC%20value%0A%20%20%20%20name%20%3D%20hmap%5B15937%5D%0A%20%20%20%20%0A%20%20%20%20%23%20%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%0A%20%20%20%20%23%20%E5%9C%A8%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E5%88%A0%E9%99%A4%E9%94%AE%E5%80%BC%E5%AF%B9%20%28key,%20value%29%0A%20%20%20%20hmap.pop%2810583%29&cumulative=false&curInstr=2&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false
 
-There are three common ways to traverse a hash table: traversing key-value pairs, traversing keys, and traversing values. Example code is as follows:
+Có ba cách phổ biến để duyệt qua một bảng băm: duyệt các cặp khóa-giá trị, duyệt các khóa và duyệt các giá trị. Mã ví dụ như sau:
 
 === "Python"
 
     ```python title="hash_map.py"
-    # Traverse hash table
-    # Traverse key-value pairs key->value
+    # Duyệt bảng băm
+    # Duyệt các cặp khóa-giá trị key->value
     for key, value in hmap.items():
         print(key, "->", value)
-    # Traverse keys only
+    # Chỉ duyệt các khóa
     for key in hmap.keys():
         print(key)
-    # Traverse values only
+    # Chỉ duyệt các giá trị
     for value in hmap.values():
         print(value)
     ```
@@ -337,12 +337,12 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "C++"
 
     ```cpp title="hash_map.cpp"
-    /* Traverse hash table */
-    // Traverse key-value pairs key->value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị key->value
     for (auto kv: map) {
         cout << kv.first << " -> " << kv.second << endl;
     }
-    // Traverse using iterator key->value
+    // Duyệt bằng iterator key->value
     for (auto iter = map.begin(); iter != map.end(); iter++) {
         cout << iter->first << "->" << iter->second << endl;
     }
@@ -351,16 +351,16 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "Java"
 
     ```java title="hash_map.java"
-    /* Traverse hash table */
-    // Traverse key-value pairs key->value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị key->value
     for (Map.Entry<Integer, String> kv: map.entrySet()) {
         System.out.println(kv.getKey() + " -> " + kv.getValue());
     }
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     for (int key: map.keySet()) {
         System.out.println(key);
     }
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     for (String val: map.values()) {
         System.out.println(val);
     }
@@ -369,16 +369,16 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "C#"
 
     ```csharp title="hash_map.cs"
-    /* Traverse hash table */
-    // Traverse key-value pairs Key->Value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị Key->Value
     foreach (var kv in map) {
         Console.WriteLine(kv.Key + " -> " + kv.Value);
     }
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     foreach (int key in map.Keys) {
         Console.WriteLine(key);
     }
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     foreach (string val in map.Values) {
         Console.WriteLine(val);
     }
@@ -387,16 +387,16 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "Go"
 
     ```go title="hash_map_test.go"
-    /* Traverse hash table */
-    // Traverse key-value pairs key->value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị key->value
     for key, value := range hmap {
         fmt.Println(key, "->", value)
     }
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     for key := range hmap {
         fmt.Println(key)
     }
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     for _, value := range hmap {
         fmt.Println(value)
     }
@@ -405,16 +405,16 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "Swift"
 
     ```swift title="hash_map.swift"
-    /* Traverse hash table */
-    // Traverse key-value pairs Key->Value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị Key->Value
     for (key, value) in map {
         print("\(key) -> \(value)")
     }
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     for key in map.keys {
         print(key)
     }
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     for value in map.values {
         print(value)
     }
@@ -423,7 +423,7 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "JS"
 
     ```javascript title="hash_map.js"
-    /* Traverse hash table */
+    /* Duyệt bảng băm */
     console.info('\nTraverse key-value pairs Key->Value');
     for (const [k, v] of map.entries()) {
         console.info(k + ' -> ' + v);
@@ -441,7 +441,7 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "TS"
 
     ```typescript title="hash_map.ts"
-    /* Traverse hash table */
+    /* Duyệt bảng băm */
     console.info('\nTraverse key-value pairs Key->Value');
     for (const [k, v] of map.entries()) {
         console.info(k + ' -> ' + v);
@@ -459,18 +459,18 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "Dart"
 
     ```dart title="hash_map.dart"
-    /* Traverse hash table */
-    // Traverse key-value pairs Key->Value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị Key->Value
     map.forEach((key, value) {
       print('$key -> $value');
     });
 
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     map.keys.forEach((key) {
       print(key);
     });
 
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     map.values.forEach((value) {
       print(value);
     });
@@ -479,18 +479,18 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "Rust"
 
     ```rust title="hash_map.rs"
-    /* Traverse hash table */
-    // Traverse key-value pairs Key->Value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị Key->Value
     for (key, value) in &map {
         println!("{key} -> {value}");
     }
 
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     for key in map.keys() {
         println!("{key}");
     }
 
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     for value in map.values() {
         println!("{value}");
     }
@@ -499,22 +499,22 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "C"
 
     ```c title="hash_map.c"
-    // C does not provide a built-in hash table
+    // C không cung cấp bảng băm tích hợp sẵn
     ```
 
 === "Kotlin"
 
     ```kotlin title="hash_map.kt"
-    /* Traverse hash table */
-    // Traverse key-value pairs key->value
+    /* Duyệt bảng băm */
+    // Duyệt các cặp khóa-giá trị key->value
     for ((key, value) in map) {
         println("$key -> $value")
     }
-    // Traverse keys only
+    // Chỉ duyệt các khóa
     for (key in map.keys) {
         println(key)
     }
-    // Traverse values only
+    // Chỉ duyệt các giá trị
     for (_val in map.values) {
         println(_val)
     }
@@ -523,69 +523,69 @@ There are three common ways to traverse a hash table: traversing key-value pairs
 === "Ruby"
 
     ```ruby title="hash_map.rb"
-    # Traverse hash table
-    # Traverse key-value pairs key->value
+    # Duyệt bảng băm
+    # Duyệt các cặp khóa-giá trị key->value
     hmap.entries.each { |key, value| puts "#{key} -> #{value}" }
 
-    # Traverse keys only
+    # Chỉ duyệt các khóa
     hmap.keys.each { |key| puts key }
 
-    # Traverse values only
+    # Chỉ duyệt các giá trị
     hmap.values.each { |val| puts val }
     ```
 
-??? pythontutor "Visualized Execution"
+??? pythontutor "Thực thi trực quan"
 
     https://pythontutor.com/render.html#code=%22%22%22Driver%20Code%22%22%22%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20%23%20%E5%88%9D%E5%A7%8B%E5%8C%96%E5%93%88%E5%B8%8C%E8%A1%A8%0A%20%20%20%20hmap%20%3D%20%7B%7D%0A%20%20%20%20%0A%20%20%20%20%23%20%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C%0A%20%20%20%20%23%20%E5%9C%A8%E5%93%88%E5%B8%8C%E8%A1%A8%E4%B8%AD%E6%B7%BB%E5%8A%A0%E9%94%AE%E5%80%BC%E5%AF%B9%20%28key,%20value%29%0A%20%20%20%20hmap%5B12836%5D%20%3D%20%22%E5%B0%8F%E5%93%88%22%0A%20%20%20%20hmap%5B15937%5D%20%3D%20%22%E5%B0%8F%E5%95%B0%22%0A%20%20%20%20hmap%5B16750%5D%20%3D%20%22%E5%B0%8F%E7%AE%97%22%0A%20%20%20%20hmap%5B13276%5D%20%3D%20%22%E5%B0%8F%E6%B3%95%22%0A%20%20%20%20hmap%5B10583%5D%20%3D%20%22%E5%B0%8F%E9%B8%AD%22%0A%20%20%20%20%0A%20%20%20%20%23%20%E9%81%8D%E5%8E%86%E5%93%88%E5%B8%8C%E8%A1%A8%0A%20%20%20%20%23%20%E9%81%8D%E5%8E%86%E9%94%AE%E5%80%BC%E5%AF%B9%20key-%3Evalue%0A%20%20%20%20for%20key,%20value%20in%20hmap.items%28%29%3A%0A%20%20%20%20%20%20%20%20print%28key,%20%22-%3E%22,%20value%29%0A%20%20%20%20%23%20%E5%8D%95%E7%8B%AC%E9%81%8D%E5%8E%86%E9%94%AE%20key%0A%20%20%20%20for%20key%20in%20hmap.keys%28%29%3A%0A%20%20%20%20%20%20%20%20print%28key%29%0A%20%20%20%20%23%20%E5%8D%95%E7%8B%AC%E9%81%8D%E5%8E%86%E5%80%BC%20value%0A%20%20%20%20for%20value%20in%20hmap.values%28%29%3A%0A%20%20%20%20%20%20%20%20print%28value%29&cumulative=false&curInstr=8&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false
 
-## Simple Hash Table Implementation
+## Triển khai bảng băm đơn giản
 
-Let's start with the simplest case: **implementing a hash table with just an array**. In a hash table, each empty slot in the array is called a <u>bucket</u>, and each bucket can store one key-value pair. A lookup therefore consists of finding the bucket for `key` and reading the `value` stored there.
+Hãy bắt đầu với trường hợp đơn giản nhất: **triển khai một bảng băm chỉ bằng một mảng**. Trong bảng băm, mỗi ô trống trong mảng được gọi là <u>bucket</u>, và mỗi bucket có thể lưu trữ một cặp khóa-giá trị. Vì vậy, việc tra cứu bao gồm tìm bucket của `key` và đọc `value` được lưu trữ tại đó.
 
-So how do we find the right bucket for a given `key`? We do this with a <u>hash function</u>. A hash function maps a larger input space to a smaller output space. In a hash table, the input space is the set of all `key`s, and the output space is the set of all buckets (array indices). In other words, given a `key`, **the hash function tells us where the corresponding key-value pair should be stored in the array**.
+Vậy làm thế nào để tìm đúng bucket cho một `key` cho trước? Chúng ta thực hiện việc này bằng một <u>hàm băm</u>. Hàm băm ánh xạ một không gian đầu vào lớn hơn tới một không gian đầu ra nhỏ hơn. Trong bảng băm, không gian đầu vào là tập hợp tất cả `key`s, còn không gian đầu ra là tập hợp tất cả các bucket (chỉ số mảng). Nói cách khác, với một `key`, **hàm băm cho chúng ta biết vị trí lưu trữ cặp khóa-giá trị tương ứng trong mảng**.
 
-Given a `key`, computing the bucket index involves the following two steps:
+Với một `key`, việc tính chỉ số bucket bao gồm hai bước sau:
 
-1. Use a hash algorithm `hash()` to compute a hash value.
-2. Take that hash value modulo the number of buckets (array length), `capacity`, to obtain the bucket (array index) `index` corresponding to the `key`.
+1. Sử dụng thuật toán băm `hash()` để tính giá trị băm.
+2. Lấy giá trị băm modulo cho số lượng bucket (độ dài mảng), `capacity`, để thu được bucket (chỉ số mảng) `index` tương ứng với `key`.
 
 ```shell
 index = hash(key) % capacity
 ```
 
-We can then use `index` to access the corresponding bucket in the hash table and retrieve the `value`.
+Sau đó, chúng ta có thể sử dụng `index` để truy cập bucket tương ứng trong bảng băm và lấy `value`.
 
-Suppose the array length is `capacity = 100` and the hash algorithm is `hash(key) = key`. Then the hash function is `key % 100`. The figure below illustrates how this hash function works, using student ID as `key` and name as `value`.
+Giả sử độ dài mảng là `capacity = 100` và thuật toán băm là `hash(key) = key`. Khi đó, hàm băm là `key % 100`. Hình bên dưới minh họa cách hoạt động của hàm băm này, sử dụng mã số sinh viên làm `key` và tên làm `value`.
 
-![Working principle of hash function](hash_map.assets/hash_function.png)
+![Nguyên lý hoạt động của hàm băm](hash_map.assets/hash_function.png)
 
-The following code implements a simple hash table. Here, we encapsulate `key` and `value` into a class `Pair` to represent a key-value pair.
+Đoạn mã sau triển khai một bảng băm đơn giản. Ở đây, chúng ta đóng gói `key` và `value` vào một lớp `Pair` để biểu diễn một cặp khóa-giá trị.
 
 ```src
 [file]{array_hash_map}-[class]{array_hash_map}-[func]{}
 ```
 
-## Hash Collision and Resizing
+## Xung đột băm và thay đổi kích thước
 
-Fundamentally, a hash function maps the input space consisting of all `key`s to the output space consisting of all array indices, and the input space is often much larger than the output space. Therefore, **in theory, different inputs must sometimes map to the same output**.
+Về bản chất, một hàm băm ánh xạ không gian đầu vào gồm tất cả `key`s tới không gian đầu ra gồm tất cả các chỉ số mảng, và không gian đầu vào thường lớn hơn nhiều so với không gian đầu ra. Do đó, **về lý thuyết, đôi khi các đầu vào khác nhau bắt buộc phải được ánh xạ tới cùng một đầu ra**.
 
-For the hash function in the above example, when the input `key`s have the same last two digits, the hash function produces the same output. For example, when querying two students with IDs 12836 and 20336, we get:
+Đối với hàm băm trong ví dụ trên, khi các `key`s đầu vào có cùng hai chữ số cuối, hàm băm sẽ tạo ra cùng một đầu ra. Ví dụ, khi truy vấn hai sinh viên có mã số 12836 và 20336, chúng ta nhận được:
 
 ```shell
 12836 % 100 = 36
 20336 % 100 = 36
 ```
 
-As shown below, two student IDs now point to the same name, which is clearly incorrect. We call this situation, where multiple inputs map to the same output, a <u>hash collision</u>.
+Như minh họa bên dưới, hai mã số sinh viên hiện trỏ tới cùng một tên, điều này rõ ràng là không chính xác. Chúng ta gọi tình huống nhiều đầu vào được ánh xạ tới cùng một đầu ra là <u>xung đột băm</u>.
 
-![Hash collision example](hash_map.assets/hash_collision.png)
+![Ví dụ về xung đột băm](hash_map.assets/hash_collision.png)
 
-It's easy to see that the larger the hash table capacity $n$, the lower the probability that multiple `key`s will be assigned to the same bucket, and the fewer collisions. Therefore, **we can reduce hash collisions by expanding the hash table**.
+Dễ thấy rằng dung lượng bảng băm $n$ càng lớn thì xác suất nhiều `key`s được gán vào cùng một bucket càng thấp và số lượng xung đột càng ít. Vì vậy, **chúng ta có thể giảm xung đột băm bằng cách mở rộng bảng băm**.
 
-As shown in the figure below, before expansion, the key-value pairs `(136, A)` and `(236, D)` collided, but after expansion, the collision disappears.
+Như minh họa trong hình bên dưới, trước khi mở rộng, các cặp khóa-giá trị `(136, A)` và `(236, D)` bị xung đột, nhưng sau khi mở rộng, xung đột biến mất.
 
-![Hash table resizing](hash_map.assets/hash_table_reshash.png)
+![Thay đổi kích thước bảng băm](hash_map.assets/hash_table_reshash.png)
 
-Like resizing an array, resizing a hash table requires migrating all key-value pairs from the original table to the new table, which is expensive. In addition, because the hash table capacity `capacity` changes, we must recompute the storage location of every key-value pair using the hash function, which further increases the cost of resizing. For this reason, programming languages typically reserve a sufficiently large hash table capacity to avoid frequent resizing.
+Tương tự như thay đổi kích thước mảng, việc thay đổi kích thước bảng băm yêu cầu di chuyển tất cả các cặp khóa-giá trị từ bảng ban đầu sang bảng mới, đây là một thao tác tốn kém. Ngoài ra, vì dung lượng bảng băm `capacity` thay đổi, chúng ta phải tính lại vị trí lưu trữ của mọi cặp khóa-giá trị bằng hàm băm, làm tăng thêm chi phí thay đổi kích thước. Vì lý do này, các ngôn ngữ lập trình thường dự trữ dung lượng bảng băm đủ lớn để tránh việc thay đổi kích thước thường xuyên.
 
-The <u>load factor</u> is an important concept in hash tables. It is defined as the number of elements in the hash table divided by the number of buckets and is used to measure the severity of hash collisions. **It is also commonly used as a threshold for triggering hash table resizing**. For example, in Java, when the load factor exceeds $0.75$, the system expands the hash table to twice its original size.
+<u>Hệ số tải</u> là một khái niệm quan trọng trong bảng băm. Nó được định nghĩa là số lượng phần tử trong bảng băm chia cho số lượng bucket và được dùng để đo mức độ nghiêm trọng của các xung đột băm. **Nó cũng thường được dùng làm ngưỡng để kích hoạt việc thay đổi kích thước bảng băm**. Ví dụ, trong Java, khi hệ số tải vượt quá $0.75$, hệ thống sẽ mở rộng bảng băm lên gấp đôi kích thước ban đầu.

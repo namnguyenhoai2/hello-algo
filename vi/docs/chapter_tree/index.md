@@ -1,9 +1,9 @@
-# Tree
+# Cây
 
-![Tree](../assets/covers/chapter_tree.jpg)
+![Cây](../assets/covers/chapter_tree.jpg)
 
 !!! abstract
 
-    Towering trees are full of vitality, with deep roots, lush foliage, and sprawling branches.
+    Những cây cao vút tràn đầy sức sống, với bộ rễ đâm sâu, tán lá sum suê và cành cây vươn rộng.
 
-    They offer a vivid illustration of divide-and-conquer in data structures.
+    Chúng minh họa sinh động cho phương pháp chia để trị trong cấu trúc dữ liệu.

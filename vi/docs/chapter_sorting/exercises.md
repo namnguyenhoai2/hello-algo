@@ -1,94 +1,94 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### The First Few Rounds of Selection Sort and Bubble Sort
+### Một vài vòng đầu của Selection Sort và Bubble Sort
 
-Given the array `[4, 2, 5, 1, 3]`, sort it in ascending order in both parts below.
+Cho mảng `[4, 2, 5, 1, 3]`, hãy sắp xếp mảng theo thứ tự tăng dần trong cả hai phần dưới đây.
 
 <!-- numbered-subquestions -->
 
-1. Simulate the first two rounds of selection sort. Write the array after each round and identify which positions are now fixed.
-2. Simulate the first round of bubble sort. Write the resulting array and the number of swaps, and identify which position is now fixed.
+1. Mô phỏng hai vòng đầu tiên của selection sort. Viết mảng sau mỗi vòng và xác định những vị trí nào hiện đã được cố định.
+2. Mô phỏng vòng đầu tiên của bubble sort. Viết mảng kết quả và số lần hoán đổi, đồng thời xác định vị trí nào hiện đã được cố định.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The first two rounds are:
+    1. Hai vòng đầu tiên là:
 
-        | Round | Array | Explanation |
+        | Vòng | Mảng | Giải thích |
         | --- | --- | --- |
-        | 1 | `[1, 2, 5, 4, 3]` | The smallest element, 1, is swapped with the first element |
-        | 2 | `[1, 2, 5, 4, 3]` | The value 2 is already at index 1, so no swap is needed |
+        | 1 | `[1, 2, 5, 4, 3]` | Phần tử nhỏ nhất, 1, được hoán đổi với phần tử đầu tiên |
+        | 2 | `[1, 2, 5, 4, 3]` | Giá trị 2 đã ở tại chỉ số 1, nên không cần hoán đổi |
 
-        The first two positions are now fixed. Later rounds need to find the smallest element only within `[5, 4, 3]`.
+        Hai vị trí đầu tiên hiện đã được cố định. Các vòng sau chỉ cần tìm phần tử nhỏ nhất trong `[5, 4, 3]`.
 
-    2. Compare adjacent elements in order: swap 4 and 2; do not swap 4 and 5; swap 5 and 1; then swap 5 and 3.
-        The result is `[2, 4, 1, 3, 5]`, after 3 swaps. The largest element, 5, has moved to the end of the array, so the last position is now fixed.
+    2. So sánh các phần tử liền kề theo thứ tự: hoán đổi 4 và 2; không hoán đổi 4 và 5; hoán đổi 5 và 1; sau đó hoán đổi 5 và 3.
+        Kết quả là `[2, 4, 1, 3, 5]`, sau 3 lần hoán đổi. Phần tử lớn nhất, 5, đã được đưa về cuối mảng, nên vị trí cuối cùng hiện đã được cố định.
 
-### Can Equal Elements Change Their Relative Order?
+### Các phần tử bằng nhau có thể thay đổi thứ tự tương đối không?
 
-In the array $[2_a, 2_b, 1]$, $2_a$ and $2_b$ have equal values, but their subscripts mark their original order.
-
-<!-- numbered-subquestions -->
-
-1. Write the array after the first round of selection sort. Has the relative order of $2_a$ and $2_b$ changed?
-2. Write the array after the first round of bubble sort. Has the relative order of $2_a$ and $2_b$ changed?
-3. Based on the first two questions, explain how the two sorting algorithms differ in preserving the original order of equal elements.
-
-??? success "Answer"
-
-    1. In its first round, selection sort selects the smallest element, 1, and swaps it with the first element, $2_a$, producing
-        $[1, 2_b, 2_a]$. The relative order has changed because $2_a$ has moved behind $2_b$.
-
-    2. Bubble sort first compares $2_a$ and $2_b$. Because they are equal, it does not swap them. It then compares $2_b$ and 1 and swaps them,
-        producing $[2_a, 1, 2_b]$ after the first round. $2_a$ is still before $2_b$, so their relative order has not changed.
-
-    3. In this example, selection sort changes the original order of equal elements. Bubble sort swaps adjacent elements only when the left element is greater than the right one.
-        Equal elements are not swapped, so their original relative order is preserved.
-
-### Compare Counting Sort and Radix Sort
-
-A school needs to sort many student ID numbers, each exactly 8 digits long. Answer the following questions:
+Trong mảng $[2_a, 2_b, 1]$, $2_a$ và $2_b$ có giá trị bằng nhau, nhưng chỉ số dưới của chúng đánh dấu thứ tự ban đầu.
 
 <!-- numbered-subquestions -->
 
-1. How many rounds does radix sort need when it starts with the least significant digit?
-2. If the student IDs are treated directly as integers for counting sort, why would the count array need many entries that are never used?
-3. Based on the first two questions, which would you choose for sorting many fixed-length 8-digit student IDs: counting sort or radix sort? Why?
+1. Viết mảng sau vòng đầu tiên của selection sort. Thứ tự tương đối của $2_a$ và $2_b$ có thay đổi không?
+2. Viết mảng sau vòng đầu tiên của bubble sort. Thứ tự tương đối của $2_a$ và $2_b$ có thay đổi không?
+3. Dựa trên hai câu hỏi đầu, hãy giải thích hai thuật toán sắp xếp khác nhau như thế nào trong việc bảo toàn thứ tự ban đầu của các phần tử bằng nhau.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. A student ID has 8 digits, so 8 rounds are needed from the least significant to the most significant digit. Each round groups values only by 0–9.
+    1. Trong vòng đầu tiên, selection sort chọn phần tử nhỏ nhất, 1, rồi hoán đổi phần tử đó với phần tử đầu tiên, $2_a$, tạo ra
+        $[1, 2_b, 2_a]$. Thứ tự tương đối đã thay đổi vì $2_a$ đã di chuyển ra sau $2_b$.
 
-    2. Direct counting would require an entry for every possible 8-digit value, but only a small fraction of those values are actually assigned to students.
-        Most entries in the count array would remain 0.
+    2. Bubble sort trước tiên so sánh $2_a$ và $2_b$. Vì chúng bằng nhau nên không hoán đổi chúng. Sau đó, nó so sánh $2_b$ và 1 rồi hoán đổi chúng,
+        tạo ra $[2_a, 1, 2_b]$ sau vòng đầu tiên. $2_a$ vẫn đứng trước $2_b$, nên thứ tự tương đối của chúng không thay đổi.
 
-    3. Radix sort is the better choice. It uses the facts that the length is fixed and each digit has only 10 possible values, requiring only 8 rounds of stable grouping.
-        Counting sort, if it used the entire 8-digit ID as an integer index, would require count-array entries for many values that never occur.
+    3. Trong ví dụ này, selection sort thay đổi thứ tự ban đầu của các phần tử bằng nhau. Bubble sort chỉ hoán đổi các phần tử liền kề khi phần tử bên trái lớn hơn phần tử bên phải.
+        Các phần tử bằng nhau không bị hoán đổi, nên thứ tự tương đối ban đầu của chúng được bảo toàn.
 
-## Programming Exercises
+### So sánh Counting Sort và Radix Sort
 
-### Sort an Array with Merge Sort
+Một trường học cần sắp xếp nhiều mã số học sinh, mỗi mã có đúng 8 chữ số. Hãy trả lời các câu hỏi sau:
 
-Given an integer array `nums`, implement merge sort yourself, arrange its elements in nondecreasing order, and return the result. Do not call the language's built-in sorting function.
+<!-- numbered-subquestions -->
 
-??? tip "Hints"
+1. Radix sort cần bao nhiêu vòng khi bắt đầu từ chữ số có trọng số nhỏ nhất?
+2. Nếu các mã số học sinh được xử lý trực tiếp dưới dạng số nguyên bằng counting sort, tại sao mảng đếm cần nhiều phần tử không bao giờ được sử dụng?
+3. Dựa trên hai câu hỏi đầu, bạn sẽ chọn counting sort hay radix sort để sắp xếp nhiều mã số học sinh có độ dài cố định 8 chữ số? Tại sao?
 
-    1. An interval of length at most 1 is already sorted
-    2. Divide the interval in half at its midpoint and recursively sort both halves
-    3. Use two pointers to merge the two sorted halves, then write the result back into the original array
+??? success "Đáp án"
+
+    1. Một mã số học sinh có 8 chữ số, nên cần 8 vòng, từ chữ số có trọng số nhỏ nhất đến chữ số có trọng số lớn nhất. Mỗi vòng chỉ nhóm các giá trị từ 0–9.
+
+    2. Cách đếm trực tiếp sẽ yêu cầu một phần tử cho mọi giá trị 8 chữ số có thể có, nhưng chỉ một phần nhỏ trong số đó thực sự được cấp cho học sinh.
+        Phần lớn các phần tử trong mảng đếm sẽ vẫn bằng 0.
+
+    3. Radix sort là lựa chọn tốt hơn. Nó tận dụng việc độ dài là cố định và mỗi chữ số chỉ có 10 giá trị có thể có, nên chỉ cần 8 vòng nhóm ổn định.
+        Counting sort, nếu sử dụng toàn bộ mã số 8 chữ số làm chỉ số số nguyên, sẽ cần các phần tử trong mảng đếm cho nhiều giá trị không xuất hiện.
+
+## Bài tập lập trình
+
+### Sắp xếp một mảng bằng Merge Sort
+
+Cho mảng số nguyên `nums`, hãy tự triển khai merge sort, sắp xếp các phần tử theo thứ tự không giảm và trả về kết quả. Không gọi hàm sắp xếp tích hợp sẵn của ngôn ngữ.
+
+??? tip "Gợi ý"
+
+    1. Một khoảng có độ dài tối đa 1 vốn đã được sắp xếp
+    2. Chia khoảng thành hai nửa tại điểm giữa và đệ quy sắp xếp cả hai nửa
+    3. Sử dụng hai con trỏ để trộn hai nửa đã sắp xếp, sau đó ghi kết quả trở lại mảng ban đầu
 
 [LeetCode](https://leetcode.com/problems/sort-an-array/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
 
-### Sort an Integer Array with Counting Sort
+### Sắp xếp một mảng số nguyên bằng Counting Sort
 
-You are given an integer array `nums` and a non-negative integer $K$. Every element of the array is between $0$ and $K$.
+Cho mảng số nguyên `nums` và số nguyên không âm $K$. Mọi phần tử trong mảng đều nằm trong khoảng từ $0$ đến $K$.
 
-Implement counting sort, write the result back into `nums` in nondecreasing order, and return `nums`.
-Do not determine the order by comparing elements, and do not call the language's built-in sorting function.
+Hãy triển khai counting sort, ghi kết quả trở lại `nums` theo thứ tự không giảm và trả về `nums`.
+Không xác định thứ tự bằng cách so sánh các phần tử và không gọi hàm sắp xếp tích hợp sẵn của ngôn ngữ.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. Because every element is between 0 and K, use each element's value directly as an index in the counting array
-    2. Scan nums once and increment the count at the corresponding position
-    3. Then scan the counting array from 0 to K; if the value x occurs a certain number of times, write x into nums that many consecutive times
+    1. Vì mọi phần tử đều nằm trong khoảng từ 0 đến K, hãy sử dụng trực tiếp giá trị của mỗi phần tử làm chỉ số trong mảng đếm
+    2. Duyệt nums một lần và tăng bộ đếm tại vị trí tương ứng
+    3. Sau đó, duyệt mảng đếm từ 0 đến K; nếu giá trị x xuất hiện một số lần nhất định, hãy ghi x vào nums trong số lần liên tiếp tương ứng

@@ -1,42 +1,42 @@
-# Top-k Problem
+# Bài toán Top-k
 
 !!! question
 
-    Given an unordered array `nums` of length $n$, return the largest $k$ elements in the array.
+    Cho một mảng chưa được sắp xếp `nums` có độ dài $n$, hãy trả về $k$ phần tử lớn nhất trong mảng.
 
-For this problem, we will first introduce two relatively straightforward solutions, followed by a more efficient heap-based solution.
+Trong bài toán này, trước tiên chúng ta sẽ giới thiệu hai lời giải tương đối đơn giản, sau đó là một lời giải dựa trên heap hiệu quả hơn.
 
-## Method 1: Iterative Selection
+## Phương pháp 1: Chọn tuần tự
 
-We can perform $k$ rounds of traversal as shown in the figure below, extracting the $1^{st}$, $2^{nd}$, $\dots$, $k^{th}$ largest elements in each round, with a time complexity of $O(nk)$.
+Chúng ta có thể thực hiện $k$ lượt duyệt như trong hình dưới đây, lần lượt trích xuất phần tử lớn thứ $1^{st}$, lớn thứ $2^{nd}$, $\dots$, lớn thứ $k^{th}$ trong mỗi lượt, với độ phức tạp thời gian là $O(nk)$.
 
-This method is only suitable when $k \ll n$, because when $k$ is close to $n$, the time complexity approaches $O(n^2)$, making it very inefficient.
+Phương pháp này chỉ phù hợp khi $k \ll n$, vì khi $k$ gần với $n$, độ phức tạp thời gian tiến tới $O(n^2)$, khiến phương pháp trở nên rất kém hiệu quả.
 
-![Traversing to find the largest k elements](top_k.assets/top_k_traversal.png)
+![Duyệt để tìm $k$ phần tử lớn nhất](top_k.assets/top_k_traversal.png)
 
 !!! tip
 
-    When $k = n$, we can obtain a complete sorted sequence, which is equivalent to the "selection sort" algorithm.
+    Khi $k = n$, chúng ta có thể thu được một dãy được sắp xếp hoàn chỉnh, tương đương với thuật toán "selection sort".
 
-## Method 2: Sorting
+## Phương pháp 2: Sắp xếp
 
-As shown in the figure below, we can first sort the array `nums`, then return the rightmost $k$ elements, with a time complexity of $O(n \log n)$.
+Như trong hình dưới đây, trước tiên chúng ta có thể sắp xếp mảng `nums`, sau đó trả về $k$ phần tử ngoài cùng bên phải, với độ phức tạp thời gian là $O(n \log n)$.
 
-Clearly, this method does more work than necessary, because we only need to find the largest $k$ elements rather than sort the other elements.
+Rõ ràng, phương pháp này thực hiện nhiều công việc hơn mức cần thiết, vì chúng ta chỉ cần tìm $k$ phần tử lớn nhất thay vì sắp xếp các phần tử còn lại.
 
-![Sorting to find the largest k elements](top_k.assets/top_k_sorting.png)
+![Sắp xếp để tìm $k$ phần tử lớn nhất](top_k.assets/top_k_sorting.png)
 
-## Method 3: Heap
+## Phương pháp 3: Heap
 
-We can solve the Top-k problem more efficiently with a heap, as shown in the figure below.
+Chúng ta có thể giải bài toán Top-k hiệu quả hơn bằng heap, như trong hình dưới đây.
 
-1. Initialize a min heap, where the heap top element is the smallest.
-2. First, insert the first $k$ elements of the array into the heap in sequence.
-3. Starting from the $(k + 1)^{th}$ element, if the current element is greater than the heap top element, remove the heap top element and insert the current element into the heap.
-4. After traversal is complete, the heap contains the largest $k$ elements.
+1. Khởi tạo một min heap, trong đó phần tử ở đỉnh heap là phần tử nhỏ nhất.
+2. Trước tiên, lần lượt chèn $k$ phần tử đầu tiên của mảng vào heap.
+3. Bắt đầu từ phần tử thứ $(k + 1)^{th}$, nếu phần tử hiện tại lớn hơn phần tử ở đỉnh heap, hãy xóa phần tử ở đỉnh heap và chèn phần tử hiện tại vào heap.
+4. Sau khi duyệt xong, heap sẽ chứa $k$ phần tử lớn nhất.
 
 === "<1>"
-    ![Finding the largest k elements using a heap](top_k.assets/top_k_heap_step1.png)
+    ![Tìm $k$ phần tử lớn nhất bằng heap](top_k.assets/top_k_heap_step1.png)
 
 === "<2>"
     ![top_k_heap_step2](top_k.assets/top_k_heap_step2.png)
@@ -62,12 +62,12 @@ We can solve the Top-k problem more efficiently with a heap, as shown in the fig
 === "<9>"
     ![top_k_heap_step9](top_k.assets/top_k_heap_step9.png)
 
-Example code is as follows:
+Mã ví dụ như sau:
 
 ```src
 [file]{top_k}-[class]{}-[func]{top_k_heap}
 ```
 
-A total of $n$ rounds of heap insertions and removals are performed, with the heap's maximum length being $k$, so the time complexity is $O(n \log k)$. This method is very efficient; when $k$ is small, the time complexity approaches $O(n)$; when $k$ is large, the time complexity does not exceed $O(n \log n)$.
+Thực hiện tổng cộng $n$ lượt chèn và xóa phần tử trong heap, với độ dài tối đa của heap là $k$, nên độ phức tạp thời gian là $O(n \log k)$. Phương pháp này rất hiệu quả; khi $k$ nhỏ, độ phức tạp thời gian tiến tới $O(n)$; khi $k$ lớn, độ phức tạp thời gian không vượt quá $O(n \log n)$.
 
-Additionally, this method is well suited to dynamic data streams. As new data arrives, we can continuously maintain the elements in the heap, enabling dynamic updates to the largest $k$ elements.
+Ngoài ra, phương pháp này rất phù hợp với các luồng dữ liệu động. Khi dữ liệu mới xuất hiện, chúng ta có thể liên tục duy trì các phần tử trong heap, từ đó cho phép cập nhật động $k$ phần tử lớn nhất.

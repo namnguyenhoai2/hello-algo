@@ -1,15 +1,15 @@
 # Quick Sort
 
-<u>Quick sort</u> is an efficient and widely used sorting algorithm based on the divide-and-conquer strategy.
+<u>Quick sort</u> là một thuật toán sắp xếp hiệu quả và được sử dụng rộng rãi, dựa trên chiến lược chia để trị.
 
-The core operation of quick sort is "sentinel partitioning", whose goal is to select an element as the "pivot", move all elements smaller than the pivot to its left, and move all elements larger than the pivot to its right. Specifically, the process is shown in the figure below.
+Thao tác cốt lõi của quick sort là “phân hoạch bằng chốt”, với mục tiêu chọn một phần tử làm “pivot”, di chuyển tất cả phần tử nhỏ hơn pivot sang bên trái, và di chuyển tất cả phần tử lớn hơn pivot sang bên phải. Cụ thể, quy trình được minh họa trong hình dưới đây.
 
-1. Select the leftmost element as the pivot, and initialize two pointers `i` and `j` at the two ends of the array.
-2. Enter a loop. In each round, use `i` (`j`) to find the first element larger (smaller) than the pivot, and then swap the two elements.
-3. Repeat step `2.` until `i` and `j` meet, then swap the pivot into the boundary position between the two sub-arrays.
+1. Chọn phần tử ngoài cùng bên trái làm pivot, đồng thời khởi tạo hai con trỏ `i` và `j` ở hai đầu mảng.
+2. Bắt đầu một vòng lặp. Trong mỗi lượt, sử dụng `i` (`j`) để tìm phần tử đầu tiên lớn hơn (nhỏ hơn) pivot, sau đó hoán đổi hai phần tử này.
+3. Lặp lại bước `2.` cho đến khi `i` và `j` gặp nhau, rồi hoán đổi pivot vào vị trí biên giữa hai mảng con.
 
 === "<1>"
-    ![Sentinel partitioning steps](quick_sort.assets/pivot_division_step1.png)
+    ![Các bước phân hoạch bằng chốt](quick_sort.assets/pivot_division_step1.png)
 
 === "<2>"
     ![pivot_division_step2](quick_sort.assets/pivot_division_step2.png)
@@ -35,65 +35,65 @@ The core operation of quick sort is "sentinel partitioning", whose goal is to se
 === "<9>"
     ![pivot_division_step9](quick_sort.assets/pivot_division_step9.png)
 
-After sentinel partitioning, the original array is divided into three parts: the left sub-array, the pivot, and the right sub-array, such that "any element in the left sub-array $\leq$ the pivot $\leq$ any element in the right sub-array". Therefore, we only need to sort the two sub-arrays next.
+Sau khi phân hoạch bằng chốt, mảng ban đầu được chia thành ba phần: mảng con bên trái, pivot và mảng con bên phải, sao cho “mọi phần tử trong mảng con bên trái $\leq$ pivot $\leq$ mọi phần tử trong mảng con bên phải”. Vì vậy, tiếp theo chúng ta chỉ cần sắp xếp hai mảng con.
 
-!!! note "Divide-and-conquer strategy of quick sort"
+!!! note "Chiến lược chia để trị của quick sort"
 
-    The essence of sentinel partitioning is to simplify the sorting problem of a longer array into the sorting problems of two shorter arrays.
+    Bản chất của phân hoạch bằng chốt là đơn giản hóa bài toán sắp xếp một mảng dài thành các bài toán sắp xếp hai mảng ngắn hơn.
 
 ```src
 [file]{quick_sort}-[class]{quick_sort}-[func]{partition}
 ```
 
-## Algorithm Flow
+## Quy trình thuật toán
 
-The overall flow of quick sort is shown in the figure below.
+Quy trình tổng thể của quick sort được minh họa trong hình dưới đây.
 
-1. First, perform one "sentinel partitioning" on the original array to obtain the unsorted left sub-array and right sub-array.
-2. Then, recursively perform "sentinel partitioning" on the left sub-array and right sub-array respectively.
-3. Continue recursively until the sub-array length is 1, at which point sorting of the entire array is complete.
+1. Trước tiên, thực hiện một lần “phân hoạch bằng chốt” trên mảng ban đầu để thu được mảng con bên trái và mảng con bên phải chưa được sắp xếp.
+2. Sau đó, lần lượt thực hiện đệ quy “phân hoạch bằng chốt” trên mảng con bên trái và mảng con bên phải.
+3. Tiếp tục đệ quy cho đến khi độ dài mảng con bằng 1; lúc đó, toàn bộ mảng đã được sắp xếp.
 
-![Quick sort flow](quick_sort.assets/quick_sort_overview.png)
+![Quy trình quick sort](quick_sort.assets/quick_sort_overview.png)
 
 ```src
 [file]{quick_sort}-[class]{quick_sort}-[func]{quick_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity of $O(n \log n)$, non-adaptive sorting**: On average, sentinel partitioning produces $\log n$ recursive levels, and the total number of loop iterations across each level is $n$, so the overall time complexity is $O(n \log n)$. In the worst case, each round of sentinel partitioning splits an array of length $n$ into sub-arrays of lengths $0$ and $n - 1$. The recursion depth then reaches $n$, with $n$ loop iterations at each level, yielding an overall time complexity of $O(n^2)$.
-- **Space complexity of $O(n)$, in-place sorting**: In the case where the input array is completely reversed, the worst recursive depth reaches $n$, using $O(n)$ stack frame space. The sorting operation is performed on the original array without the aid of an additional array.
-- **Unstable sorting**: In the last step of sentinel partitioning, the pivot may be swapped to the right of an equal element.
+- **Độ phức tạp thời gian $O(n \log n)$, sắp xếp không thích nghi**: Trung bình, phân hoạch bằng chốt tạo ra $\log n$ mức đệ quy, và tổng số lần lặp vòng lặp ở mỗi mức là $n$, vì vậy độ phức tạp thời gian tổng thể là $O(n \log n)$. Trong trường hợp xấu nhất, mỗi lượt phân hoạch bằng chốt chia một mảng có độ dài $n$ thành các mảng con có độ dài $0$ và $n - 1$. Khi đó, độ sâu đệ quy đạt đến $n$, với $n$ lần lặp vòng lặp ở mỗi mức, dẫn đến độ phức tạp thời gian tổng thể là $O(n^2)$.
+- **Độ phức tạp không gian $O(n)$, sắp xếp tại chỗ**: Khi mảng đầu vào bị đảo ngược hoàn toàn, độ sâu đệ quy trong trường hợp xấu nhất đạt đến $n$, sử dụng $O(n)$ không gian cho các stack frame. Thao tác sắp xếp được thực hiện trực tiếp trên mảng ban đầu mà không cần đến mảng bổ sung.
+- **Sắp xếp không ổn định**: Trong bước cuối của phân hoạch bằng chốt, pivot có thể được hoán đổi sang bên phải một phần tử bằng nó.
 
-## Why Is Quick Sort Fast
+## Vì sao Quick Sort nhanh
 
-As the name suggests, quick sort has clear efficiency advantages. Although its average time complexity is the same as that of "merge sort" and "heap sort", quick sort is usually faster in practice for the following reasons.
+Đúng như tên gọi, quick sort có những ưu thế rõ rệt về hiệu suất. Mặc dù độ phức tạp thời gian trung bình giống với “merge sort” và “heap sort”, quick sort thường nhanh hơn trong thực tế vì các lý do sau.
 
-- **The worst case is unlikely to occur**: Although the worst-case time complexity of quick sort is $O(n^2)$ and its performance is less predictable than that of merge sort, quick sort runs in $O(n \log n)$ time in the vast majority of cases.
-- **High cache efficiency**: During sentinel partitioning, the system can load the entire sub-array into cache, so accessing elements is relatively efficient. By contrast, algorithms such as "heap sort" require non-contiguous access to elements and therefore do not enjoy this advantage.
-- **Small constant factors**: Among the three algorithms above, quick sort performs the fewest comparisons, assignments, and swaps in total. This is similar to why "insertion sort" is faster than "bubble sort".
+- **Trường hợp xấu nhất khó xảy ra**: Mặc dù độ phức tạp thời gian trong trường hợp xấu nhất của quick sort là $O(n^2)$ và hiệu suất của nó khó dự đoán hơn merge sort, quick sort chạy trong thời gian $O(n \log n)$ ở phần lớn trường hợp.
+- **Hiệu quả cache cao**: Trong quá trình phân hoạch bằng chốt, hệ thống có thể tải toàn bộ mảng con vào cache, vì vậy việc truy cập các phần tử tương đối hiệu quả. Ngược lại, các thuật toán như “heap sort” yêu cầu truy cập các phần tử không liền kề, nên không có được lợi thế này.
+- **Hệ số hằng nhỏ**: Trong ba thuật toán trên, quick sort thực hiện tổng cộng ít phép so sánh, phép gán và phép hoán đổi nhất. Điều này tương tự lý do “insertion sort” nhanh hơn “bubble sort”.
 
-## Pivot Optimization
+## Tối ưu hóa Pivot
 
-**Quick sort can become less time-efficient for certain inputs**. Consider an extreme example in which the input array is in completely descending order. Because we choose the leftmost element as the pivot, once sentinel partitioning is complete, the pivot is swapped to the far right of the array, leaving a left sub-array of length $n - 1$ and a right sub-array of length $0$. If this continues recursively, each round of sentinel partitioning produces one sub-array of length $0$, the divide-and-conquer strategy breaks down, and quick sort degenerates into an approximation of "bubble sort".
+**Quick sort có thể kém hiệu quả về thời gian hơn đối với một số dữ liệu đầu vào**. Hãy xét một ví dụ cực đoan, trong đó mảng đầu vào được sắp xếp hoàn toàn theo thứ tự giảm dần. Vì chúng ta chọn phần tử ngoài cùng bên trái làm pivot, sau khi phân hoạch bằng chốt hoàn tất, pivot sẽ được hoán đổi đến tận cùng bên phải của mảng, để lại một mảng con bên trái có độ dài $n - 1$ và một mảng con bên phải có độ dài $0$. Nếu quá trình này tiếp tục theo cách đệ quy, mỗi lượt phân hoạch bằng chốt sẽ tạo ra một mảng con có độ dài $0$, chiến lược chia để trị bị phá vỡ, và quick sort suy biến thành một dạng gần giống “bubble sort”.
 
-To reduce the chance of this happening, **we can optimize the pivot selection strategy used in sentinel partitioning**. For example, we can choose a pivot at random. However, if we are unlucky and repeatedly pick poor pivots, performance can still be unsatisfactory.
+Để giảm khả năng điều này xảy ra, **chúng ta có thể tối ưu hóa chiến lược chọn pivot được sử dụng trong phân hoạch bằng chốt**. Ví dụ, chúng ta có thể chọn pivot một cách ngẫu nhiên. Tuy nhiên, nếu không may liên tục chọn phải các pivot không phù hợp, hiệu suất vẫn có thể không đạt yêu cầu.
 
-It should be noted that programming languages usually generate "pseudo-random numbers". If we construct a specific test case against a pseudo-random sequence, quick sort can still suffer degraded performance.
+Cần lưu ý rằng các ngôn ngữ lập trình thường tạo ra “số giả ngẫu nhiên”. Nếu xây dựng một trường hợp kiểm thử cụ thể dựa trên một chuỗi giả ngẫu nhiên, quick sort vẫn có thể bị suy giảm hiệu suất.
 
-To improve further, we can choose three candidate elements from the array, usually the first, last, and middle elements, **and use the median of the three as the pivot**. This greatly increases the chance that the pivot is "neither too small nor too large". We can also choose more candidate elements to further improve the robustness of the algorithm. With this method, the probability that the time complexity degrades to $O(n^2)$ is significantly reduced.
+Để cải thiện hơn nữa, chúng ta có thể chọn ba phần tử ứng viên từ mảng, thường là phần tử đầu tiên, phần tử cuối cùng và phần tử ở giữa, **sau đó sử dụng trung vị của ba phần tử làm pivot**. Điều này làm tăng đáng kể khả năng pivot “không quá nhỏ cũng không quá lớn”. Chúng ta cũng có thể chọn nhiều phần tử ứng viên hơn để tiếp tục cải thiện độ ổn định của thuật toán. Với phương pháp này, xác suất độ phức tạp thời gian suy giảm xuống $O(n^2)$ được giảm đáng kể.
 
-Example code is as follows:
+Mã ví dụ như sau:
 
 ```src
 [file]{quick_sort}-[class]{quick_sort_median}-[func]{partition}
 ```
 
-## Recursive Depth Optimization
+## Tối ưu hóa độ sâu đệ quy
 
-**Quick sort may also use more space for certain inputs**. Consider a fully sorted input array. Let the length of the current sub-array in the recursion be $m$. Each round of sentinel partitioning produces a left sub-array of length $0$ and a right sub-array of length $m - 1$, which means each recursive call reduces the problem size by only one element. The recursion tree can therefore reach a height of $n - 1$, requiring $O(n)$ stack-frame space.
+**Quick sort cũng có thể sử dụng nhiều không gian hơn đối với một số dữ liệu đầu vào**. Hãy xét một mảng đầu vào đã được sắp xếp hoàn toàn. Gọi độ dài của mảng con hiện tại trong quá trình đệ quy là $m$. Mỗi lượt phân hoạch bằng chốt tạo ra một mảng con bên trái có độ dài $0$ và một mảng con bên phải có độ dài $m - 1$, nghĩa là mỗi lời gọi đệ quy chỉ làm giảm kích thước bài toán đi một phần tử. Do đó, cây đệ quy có thể đạt chiều cao $n - 1$, cần đến $O(n)$ không gian cho các stack frame.
 
-To prevent stack frames from accumulating, we can compare the lengths of the two sub-arrays after each round of sentinel partitioning, **and recurse only on the shorter one**. Because the shorter sub-array has length at most $n / 2$, this method ensures that the recursion depth does not exceed $\log n$, reducing the worst-case space complexity to $O(\log n)$. The code is shown below:
+Để ngăn các stack frame tích lũy, sau mỗi lượt phân hoạch bằng chốt, chúng ta có thể so sánh độ dài của hai mảng con và **chỉ đệ quy trên mảng con ngắn hơn**. Vì mảng con ngắn hơn có độ dài tối đa là $n / 2$, phương pháp này đảm bảo độ sâu đệ quy không vượt quá $\log n$, giảm độ phức tạp không gian trong trường hợp xấu nhất xuống $O(\log n)$. Mã được trình bày bên dưới:
 
 ```src
 [file]{quick_sort}-[class]{quick_sort_tail_call}-[func]{quick_sort}

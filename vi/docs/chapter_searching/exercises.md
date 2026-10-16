@@ -1,96 +1,96 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### How Binary Search Narrows the Search Interval
+### Cách tìm kiếm nhị phân thu hẹp khoảng tìm kiếm
 
-Search for 16 in the sorted array `[2, 5, 8, 12, 16, 23, 38]`.
-Use the closed interval `[i, j]` and calculate the midpoint as
-$m=i+(j-i)/2$, rounded down.
+Tìm kiếm 16 trong mảng đã sắp xếp `[2, 5, 8, 12, 16, 23, 38]`.
+Sử dụng khoảng đóng `[i, j]` và tính điểm giữa theo công thức
+$m=i+(j-i)/2$, làm tròn xuống.
 
-For each round, write `(i, j, m)`, the middle element, and how the interval is narrowed next,
-until the target is found.
+Ở mỗi vòng, hãy viết `(i, j, m)`, phần tử ở giữa và cách thu hẹp khoảng tiếp theo,
+cho đến khi tìm thấy giá trị cần tìm.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    The search proceeds as follows:
+    Quá trình tìm kiếm diễn ra như sau:
 
-    | Round | `(i, j, m)` | Middle element | Next step |
+    | Vòng | `(i, j, m)` | Phần tử ở giữa | Bước tiếp theo |
     | --- | --- | --- | --- |
-    | 1 | `(0, 6, 3)` | 12 | `12 < 16`, set `i = 4` |
-    | 2 | `(4, 6, 5)` | 23 | `23 > 16`, set `j = 4` |
-    | 3 | `(4, 4, 4)` | 16 | Target found; return index 4 |
+    | 1 | `(0, 6, 3)` | 12 | `12 < 16`, đặt `i = 4` |
+    | 2 | `(4, 6, 5)` | 23 | `23 > 16`, đặt `j = 4` |
+    | 3 | `(4, 4, 4)` | 16 | Đã tìm thấy giá trị cần tìm; trả về chỉ số 4 |
 
-    Because the array is sorted, when the middle value is smaller than the target, the middle and everything to its left can be excluded.
-    When the middle value is greater than the target, the middle and everything to its right can be excluded.
+    Vì mảng đã được sắp xếp, khi giá trị ở giữa nhỏ hơn giá trị cần tìm, có thể loại bỏ phần tử ở giữa và mọi phần tử bên trái nó.
+    Khi giá trị ở giữa lớn hơn giá trị cần tìm, có thể loại bỏ phần tử ở giữa và mọi phần tử bên phải nó.
 
-### Left and Right Boundaries of Duplicate Elements
+### Biên trái và biên phải của các phần tử trùng lặp
 
-Search for the number 2 in the array `[1, 2, 2, 2, 4, 6]`.
-A student uses binary search, returns immediately after finding the target at index 2, and says,
-"Index 2 is the left boundary of the number 2."
-
-<!-- numbered-subquestions -->
-
-1. Is the student's statement correct? What are the left and right boundaries of 2? Explain why.
-2. When searching for the left boundary, if the middle element equals the target, which side should be searched next?
-3. When searching for the right boundary, which side should be searched next? State only the direction; you do not need to write the complete search process.
-
-??? success "Answer"
-
-    1. The student's statement is incorrect. Returning as soon as a 2 is found guarantees only that some occurrence of 2 was found, not the leftmost or rightmost one.
-        Here, the left boundary is index 1 and the right boundary is index 3.
-
-    2. When searching for the left boundary, continue searching on the left even if the middle element equals 2.
-        For example, with a closed interval, set `j = m - 1`.
-
-    3. When searching for the right boundary, continue searching on the right after the middle element equals 2.
-        For example, set `i = m + 1`.
-
-### Choosing a Search Method for Different Data
-
-For each situation below, choose an appropriate method from "linear search," "binary search," and "hash table," and explain why:
+Tìm kiếm số 2 trong mảng `[1, 2, 2, 2, 4, 6]`.
+Một học sinh sử dụng tìm kiếm nhị phân, trả về ngay sau khi tìm thấy giá trị cần tìm tại chỉ số 2 và nói:
+"Chỉ số 2 là biên trái của số 2."
 
 <!-- numbered-subquestions -->
 
-1. Repeatedly search among $10^7$ integers that are already sorted and never change, without building any additional data structure.
-2. Repeatedly test whether a key exists in a collection with frequent insertions and deletions. The collection need not remain sorted, and no range searches are needed.
-3. Search an unsorted array for a value only once.
+1. Phát biểu của học sinh có đúng không? Biên trái và biên phải của 2 là gì? Hãy giải thích tại sao.
+2. Khi tìm biên trái, nếu phần tử ở giữa bằng giá trị cần tìm thì nên tìm tiếp ở phía nào?
+3. Khi tìm biên phải, nên tìm tiếp ở phía nào? Chỉ cần nêu hướng; không cần viết toàn bộ quá trình tìm kiếm.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. Binary search: the data is sorted and static, so searching takes $O(\log n)$ time without extra space.
-    2. Hash table: when the hash function distributes keys fairly evenly among the buckets, insertion, deletion, and lookup by key all take $O(1)$ time on average.
-    3. Scan directly from beginning to end. When searching only once, sorting the array or building a hash table still requires processing the entire array first,
-        so neither reduces the total work for this single task.
+    1. Phát biểu của học sinh không đúng. Việc trả về ngay khi tìm thấy một số 2 chỉ đảm bảo rằng đã tìm thấy một lần xuất hiện nào đó của 2, chứ không đảm bảo đó là lần xuất hiện ngoài cùng bên trái hoặc bên phải.
+        Trong trường hợp này, biên trái là chỉ số 1 và biên phải là chỉ số 3.
 
-        The choice depends on whether the data is sorted, whether an additional structure is allowed, how many searches are needed, and which operations must be supported.
+    2. Khi tìm biên trái, hãy tiếp tục tìm ở bên trái ngay cả khi phần tử ở giữa bằng 2.
+        Ví dụ, với một khoảng đóng, đặt `j = m - 1`.
 
-## Programming Exercises
+    3. Khi tìm biên phải, hãy tiếp tục tìm ở bên phải sau khi phần tử ở giữa bằng 2.
+        Ví dụ, đặt `i = m + 1`.
 
-### Binary Search in a Sorted Array
+### Chọn phương pháp tìm kiếm cho các loại dữ liệu khác nhau
 
-Given an integer array `nums` in strictly increasing order and a target value `target`, use binary search to find `target`. If it exists, return its array index; otherwise, return -1.
+Với mỗi tình huống dưới đây, hãy chọn một phương pháp phù hợp trong số "tìm kiếm tuyến tính", "tìm kiếm nhị phân" và "bảng băm", rồi giải thích lý do:
 
-??? tip "Hints"
+<!-- numbered-subquestions -->
 
-    1. The initial interval is left = 0 and right = n - 1; it is nonempty while left <= right
-    2. Calculate the midpoint with mid = left + (right - left) // 2
-    3. If `nums[mid]` is less than `target`, move the left boundary to `mid + 1`; if `nums[mid]` is greater than `target`, move the right boundary to `mid - 1`; if they are equal, return immediately
+1. Lặp lại việc tìm kiếm trong số $10^7$ số nguyên đã được sắp xếp và không bao giờ thay đổi, mà không xây dựng thêm cấu trúc dữ liệu nào.
+2. Lặp lại việc kiểm tra xem một khóa có tồn tại trong một tập hợp thường xuyên có thao tác chèn và xóa hay không. Tập hợp không cần duy trì thứ tự sắp xếp và không cần tìm kiếm theo phạm vi.
+3. Tìm kiếm một giá trị trong mảng chưa sắp xếp chỉ một lần.
+
+??? success "Đáp án"
+
+    1. Tìm kiếm nhị phân: dữ liệu đã được sắp xếp và ở trạng thái tĩnh, nên việc tìm kiếm mất $O(\log n)$ thời gian mà không cần thêm không gian.
+    2. Bảng băm: khi hàm băm phân phối các khóa tương đối đồng đều giữa các bucket, thao tác chèn, xóa và tra cứu theo khóa đều mất trung bình $O(1)$ thời gian.
+    3. Quét trực tiếp từ đầu đến cuối. Khi chỉ tìm kiếm một lần, việc sắp xếp mảng hoặc xây dựng bảng băm vẫn yêu cầu xử lý toàn bộ mảng trước,
+        nên không phương pháp nào làm giảm tổng khối lượng công việc cho tác vụ đơn lẻ này.
+
+        Lựa chọn phụ thuộc vào việc dữ liệu có được sắp xếp hay không, có cho phép xây dựng thêm cấu trúc hay không, cần thực hiện bao nhiêu lần tìm kiếm và cần hỗ trợ những thao tác nào.
+
+## Bài tập lập trình
+
+### Tìm kiếm nhị phân trong mảng đã sắp xếp
+
+Cho một mảng số nguyên `nums` theo thứ tự tăng nghiêm ngặt và một giá trị cần tìm `target`, hãy sử dụng tìm kiếm nhị phân để tìm `target`. Nếu tồn tại, hãy trả về chỉ số của nó trong mảng; nếu không, trả về -1.
+
+??? tip "Gợi ý"
+
+    1. Khoảng ban đầu là left = 0 và right = n - 1; khoảng này không rỗng khi left <= right
+    2. Tính điểm giữa bằng mid = left + (right - left) // 2
+    3. Nếu `nums[mid]` nhỏ hơn `target`, hãy di chuyển biên trái đến `mid + 1`; nếu `nums[mid]` lớn hơn `target`, hãy di chuyển biên phải đến `mid - 1`; nếu chúng bằng nhau, trả về ngay
 
 [LeetCode](https://leetcode.com/problems/binary-search/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
 
-### Insertion Point in a Sorted Array
+### Vị trí chèn trong mảng đã sắp xếp
 
-You are given an integer array `nums` in strictly increasing order and a target value `target`.
+Cho một mảng số nguyên `nums` theo thứ tự tăng nghiêm ngặt và một giá trị cần tìm `target`.
 
-Return the index of `target` if it is already in the array. Otherwise, return the insertion point at which `target` can be inserted while keeping the array in strictly increasing order.
-The insertion point may be 0 or may equal the array's length. Use binary search.
+Trả về chỉ số của `target` nếu nó đã có trong mảng. Nếu không, trả về vị trí chèn mà tại đó có thể chèn `target` mà vẫn giữ cho mảng theo thứ tự tăng nghiêm ngặt.
+Vị trí chèn có thể là 0 hoặc bằng độ dài của mảng. Hãy sử dụng tìm kiếm nhị phân.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. The answer may be 0 or the array length n
-    2. With a closed interval, if `nums[mid]` is greater than or equal to `target`, set `right = mid - 1` and continue checking farther left; otherwise, set `left = mid + 1`
-    3. When the loop ends, left is the insertion point
+    1. Kết quả có thể là 0 hoặc độ dài mảng n
+    2. Với một khoảng đóng, nếu `nums[mid]` lớn hơn hoặc bằng `target`, hãy đặt `right = mid - 1` và tiếp tục kiểm tra xa hơn về bên trái; nếu không, hãy đặt `left = mid + 1`
+    3. Khi vòng lặp kết thúc, left là vị trí chèn
 
 [LeetCode](https://leetcode.com/problems/search-insert-position/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

@@ -1,56 +1,56 @@
-# Binary Search Boundaries
+# Biên giới của Binary Search
 
-## Finding the Left Boundary
+## Tìm biên trái
 
 !!! question
 
-    Given a sorted array `nums` of length $n$ that may contain duplicate elements, return the index of the leftmost occurrence of `target`. If the array does not contain `target`, return $-1$.
+    Cho một mảng đã sắp xếp `nums` có độ dài $n$ và có thể chứa các phần tử trùng lặp, hãy trả về chỉ số của lần xuất hiện ngoài cùng bên trái của `target`. Nếu mảng không chứa `target`, hãy trả về $-1$.
 
-Recall the method for finding the insertion point with binary search. After the search completes, $i$ points to the leftmost `target`, **so finding the insertion point is essentially finding the index of the leftmost `target`**.
+Hãy nhớ lại phương pháp tìm vị trí chèn bằng binary search. Sau khi quá trình tìm kiếm hoàn tất, $i$ trỏ đến `target` ngoài cùng bên trái, **vì vậy tìm vị trí chèn về cơ bản chính là tìm chỉ số của `target` ngoài cùng bên trái**.
 
-Consider implementing the left boundary search using the insertion point finding function. Note that the array may not contain `target`, which could result in the following two cases:
+Hãy xem xét việc triển khai tìm biên trái bằng hàm tìm vị trí chèn. Lưu ý rằng mảng có thể không chứa `target`, dẫn đến hai trường hợp sau:
 
-- The insertion point index $i$ is out of bounds.
-- The element `nums[i]` is not equal to `target`.
+- Chỉ số vị trí chèn $i$ nằm ngoài phạm vi.
+- Phần tử `nums[i]` không bằng `target`.
 
-When either of these situations occurs, simply return $-1$. The code is shown below:
+Khi xảy ra một trong hai trường hợp này, chỉ cần trả về $-1$. Mã được trình bày dưới đây:
 
 ```src
 [file]{binary_search_edge}-[class]{}-[func]{binary_search_left_edge}
 ```
 
-## Finding the Right Boundary
+## Tìm biên phải
 
-So how do we find the rightmost `target`? The most direct approach is to modify the code and replace the pointer shrinking operation in the `nums[m] == target` case. The code is omitted here; interested readers can implement it themselves.
+Vậy làm thế nào để tìm `target` ngoài cùng bên phải? Cách trực tiếp nhất là chỉnh sửa mã và thay thế thao tác thu hẹp con trỏ trong trường hợp `nums[m] == target`. Phần mã được lược bỏ ở đây; bạn đọc có thể tự triển khai.
 
-Below we introduce two more clever methods.
+Dưới đây, chúng ta sẽ giới thiệu thêm hai phương pháp thông minh hơn.
 
-### Reusing Left Boundary Search
+### Tái sử dụng tìm biên trái
 
-In fact, we can use the function for finding the leftmost `target` to find the rightmost `target`. The specific method is: **convert finding the rightmost `target` into finding the leftmost `target + 1`**.
+Trên thực tế, chúng ta có thể sử dụng hàm tìm `target` ngoài cùng bên trái để tìm `target` ngoài cùng bên phải. Phương pháp cụ thể là: **chuyển việc tìm `target` ngoài cùng bên phải thành việc tìm `target + 1` ngoài cùng bên trái**.
 
-As shown in the figure below, after the search completes, the pointer $i$ points to the leftmost `target + 1` (if it exists), while $j$ points to the rightmost `target`, **so we can return $j$**.
+Như minh họa trong hình bên dưới, sau khi quá trình tìm kiếm hoàn tất, con trỏ $i$ trỏ đến `target + 1` ngoài cùng bên trái (nếu tồn tại), còn $j$ trỏ đến `target` ngoài cùng bên phải, **vì vậy chúng ta có thể trả về $j$**.
 
-![Converting right boundary search to left boundary search](binary_search_edge.assets/binary_search_right_edge_by_left_edge.png)
+![Chuyển đổi tìm biên phải thành tìm biên trái](binary_search_edge.assets/binary_search_right_edge_by_left_edge.png)
 
-Note that the returned insertion point is $i$, so we need to subtract $1$ from it to obtain $j$:
+Lưu ý rằng vị trí chèn được trả về là $i$, vì vậy chúng ta cần trừ $1$ để thu được $j$:
 
 ```src
 [file]{binary_search_edge}-[class]{}-[func]{binary_search_right_edge}
 ```
 
-### Converting to Element Search
+### Chuyển đổi thành tìm kiếm phần tử
 
-We know that when the array does not contain `target`, $i$ and $j$ will eventually point to the first element greater than `target` and the rightmost element less than `target`, respectively.
+Chúng ta biết rằng khi mảng không chứa `target`, $i$ và $j$ cuối cùng sẽ lần lượt trỏ đến phần tử đầu tiên lớn hơn `target` và phần tử ngoài cùng bên phải nhỏ hơn `target`.
 
-Therefore, as shown in the figure below, we can construct an element that does not exist in the array to find the left and right boundaries.
+Do đó, như minh họa trong hình bên dưới, chúng ta có thể tạo một phần tử không tồn tại trong mảng để tìm các biên trái và phải.
 
-- Finding the leftmost `target`: This can be converted to finding `target - 0.5` and returning the pointer $i$.
-- Finding the rightmost `target`: This can be converted to finding `target + 0.5` and returning the pointer $j$.
+- Tìm `target` ngoài cùng bên trái: Có thể chuyển thành việc tìm `target - 0.5` và trả về con trỏ $i$.
+- Tìm `target` ngoài cùng bên phải: Có thể chuyển thành việc tìm `target + 0.5` và trả về con trỏ $j$.
 
-![Converting boundary search to element search](binary_search_edge.assets/binary_search_edge_by_element.png)
+![Chuyển đổi tìm biên thành tìm kiếm phần tử](binary_search_edge.assets/binary_search_edge_by_element.png)
 
-The code is omitted here, but the following two points are worth noting:
+Phần mã được lược bỏ ở đây, nhưng cần lưu ý hai điểm sau:
 
-- Since the given array does not contain decimal values, we do not need to worry about how to handle equality.
-- Because this method introduces decimals, the variable `target` in the function needs to be changed to a floating-point type (Python does not require this change).
+- Vì mảng đã cho không chứa các giá trị thập phân, chúng ta không cần lo lắng về cách xử lý trường hợp bằng nhau.
+- Vì phương pháp này đưa vào các số thập phân, biến `target` trong hàm cần được đổi sang kiểu số thực (Python không yêu cầu thay đổi này).

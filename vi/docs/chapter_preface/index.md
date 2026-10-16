@@ -1,9 +1,9 @@
-# Preface
+# Lời nói đầu
 
-![Preface](../assets/covers/chapter_preface.jpg)
+![Lời nói đầu](../assets/covers/chapter_preface.jpg)
 
 !!! abstract
 
-    Algorithms are like a beautiful symphony, each line of code flows like a melody.
+    Các thuật toán giống như một bản giao hưởng tuyệt đẹp, mỗi dòng mã tuôn chảy như một giai điệu.
 
-    May this book gently resonate in your mind, leaving a unique and profound melody.
+    Mong rằng cuốn sách này nhẹ nhàng vang vọng trong tâm trí bạn, để lại một giai điệu độc đáo và sâu sắc.

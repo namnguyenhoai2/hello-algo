@@ -1,27 +1,27 @@
-# Binary Search
+# Tìm kiếm nhị phân
 
-<u>Binary search</u> is an efficient search algorithm based on the divide-and-conquer strategy. It leverages the sorted order of the data to reduce the search range by half in each round until the target element is found or the search interval becomes empty.
+<u>Tìm kiếm nhị phân</u> là một thuật toán tìm kiếm hiệu quả dựa trên chiến lược chia để trị. Thuật toán tận dụng thứ tự đã được sắp xếp của dữ liệu để giảm phạm vi tìm kiếm đi một nửa sau mỗi vòng lặp, cho đến khi tìm thấy phần tử mục tiêu hoặc khoảng tìm kiếm trở thành rỗng.
 
 !!! question
 
-    Given an array `nums` of length $n$ with elements arranged in ascending order and no duplicates, search for and return the index of element `target` in the array. If the array does not contain the element, return $-1$. An example is shown in the figure below.
+    Cho một mảng `nums` có độ dài $n$, trong đó các phần tử được sắp xếp theo thứ tự tăng dần và không có phần tử trùng lặp, hãy tìm và trả về chỉ số của phần tử `target` trong mảng. Nếu mảng không chứa phần tử đó, hãy trả về $-1$. Ví dụ được minh họa trong hình bên dưới.
 
-![Binary search example data](binary_search.assets/binary_search_example.png)
+![Dữ liệu ví dụ về tìm kiếm nhị phân](binary_search.assets/binary_search_example.png)
 
-As shown in the figure below, we first initialize pointers $i = 0$ and $j = n - 1$, pointing to the first and last elements of the array respectively, representing the search interval $[0, n - 1]$. Note that square brackets denote a closed interval, which includes the boundary values themselves.
+Như minh họa trong hình bên dưới, trước tiên chúng ta khởi tạo các con trỏ $i = 0$ và $j = n - 1$, lần lượt trỏ đến phần tử đầu tiên và cuối cùng của mảng, biểu diễn khoảng tìm kiếm $[0, n - 1]$. Lưu ý rằng dấu ngoặc vuông biểu thị một khoảng đóng, bao gồm cả các giá trị biên.
 
-Next, perform the following two steps in a loop:
+Tiếp theo, thực hiện hai bước sau trong một vòng lặp:
 
-1. Calculate the midpoint index $m = \lfloor {(i + j) / 2} \rfloor$, where $\lfloor \: \rfloor$ denotes the floor operation.
-2. Compare `nums[m]` and `target`, which results in three cases:
-    1. When `nums[m] < target`, it indicates that `target` is in the interval $[m + 1, j]$, so execute $i = m + 1$.
-    2. When `nums[m] > target`, it indicates that `target` is in the interval $[i, m - 1]$, so execute $j = m - 1$.
-    3. When `nums[m] = target`, it indicates that `target` has been found, so return index $m$.
+1. Tính chỉ số phần tử giữa $m = \lfloor {(i + j) / 2} \rfloor$, trong đó $\lfloor \: \rfloor$ biểu thị phép lấy phần nguyên.
+2. So sánh `nums[m]` và `target`, từ đó có ba trường hợp:
+    1. Khi `nums[m] < target`, điều đó cho biết `target` nằm trong khoảng $[m + 1, j]$, vì vậy thực hiện $i = m + 1$.
+    2. Khi `nums[m] > target`, điều đó cho biết `target` nằm trong khoảng $[i, m - 1]$, vì vậy thực hiện $j = m - 1$.
+    3. Khi `nums[m] = target`, điều đó cho biết đã tìm thấy `target`, vì vậy trả về chỉ số $m$.
 
-If the array does not contain the target element, the search interval will eventually become empty. In this case, return $-1$.
+Nếu mảng không chứa phần tử mục tiêu, khoảng tìm kiếm cuối cùng sẽ trở thành rỗng. Trong trường hợp này, trả về $-1$.
 
 === "<1>"
-    ![Binary search process](binary_search.assets/binary_search_step1.png)
+    ![Quá trình tìm kiếm nhị phân](binary_search.assets/binary_search_step1.png)
 
 === "<2>"
     ![binary_search_step2](binary_search.assets/binary_search_step2.png)
@@ -41,43 +41,43 @@ If the array does not contain the target element, the search interval will event
 === "<7>"
     ![binary_search_step7](binary_search.assets/binary_search_step7.png)
 
-It's worth noting that since both $i$ and $j$ are of `int` type, **$i + j$ may exceed the range of the `int` type**. To avoid integer overflow, we typically use the formula $m = \lfloor {i + (j - i) / 2} \rfloor$ to calculate the midpoint.
+Cần lưu ý rằng vì cả $i$ và $j$ đều thuộc kiểu `int`, **$i + j$ có thể vượt quá phạm vi của kiểu `int`**. Để tránh tràn số nguyên, chúng ta thường sử dụng công thức $m = \lfloor {i + (j - i) / 2} \rfloor$ để tính phần tử giữa.
 
-The code is shown below:
+Mã được trình bày bên dưới:
 
 ```src
 [file]{binary_search}-[class]{}-[func]{binary_search}
 ```
 
-**Time complexity is $O(\log n)$**: In the binary search loop, the interval is reduced by half each round, so the number of iterations is $\log_2 n$.
+**Độ phức tạp thời gian là $O(\log n)$**: Trong vòng lặp tìm kiếm nhị phân, khoảng tìm kiếm giảm đi một nửa sau mỗi vòng, vì vậy số lần lặp là $\log_2 n$.
 
-**Space complexity is $O(1)$**: Pointers $i$ and $j$ use constant-size space.
+**Độ phức tạp không gian là $O(1)$**: Các con trỏ $i$ và $j$ sử dụng không gian có kích thước không đổi.
 
-## Interval Representation Methods
+## Các phương pháp biểu diễn khoảng
 
-In addition to the closed interval mentioned above, another common interval representation is the "left-closed right-open" interval, defined as $[0, n)$, meaning that the left boundary is inclusive while the right boundary is exclusive. Under this representation, the interval $[i, j)$ is empty when $i = j$.
+Ngoài khoảng đóng được đề cập ở trên, một cách biểu diễn khoảng phổ biến khác là khoảng "đóng trái, mở phải", được định nghĩa là $[0, n)$, nghĩa là biên trái được bao gồm còn biên phải không được bao gồm. Theo cách biểu diễn này, khoảng $[i, j)$ là rỗng khi $i = j$.
 
-We can implement a binary search algorithm with the same functionality based on this representation:
+Chúng ta có thể triển khai thuật toán tìm kiếm nhị phân với cùng chức năng dựa trên cách biểu diễn này:
 
 ```src
 [file]{binary_search}-[class]{}-[func]{binary_search_lcro}
 ```
 
-As shown in the figure below, under the two interval representations, the initialization, loop condition, and interval narrowing operations of the binary search algorithm are all different.
+Như minh họa trong hình bên dưới, với hai cách biểu diễn khoảng, thao tác khởi tạo, điều kiện vòng lặp và các thao tác thu hẹp khoảng của thuật toán tìm kiếm nhị phân đều khác nhau.
 
-Since both the left and right boundaries in the "closed interval" representation are defined as closed, the operations to narrow the interval through pointers $i$ and $j$ are also symmetric. This makes it less error-prone, **so the "closed interval" approach is generally recommended**.
+Vì cả biên trái và biên phải trong cách biểu diễn "khoảng đóng" đều được định nghĩa là đóng, các thao tác thu hẹp khoảng thông qua các con trỏ $i$ và $j$ cũng đối xứng nhau. Điều này giúp giảm khả năng xảy ra lỗi, **vì vậy cách tiếp cận "khoảng đóng" thường được khuyến nghị**.
 
-![Two interval definitions](binary_search.assets/binary_search_ranges.png)
+![Hai cách định nghĩa khoảng](binary_search.assets/binary_search_ranges.png)
 
-## Advantages and Limitations
+## Ưu điểm và hạn chế
 
-Binary search offers good performance in both time and space.
+Tìm kiếm nhị phân có hiệu năng tốt cả về thời gian lẫn không gian.
 
-- Binary search has high time efficiency. With large data volumes, the logarithmic time complexity has significant advantages. For example, when the data size $n = 2^{20}$, linear search requires $2^{20} = 1048576$ iterations, while binary search only needs $\log_2 2^{20} = 20$ iterations.
-- Binary search requires no extra space. Compared to searching algorithms that require additional space (such as hash-based search), binary search is more space-efficient.
+- Tìm kiếm nhị phân có hiệu quả cao về thời gian. Với lượng dữ liệu lớn, độ phức tạp thời gian logarit mang lại những lợi thế đáng kể. Ví dụ, khi kích thước dữ liệu $n = 2^{20}$, tìm kiếm tuyến tính cần $2^{20} = 1048576$ lần lặp, trong khi tìm kiếm nhị phân chỉ cần $\log_2 2^{20} = 20$ lần lặp.
+- Tìm kiếm nhị phân không yêu cầu không gian bổ sung. So với các thuật toán tìm kiếm yêu cầu không gian bổ sung, chẳng hạn như tìm kiếm dựa trên hash, tìm kiếm nhị phân sử dụng không gian hiệu quả hơn.
 
-However, binary search is not suitable for all situations, mainly for the following reasons:
+Tuy nhiên, tìm kiếm nhị phân không phù hợp với mọi tình huống, chủ yếu vì những lý do sau:
 
-- Binary search is only applicable to sorted data. If the input data is unsorted, sorting specifically to use binary search would be counterproductive, as sorting algorithms typically have a time complexity of $O(n \log n)$, which is higher than both linear search and binary search. For scenarios with frequent element insertions, keeping the array sorted requires inserting elements at specific positions with a time complexity of $O(n)$, which is also very expensive.
-- Binary search is only applicable to arrays. Binary search requires non-contiguous, jump-style access to elements, and this kind of access is inefficient in linked lists, making it unsuitable for linked lists or linked-list-based data structures.
-- For small data volumes, linear search performs better. In linear search, each round requires only 1 comparison operation; while in binary search, it requires 1 addition, 1 division, 1-3 comparison operations, and 1 addition (subtraction), totaling 4-6 unit operations. Therefore, when the data volume $n$ is small, linear search is actually faster than binary search.
+- Tìm kiếm nhị phân chỉ áp dụng cho dữ liệu đã được sắp xếp. Nếu dữ liệu đầu vào chưa được sắp xếp, việc sắp xếp riêng để sử dụng tìm kiếm nhị phân sẽ phản tác dụng, vì các thuật toán sắp xếp thường có độ phức tạp thời gian $O(n \log n)$, cao hơn cả tìm kiếm tuyến tính và tìm kiếm nhị phân. Trong các trường hợp thường xuyên chèn phần tử, việc duy trì mảng đã sắp xếp đòi hỏi chèn các phần tử vào những vị trí cụ thể với độ phức tạp thời gian $O(n)$, điều này cũng rất tốn kém.
+- Tìm kiếm nhị phân chỉ áp dụng cho mảng. Tìm kiếm nhị phân yêu cầu truy cập các phần tử không liên tục theo kiểu nhảy, và kiểu truy cập này không hiệu quả trong linked list, khiến thuật toán không phù hợp với linked list hoặc các cấu trúc dữ liệu dựa trên linked list.
+- Với lượng dữ liệu nhỏ, tìm kiếm tuyến tính cho hiệu năng tốt hơn. Trong tìm kiếm tuyến tính, mỗi vòng chỉ yêu cầu 1 phép so sánh; trong khi đó, tìm kiếm nhị phân yêu cầu 1 phép cộng, 1 phép chia, 1–3 phép so sánh và 1 phép cộng (phép trừ), tổng cộng 4–6 thao tác đơn vị. Do đó, khi lượng dữ liệu $n$ nhỏ, tìm kiếm tuyến tính thực tế nhanh hơn tìm kiếm nhị phân.

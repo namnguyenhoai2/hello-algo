@@ -1,9 +1,9 @@
-# Searching
+# Tìm kiếm
 
-![Searching](../assets/covers/chapter_searching.jpg)
+![Tìm kiếm](../assets/covers/chapter_searching.jpg)
 
 !!! abstract
 
-    Searching is an adventure into the unknown, where we may need to traverse every corner of the mysterious space, or we may be able to quickly lock onto the target.
+    Tìm kiếm là một cuộc phiêu lưu vào điều chưa biết, nơi chúng ta có thể cần khám phá mọi ngóc ngách của không gian bí ẩn, hoặc có thể nhanh chóng khóa mục tiêu.
 
-    In this journey of discovery, each exploration may yield an unexpected answer.
+    Trong hành trình khám phá này, mỗi lần thăm dò đều có thể mang lại một câu trả lời bất ngờ.

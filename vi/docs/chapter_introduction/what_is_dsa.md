@@ -1,53 +1,53 @@
-# What Is an Algorithm
+# Thuật toán là gì
 
-## Algorithm Definition
+## Định nghĩa thuật toán
 
-An <u>algorithm</u> is a set of instructions or operational steps that solves a specific problem within a finite amount of time. It has the following characteristics.
+<u>thuật toán</u> là một tập hợp các chỉ dẫn hoặc bước thao tác dùng để giải quyết một vấn đề cụ thể trong một khoảng thời gian hữu hạn. Thuật toán có các đặc điểm sau.
 
-- The problem is well-defined, with clear input and output definitions.
-- It is feasible and can be completed with finite steps, time, and memory.
-- Each step has a definite meaning, and under the same input and operating conditions, the output is always the same.
+- Vấn đề được xác định rõ ràng, với định nghĩa rõ về đầu vào và đầu ra.
+- Có tính khả thi và có thể hoàn thành trong số bước, thời gian và dung lượng bộ nhớ hữu hạn.
+- Mỗi bước có ý nghĩa xác định; với cùng đầu vào và điều kiện vận hành, đầu ra luôn giống nhau.
 
-## Data Structure Definition
+## Định nghĩa cấu trúc dữ liệu
 
-A <u>data structure</u> is a way of organizing and storing data, including the data itself, the relationships between data elements, and the methods used to operate on them. It has the following design objectives.
+<u>cấu trúc dữ liệu</u> là cách tổ chức và lưu trữ dữ liệu, bao gồm bản thân dữ liệu, mối quan hệ giữa các phần tử dữ liệu và các phương thức dùng để thao tác với chúng. Cấu trúc dữ liệu có các mục tiêu thiết kế sau.
 
-- Occupy as little space as possible to save computer memory.
-- Data operations should be as fast as possible, covering data access, addition, deletion, update, etc.
-- Provide a concise data representation and logical information so that algorithms can run efficiently.
+- Chiếm càng ít không gian càng tốt để tiết kiệm bộ nhớ máy tính.
+- Các thao tác trên dữ liệu phải nhanh nhất có thể, bao gồm truy cập, thêm, xóa, cập nhật dữ liệu, v.v.
+- Cung cấp cách biểu diễn dữ liệu cô đọng và thông tin logic để các thuật toán có thể chạy hiệu quả.
 
-**Data structure design is a process full of trade-offs**. If we want to achieve improvements in one aspect, we often need to make compromises in another aspect. Here are two examples.
+**Thiết kế cấu trúc dữ liệu là một quá trình đầy sự đánh đổi**. Nếu muốn cải thiện một khía cạnh, chúng ta thường phải thỏa hiệp ở một khía cạnh khác. Dưới đây là hai ví dụ.
 
-- Compared to arrays, linked lists are more convenient for data addition and deletion operations but sacrifice data access speed.
-- Compared to linked lists, graphs provide richer logical information but require larger memory space.
+- So với mảng, danh sách liên kết thuận tiện hơn cho các thao tác thêm và xóa dữ liệu nhưng phải đánh đổi tốc độ truy cập dữ liệu.
+- So với danh sách liên kết, đồ thị cung cấp thông tin logic phong phú hơn nhưng yêu cầu dung lượng bộ nhớ lớn hơn.
 
-## The Relationship Between Data Structures and Algorithms
+## Mối quan hệ giữa cấu trúc dữ liệu và thuật toán
 
-As shown in the figure below, data structures and algorithms are highly related and tightly coupled, specifically manifested in the following three aspects.
+Như hình dưới đây minh họa, cấu trúc dữ liệu và thuật toán có mối liên hệ rất chặt chẽ và gắn kết với nhau, cụ thể thể hiện ở ba khía cạnh sau.
 
-- Data structures are the foundation of algorithms. Data structures provide algorithms with structured storage of data and methods for operating on data.
-- Algorithms breathe life into data structures. Data structures themselves only store data information; combined with algorithms, they can solve specific problems.
-- Algorithms can usually be implemented based on different data structures, but execution efficiency may vary greatly. Choosing the appropriate data structure is key.
+- Cấu trúc dữ liệu là nền tảng của thuật toán. Cấu trúc dữ liệu cung cấp cho thuật toán cách lưu trữ dữ liệu có cấu trúc và các phương thức thao tác trên dữ liệu.
+- Thuật toán thổi sức sống vào cấu trúc dữ liệu. Bản thân cấu trúc dữ liệu chỉ lưu trữ thông tin dữ liệu; khi kết hợp với thuật toán, chúng có thể giải quyết các vấn đề cụ thể.
+- Thuật toán thường có thể được triển khai dựa trên các cấu trúc dữ liệu khác nhau, nhưng hiệu suất thực thi có thể khác biệt rất lớn. Việc lựa chọn cấu trúc dữ liệu phù hợp là yếu tố then chốt.
 
-![The relationship between data structures and algorithms](what_is_dsa.assets/relationship_between_data_structure_and_algorithm.png)
+![Mối quan hệ giữa cấu trúc dữ liệu và thuật toán](what_is_dsa.assets/relationship_between_data_structure_and_algorithm.png)
 
-Data structures and algorithms are like assembling building blocks as shown in the figure below. A set of building blocks, in addition to containing many parts, also comes with detailed assembly instructions. By following the instructions step by step, we can assemble an exquisite building block model.
+Cấu trúc dữ liệu và thuật toán giống như việc lắp ráp các khối xây dựng, như hình dưới đây minh họa. Một bộ khối xây dựng không chỉ bao gồm nhiều bộ phận mà còn đi kèm hướng dẫn lắp ráp chi tiết. Bằng cách làm theo hướng dẫn từng bước, chúng ta có thể lắp ráp thành một mô hình khối xây dựng tinh xảo.
 
-![Assembling blocks](what_is_dsa.assets/assembling_blocks.png)
+![Lắp ráp các khối xây dựng](what_is_dsa.assets/assembling_blocks.png)
 
-The detailed correspondence between the two is shown in the table below.
+Mối tương ứng chi tiết giữa hai khái niệm được thể hiện trong bảng dưới đây.
 
-<p align="center"> Table <id> &nbsp; Comparing data structures and algorithms to assembling building blocks </p>
+<p align="center"> Bảng <id> &nbsp; So sánh cấu trúc dữ liệu và thuật toán với việc lắp ráp các khối xây dựng </p>
 
-| Data structures and algorithms | Assembling building blocks                                        |
+| Cấu trúc dữ liệu và thuật toán | Lắp ráp các khối xây dựng                                        |
 | ------------------------------ | ------------------------------------------------------------------ |
-| Input data                     | Unassembled building blocks                                        |
-| Data structure                 | Organization form of building blocks, including shape, size, connection method, etc. |
-| Algorithm                      | A series of operational steps to assemble the blocks into the target form |
-| Output data                    | Building block model                                               |
+| Dữ liệu đầu vào                | Các khối xây dựng chưa được lắp ráp                                |
+| Cấu trúc dữ liệu               | Cách tổ chức các khối xây dựng, bao gồm hình dạng, kích thước, phương thức kết nối, v.v. |
+| Thuật toán                     | Một loạt bước thao tác để lắp ráp các khối thành hình dạng mục tiêu |
+| Dữ liệu đầu ra                 | Mô hình khối xây dựng                                               |
 
-It is worth noting that data structures and algorithms are independent of programming languages. That is why this book can provide implementations in multiple programming languages.
+Cần lưu ý rằng cấu trúc dữ liệu và thuật toán độc lập với ngôn ngữ lập trình. Đó là lý do cuốn sách này có thể cung cấp các bản triển khai bằng nhiều ngôn ngữ lập trình.
 
-!!! tip "Conventional abbreviation"
+!!! tip "Cách viết tắt thông dụng"
 
-    In actual discussions, we usually abbreviate "data structures and algorithms" as "algorithms". For example, the well-known LeetCode algorithm problems actually examine knowledge of both data structures and algorithms.
+    Trong các cuộc thảo luận thực tế, chúng ta thường viết tắt "cấu trúc dữ liệu và thuật toán" thành "thuật toán". Ví dụ, các bài toán thuật toán LeetCode nổi tiếng thực tế kiểm tra kiến thức về cả cấu trúc dữ liệu và thuật toán.

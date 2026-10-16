@@ -1,60 +1,60 @@
-# Hash Algorithm
+# Thuật toán băm
 
-The previous two sections introduced the working principle of hash tables and the methods to handle hash collisions. However, both open addressing and separate chaining **can only ensure that the hash table functions normally when hash collisions occur, but cannot reduce the frequency of hash collisions**.
+Hai phần trước đã giới thiệu nguyên lý hoạt động của bảng băm và các phương pháp xử lý xung đột băm. Tuy nhiên, cả phương pháp địa chỉ mở và phương pháp nối kết riêng biệt **chỉ có thể đảm bảo bảng băm hoạt động bình thường khi xảy ra xung đột băm, chứ không thể giảm tần suất xảy ra xung đột băm**.
 
-If hash collisions occur too frequently, the performance of the hash table will deteriorate drastically. As shown in the figure below, for a separate chaining hash table, in the ideal case, the key-value pairs are evenly distributed across the buckets, achieving optimal query efficiency; in the worst case, all key-value pairs are stored in the same bucket, degrading the time complexity to $O(n)$.
+Nếu xung đột băm xảy ra quá thường xuyên, hiệu năng của bảng băm sẽ suy giảm nghiêm trọng. Như hình dưới đây, đối với bảng băm sử dụng phương pháp nối kết riêng biệt, trong trường hợp lý tưởng, các cặp key-value được phân bố đều trên các bucket, đạt hiệu quả truy vấn tối ưu; trong trường hợp xấu nhất, tất cả cặp key-value đều được lưu trong cùng một bucket, khiến độ phức tạp thời gian suy giảm xuống $O(n)$.
 
-![Ideal and worst cases of hash collisions](hash_algorithm.assets/hash_collision_best_worst_condition.png)
+![Trường hợp lý tưởng và trường hợp xấu nhất của xung đột băm](hash_algorithm.assets/hash_collision_best_worst_condition.png)
 
-**The distribution of key-value pairs is determined by the hash function**. Recall the steps of the hash function: first compute the hash value, then take it modulo the array length:
+**Sự phân bố của các cặp key-value được quyết định bởi hàm băm**. Hãy nhớ lại các bước của hàm băm: trước tiên tính giá trị băm, sau đó lấy phần dư của nó cho độ dài mảng:
 
 ```shell
 index = hash(key) % capacity
 ```
 
-Observing the above formula, when the hash table capacity `capacity` is fixed, **the hash algorithm `hash()` determines the output value**, thereby determining the distribution of key-value pairs in the hash table.
+Quan sát công thức trên, khi dung lượng bảng băm `capacity` được cố định, **thuật toán băm `hash()` quyết định giá trị đầu ra**, từ đó quyết định sự phân bố của các cặp key-value trong bảng băm.
 
-This means that, to reduce the probability of hash collisions, we should focus on the design of the hash algorithm `hash()`.
+Điều này có nghĩa là để giảm xác suất xảy ra xung đột băm, chúng ta nên tập trung vào việc thiết kế thuật toán băm `hash()`.
 
-## Goals of Hash Algorithms
+## Mục tiêu của thuật toán băm
 
-To build a hash table that is both fast and robust, a hash algorithm should have the following properties:
+Để xây dựng một bảng băm vừa nhanh vừa mạnh, thuật toán băm cần có các thuộc tính sau:
 
-- **Determinism**: For the same input, the hash algorithm should always produce the same output. Only then can the hash table be reliable.
-- **High efficiency**: The process of computing the hash value should be fast enough. The smaller the computational overhead, the more practical the hash table.
-- **Uniform distribution**: The hash algorithm should ensure that key-value pairs are evenly distributed in the hash table. The more uniform the distribution, the lower the probability of hash collisions.
+- **Tính xác định**: Với cùng một đầu vào, thuật toán băm phải luôn tạo ra cùng một đầu ra. Chỉ khi đó bảng băm mới có thể hoạt động đáng tin cậy.
+- **Hiệu suất cao**: Quá trình tính giá trị băm phải đủ nhanh. Chi phí tính toán càng nhỏ thì bảng băm càng thực tiễn.
+- **Phân bố đồng đều**: Thuật toán băm phải đảm bảo các cặp key-value được phân bố đều trong bảng băm. Sự phân bố càng đồng đều thì xác suất xảy ra xung đột băm càng thấp.
 
-In fact, hash algorithms are not only used to implement hash tables but are also widely applied in other fields.
+Trên thực tế, thuật toán băm không chỉ được dùng để triển khai bảng băm mà còn được ứng dụng rộng rãi trong các lĩnh vực khác.
 
-- **Password storage**: To protect the security of user passwords, systems usually do not store the plaintext passwords but rather the hash values of the passwords. When a user enters a password, the system calculates the hash value of the input and compares it with the stored hash value. If they match, the password is considered correct.
-- **Data integrity check**: The data sender can calculate the hash value of the data and send it along; the receiver can recalculate the hash value of the received data and compare it with the received hash value. If they match, the data is considered intact.
+- **Lưu trữ mật khẩu**: Để bảo vệ tính an toàn của mật khẩu người dùng, các hệ thống thường không lưu mật khẩu dạng plaintext mà lưu giá trị băm của mật khẩu. Khi người dùng nhập mật khẩu, hệ thống tính giá trị băm của dữ liệu đầu vào rồi so sánh với giá trị băm đã lưu. Nếu chúng trùng khớp, mật khẩu được xem là chính xác.
+- **Kiểm tra tính toàn vẹn dữ liệu**: Bên gửi dữ liệu có thể tính giá trị băm của dữ liệu và gửi kèm; bên nhận có thể tính lại giá trị băm của dữ liệu đã nhận rồi so sánh với giá trị băm nhận được. Nếu chúng trùng khớp, dữ liệu được xem là nguyên vẹn.
 
-For cryptographic applications, hash algorithms need stronger security properties to prevent reverse engineering, such as inferring the original password from a hash value.
+Đối với các ứng dụng mật mã, thuật toán băm cần có các thuộc tính bảo mật mạnh hơn để ngăn chặn việc truy ngược, chẳng hạn như suy ra mật khẩu ban đầu từ một giá trị băm.
 
-- **Unidirectionality**: It should be impossible to deduce any information about the input data from the hash value.
-- **Collision resistance**: It should be extremely difficult to find two different inputs that produce the same hash value.
-- **Avalanche effect**: Minor changes in the input should lead to significant and unpredictable changes in the output.
+- **Tính một chiều**: Không thể suy ra bất kỳ thông tin nào về dữ liệu đầu vào từ giá trị băm.
+- **Khả năng chống xung đột**: Việc tìm ra hai đầu vào khác nhau tạo ra cùng một giá trị băm phải cực kỳ khó.
+- **Hiệu ứng avalanche**: Những thay đổi nhỏ trong đầu vào phải dẫn đến những thay đổi đáng kể và không thể dự đoán trong đầu ra.
 
-Note that **"uniform distribution" and "collision resistance" are two independent concepts**. Satisfying uniform distribution does not necessarily mean collision resistance. For example, under random input `key`, the hash function `key % 100` can produce a uniformly distributed output. However, this hash algorithm is too simple, and all `key` with the same last two digits will have the same output, making it easy to deduce a usable `key` from the hash value, thereby cracking the password.
+Lưu ý rằng **“phân bố đồng đều” và “khả năng chống xung đột” là hai khái niệm độc lập**. Việc đạt được sự phân bố đồng đều không nhất thiết có nghĩa là có khả năng chống xung đột. Ví dụ, với đầu vào ngẫu nhiên `key`, hàm băm `key % 100` có thể tạo ra đầu ra được phân bố đồng đều. Tuy nhiên, thuật toán băm này quá đơn giản: mọi `key` có cùng hai chữ số cuối sẽ có cùng đầu ra, khiến việc suy ra một `key` có thể sử dụng từ giá trị băm trở nên dễ dàng, từ đó bẻ khóa được mật khẩu.
 
-## Design of Hash Algorithms
+## Thiết kế thuật toán băm
 
-The design of hash algorithms is a complex issue that requires consideration of many factors. However, for some less demanding scenarios, we can also design some simple hash algorithms.
+Thiết kế thuật toán băm là một vấn đề phức tạp, đòi hỏi phải cân nhắc nhiều yếu tố. Tuy nhiên, trong một số tình huống không yêu cầu quá cao, chúng ta cũng có thể thiết kế các thuật toán băm đơn giản.
 
-- **Additive hash**: Add up the ASCII codes of each character in the input and use the total sum as the hash value.
-- **Multiplicative hash**: Leverage the low correlation introduced by multiplication: multiply by a constant at each step and accumulate the ASCII codes of the characters into the hash value.
-- **XOR hash**: Accumulate the hash value by XORing each element of the input data.
-- **Rotating hash**: Accumulate the ASCII code of each character into a hash value, performing a rotation operation on the hash value before each accumulation.
+- **Băm cộng**: Cộng mã ASCII của từng ký tự trong đầu vào và sử dụng tổng đó làm giá trị băm.
+- **Băm nhân**: Tận dụng mức độ tương quan thấp do phép nhân tạo ra: nhân với một hằng số ở mỗi bước và cộng dồn mã ASCII của các ký tự vào giá trị băm.
+- **Băm XOR**: Cộng dồn giá trị băm bằng cách thực hiện phép XOR với từng phần tử của dữ liệu đầu vào.
+- **Băm xoay**: Cộng dồn mã ASCII của từng ký tự vào giá trị băm, đồng thời thực hiện phép xoay trên giá trị băm trước mỗi lần cộng dồn.
 
 ```src
 [file]{simple_hash}-[class]{}-[func]{rot_hash}
 ```
 
-We can observe that the final step of each hash algorithm is to take the result modulo the large prime $1000000007$, ensuring that the hash value stays within a suitable range. This naturally raises a question: why emphasize using a prime modulus, and what are the drawbacks of using a composite modulus?
+Có thể thấy bước cuối cùng của mỗi thuật toán băm là lấy phần dư của kết quả cho số nguyên tố lớn $1000000007$, nhằm đảm bảo giá trị băm nằm trong một phạm vi phù hợp. Điều này tự nhiên dẫn đến một câu hỏi: tại sao phải nhấn mạnh việc sử dụng một số nguyên tố làm số modulo, và việc sử dụng một số hợp số có những hạn chế gì?
 
-In short: **using a large prime as the modulus helps maximize the uniformity of hash values**. Because a prime shares no common factors with other numbers, it can reduce periodic patterns introduced by the modulo operation and thus mitigate hash collisions.
+Nói ngắn gọn: **sử dụng một số nguyên tố lớn làm số modulo giúp tối đa hóa tính đồng đều của các giá trị băm**. Vì một số nguyên tố không có ước chung với các số khác, nó có thể làm giảm các mẫu tuần hoàn do phép modulo tạo ra, từ đó giảm xung đột băm.
 
-For example, suppose we choose the composite number $9$ as the modulus, which can be divided by $3$, then all `key` divisible by $3$ will be mapped to hash values $0$, $3$, $6$.
+Ví dụ, giả sử chúng ta chọn số hợp $9$ làm số modulo; số này chia hết cho $3$, do đó mọi `key` chia hết cho $3$ sẽ được ánh xạ tới các giá trị băm $0$, $3$, $6$.
 
 $$
 \begin{aligned}
@@ -64,7 +64,7 @@ $$
 \end{aligned}
 $$
 
-If the input `key` values happen to follow this kind of arithmetic progression, the hash values will cluster, worsening hash collisions. Now suppose we replace `modulus` with the prime number $13$. Because `key` and `modulus` share no common factors, the output hash values become much more evenly distributed.
+Nếu các giá trị đầu vào `key` tình cờ tuân theo dạng cấp số cộng này, các giá trị băm sẽ tập trung lại, khiến xung đột băm trở nên nghiêm trọng hơn. Bây giờ giả sử chúng ta thay `modulus` bằng số nguyên tố $13$. Vì `key` và `modulus` không có ước chung, các giá trị băm đầu ra trở nên phân bố đồng đều hơn nhiều.
 
 $$
 \begin{aligned}
@@ -74,71 +74,71 @@ $$
 \end{aligned}
 $$
 
-It is worth noting that if the `key` is guaranteed to be randomly and uniformly distributed, then choosing a prime number or a composite number as the modulus can both produce uniformly distributed hash values. However, when the distribution of `key` has some periodicity, modulo a composite number is more likely to result in clustering.
+Đáng lưu ý rằng nếu `key` được đảm bảo phân bố ngẫu nhiên và đồng đều, thì việc chọn số nguyên tố hay số hợp làm số modulo đều có thể tạo ra các giá trị băm phân bố đồng đều. Tuy nhiên, khi phân bố của `key` có tính tuần hoàn, việc lấy modulo một số hợp có khả năng dẫn đến hiện tượng tập trung hơn.
 
-In summary, we usually choose a prime number as the modulus, and this prime number should be large enough to eliminate periodic patterns as much as possible, enhancing the robustness of the hash algorithm.
+Tóm lại, chúng ta thường chọn một số nguyên tố làm số modulo, và số nguyên tố này phải đủ lớn để loại bỏ các mẫu tuần hoàn nhiều nhất có thể, qua đó tăng cường tính mạnh mẽ của thuật toán băm.
 
-## Common Hash Algorithms
+## Các thuật toán băm phổ biến
 
-It is easy to see that the simple hash algorithms introduced above are fairly "fragile" and fall far short of the design goals of hash algorithms. For example, because addition and XOR are commutative, additive hash and XOR hash cannot distinguish strings with the same characters in a different order, which may worsen hash collisions and introduce security risks.
+Có thể dễ dàng nhận thấy các thuật toán băm đơn giản được giới thiệu ở trên khá “mong manh” và còn cách xa các mục tiêu thiết kế của thuật toán băm. Ví dụ, vì phép cộng và phép XOR có tính giao hoán, băm cộng và băm XOR không thể phân biệt các chuỗi có cùng ký tự nhưng khác thứ tự, điều này có thể làm gia tăng xung đột băm và tạo ra các rủi ro bảo mật.
 
-In practice, we usually use some standard hash algorithms, such as MD5, SHA-1, SHA-2, and SHA-3. They can map input data of any length to a fixed-length hash value.
+Trong thực tế, chúng ta thường sử dụng một số thuật toán băm tiêu chuẩn như MD5, SHA-1, SHA-2 và SHA-3. Chúng có thể ánh xạ dữ liệu đầu vào có độ dài bất kỳ thành một giá trị băm có độ dài cố định.
 
-Over the past century, hash algorithms have been in a continuous process of upgrading and optimization. Some researchers strive to improve the performance of hash algorithms, while others, including hackers, are dedicated to finding security issues in hash algorithms. The table below shows hash algorithms commonly used in practical applications.
+Trong thế kỷ qua, các thuật toán băm đã không ngừng được nâng cấp và tối ưu hóa. Một số nhà nghiên cứu nỗ lực cải thiện hiệu suất của thuật toán băm, trong khi những người khác, bao gồm cả hacker, tập trung tìm kiếm các vấn đề bảo mật trong thuật toán băm. Bảng dưới đây trình bày các thuật toán băm thường được sử dụng trong thực tế.
 
-- MD5 and SHA-1 have been successfully attacked multiple times and are thus abandoned in various security applications.
-- SHA-2 series, especially SHA-256, is one of the most secure hash algorithms to date, with no successful attacks reported, hence commonly used in various security applications and protocols.
-- SHA-3 has lower implementation costs and higher computational efficiency compared to SHA-2, but its current usage coverage is not as extensive as the SHA-2 series.
+- MD5 và SHA-1 đã nhiều lần bị tấn công thành công, vì vậy chúng đã bị loại bỏ trong nhiều ứng dụng bảo mật.
+- Dòng SHA-2, đặc biệt là SHA-256, là một trong những thuật toán băm an toàn nhất hiện nay và chưa ghi nhận cuộc tấn công thành công nào, do đó thường được sử dụng trong nhiều ứng dụng và giao thức bảo mật.
+- SHA-3 có chi phí triển khai thấp hơn và hiệu suất tính toán cao hơn so với SHA-2, nhưng phạm vi sử dụng hiện tại chưa rộng bằng dòng SHA-2.
 
-<p align="center"> Table <id> &nbsp; Common hash algorithms </p>
+<p align="center"> Bảng <id> &nbsp; Các thuật toán băm phổ biến </p>
 
 |                 | MD5                                             | SHA-1                               | SHA-2                                                             | SHA-3                        |
 | --------------- | ----------------------------------------------- | ----------------------------------- | ----------------------------------------------------------------- | ---------------------------- |
-| Release Year    | 1992                                            | 1995                                | 2002                                                              | 2008                         |
-| Output Length   | 128 bit                                         | 160 bit                             | 256/512 bit                                                       | 224/256/384/512 bit          |
-| Hash Collisions | Frequent                                        | Frequent                            | Rare                                                              | Rare                         |
-| Security Level  | Low, has been successfully attacked             | Low, has been successfully attacked | High                                                              | High                         |
-| Applications    | Abandoned, still used for data integrity checks | Abandoned                           | Cryptocurrency transaction verification, digital signatures, etc. | Can be used to replace SHA-2 |
+| Năm phát hành    | 1992                                            | 1995                                | 2002                                                              | 2008                         |
+| Độ dài đầu ra    | 128 bit                                         | 160 bit                             | 256/512 bit                                                       | 224/256/384/512 bit          |
+| Xung đột băm     | Thường xuyên                                    | Thường xuyên                        | Hiếm                                                              | Hiếm                         |
+| Mức độ bảo mật   | Thấp, đã bị tấn công thành công                | Thấp, đã bị tấn công thành công      | Cao                                                               | Cao                          |
+| Ứng dụng         | Đã bị loại bỏ, vẫn được dùng để kiểm tra tính toàn vẹn dữ liệu | Đã bị loại bỏ | Xác minh giao dịch tiền mã hóa, chữ ký số, v.v. | Có thể dùng để thay thế SHA-2 |
 
-## Hash Values in Data Structures
+## Giá trị băm trong cấu trúc dữ liệu
 
-We know that hash table keys can be integers, floating-point numbers, strings, and other data types. Programming languages usually provide built-in hash algorithms for these types to compute bucket indices in a hash table. Taking Python as an example, we can call the `hash()` function to compute hash values for various data types.
+Chúng ta biết rằng các khóa của hash table có thể là số nguyên, số dấu phẩy động, chuỗi và các kiểu dữ liệu khác. Các ngôn ngữ lập trình thường cung cấp các thuật toán hash tích hợp sẵn cho những kiểu này để tính chỉ số bucket trong hash table. Lấy Python làm ví dụ, chúng ta có thể gọi hàm `hash()` để tính giá trị hash cho nhiều kiểu dữ liệu khác nhau.
 
-- The hash values of integers and booleans are their own values.
-- The calculation of hash values for floating-point numbers and strings is more complex, and interested readers are encouraged to study this on their own.
-- The hash value of a tuple is obtained by hashing each of its elements and combining those results into a single hash value.
-- An object's hash value is typically generated from its memory address. By overriding the object's hash method, it can instead be generated from the object's contents.
+- Giá trị hash của số nguyên và boolean chính là giá trị của chúng.
+- Việc tính giá trị hash cho số dấu phẩy động và chuỗi phức tạp hơn; bạn đọc quan tâm nên tự tìm hiểu thêm.
+- Giá trị hash của tuple được tính bằng cách hash từng phần tử rồi kết hợp các kết quả đó thành một giá trị hash duy nhất.
+- Giá trị hash của một đối tượng thường được tạo từ địa chỉ bộ nhớ của đối tượng. Bằng cách ghi đè phương thức hash của đối tượng, ta có thể tạo giá trị hash dựa trên nội dung của đối tượng.
 
 !!! tip
 
-    Be aware that the definition and methods of the built-in hash value calculation functions in different programming languages vary.
+    Hãy lưu ý rằng định nghĩa và phương thức của các hàm tính giá trị hash tích hợp sẵn khác nhau giữa các ngôn ngữ lập trình.
 
 === "Python"
 
     ```python title="built_in_hash.py"
     num = 3
     hash_num = hash(num)
-    # Hash value of integer 3 is 3
+    # Giá trị hash của số nguyên 3 là 3
 
     bol = True
     hash_bol = hash(bol)
-    # Hash value of boolean True is 1
+    # Giá trị hash của boolean True là 1
 
     dec = 3.14159
     hash_dec = hash(dec)
-    # Hash value of decimal 3.14159 is 326484311674566659
+    # Giá trị hash của số thập phân 3.14159 là 326484311674566659
 
     str = "Hello 算法"
     hash_str = hash(str)
-    # Hash value of string "Hello 算法" is 4617003410720528961
+    # Giá trị hash của chuỗi "Hello 算法" là 4617003410720528961
 
     tup = (12836, "小哈")
     hash_tup = hash(tup)
-    # Hash value of tuple (12836, '小哈') is 1029005403108185979
+    # Giá trị hash của tuple (12836, '小哈') là 1029005403108185979
 
     obj = ListNode(0)
     hash_obj = hash(obj)
-    # Hash value of ListNode object at 0x1058fd810 is 274267521
+    # Giá trị hash của đối tượng ListNode tại 0x1058fd810 là 274267521
     ```
 
 === "C++"
@@ -146,22 +146,22 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```cpp title="built_in_hash.cpp"
     int num = 3;
     size_t hashNum = hash<int>()(num);
-    // Hash value of integer 3 is 3
+    // Giá trị hash của số nguyên 3 là 3
 
     bool bol = true;
     size_t hashBol = hash<bool>()(bol);
-    // Hash value of boolean 1 is 1
+    // Giá trị hash của boolean 1 là 1
 
     double dec = 3.14159;
     size_t hashDec = hash<double>()(dec);
-    // Hash value of decimal 3.14159 is 4614256650576692846
+    // Giá trị hash của số thập phân 3.14159 là 4614256650576692846
 
     string str = "Hello 算法";
     size_t hashStr = hash<string>()(str);
-    // Hash value of string "Hello 算法" is 15466937326284535026
+    // Giá trị hash của chuỗi "Hello 算法" là 15466937326284535026
 
-    // In C++, built-in std::hash() only provides hash values for basic data types
-    // Hash values for arrays and objects need to be implemented separately
+    // Trong C++, std::hash() tích hợp sẵn chỉ cung cấp giá trị hash cho các kiểu dữ liệu cơ bản
+    // Giá trị hash cho mảng và đối tượng cần được triển khai riêng
     ```
 
 === "Java"
@@ -169,27 +169,27 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```java title="built_in_hash.java"
     int num = 3;
     int hashNum = Integer.hashCode(num);
-    // Hash value of integer 3 is 3
+    // Giá trị hash của số nguyên 3 là 3
 
     boolean bol = true;
     int hashBol = Boolean.hashCode(bol);
-    // Hash value of boolean true is 1231
+    // Giá trị hash của boolean true là 1231
 
     double dec = 3.14159;
     int hashDec = Double.hashCode(dec);
-    // Hash value of decimal 3.14159 is -1340954729
+    // Giá trị hash của số thập phân 3.14159 là -1340954729
 
     String str = "Hello 算法";
     int hashStr = str.hashCode();
-    // Hash value of string "Hello 算法" is -727081396
+    // Giá trị hash của chuỗi "Hello 算法" là -727081396
 
     Object[] arr = { 12836, "小哈" };
     int hashTup = Arrays.hashCode(arr);
-    // Hash value of array [12836, 小哈] is 1151158
+    // Giá trị hash của mảng [12836, 小哈] là 1151158
 
     ListNode obj = new ListNode(0);
     int hashObj = obj.hashCode();
-    // Hash value of ListNode object utils.ListNode@7dc5e7b4 is 2110121908
+    // Giá trị hash của đối tượng ListNode utils.ListNode@7dc5e7b4 là 2110121908
     ```
 
 === "C#"
@@ -197,33 +197,33 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```csharp title="built_in_hash.cs"
     int num = 3;
     int hashNum = num.GetHashCode();
-    // Hash value of integer 3 is 3;
+    // Giá trị hash của số nguyên 3 là 3;
 
     bool bol = true;
     int hashBol = bol.GetHashCode();
-    // Hash value of boolean true is 1;
+    // Giá trị hash của boolean true là 1;
 
     double dec = 3.14159;
     int hashDec = dec.GetHashCode();
-    // Hash value of decimal 3.14159 is -1340954729;
+    // Giá trị hash của số thập phân 3.14159 là -1340954729;
 
     string str = "Hello 算法";
     int hashStr = str.GetHashCode();
-    // Hash value of string "Hello 算法" is -586107568;
+    // Giá trị hash của chuỗi "Hello 算法" là -586107568;
 
     object[] arr = [12836, "小哈"];
     int hashTup = arr.GetHashCode();
-    // Hash value of array [12836, 小哈] is 42931033;
+    // Giá trị hash của mảng [12836, 小哈] là 42931033;
 
     ListNode obj = new(0);
     int hashObj = obj.GetHashCode();
-    // Hash value of ListNode object 0 is 39053774;
+    // Giá trị hash của đối tượng ListNode 0 là 39053774;
     ```
 
 === "Go"
 
     ```go title="built_in_hash.go"
-    // Go does not provide built-in hash code functions
+    // Go không cung cấp các hàm mã hash tích hợp sẵn
     ```
 
 === "Swift"
@@ -231,39 +231,39 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```swift title="built_in_hash.swift"
     let num = 3
     let hashNum = num.hashValue
-    // Hash value of integer 3 is 9047044699613009734
+    // Giá trị hash của số nguyên 3 là 9047044699613009734
 
     let bol = true
     let hashBol = bol.hashValue
-    // Hash value of boolean true is -4431640247352757451
+    // Giá trị hash của boolean true là -4431640247352757451
 
     let dec = 3.14159
     let hashDec = dec.hashValue
-    // Hash value of decimal 3.14159 is -2465384235396674631
+    // Giá trị hash của số thập phân 3.14159 là -2465384235396674631
 
     let str = "Hello 算法"
     let hashStr = str.hashValue
-    // Hash value of string "Hello 算法" is -7850626797806988787
+    // Giá trị hash của chuỗi "Hello 算法" là -7850626797806988787
 
     let arr = [AnyHashable(12836), AnyHashable("小哈")]
     let hashTup = arr.hashValue
-    // Hash value of array [AnyHashable(12836), AnyHashable("小哈")] is -2308633508154532996
+    // Giá trị hash của mảng [AnyHashable(12836), AnyHashable("小哈")] là -2308633508154532996
 
     let obj = ListNode(x: 0)
     let hashObj = obj.hashValue
-    // Hash value of ListNode object utils.ListNode is -2434780518035996159
+    // Giá trị hash của đối tượng ListNode utils.ListNode là -2434780518035996159
     ```
 
 === "JS"
 
     ```javascript title="built_in_hash.js"
-    // JavaScript does not provide built-in hash code functions
+    // JavaScript không cung cấp các hàm mã hash tích hợp sẵn
     ```
 
 === "TS"
 
     ```typescript title="built_in_hash.ts"
-    // TypeScript does not provide built-in hash code functions
+    // TypeScript không cung cấp các hàm mã hash tích hợp sẵn
     ```
 
 === "Dart"
@@ -271,27 +271,27 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```dart title="built_in_hash.dart"
     int num = 3;
     int hashNum = num.hashCode;
-    // Hash value of integer 3 is 34803
+    // Giá trị hash của số nguyên 3 là 34803
 
     bool bol = true;
     int hashBol = bol.hashCode;
-    // Hash value of boolean true is 1231
+    // Giá trị hash của boolean true là 1231
 
     double dec = 3.14159;
     int hashDec = dec.hashCode;
-    // Hash value of decimal 3.14159 is 2570631074981783
+    // Giá trị hash của số thập phân 3.14159 là 2570631074981783
 
     String str = "Hello 算法";
     int hashStr = str.hashCode;
-    // Hash value of string "Hello 算法" is 468167534
+    // Giá trị hash của chuỗi "Hello 算法" là 468167534
 
     List arr = [12836, "小哈"];
     int hashArr = arr.hashCode;
-    // Hash value of array [12836, 小哈] is 976512528
+    // Giá trị hash của mảng [12836, 小哈] là 976512528
 
     ListNode obj = new ListNode(0);
     int hashObj = obj.hashCode;
-    // Hash value of ListNode object Instance of 'ListNode' is 1033450432
+    // Giá trị hash của đối tượng ListNode Instance of 'ListNode' là 1033450432
     ```
 
 === "Rust"
@@ -304,43 +304,43 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     let mut num_hasher = DefaultHasher::new();
     num.hash(&mut num_hasher);
     let hash_num = num_hasher.finish();
-    // Hash value of integer 3 is 568126464209439262
+    // Giá trị hash của số nguyên 3 là 568126464209439262
 
     let bol = true;
     let mut bol_hasher = DefaultHasher::new();
     bol.hash(&mut bol_hasher);
     let hash_bol = bol_hasher.finish();
-    // Hash value of boolean true is 4952851536318644461
+    // Giá trị hash của boolean true là 4952851536318644461
 
     let dec: f32 = 3.14159;
     let mut dec_hasher = DefaultHasher::new();
     dec.to_bits().hash(&mut dec_hasher);
     let hash_dec = dec_hasher.finish();
-    // Hash value of decimal 3.14159 is 2566941990314602357
+    // Giá trị hash của số thập phân 3.14159 là 2566941990314602357
 
     let str = "Hello 算法";
     let mut str_hasher = DefaultHasher::new();
     str.hash(&mut str_hasher);
     let hash_str = str_hasher.finish();
-    // Hash value of string "Hello 算法" is 16092673739211250988
+    // Giá trị hash của chuỗi "Hello 算法" là 16092673739211250988
 
     let arr = (&12836, &"小哈");
     let mut tup_hasher = DefaultHasher::new();
     arr.hash(&mut tup_hasher);
     let hash_tup = tup_hasher.finish();
-    // Hash value of tuple (12836, "小哈") is 1885128010422702749
+    // Giá trị hash của tuple (12836, "小哈") là 1885128010422702749
 
     let node = ListNode::new(42);
     let mut hasher = DefaultHasher::new();
     node.borrow().val.hash(&mut hasher);
     let hash = hasher.finish();
-    // Hash value of ListNode object RefCell { value: ListNode { val: 42, next: None } } is 15387811073369036852
+    // Giá trị hash của đối tượng ListNode RefCell { value: ListNode { val: 42, next: None } } là 15387811073369036852
     ```
 
 === "C"
 
     ```c title="built_in_hash.c"
-    // C does not provide built-in hash code functions
+    // C không cung cấp các hàm mã hash tích hợp sẵn
     ```
 
 === "Kotlin"
@@ -348,27 +348,27 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```kotlin title="built_in_hash.kt"
     val num = 3
     val hashNum = num.hashCode()
-    // Hash value of integer 3 is 3
+    // Giá trị hash của số nguyên 3 là 3
 
     val bol = true
     val hashBol = bol.hashCode()
-    // Hash value of boolean true is 1231
+    // Giá trị hash của boolean true là 1231
 
     val dec = 3.14159
     val hashDec = dec.hashCode()
-    // Hash value of decimal 3.14159 is -1340954729
+    // Giá trị hash của số thập phân 3.14159 là -1340954729
 
     val str = "Hello 算法"
     val hashStr = str.hashCode()
-    // Hash value of string "Hello 算法" is -727081396
+    // Giá trị hash của chuỗi "Hello 算法" là -727081396
 
     val arr = arrayOf<Any>(12836, "小哈")
     val hashTup = arr.hashCode()
-    // Hash value of array [12836, 小哈] is 189568618
+    // Giá trị hash của mảng [12836, 小哈] là 189568618
 
     val obj = ListNode(0)
     val hashObj = obj.hashCode()
-    // Hash value of ListNode object utils.ListNode@1d81eb93 is 495053715
+    // Giá trị hash của đối tượng ListNode utils.ListNode@1d81eb93 là 495053715
     ```
 
 === "Ruby"
@@ -376,35 +376,35 @@ We know that hash table keys can be integers, floating-point numbers, strings, a
     ```ruby title="built_in_hash.rb"
     num = 3
     hash_num = num.hash
-    # Hash value of integer 3 is -4385856518450339636
+    # Giá trị hash của số nguyên 3 là -4385856518450339636
 
     bol = true
     hash_bol = bol.hash
-    # Hash value of boolean true is -1617938112149317027
+    # Giá trị hash của boolean true là -1617938112149317027
 
     dec = 3.14159
     hash_dec = dec.hash
-    # Hash value of decimal 3.14159 is -1479186995943067893
+    # Giá trị hash của số thập phân 3.14159 là -1479186995943067893
 
     str = "Hello 算法"
     hash_str = str.hash
-    # Hash value of string "Hello 算法" is -4075943250025831763
+    # Giá trị hash của chuỗi "Hello 算法" là -4075943250025831763
 
     tup = [12836, '小哈']
     hash_tup = tup.hash
-    # Hash value of tuple (12836, '小哈') is 1999544809202288822
+    # Giá trị hash của tuple (12836, '小哈') là 1999544809202288822
 
     obj = ListNode.new(0)
     hash_obj = obj.hash
-    # Hash value of ListNode object #<ListNode:0x000078133140ab70> is 4302940560806366381
+    # Giá trị hash của đối tượng ListNode #<ListNode:0x000078133140ab70> là 4302940560806366381
     ```
 
-??? pythontutor "Visualized Execution"
+??? pythontutor "Thực thi trực quan"
 
     https://pythontutor.com/render.html#code=class%20ListNode%3A%0A%20%20%20%20%22%22%22%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9%E7%B1%BB%22%22%22%0A%20%20%20%20def%20__init__%28self,%20val%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.val%3A%20int%20%3D%20val%20%20%23%20%E8%8A%82%E7%82%B9%E5%80%BC%0A%20%20%20%20%20%20%20%20self.next%3A%20ListNode%20%7C%20None%20%3D%20None%20%20%23%20%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9%E5%BC%95%E7%94%A8%0A%0A%22%22%22Driver%20Code%22%22%22%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20num%20%3D%203%0A%20%20%20%20hash_num%20%3D%20hash%28num%29%0A%20%20%20%20%23%20%E6%95%B4%E6%95%B0%203%20%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E4%B8%BA%203%0A%0A%20%20%20%20bol%20%3D%20True%0A%20%20%20%20hash_bol%20%3D%20hash%28bol%29%0A%20%20%20%20%23%20%E5%B8%83%E5%B0%94%E9%87%8F%20True%20%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E4%B8%BA%201%0A%0A%20%20%20%20dec%20%3D%203.14159%0A%20%20%20%20hash_dec%20%3D%20hash%28dec%29%0A%20%20%20%20%23%20%E5%B0%8F%E6%95%B0%203.14159%20%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E4%B8%BA%20326484311674566659%0A%0A%20%20%20%20str%20%3D%20%22Hello%20%E7%AE%97%E6%B3%95%22%0A%20%20%20%20hash_str%20%3D%20hash%28str%29%0A%20%20%20%20%23%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E2%80%9CHello%20%E7%AE%97%E6%B3%95%E2%80%9D%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E4%B8%BA%204617003410720528961%0A%0A%20%20%20%20tup%20%3D%20%2812836,%20%22%E5%B0%8F%E5%93%88%22%29%0A%20%20%20%20hash_tup%20%3D%20hash%28tup%29%0A%20%20%20%20%23%20%E5%85%83%E7%BB%84%20%2812836,%20'%E5%B0%8F%E5%93%88'%29%20%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E4%B8%BA%201029005403108185979%0A%0A%20%20%20%20obj%20%3D%20ListNode%280%29%0A%20%20%20%20hash_obj%20%3D%20hash%28obj%29%0A%20%20%20%20%23%20%E8%8A%82%E7%82%B9%E5%AF%B9%E8%B1%A1%20%3CListNode%20object%20at%200x1058fd810%3E%20%E7%9A%84%E5%93%88%E5%B8%8C%E5%80%BC%E4%B8%BA%20274267521&cumulative=false&curInstr=19&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false
 
-In many programming languages, **only immutable objects can serve as the `key` in a hash table**. If we use a list (dynamic array) as a `key`, when the contents of the list change, its hash value also changes, and we would no longer be able to find the original `value` in the hash table.
+Trong nhiều ngôn ngữ lập trình, **chỉ các đối tượng bất biến mới có thể được dùng làm `key` trong hash table**. Nếu sử dụng một list (mảng động) làm `key`, khi nội dung của list thay đổi, giá trị hash của nó cũng thay đổi, và chúng ta sẽ không còn có thể tìm thấy `value` ban đầu trong hash table.
 
-Although the member variables of a custom object (such as a linked list node) are mutable, it is hashable. **This is because the hash value of an object is usually generated based on its memory address**, and even if the contents of the object change, the memory address remains the same, so the hash value remains unchanged.
+Mặc dù các biến thành viên của một đối tượng tùy chỉnh (chẳng hạn như một node của linked list) có thể thay đổi, đối tượng đó vẫn có thể được hash. **Điều này là do giá trị hash của một đối tượng thường được tạo dựa trên địa chỉ bộ nhớ của nó**; ngay cả khi nội dung của đối tượng thay đổi, địa chỉ bộ nhớ vẫn giữ nguyên, vì vậy giá trị hash cũng không thay đổi.
 
-You might have noticed that the hash values output in different consoles are different. **This is because the Python interpreter adds a random salt to the string hash function each time it starts up**. This approach effectively prevents HashDoS attacks and enhances the security of the hash algorithm.
+Có thể bạn đã nhận thấy rằng các giá trị băm được xuất ra trong những console khác nhau không giống nhau. **Điều này là do trình thông dịch Python thêm một salt ngẫu nhiên vào hàm băm chuỗi mỗi khi khởi động**. Cách tiếp cận này giúp ngăn chặn hiệu quả các cuộc tấn công HashDoS và tăng cường tính bảo mật của thuật toán băm.

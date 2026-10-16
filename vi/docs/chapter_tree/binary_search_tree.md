@@ -1,26 +1,26 @@
-# Binary Search Tree
+# Cây tìm kiếm nhị phân
 
-As shown in the figure below, a <u>binary search tree</u> satisfies the following conditions.
+Như trong hình bên dưới, một <u>cây tìm kiếm nhị phân</u> thỏa mãn các điều kiện sau.
 
-1. For the root node, the value of all nodes in the left subtree $<$ the value of the root node $<$ the value of all nodes in the right subtree.
-2. The left and right subtrees of any node are also binary search trees, i.e., they satisfy condition `1.` as well.
+1. Đối với nút gốc, giá trị của mọi nút trong cây con trái $<$ giá trị của nút gốc $<$ giá trị của mọi nút trong cây con phải.
+2. Cây con trái và cây con phải của mọi nút cũng là cây tìm kiếm nhị phân, tức là cũng thỏa mãn điều kiện `1.`.
 
-![Binary search tree](binary_search_tree.assets/binary_search_tree.png)
+![Cây tìm kiếm nhị phân](binary_search_tree.assets/binary_search_tree.png)
 
-## Operations on a Binary Search Tree
+## Các thao tác trên cây tìm kiếm nhị phân
 
-We encapsulate the binary search tree as a class `BinarySearchTree` and declare a member variable `root` pointing to the tree's root node.
+Chúng ta đóng gói cây tìm kiếm nhị phân thành một class `BinarySearchTree` và khai báo một biến thành viên `root` trỏ đến nút gốc của cây.
 
-### Searching for a Node
+### Tìm kiếm một nút
 
-Given a target node value `num`, we can search according to the properties of the binary search tree. As shown in the figure below, we declare a node `cur` and start from the binary search tree's root node `root`, looping to compare `cur.val` with `num`.
+Với giá trị nút cần tìm `num`, chúng ta có thể tìm kiếm dựa trên các tính chất của cây tìm kiếm nhị phân. Như trong hình bên dưới, chúng ta khai báo một nút `cur` và bắt đầu từ nút gốc `root` của cây tìm kiếm nhị phân, lặp lại để so sánh `cur.val` với `num`.
 
-- If `cur.val < num`, it means the target node is in `cur`'s right subtree, thus execute `cur = cur.right`.
-- If `cur.val > num`, it means the target node is in `cur`'s left subtree, thus execute `cur = cur.left`.
-- If `cur.val = num`, it means the target node is found, exit the loop, and return the node.
+- Nếu `cur.val < num`, điều đó có nghĩa là nút cần tìm nằm trong cây con phải của `cur`, vì vậy thực hiện `cur = cur.right`.
+- Nếu `cur.val > num`, điều đó có nghĩa là nút cần tìm nằm trong cây con trái của `cur`, vì vậy thực hiện `cur = cur.left`.
+- Nếu `cur.val = num`, điều đó có nghĩa là đã tìm thấy nút cần tìm, thoát khỏi vòng lặp và trả về nút đó.
 
 === "<1>"
-    ![Example of searching for a node in a binary search tree](binary_search_tree.assets/bst_search_step1.png)
+    ![Ví dụ tìm kiếm một nút trong cây tìm kiếm nhị phân](binary_search_tree.assets/bst_search_step1.png)
 
 === "<2>"
     ![bst_search_step2](binary_search_tree.assets/bst_search_step2.png)
@@ -31,53 +31,53 @@ Given a target node value `num`, we can search according to the properties of th
 === "<4>"
     ![bst_search_step4](binary_search_tree.assets/bst_search_step4.png)
 
-The search operation in a binary search tree follows the same principle as binary search: each round rules out half of the remaining cases. The number of loop iterations is at most the height of the tree. When the tree is balanced, the search takes $O(\log n)$ time. The example code is as follows:
+Thao tác tìm kiếm trong cây tìm kiếm nhị phân tuân theo cùng nguyên tắc với tìm kiếm nhị phân: mỗi vòng lặp loại bỏ một nửa số trường hợp còn lại. Số lần lặp tối đa bằng chiều cao của cây. Khi cây cân bằng, thao tác tìm kiếm mất thời gian $O(\log n)$. Mã ví dụ như sau:
 
 ```src
 [file]{binary_search_tree}-[class]{binary_search_tree}-[func]{search}
 ```
 
-### Inserting a Node
+### Chèn một nút
 
-Given an element `num` to be inserted, in order to maintain the property of the binary search tree "left subtree < root node < right subtree," the insertion process is as shown in the figure below.
+Với một phần tử `num` cần chèn, để duy trì tính chất “cây con trái < nút gốc < cây con phải” của cây tìm kiếm nhị phân, quá trình chèn được thực hiện như trong hình bên dưới.
 
-1. **Finding the insertion position**: Similar to the search operation, start from the root node and loop downward searching according to the size relationship between the current node value and `num`, until passing the leaf node (traversing to `None`) and then exit the loop.
-2. **Insert the node at that position**: Create a node for `num` and place it at the `None` position.
+1. **Tìm vị trí chèn**: Tương tự thao tác tìm kiếm, bắt đầu từ nút gốc và lặp xuống dưới để tìm kiếm dựa trên quan hệ kích thước giữa giá trị của nút hiện tại và `num`, cho đến khi đi qua nút lá (duyệt đến `None`) rồi thoát khỏi vòng lặp.
+2. **Chèn nút vào vị trí đó**: Tạo một nút cho `num` và đặt nó vào vị trí `None`.
 
-![Inserting a node into a binary search tree](binary_search_tree.assets/bst_insert.png)
+![Chèn một nút vào cây tìm kiếm nhị phân](binary_search_tree.assets/bst_insert.png)
 
-In the code implementation, note the following two points:
+Trong phần triển khai mã, cần lưu ý hai điểm sau:
 
-- Binary search trees do not allow duplicate nodes; otherwise, the tree would no longer satisfy its definition. Therefore, if the node to be inserted already exists in the tree, the insertion is skipped and the function returns directly.
-- To implement the node insertion, we need to use node `pre` to save the node from the previous loop iteration. This way, when traversing to `None`, we can obtain its parent node, thereby completing the node insertion operation.
+- Cây tìm kiếm nhị phân không cho phép các nút trùng lặp; nếu không, cây sẽ không còn thỏa mãn định nghĩa của nó. Vì vậy, nếu nút cần chèn đã tồn tại trong cây, thao tác chèn sẽ được bỏ qua và hàm trả về ngay.
+- Để triển khai thao tác chèn nút, chúng ta cần sử dụng nút `pre` để lưu nút của lần lặp trước đó. Nhờ vậy, khi duyệt đến `None`, chúng ta có thể lấy được nút cha của nó và hoàn tất thao tác chèn nút.
 
 ```src
 [file]{binary_search_tree}-[class]{binary_search_tree}-[func]{insert}
 ```
 
-Similar to searching for a node, inserting a node uses $O(\log n)$ time.
+Tương tự như tìm kiếm một nút, thao tác chèn một nút mất thời gian $O(\log n)$.
 
-### Removing a Node
+### Xóa một nút
 
-First, find the target node in the binary search tree, then remove it. Similar to node insertion, we need to ensure that after the removal operation is completed, the binary search tree's property of "left subtree $<$ root node $<$ right subtree" is still maintained. Therefore, depending on the number of child nodes the target node has, we consider three cases: degree $0$, degree $1$, and degree $2$, and perform the corresponding removal operation.
+Trước tiên, tìm nút cần xóa trong cây tìm kiếm nhị phân, sau đó xóa nó. Tương tự như khi chèn nút, chúng ta cần đảm bảo rằng sau khi hoàn tất thao tác xóa, tính chất “cây con trái $<$ nút gốc $<$ cây con phải” của cây tìm kiếm nhị phân vẫn được duy trì. Vì vậy, dựa trên số lượng nút con của nút cần xóa, chúng ta xét ba trường hợp: bậc $0$, bậc $1$ và bậc $2$, rồi thực hiện thao tác xóa tương ứng.
 
-As shown in the figure below, when the degree of the node to be removed is $0$, it means the node is a leaf node and can be directly removed.
+Như trong hình bên dưới, khi nút cần xóa có bậc $0$, điều đó có nghĩa là nút đó là nút lá và có thể được xóa trực tiếp.
 
-![Removing a node in a binary search tree (degree 0)](binary_search_tree.assets/bst_remove_case1.png)
+![Xóa một nút trong cây tìm kiếm nhị phân (bậc 0)](binary_search_tree.assets/bst_remove_case1.png)
 
-As shown in the figure below, when the degree of the node to be removed is $1$, replacing the node to be removed with its child node is sufficient.
+Như trong hình bên dưới, khi nút cần xóa có bậc $1$, chỉ cần thay thế nút cần xóa bằng nút con của nó.
 
-![Removing a node in a binary search tree (degree 1)](binary_search_tree.assets/bst_remove_case2.png)
+![Xóa một nút trong cây tìm kiếm nhị phân (bậc 1)](binary_search_tree.assets/bst_remove_case2.png)
 
-When the degree of the node to be removed is $2$, we cannot directly remove it; instead, we need to use a node to replace it. To maintain the binary search tree's property of "left subtree $<$ root node $<$ right subtree," **this node can be either the smallest node in the right subtree or the largest node in the left subtree**.
+Khi nút cần xóa có bậc $2$, chúng ta không thể xóa trực tiếp nút đó; thay vào đó, cần dùng một nút khác để thay thế. Để duy trì tính chất “cây con trái $<$ nút gốc $<$ cây con phải” của cây tìm kiếm nhị phân, **nút này có thể là nút nhỏ nhất trong cây con phải hoặc nút lớn nhất trong cây con trái**.
 
-Assuming we choose the smallest node in the right subtree, that is, the inorder successor, the removal process is as shown in the figure below.
+Giả sử chúng ta chọn nút nhỏ nhất trong cây con phải, tức là nút kế nhiệm trong phép duyệt inorder, quá trình xóa được thực hiện như trong hình bên dưới.
 
-1. Find the next node of the node to be removed in the "inorder traversal sequence," denoted as `tmp`.
-2. Replace the value of the node to be removed with the value of `tmp`, and recursively remove node `tmp` in the tree.
+1. Tìm nút tiếp theo của nút cần xóa trong “chuỗi duyệt inorder”, ký hiệu là `tmp`.
+2. Thay thế giá trị của nút cần xóa bằng giá trị của `tmp`, rồi đệ quy xóa nút `tmp` trong cây.
 
 === "<1>"
-    ![Removing a node in a binary search tree (degree 2)](binary_search_tree.assets/bst_remove_case3_step1.png)
+    ![Xóa một nút trong cây tìm kiếm nhị phân (bậc 2)](binary_search_tree.assets/bst_remove_case3_step1.png)
 
 === "<2>"
     ![bst_remove_case3_step2](binary_search_tree.assets/bst_remove_case3_step2.png)
@@ -88,42 +88,42 @@ Assuming we choose the smallest node in the right subtree, that is, the inorder 
 === "<4>"
     ![bst_remove_case3_step4](binary_search_tree.assets/bst_remove_case3_step4.png)
 
-The node removal operation also uses $O(\log n)$ time, where finding the node to be removed requires $O(\log n)$ time, and obtaining the inorder successor node requires $O(\log n)$ time. Example code is as follows:
+Thao tác xóa nút cũng mất thời gian $O(\log n)$, trong đó việc tìm nút cần xóa mất thời gian $O(\log n)$ và việc lấy nút kế nhiệm trong phép duyệt inorder mất thời gian $O(\log n)$. Mã ví dụ như sau:
 
 ```src
 [file]{binary_search_tree}-[class]{binary_search_tree}-[func]{remove}
 ```
 
-### Inorder Traversal Is Ordered
+### Duyệt Inorder Có Thứ Tự
 
-As shown in the figure below, the inorder traversal of a binary tree follows the "left $\rightarrow$ root $\rightarrow$ right" traversal order, while the binary search tree satisfies the "left child node $<$ root node $<$ right child node" size relationship.
+Như trong hình bên dưới, phép duyệt inorder của cây nhị phân tuân theo thứ tự “trái $\rightarrow$ gốc $\rightarrow$ phải”, trong khi cây tìm kiếm nhị phân thỏa mãn quan hệ kích thước “nút con trái $<$ nút gốc $<$ nút con phải”.
 
-This means that when performing an inorder traversal in a binary search tree, the next smallest node is always traversed first, thus yielding an important property: **The inorder traversal sequence of a binary search tree is ascending**.
+Điều này có nghĩa là khi thực hiện phép duyệt inorder trên cây tìm kiếm nhị phân, nút nhỏ tiếp theo luôn được duyệt trước, từ đó tạo nên một tính chất quan trọng: **chuỗi duyệt inorder của cây tìm kiếm nhị phân có thứ tự tăng dần**.
 
-Using the property of inorder traversal being ascending, we can obtain ordered data in a binary search tree in only $O(n)$ time, without the need for additional sorting operations, which is very efficient.
+Nhờ tính chất tăng dần của phép duyệt inorder, chúng ta có thể lấy dữ liệu theo thứ tự trong cây tìm kiếm nhị phân chỉ trong thời gian $O(n)$ mà không cần thực hiện thêm thao tác sắp xếp nào, nên rất hiệu quả.
 
-![Inorder traversal sequence of a binary search tree](binary_search_tree.assets/bst_inorder_traversal.png)
+![Chuỗi duyệt inorder của cây tìm kiếm nhị phân](binary_search_tree.assets/bst_inorder_traversal.png)
 
-## Efficiency of Binary Search Trees
+## Hiệu quả của cây tìm kiếm nhị phân
 
-Given a set of data, we consider using an array or a binary search tree for storage. Observing the table below, all operations in a binary search tree have logarithmic time complexity, providing stable and efficient performance. Arrays are more efficient than binary search trees only in scenarios with high-frequency additions and low-frequency searches and deletions.
+Với một tập dữ liệu, chúng ta cân nhắc việc sử dụng mảng hoặc cây tìm kiếm nhị phân để lưu trữ. Như trong bảng bên dưới, mọi thao tác trên cây tìm kiếm nhị phân đều có độ phức tạp thời gian logarit, mang lại hiệu suất ổn định và hiệu quả. Mảng chỉ hiệu quả hơn cây tìm kiếm nhị phân trong các trường hợp có tần suất thêm phần tử cao và tần suất tìm kiếm, xóa phần tử thấp.
 
-<p align="center"> Table <id> &nbsp; Efficiency comparison between arrays and search trees </p>
+<p align="center"> Bảng <id> &nbsp; So sánh hiệu quả giữa mảng và cây tìm kiếm </p>
 
-|                | Unsorted array | Binary search tree |
+|                | Mảng chưa sắp xếp | Cây tìm kiếm nhị phân |
 | -------------- | -------------- | ------------------ |
-| Search element | $O(n)$         | $O(\log n)$        |
-| Insert element | $O(1)$         | $O(\log n)$        |
-| Remove element | $O(n)$         | $O(\log n)$        |
+| Tìm kiếm phần tử | $O(n)$         | $O(\log n)$        |
+| Chèn phần tử | $O(1)$         | $O(\log n)$        |
+| Xóa phần tử | $O(n)$         | $O(\log n)$        |
 
-In the ideal case, a binary search tree is balanced, so any node can be found within $O(\log n)$ loop iterations.
+Trong trường hợp lý tưởng, cây tìm kiếm nhị phân được cân bằng, vì vậy có thể tìm thấy bất kỳ nút nào trong vòng $O(\log n)$ lần lặp.
 
-However, if we continuously insert and remove nodes in a binary search tree, it may degenerate into a linked list as shown in the figure below, where the time complexity of various operations also degrades to $O(n)$.
+Tuy nhiên, nếu liên tục chèn và xóa các nút trong cây tìm kiếm nhị phân, cây có thể suy biến thành một danh sách liên kết như trong hình bên dưới, khi đó độ phức tạp thời gian của các thao tác khác nhau cũng suy giảm xuống còn $O(n)$.
 
-![Degradation of a binary search tree](binary_search_tree.assets/bst_degradation.png)
+![Sự suy biến của cây tìm kiếm nhị phân](binary_search_tree.assets/bst_degradation.png)
 
-## Common Applications of Binary Search Trees
+## Các ứng dụng phổ biến của cây tìm kiếm nhị phân
 
-- Used as multi-level indexes in systems to implement efficient search, insertion, and removal operations.
-- Serves as the underlying data structure for certain search algorithms.
-- Used to store data streams to maintain their ordered state.
+- Được sử dụng làm chỉ mục nhiều cấp trong các hệ thống để triển khai các thao tác tìm kiếm, chèn và xóa hiệu quả.
+- Được dùng làm cấu trúc dữ liệu nền tảng cho một số thuật toán tìm kiếm.
+- Được sử dụng để lưu trữ các luồng dữ liệu nhằm duy trì trạng thái có thứ tự của chúng.

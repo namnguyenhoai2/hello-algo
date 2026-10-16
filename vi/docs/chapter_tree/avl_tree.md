@@ -1,46 +1,46 @@
-# AVL Tree *
+# Cây AVL *
 
-In the "Binary Search Tree" section, we mentioned that after multiple insertion and removal operations, a binary search tree may degenerate into a linked list. In this case, the time complexity of all operations degrades from $O(\log n)$ to $O(n)$.
+Trong phần "Cây tìm kiếm nhị phân", chúng ta đã đề cập rằng sau nhiều thao tác chèn và xóa, một cây tìm kiếm nhị phân có thể suy biến thành một danh sách liên kết. Trong trường hợp này, độ phức tạp thời gian của mọi thao tác sẽ giảm từ $O(\log n)$ xuống $O(n)$.
 
-As shown in the figure below, after two node removal operations, this binary search tree will degrade into a linked list.
+Như trong hình dưới đây, sau hai thao tác xóa nút, cây tìm kiếm nhị phân này sẽ suy biến thành một danh sách liên kết.
 
-![Degradation of an AVL tree after removing nodes](avl_tree.assets/avltree_degradation_from_removing_node.png)
+![Sự suy biến của cây AVL sau khi xóa các nút](avl_tree.assets/avltree_degradation_from_removing_node.png)
 
-For example, in the perfect binary tree shown in the figure below, after inserting two nodes, the tree will lean heavily to the left, and the time complexity of search operations will also degrade.
+Ví dụ, trong cây nhị phân hoàn chỉnh được minh họa ở hình dưới đây, sau khi chèn hai nút, cây sẽ nghiêng mạnh sang trái và độ phức tạp thời gian của các thao tác tìm kiếm cũng sẽ suy giảm.
 
-![Degradation of an AVL tree after inserting nodes](avl_tree.assets/avltree_degradation_from_inserting_node.png)
+![Sự suy biến của cây AVL sau khi chèn các nút](avl_tree.assets/avltree_degradation_from_inserting_node.png)
 
-In 1962, G. M. Adelson-Velsky and E. M. Landis proposed the <u>AVL tree</u> in their paper "An algorithm for the organization of information". The paper describes a series of operations that prevent an AVL tree from degenerating as nodes are inserted and removed, thereby keeping the time complexity of various operations at $O(\log n)$. In other words, in scenarios that require frequent insertion, deletion, lookup, and update operations, AVL trees can maintain consistently efficient performance and therefore have strong practical value.
+Năm 1962, G. M. Adelson-Velsky và E. M. Landis đã đề xuất <u>cây AVL</u> trong bài báo "An algorithm for the organization of information". Bài báo mô tả một loạt thao tác giúp cây AVL không bị suy biến khi các nút được chèn và xóa, nhờ đó duy trì độ phức tạp thời gian của nhiều thao tác ở mức $O(\log n)$. Nói cách khác, trong các tình huống yêu cầu thực hiện thường xuyên các thao tác chèn, xóa, tra cứu và cập nhật, cây AVL có thể duy trì hiệu suất ổn định và hiệu quả, do đó có giá trị thực tiễn cao.
 
-## Common Terminology in AVL Trees
+## Thuật ngữ thường dùng trong cây AVL
 
-An AVL tree is both a binary search tree and a balanced binary tree, simultaneously satisfying all the properties of these two types of binary trees, hence it is a <u>balanced binary search tree</u>.
+Cây AVL vừa là cây tìm kiếm nhị phân vừa là cây nhị phân cân bằng, đồng thời thỏa mãn tất cả các tính chất của hai loại cây nhị phân này, vì vậy nó là một <u>cây tìm kiếm nhị phân cân bằng</u>.
 
-### Node Height
+### Chiều cao của nút
 
-Since the operations related to AVL trees require obtaining node heights, we need to add a `height` variable to the node class:
+Vì các thao tác liên quan đến cây AVL cần lấy chiều cao của nút, chúng ta cần thêm một `height` biến vào lớp nút:
 
 === "Python"
 
     ```python title=""
     class TreeNode:
-        """AVL tree node"""
+        """Nút cây AVL"""
         def __init__(self, val: int):
-            self.val: int = val                 # Node value
-            self.height: int = 0                # Node height
-            self.left: TreeNode | None = None   # Left child reference
-            self.right: TreeNode | None = None  # Right child reference
+            self.val: int = val                 # Giá trị nút
+            self.height: int = 0                # Chiều cao nút
+            self.left: TreeNode | None = None   # Tham chiếu đến nút con trái
+            self.right: TreeNode | None = None  # Tham chiếu đến nút con phải
     ```
 
 === "C++"
 
     ```cpp title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     struct TreeNode {
-        int val{};          // Node value
-        int height = 0;     // Node height
-        TreeNode *left{};   // Left child
-        TreeNode *right{};  // Right child
+        int val{};          // Giá trị nút
+        int height = 0;     // Chiều cao nút
+        TreeNode *left{};   // Nút con trái
+        TreeNode *right{};  // Nút con phải
         TreeNode() = default;
         explicit TreeNode(int x) : val(x){}
     };
@@ -49,12 +49,12 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "Java"
 
     ```java title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     class TreeNode {
-        public int val;        // Node value
-        public int height;     // Node height
-        public TreeNode left;  // Left child
-        public TreeNode right; // Right child
+        public int val;        // Giá trị nút
+        public int height;     // Chiều cao nút
+        public TreeNode left;  // Nút con trái
+        public TreeNode right; // Nút con phải
         public TreeNode(int x) { val = x; }
     }
     ```
@@ -62,36 +62,36 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "C#"
 
     ```csharp title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     class TreeNode(int? x) {
-        public int? val = x;    // Node value
-        public int height;      // Node height
-        public TreeNode? left;  // Left child reference
-        public TreeNode? right; // Right child reference
+        public int? val = x;    // Giá trị nút
+        public int height;      // Chiều cao nút
+        public TreeNode? left;  // Tham chiếu đến nút con trái
+        public TreeNode? right; // Tham chiếu đến nút con phải
     }
     ```
 
 === "Go"
 
     ```go title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     type TreeNode struct {
-        Val    int       // Node value
-        Height int       // Node height
-        Left   *TreeNode // Left child reference
-        Right  *TreeNode // Right child reference
+        Val    int       // Giá trị nút
+        Height int       // Chiều cao nút
+        Left   *TreeNode // Tham chiếu đến nút con trái
+        Right  *TreeNode // Tham chiếu đến nút con phải
     }
     ```
 
 === "Swift"
 
     ```swift title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     class TreeNode {
-        var val: Int // Node value
-        var height: Int // Node height
-        var left: TreeNode? // Left child
-        var right: TreeNode? // Right child
+        var val: Int // Giá trị nút
+        var height: Int // Chiều cao nút
+        var left: TreeNode? // Nút con trái
+        var right: TreeNode? // Nút con phải
 
         init(x: Int) {
             val = x
@@ -103,12 +103,12 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "JS"
 
     ```javascript title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     class TreeNode {
-        val; // Node value
-        height; // Node height
-        left; // Left child pointer
-        right; // Right child pointer
+        val; // Giá trị nút
+        height; // Chiều cao nút
+        left; // Con trỏ đến nút con trái
+        right; // Con trỏ đến nút con phải
         constructor(val, left, right, height) {
             this.val = val === undefined ? 0 : val;
             this.height = height === undefined ? 0 : height;
@@ -121,12 +121,12 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "TS"
 
     ```typescript title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     class TreeNode {
-        val: number;            // Node value
-        height: number;         // Node height
-        left: TreeNode | null;  // Left child pointer
-        right: TreeNode | null; // Right child pointer
+        val: number;            // Giá trị nút
+        height: number;         // Chiều cao nút
+        left: TreeNode | null;  // Con trỏ đến nút con trái
+        right: TreeNode | null; // Con trỏ đến nút con phải
         constructor(val?: number, height?: number, left?: TreeNode | null, right?: TreeNode | null) {
             this.val = val === undefined ? 0 : val;
             this.height = height === undefined ? 0 : height; 
@@ -139,12 +139,12 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "Dart"
 
     ```dart title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     class TreeNode {
-      int val;         // Node value
-      int height;      // Node height
-      TreeNode? left;  // Left child
-      TreeNode? right; // Right child
+      int val;         // Giá trị nút
+      int height;      // Chiều cao nút
+      TreeNode? left;  // Nút con trái
+      TreeNode? right; // Nút con phải
       TreeNode(this.val, [this.height = 0, this.left, this.right]);
     }
     ```
@@ -155,16 +155,16 @@ Since the operations related to AVL trees require obtaining node heights, we nee
     use std::rc::Rc;
     use std::cell::RefCell;
 
-    /* AVL tree node */
+    /* Nút cây AVL */
     struct TreeNode {
-        val: i32,                               // Node value
-        height: i32,                            // Node height
-        left: Option<Rc<RefCell<TreeNode>>>,    // Left child
-        right: Option<Rc<RefCell<TreeNode>>>,   // Right child
+        val: i32,                               // Giá trị nút
+        height: i32,                            // Chiều cao nút
+        left: Option<Rc<RefCell<TreeNode>>>,    // Nút con trái
+        right: Option<Rc<RefCell<TreeNode>>>,   // Nút con phải
     }
 
     impl TreeNode {
-        /* Constructor */
+        /* Hàm khởi tạo */
         fn new(val: i32) -> Rc<RefCell<Self>> {
             Rc::new(RefCell::new(Self {
                 val,
@@ -179,7 +179,7 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "C"
 
     ```c title=""
-    /* AVL tree node */
+    /* Nút cây AVL */
     typedef struct TreeNode {
         int val;
         int height;
@@ -187,7 +187,7 @@ Since the operations related to AVL trees require obtaining node heights, we nee
         struct TreeNode *right;
     } TreeNode;
 
-    /* Constructor */
+    /* Hàm khởi tạo */
     TreeNode *newTreeNode(int val) {
         TreeNode *node;
 
@@ -203,23 +203,23 @@ Since the operations related to AVL trees require obtaining node heights, we nee
 === "Kotlin"
 
     ```kotlin title=""
-    /* AVL tree node */
-    class TreeNode(val _val: Int) {  // Node value
-        var height: Int = 0          // Node height
-        var left: TreeNode? = null   // Left child
-        var right: TreeNode? = null  // Right child
+    /* Nút cây AVL */
+    class TreeNode(val _val: Int) {  // Giá trị nút
+        var height: Int = 0          // Chiều cao nút
+        var left: TreeNode? = null   // Nút con trái
+        var right: TreeNode? = null  // Nút con phải
     }
     ```
 
 === "Ruby"
 
     ```ruby title=""
-    ### AVL tree node class ###
+    ### Lớp nút cây AVL ###
     class TreeNode
-      attr_accessor :val    # Node value
-      attr_accessor :height # Node height
-      attr_accessor :left   # Left child reference
-      attr_accessor :right  # Right child reference
+      attr_accessor :val    # Giá trị nút
+      attr_accessor :height # Chiều cao nút
+      attr_accessor :left   # Tham chiếu đến nút con trái
+      attr_accessor :right  # Tham chiếu đến nút con phải
 
       def initialize(val)
         @val = val
@@ -228,15 +228,15 @@ Since the operations related to AVL trees require obtaining node heights, we nee
     end
     ```
 
-The "node height" refers to the distance from that node to its farthest leaf node, i.e., the number of edges on the path. It is important to note that the height of a leaf node is $0$, and the height of a null node is $-1$. We will create two utility functions for getting and updating the height of a node:
+"Chiều cao của nút" là khoảng cách từ nút đó đến nút lá xa nhất của nó, tức là số cạnh trên đường đi. Cần lưu ý rằng chiều cao của một nút lá là $0$, còn chiều cao của một nút null là $-1$. Chúng ta sẽ tạo hai hàm tiện ích để lấy và cập nhật chiều cao của một nút:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{update_height}
 ```
 
-### Node Balance Factor
+### Hệ số cân bằng của nút
 
-The <u>balance factor</u> of a node is defined as the height of the node's left subtree minus the height of its right subtree, and the balance factor of a null node is defined as $0$. We also encapsulate the function to obtain the node's balance factor for convenient subsequent use:
+<u>Hệ số cân bằng</u> của một nút được định nghĩa là chiều cao của cây con trái của nút đó trừ đi chiều cao của cây con phải, và hệ số cân bằng của một nút null được định nghĩa là $0$. Chúng ta cũng đóng gói hàm lấy hệ số cân bằng của nút để thuận tiện sử dụng về sau:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{balance_factor}
@@ -244,20 +244,20 @@ The <u>balance factor</u> of a node is defined as the height of the node's left 
 
 !!! tip
 
-    Let the balance factor be $f$, then the balance factor of any node in an AVL tree satisfies $-1 \le f \le 1$.
+    Gọi hệ số cân bằng là $f$, khi đó hệ số cân bằng của mọi nút trong cây AVL thỏa mãn $-1 \le f \le 1$.
 
-## Rotations in AVL Trees
+## Các phép xoay trong cây AVL
 
-The characteristic of AVL trees lies in the "rotation" operation, which can restore balance to unbalanced nodes without affecting the inorder traversal sequence of the binary tree. In other words, **rotation operations can both maintain the property of a "binary search tree" and make the tree return to a "balanced binary tree"**.
+Đặc điểm của cây AVL nằm ở thao tác "xoay", có thể khôi phục sự cân bằng cho các nút mất cân bằng mà không ảnh hưởng đến thứ tự duyệt inorder của cây nhị phân. Nói cách khác, **các thao tác xoay vừa có thể duy trì tính chất của một "cây tìm kiếm nhị phân", vừa đưa cây trở lại thành một "cây nhị phân cân bằng"**.
 
-We call nodes with a balance factor absolute value $> 1$ "unbalanced nodes". Depending on the imbalance situation, rotation operations are divided into four types: right rotation, left rotation, right rotation then left rotation, and left rotation then right rotation. Below we describe these rotation operations in detail.
+Chúng ta gọi các nút có giá trị tuyệt đối của hệ số cân bằng $> 1$ là "nút mất cân bằng". Tùy theo tình trạng mất cân bằng, các thao tác xoay được chia thành bốn loại: xoay phải, xoay trái, xoay phải rồi xoay trái và xoay trái rồi xoay phải. Dưới đây, chúng ta sẽ mô tả chi tiết các thao tác xoay này.
 
-### Right Rotation
+### Xoay phải
 
-As shown in the figure below, the value below the node is the balance factor. From bottom to top, the first unbalanced node in the binary tree is "node 3". We focus on the subtree with this unbalanced node as the root, denoting the node as `node` and its left child as `child`, and perform a "right rotation" operation. After the right rotation is completed, the subtree regains balance and still maintains the properties of a binary search tree.
+Như trong hình dưới đây, giá trị bên dưới nút là hệ số cân bằng. Từ dưới lên trên, nút mất cân bằng đầu tiên trong cây nhị phân là "nút 3". Chúng ta tập trung vào cây con có nút mất cân bằng này làm gốc, ký hiệu nút đó là `node` và nút con trái của nó là `child`, rồi thực hiện thao tác "xoay phải". Sau khi hoàn tất phép xoay phải, cây con lấy lại được sự cân bằng và vẫn duy trì các tính chất của cây tìm kiếm nhị phân.
 
 === "<1>"
-    ![Steps of right rotation](avl_tree.assets/avltree_right_rotate_step1.png)
+    ![Các bước xoay phải](avl_tree.assets/avltree_right_rotate_step1.png)
 
 === "<2>"
     ![avltree_right_rotate_step2](avl_tree.assets/avltree_right_rotate_step2.png)
@@ -268,91 +268,91 @@ As shown in the figure below, the value below the node is the balance factor. Fr
 === "<4>"
     ![avltree_right_rotate_step4](avl_tree.assets/avltree_right_rotate_step4.png)
 
-As shown in the figure below, when the `child` node has a right child (denoted as `grand_child`), a step needs to be added in the right rotation: set `grand_child` as the left child of `node`.
+Như trong hình dưới đây, khi node `child` có một node con bên phải (được ký hiệu là `grand_child`), cần thêm một bước vào phép xoay phải: đặt `grand_child` làm node con bên trái của `node`.
 
-![Right rotation with grand_child](avl_tree.assets/avltree_right_rotate_with_grandchild.png)
+![Xoay phải với grand_child](avl_tree.assets/avltree_right_rotate_with_grandchild.png)
 
-"Right rotation" is a figurative term; in practice, it is achieved by modifying node pointers, as shown in the following code:
+“Xoay phải” là một cách gọi mang tính hình tượng; trên thực tế, thao tác này được thực hiện bằng cách sửa đổi các con trỏ node, như trong đoạn mã sau:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{right_rotate}
 ```
 
-### Left Rotation
+### Xoay trái
 
-Correspondingly, if considering the "mirror" of the above unbalanced binary tree, the "left rotation" operation shown in the figure below needs to be performed.
+Tương ứng, nếu xét “ảnh gương” của cây nhị phân mất cân bằng ở trên, cần thực hiện thao tác “xoay trái” được minh họa trong hình dưới đây.
 
-![Left rotation operation](avl_tree.assets/avltree_left_rotate.png)
+![Thao tác xoay trái](avl_tree.assets/avltree_left_rotate.png)
 
-Similarly, as shown in the figure below, when the `child` node has a left child (denoted as `grand_child`), a step needs to be added in the left rotation: set `grand_child` as the right child of `node`.
+Tương tự, như trong hình dưới đây, khi node `child` có một node con bên trái (được ký hiệu là `grand_child`), cần thêm một bước vào phép xoay trái: đặt `grand_child` làm node con bên phải của `node`.
 
-![Left rotation with grand_child](avl_tree.assets/avltree_left_rotate_with_grandchild.png)
+![Xoay trái với grand_child](avl_tree.assets/avltree_left_rotate_with_grandchild.png)
 
-It can be observed that **right rotation and left rotation operations are mirror symmetric in logic, and the two imbalance cases they solve are also symmetric**. Based on symmetry, we only need to replace all `left` in the right rotation implementation code with `right`, and all `right` with `left`, to obtain the left rotation implementation code:
+Có thể thấy rằng **các thao tác xoay phải và xoay trái đối xứng gương về mặt logic, đồng thời hai trường hợp mất cân bằng mà chúng giải quyết cũng đối xứng với nhau**. Dựa trên tính đối xứng, chúng ta chỉ cần thay thế tất cả `left` trong mã triển khai phép xoay phải bằng `right`, và tất cả `right` bằng `left`, để thu được mã triển khai phép xoay trái:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{left_rotate}
 ```
 
-### Left Rotation Then Right Rotation
+### Xoay trái rồi xoay phải
 
-For the unbalanced node 3 in the figure below, using either left rotation or right rotation alone cannot restore the subtree to balance. In this case, a "left rotation" needs to be performed on `child` first, followed by a "right rotation" on `node`.
+Đối với node mất cân bằng 3 trong hình dưới đây, chỉ thực hiện phép xoay trái hoặc xoay phải riêng lẻ đều không thể đưa cây con về trạng thái cân bằng. Trong trường hợp này, trước tiên cần thực hiện “xoay trái” trên `child`, sau đó thực hiện “xoay phải” trên `node`.
 
-![Left-right rotation](avl_tree.assets/avltree_left_right_rotate.png)
+![Xoay trái-phải](avl_tree.assets/avltree_left_right_rotate.png)
 
-### Right Rotation Then Left Rotation
+### Xoay phải rồi xoay trái
 
-As shown in the figure below, for the mirror case of the above unbalanced binary tree, a "right rotation" needs to be performed on `child` first, then a "left rotation" on `node`.
+Như trong hình dưới đây, đối với trường hợp đối xứng của cây nhị phân mất cân bằng ở trên, trước tiên cần thực hiện “xoay phải” trên `child`, sau đó thực hiện “xoay trái” trên `node`.
 
-![Right-left rotation](avl_tree.assets/avltree_right_left_rotate.png)
+![Xoay phải-trái](avl_tree.assets/avltree_right_left_rotate.png)
 
-### Choice of Rotation
+### Lựa chọn phép xoay
 
-The four imbalances shown in the figure below correspond one-to-one with the above cases, requiring right rotation, left rotation then right rotation, right rotation then left rotation, and left rotation operations respectively.
+Bốn trường hợp mất cân bằng trong hình dưới đây tương ứng một-một với các trường hợp ở trên, lần lượt yêu cầu xoay phải, xoay trái rồi xoay phải, xoay phải rồi xoay trái và xoay trái.
 
-![The four rotation cases of AVL tree](avl_tree.assets/avltree_rotation_cases.png)
+![Bốn trường hợp xoay của cây AVL](avl_tree.assets/avltree_rotation_cases.png)
 
-As shown in the table below, we determine which case the unbalanced node belongs to by judging the signs of the balance factor of the unbalanced node and the balance factor of its taller-side child node.
+Như trong bảng dưới đây, chúng ta xác định node mất cân bằng thuộc trường hợp nào bằng cách xét dấu của hệ số cân bằng của node mất cân bằng và hệ số cân bằng của node con ở phía cao hơn.
 
-<p align="center"> Table <id> &nbsp; Conditions for Choosing Among the Four Rotation Cases </p>
+<p align="center"> Bảng <id> &nbsp; Điều kiện lựa chọn giữa bốn trường hợp xoay </p>
 
-| Balance factor of the unbalanced node | Balance factor of the child node | Rotation method to apply          |
+| Hệ số cân bằng của node mất cân bằng | Hệ số cân bằng của node con | Phương pháp xoay cần áp dụng |
 | -------------------------------------- | --------------------------------- | --------------------------------- |
-| $> 1$ (left-leaning tree)              | $\geq 0$                          | Right rotation                    |
-| $> 1$ (left-leaning tree)              | $<0$                              | Left rotation then right rotation |
-| $< -1$ (right-leaning tree)            | $\leq 0$                          | Left rotation                     |
-| $< -1$ (right-leaning tree)            | $>0$                              | Right rotation then left rotation |
+| $> 1$ (cây nghiêng trái)              | $\geq 0$                          | Xoay phải                    |
+| $> 1$ (cây nghiêng trái)              | $<0$                              | Xoay trái rồi xoay phải |
+| $< -1$ (cây nghiêng phải)            | $\leq 0$                          | Xoay trái                     |
+| $< -1$ (cây nghiêng phải)            | $>0$                              | Xoay phải rồi xoay trái |
 
-For ease of use, we encapsulate the rotation operations into a function. **With this function, we can perform rotations for various imbalance situations, restoring balance to unbalanced nodes**. The code is as follows:
+Để thuận tiện sử dụng, chúng ta đóng gói các thao tác xoay vào một function. **Với function này, chúng ta có thể thực hiện phép xoay cho nhiều tình huống mất cân bằng khác nhau, khôi phục trạng thái cân bằng cho các node mất cân bằng**. Mã như sau:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{rotate}
 ```
 
-## Common Operations in AVL Trees
+## Các thao tác phổ biến trong cây AVL
 
-### Node Insertion
+### Chèn node
 
-The node insertion operation in AVL trees is similar in principle to that in binary search trees. The only difference is that after inserting a node in an AVL tree, a series of unbalanced nodes may appear on the path from that node to the root. Therefore, **we need to start from this node and perform rotation operations from bottom to top, restoring balance to all unbalanced nodes**. The code is as follows:
+Về nguyên tắc, thao tác chèn node trong cây AVL tương tự như trong cây tìm kiếm nhị phân. Điểm khác biệt duy nhất là sau khi chèn một node vào cây AVL, có thể xuất hiện một loạt node mất cân bằng trên đường đi từ node đó đến root. Do đó, **chúng ta cần bắt đầu từ node này và thực hiện các thao tác xoay từ dưới lên trên, khôi phục trạng thái cân bằng cho tất cả các node mất cân bằng**. Mã như sau:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{insert_helper}
 ```
 
-### Node Removal
+### Xóa node
 
-Similarly, on the basis of the binary search tree's node removal method, rotation operations need to be performed from bottom to top to restore balance to all unbalanced nodes. The code is as follows:
+Tương tự, dựa trên phương pháp xóa node của cây tìm kiếm nhị phân, cần thực hiện các thao tác xoay từ dưới lên trên để khôi phục trạng thái cân bằng cho tất cả các node mất cân bằng. Mã như sau:
 
 ```src
 [file]{avl_tree}-[class]{avl_tree}-[func]{remove_helper}
 ```
 
-### Node Search
+### Tìm kiếm node
 
-The node search operation in AVL trees is consistent with that in binary search trees, and will not be elaborated here.
+Thao tác tìm kiếm node trong cây AVL nhất quán với thao tác tương ứng trong cây tìm kiếm nhị phân, nên sẽ không trình bày chi tiết ở đây.
 
-## Typical Applications of AVL Trees
+## Các ứng dụng điển hình của cây AVL
 
-- Organizing and storing large-scale data, suitable for scenarios with high-frequency searches and low-frequency insertions and deletions.
-- Used to build index systems in databases.
-- Red-black trees are also a common type of balanced binary search tree. Compared to AVL trees, red-black trees have more relaxed balance conditions, require fewer rotation operations for node insertion and deletion, and have higher average efficiency for node addition and deletion operations.
+- Tổ chức và lưu trữ dữ liệu quy mô lớn, phù hợp với các tình huống có tần suất tìm kiếm cao và tần suất chèn, xóa thấp.
+- Được sử dụng để xây dựng hệ thống chỉ mục trong cơ sở dữ liệu.
+- Cây đỏ-đen cũng là một loại cây tìm kiếm nhị phân cân bằng phổ biến. So với cây AVL, cây đỏ-đen có điều kiện cân bằng nới lỏng hơn, cần ít thao tác xoay hơn khi chèn và xóa node, đồng thời có hiệu suất trung bình cao hơn đối với các thao tác thêm và xóa node.

@@ -1,46 +1,46 @@
 # Counting Sort
 
-<u>Counting sort</u> sorts by counting the occurrences of elements and is typically applied to integer arrays.
+<u>Counting sort</u> sắp xếp bằng cách đếm số lần xuất hiện của các phần tử và thường được áp dụng cho các mảng số nguyên.
 
-## Simple Implementation
+## Cài đặt đơn giản
 
-Let's start with a simple example. Given an array `nums` of length $n$, where the elements are all "non-negative integers", the overall flow of counting sort is shown in the figure below.
+Hãy bắt đầu với một ví dụ đơn giản. Cho một mảng `nums` có độ dài $n$, trong đó tất cả các phần tử đều là "số nguyên không âm", quy trình tổng thể của counting sort được minh họa trong hình dưới đây.
 
-1. Traverse the array to find the largest number, denoted as $m$, and then create an auxiliary array `counter` of length $m + 1$.
-2. **Use `counter` to count how many times each number appears in `nums`**, where `counter[num]` stores the number of occurrences of `num`. This is simple: traverse `nums` (denote the current number by `num`) and increment `counter[num]` by $1$ each time.
-3. **Because the indices of `counter` are naturally ordered, the numbers are effectively already sorted**. Next, traverse `counter` and write the numbers back into `nums` in ascending order according to their occurrence counts.
+1. Duyệt qua mảng để tìm số lớn nhất, ký hiệu là $m$, sau đó tạo một mảng phụ `counter` có độ dài $m + 1$.
+2. **Sử dụng `counter` để đếm số lần mỗi số xuất hiện trong `nums`**, trong đó `counter[num]` lưu số lần xuất hiện của `num`. Việc này rất đơn giản: duyệt qua `nums` (ký hiệu số hiện tại là `num`) và tăng `counter[num]` thêm $1$ sau mỗi lần.
+3. **Vì các chỉ số của `counter` vốn đã được sắp xếp theo thứ tự, các số về cơ bản đã được sắp xếp**. Tiếp theo, duyệt qua `counter` và ghi các số trở lại `nums` theo thứ tự tăng dần dựa trên số lần xuất hiện của chúng.
 
-![Counting sort flow](counting_sort.assets/counting_sort_overview.png)
+![Quy trình counting sort](counting_sort.assets/counting_sort_overview.png)
 
-The code is as follows:
+Mã được viết như sau:
 
 ```src
 [file]{counting_sort}-[class]{}-[func]{counting_sort_naive}
 ```
 
-!!! note "Connection between counting sort and bucket sort"
+!!! note "Mối liên hệ giữa counting sort và bucket sort"
 
-    From the perspective of bucket sort, each index of the counting array `counter` can be viewed as a bucket, and the counting process can be seen as distributing elements into their corresponding buckets. Essentially, counting sort is a special case of bucket sort for integer data.
+    Dưới góc nhìn của bucket sort, mỗi chỉ số của mảng đếm `counter` có thể được xem là một bucket, còn quá trình đếm có thể được xem là việc phân phối các phần tử vào những bucket tương ứng. Về bản chất, counting sort là một trường hợp đặc biệt của bucket sort dành cho dữ liệu số nguyên.
 
-## Complete Implementation
+## Cài đặt đầy đủ
 
-Observant readers may have noticed that **if the input consists of objects, step `3.` above no longer works**. Suppose the input consists of product objects and we want to sort them by price (a member variable of the class); the above algorithm can only produce the sorted order of the prices themselves.
+Những độc giả tinh ý có thể nhận ra rằng **nếu đầu vào bao gồm các đối tượng thì bước `3.` ở trên không còn hoạt động**. Giả sử đầu vào gồm các đối tượng sản phẩm và chúng ta muốn sắp xếp chúng theo giá (một biến thành viên của lớp); thuật toán trên chỉ có thể tạo ra thứ tự đã sắp xếp của chính các giá trị giá.
 
-So how can we obtain the sorted order of the original data? We first compute the prefix sums of `counter`. As the name suggests, the prefix sum at index `i`, `prefix[i]`, equals the sum of the elements from index `0` through `i`:
+Vậy làm thế nào để lấy được thứ tự đã sắp xếp của dữ liệu ban đầu? Trước tiên, chúng ta tính tổng tiền tố của `counter`. Như tên gọi cho thấy, tổng tiền tố tại chỉ số `i`, `prefix[i]`, bằng tổng các phần tử từ chỉ số `0` đến `i`:
 
 $$
 \text{prefix}[i] = \sum_{j=0}^i \text{counter[j]}
 $$
 
-**The prefix sum has a clear interpretation: `prefix[num] - 1` gives the index of the last occurrence of element `num` in the result array `res`**. This information is crucial because it tells us where each element should be placed in the result array. Next, we traverse the original array `nums` in reverse, and for each element `num`, perform the following two steps.
+**Tổng tiền tố có cách diễn giải rõ ràng: `prefix[num] - 1` cho biết chỉ số của lần xuất hiện cuối cùng của phần tử `num` trong mảng kết quả `res`**. Thông tin này rất quan trọng vì nó cho biết vị trí cần đặt mỗi phần tử trong mảng kết quả. Tiếp theo, chúng ta duyệt ngược mảng ban đầu `nums`, và với mỗi phần tử `num`, thực hiện hai bước sau.
 
-1. Place `num` at index `prefix[num] - 1` of the array `res`.
-2. Decrease the prefix sum `prefix[num]` by $1$ to get the index for the next placement of `num`.
+1. Đặt `num` tại chỉ số `prefix[num] - 1` của mảng `res`.
+2. Giảm tổng tiền tố `prefix[num]` đi $1$ để lấy chỉ số cho lần đặt tiếp theo của `num`.
 
-After the traversal is complete, the array `res` contains the sorted result, and finally `res` is used to overwrite the original array `nums`. The complete counting sort flow is shown in the figure below.
+Sau khi duyệt xong, mảng `res` chứa kết quả đã sắp xếp; cuối cùng, `res` được dùng để ghi đè lên mảng ban đầu `nums`. Quy trình counting sort đầy đủ được minh họa trong hình dưới đây.
 
 === "<1>"
-    ![Counting sort steps](counting_sort.assets/counting_sort_step1.png)
+    ![Các bước của counting sort](counting_sort.assets/counting_sort_step1.png)
 
 === "<2>"
     ![counting_sort_step2](counting_sort.assets/counting_sort_step2.png)
@@ -63,22 +63,22 @@ After the traversal is complete, the array `res` contains the sorted result, and
 === "<8>"
     ![counting_sort_step8](counting_sort.assets/counting_sort_step8.png)
 
-The counting sort implementation is shown below:
+Cài đặt counting sort được trình bày dưới đây:
 
 ```src
 [file]{counting_sort}-[class]{}-[func]{counting_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity is $O(n + m)$, and counting sort is non-adaptive**: Traversing `nums` and `counter` both takes linear time. In general, when $n \gg m$, the time complexity approaches $O(n)$.
-- **Space complexity of $O(n + m)$, non-in-place sorting**: Uses arrays `res` and `counter` of lengths $n$ and $m$ respectively.
-- **Stable sorting**: Since elements are filled into `res` in a "right-to-left" order, traversing `nums` in reverse can avoid changing the relative positions of equal elements, thereby achieving stable sorting. In fact, traversing `nums` in forward order can also yield correct sorting results, but the result would be unstable.
+- **Độ phức tạp thời gian là $O(n + m)$ và counting sort không thích nghi**: Việc duyệt qua `nums` và `counter` đều có thời gian tuyến tính. Nhìn chung, khi $n \gg m$, độ phức tạp thời gian tiến gần đến $O(n)$.
+- **Độ phức tạp không gian là $O(n + m)$, sắp xếp không tại chỗ**: Sử dụng các mảng `res` và `counter` có độ dài lần lượt là $n$ và $m$.
+- **Sắp xếp ổn định**: Vì các phần tử được điền vào `res` theo thứ tự "từ phải sang trái", việc duyệt `nums` theo thứ tự ngược có thể tránh làm thay đổi vị trí tương đối của các phần tử bằng nhau, nhờ đó đạt được sắp xếp ổn định. Trên thực tế, duyệt `nums` theo thứ tự xuôi cũng có thể cho kết quả sắp xếp chính xác, nhưng kết quả sẽ không ổn định.
 
-## Limitations
+## Hạn chế
 
-At this point, you might think counting sort is quite ingenious because it achieves efficient sorting simply by counting occurrences. However, the prerequisites for using counting sort are fairly restrictive.
+Đến đây, bạn có thể nghĩ rằng counting sort khá khéo léo vì đạt được hiệu quả sắp xếp chỉ bằng cách đếm số lần xuất hiện. Tuy nhiên, các điều kiện tiên quyết để sử dụng counting sort khá khắt khe.
 
-**Counting sort is only applicable to non-negative integers**. To apply it to other types of data, you must ensure that they can be converted to non-negative integers without changing the relative ordering of the elements. For example, for an integer array containing negative numbers, you can first add a constant to every number to shift them into the non-negative range, and then shift them back after sorting.
+**Counting sort chỉ áp dụng được cho các số nguyên không âm**. Để áp dụng nó cho các kiểu dữ liệu khác, bạn phải đảm bảo rằng chúng có thể được chuyển đổi thành các số nguyên không âm mà không làm thay đổi thứ tự tương đối của các phần tử. Ví dụ, với một mảng số nguyên chứa các số âm, trước tiên bạn có thể cộng một hằng số vào mọi số để dịch chúng vào phạm vi không âm, sau đó dịch ngược chúng sau khi sắp xếp.
 
-**Counting sort is well suited to cases with many elements but a small value range**. For example, in the above scenario, $m$ cannot be too large; otherwise, it consumes too much space. And when $n \ll m$, counting sort takes $O(m)$ time, which may be slower than sorting algorithms with $O(n \log n)$ time complexity.
+**Counting sort đặc biệt phù hợp với các trường hợp có nhiều phần tử nhưng phạm vi giá trị nhỏ**. Ví dụ, trong trường hợp trên, $m$ không được quá lớn; nếu không, thuật toán sẽ tiêu tốn quá nhiều không gian. Và khi $n \ll m$, counting sort mất thời gian $O(m)$, có thể chậm hơn các thuật toán sắp xếp có độ phức tạp thời gian $O(n \log n)$.

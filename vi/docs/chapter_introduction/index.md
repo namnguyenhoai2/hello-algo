@@ -1,9 +1,9 @@
-# Encounter with Algorithms
+# Làm quen với Algorithms
 
-![Encounter with Algorithms](../assets/covers/chapter_introduction.jpg)
+![Làm quen với Algorithms](../assets/covers/chapter_introduction.jpg)
 
 !!! abstract
 
-    A young girl dances gracefully, intertwined with data, her skirt flowing with the melody of algorithms.
+    Một cô bé duyên dáng nhảy múa, hòa quyện cùng dữ liệu, chiếc váy của cô tung bay theo giai điệu của các thuật toán.
 
-    She invites you to dance with her. Follow her steps closely and enter the world of algorithms, full of logic and beauty.
+    Cô mời bạn cùng nhảy. Hãy chăm chú dõi theo từng bước của cô và bước vào thế giới của các thuật toán, nơi tràn đầy logic và vẻ đẹp.

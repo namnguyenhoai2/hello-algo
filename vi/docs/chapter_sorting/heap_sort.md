@@ -2,30 +2,30 @@
 
 !!! tip
 
-    Before reading this section, please ensure you have completed the "Heap" chapter.
+    Trước khi đọc phần này, hãy đảm bảo bạn đã hoàn thành chương "Heap".
 
-<u>Heap sort</u> is an efficient sorting algorithm based on the heap data structure. We can implement heap sort using the heap construction and element removal operations introduced earlier.
+<u>Heap sort</u> là một thuật toán sắp xếp hiệu quả dựa trên cấu trúc dữ liệu heap. Ta có thể triển khai heap sort bằng cách sử dụng các thao tác xây dựng heap và xóa phần tử đã được giới thiệu trước đó.
 
-1. Input the array and build a min-heap, at which point the smallest element is at the heap top.
-2. Continuously perform element removal operations and record the removed elements in order to obtain a sequence sorted in ascending order.
+1. Nhập mảng và xây dựng min-heap, khi đó phần tử nhỏ nhất nằm ở đỉnh heap.
+2. Liên tục thực hiện thao tác xóa phần tử và ghi lại các phần tử đã xóa theo thứ tự để thu được một dãy được sắp xếp theo thứ tự tăng dần.
 
-Although the above method is feasible, it requires an additional array to save the popped elements, which is quite wasteful of space. In practice, we usually use a more elegant implementation method.
+Mặc dù phương pháp trên khả thi, nhưng nó yêu cầu một mảng bổ sung để lưu các phần tử được lấy ra, gây lãng phí khá nhiều không gian. Trong thực tế, ta thường sử dụng một phương pháp triển khai thanh lịch hơn.
 
-## Algorithm Flow
+## Quy trình thuật toán
 
-Assume the array length is $n$. The flow of heap sort is shown in the figure below.
+Giả sử độ dài mảng là $n$. Quy trình của heap sort được minh họa trong hình bên dưới.
 
-1. Input the array and build a max-heap. After completion, the largest element is at the heap top.
-2. Swap the heap top element (first element) with the heap bottom element (last element). After the swap is complete, reduce the heap length by $1$ and increase the count of sorted elements by $1$.
-3. Starting from the heap top element, perform a top-to-bottom heapify operation (sift down). After heapify is complete, the heap property is restored.
-4. Repeat steps `2.` and `3.` After $n - 1$ rounds, the array is sorted.
+1. Nhập mảng và xây dựng max-heap. Sau khi hoàn tất, phần tử lớn nhất nằm ở đỉnh heap.
+2. Hoán đổi phần tử ở đỉnh heap (phần tử đầu tiên) với phần tử ở đáy heap (phần tử cuối cùng). Sau khi hoán đổi hoàn tất, giảm độ dài heap đi $1$ và tăng số lượng phần tử đã sắp xếp lên $1$.
+3. Bắt đầu từ phần tử ở đỉnh heap, thực hiện thao tác heapify từ trên xuống dưới (sift down). Sau khi heapify hoàn tất, tính chất heap được khôi phục.
+4. Lặp lại các bước `2.` và `3.` Sau $n - 1$ lượt, mảng được sắp xếp.
 
 !!! tip
 
-    In fact, the element removal operation also includes steps `2.` and `3.`, with the additional step of removing the element.
+    Thực tế, thao tác xóa phần tử cũng bao gồm các bước `2.` và `3.`, cùng với bước xóa phần tử.
 
 === "<1>"
-    ![Heap sort steps](heap_sort.assets/heap_sort_step1.png)
+    ![Các bước heap sort](heap_sort.assets/heap_sort_step1.png)
 
 === "<2>"
     ![heap_sort_step2](heap_sort.assets/heap_sort_step2.png)
@@ -60,14 +60,14 @@ Assume the array length is $n$. The flow of heap sort is shown in the figure bel
 === "<12>"
     ![heap_sort_step12](heap_sort.assets/heap_sort_step12.png)
 
-In the code below, we use the same `sift_down()` function for top-to-bottom heapify as in the "Heap" chapter. It is worth noting that since the heap length decreases as the largest element is extracted, we need to add a length parameter $n$ to `sift_down()` to specify the current effective length of the heap. The code is as follows:
+Trong đoạn mã bên dưới, ta sử dụng cùng hàm `sift_down()` để thực hiện heapify từ trên xuống dưới như trong chương "Heap". Cần lưu ý rằng vì độ dài heap giảm dần khi phần tử lớn nhất được lấy ra, ta cần thêm tham số độ dài $n$ vào `sift_down()` để chỉ định độ dài hiệu dụng hiện tại của heap. Mã như sau:
 
 ```src
 [file]{heap_sort}-[class]{}-[func]{heap_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity is $O(n \log n)$; heap sort is non-adaptive**: Heap construction takes $O(n)$ time. Extracting the largest element from the heap takes $O(\log n)$ time, and this is repeated for a total of $n - 1$ rounds.
-- **Space complexity is $O(1)$; heap sort is in-place**: A few pointer variables use $O(1)$ space. Element swapping and heapify are both performed on the original array.
-- **Unstable sorting**: When swapping the heap top element and heap bottom element, the relative positions of equal elements may change.
+- **Độ phức tạp thời gian là $O(n \log n)$; heap sort không thích nghi**: Việc xây dựng heap mất thời gian $O(n)$. Việc lấy phần tử lớn nhất từ heap mất thời gian $O(\log n)$ và được lặp lại tổng cộng $n - 1$ lượt.
+- **Độ phức tạp không gian là $O(1)$; heap sort là in-place**: Một vài biến con trỏ sử dụng không gian $O(1)$. Việc hoán đổi phần tử và heapify đều được thực hiện trên mảng ban đầu.
+- **Sắp xếp không ổn định**: Khi hoán đổi phần tử ở đỉnh heap với phần tử ở đáy heap, vị trí tương đối của các phần tử bằng nhau có thể thay đổi.

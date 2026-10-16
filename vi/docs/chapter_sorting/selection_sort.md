@@ -1,17 +1,17 @@
-# Selection Sort
+# Sắp xếp chọn
 
-<u>Selection sort</u> works very simply: in each round, it selects the smallest element from the unsorted interval and places it at the end of the sorted interval.
+<u>Sắp xếp chọn</u> hoạt động rất đơn giản: trong mỗi vòng, thuật toán chọn phần tử nhỏ nhất trong khoảng chưa được sắp xếp và đặt phần tử đó vào cuối khoảng đã được sắp xếp.
 
-Assume the array has length $n$. The procedure of selection sort is shown in the figure below.
+Giả sử mảng có độ dài $n$. Quy trình sắp xếp chọn được minh họa trong hình dưới đây.
 
-1. Initially, all elements are unsorted, i.e., the unsorted (index) interval is $[0, n-1]$.
-2. Select the smallest element in the interval $[0, n-1]$ and swap it with the element at index $0$. After completion, the first element of the array is sorted.
-3. Select the smallest element in the interval $[1, n-1]$ and swap it with the element at index $1$. After completion, the first 2 elements of the array are sorted.
-4. And so on. After $n - 1$ rounds of selection and swapping, the first $n - 1$ elements of the array are sorted.
-5. The only remaining element must be the largest, so no further sorting is needed and the array is sorted.
+1. Ban đầu, tất cả phần tử đều chưa được sắp xếp, tức là khoảng (chỉ số) chưa được sắp xếp là $[0, n-1]$.
+2. Chọn phần tử nhỏ nhất trong khoảng $[0, n-1]$ và hoán đổi nó với phần tử tại chỉ số $0$. Sau khi hoàn tất, phần tử đầu tiên của mảng đã được sắp xếp.
+3. Chọn phần tử nhỏ nhất trong khoảng $[1, n-1]$ và hoán đổi nó với phần tử tại chỉ số $1$. Sau khi hoàn tất, 2 phần tử đầu tiên của mảng đã được sắp xếp.
+4. Và cứ tiếp tục như vậy. Sau $n - 1$ vòng chọn và hoán đổi, $n - 1$ phần tử đầu tiên của mảng đã được sắp xếp.
+5. Phần tử duy nhất còn lại chắc chắn là phần tử lớn nhất, vì vậy không cần sắp xếp thêm và mảng đã được sắp xếp.
 
 === "<1>"
-    ![Selection sort steps](selection_sort.assets/selection_sort_step1.png)
+    ![Các bước sắp xếp chọn](selection_sort.assets/selection_sort_step1.png)
 
 === "<2>"
     ![selection_sort_step2](selection_sort.assets/selection_sort_step2.png)
@@ -43,16 +43,16 @@ Assume the array has length $n$. The procedure of selection sort is shown in the
 === "<11>"
     ![selection_sort_step11](selection_sort.assets/selection_sort_step11.png)
 
-In the code, we use $k$ to track the smallest element within the unsorted interval:
+Trong code, chúng ta sử dụng $k$ để theo dõi phần tử nhỏ nhất trong khoảng chưa được sắp xếp:
 
 ```src
 [file]{selection_sort}-[class]{}-[func]{selection_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity $O(n^2)$, non-adaptive sorting**: The outer loop has $n - 1$ rounds in total. The inner loop runs $n - 1$ times in the first round and $1$ time in the last round. Thus, it runs $n - 1$, $n - 2$, $\dots$, $2$, and $1$ times across the rounds, summing to $\frac{n(n - 1)}{2}$.
-- **Space complexity $O(1)$, in-place sorting**: Pointers $i$ and $j$ use a constant amount of extra space.
-- **Unstable sorting**: As shown in the figure below, element `nums[i]` may be swapped to the right of an element equal to it, causing a change in their relative order.
+- **Độ phức tạp thời gian $O(n^2)$, sắp xếp không thích nghi**: Vòng lặp bên ngoài có tổng cộng $n - 1$ vòng. Vòng lặp bên trong chạy $n - 1$ lần ở vòng đầu tiên và $1$ lần ở vòng cuối cùng. Do đó, qua các vòng, nó chạy lần lượt $n - 1$, $n - 2$, $\dots$, $2$ và $1$ lần, với tổng là $\frac{n(n - 1)}{2}$.
+- **Độ phức tạp không gian $O(1)$, sắp xếp tại chỗ**: Các con trỏ $i$ và $j$ sử dụng một lượng không gian bổ sung không đổi.
+- **Sắp xếp không ổn định**: Như được minh họa trong hình dưới đây, phần tử `nums[i]` có thể bị hoán đổi sang bên phải của một phần tử bằng nó, làm thay đổi thứ tự tương đối giữa chúng.
 
-![Selection sort non-stability example](selection_sort.assets/selection_sort_instability.png)
+![Ví dụ về tính không ổn định của sắp xếp chọn](selection_sort.assets/selection_sort_instability.png)

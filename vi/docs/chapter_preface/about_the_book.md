@@ -1,54 +1,54 @@
-# About This Book
+# Giới thiệu về cuốn sách này
 
-This project aims to create an open-source, free, beginner-friendly introductory tutorial on data structures and algorithms.
+Dự án này hướng đến việc xây dựng một tutorial nhập môn về cấu trúc dữ liệu và thuật toán, miễn phí, mã nguồn mở và thân thiện với người mới bắt đầu.
 
-- The entire book uses animated illustrations, with clear and easy-to-understand content and a smooth learning curve, guiding beginners through the landscape of data structures and algorithms.
-- The source code can be run with one click, helping readers improve their programming skills through practice and understand how algorithms work and the underlying implementation of data structures.
-- We encourage readers to learn from each other, and everyone is welcome to ask questions and share insights in the comments section, making progress together through discussion and exchange.
+- Toàn bộ cuốn sách sử dụng các hình minh họa động, với nội dung rõ ràng, dễ hiểu và lộ trình học tập mạch lạc, giúp người mới bắt đầu khám phá thế giới cấu trúc dữ liệu và thuật toán.
+- Mã nguồn có thể được chạy chỉ với một cú nhấp chuột, giúp độc giả nâng cao kỹ năng lập trình thông qua thực hành, đồng thời hiểu cách các thuật toán hoạt động và cách triển khai bên dưới của các cấu trúc dữ liệu.
+- Chúng tôi khuyến khích độc giả học hỏi lẫn nhau. Mọi người đều được hoan nghênh đặt câu hỏi và chia sẻ hiểu biết trong phần bình luận, cùng nhau tiến bộ thông qua thảo luận và trao đổi.
 
-## Target Audience
+## Đối tượng độc giả
 
-If you are an algorithm beginner who has never studied algorithms, or if you already have some problem-solving experience but only a hazy understanding of data structures and algorithms, then this book is tailor-made for you!
+Nếu bạn là người mới bắt đầu học thuật toán, chưa từng học thuật toán, hoặc đã có một số kinh nghiệm giải quyết vấn đề nhưng chỉ hiểu mơ hồ về cấu trúc dữ liệu và thuật toán, thì cuốn sách này được thiết kế dành riêng cho bạn!
 
-If you have already accumulated a certain amount of problem-solving experience and are familiar with most question types, this book can help you review and organize your algorithm knowledge system, and the repository's source code can be used as a "problem-solving toolkit" or "algorithm dictionary."
+Nếu bạn đã tích lũy được một lượng kinh nghiệm giải quyết vấn đề nhất định và quen thuộc với hầu hết các dạng bài, cuốn sách này có thể giúp bạn ôn tập và hệ thống hóa kiến thức thuật toán. Mã nguồn trong repository cũng có thể được dùng như một “bộ công cụ giải bài” hoặc “từ điển thuật toán”.
 
-If you are an algorithm "expert," we look forward to receiving your valuable suggestions, or [joining us as a contributor](https://www.hello-algo.com/chapter_appendix/contribution/).
+Nếu bạn là một “chuyên gia” thuật toán, chúng tôi mong nhận được những đề xuất quý báu từ bạn, hoặc [tham gia cùng chúng tôi với tư cách cộng tác viên](https://www.hello-algo.com/chapter_appendix/contribution/).
 
-!!! success "Prerequisites"
+!!! success "Điều kiện tiên quyết"
 
-    You need basic programming knowledge in at least one language and the ability to read and write simple code.
+    Bạn cần có kiến thức lập trình cơ bản ở ít nhất một ngôn ngữ và khả năng đọc, viết các đoạn mã đơn giản.
 
-## Content Structure
+## Cấu trúc nội dung
 
-The main content of this book is shown in the figure below.
+Nội dung chính của cuốn sách này được trình bày trong hình dưới đây.
 
-- **Complexity analysis**: Evaluation dimensions and methods for data structures and algorithms. Methods for calculating time complexity and space complexity, common types, examples, etc.
-- **Data structures**: Classification methods for basic data types and data structures. Definitions, advantages and disadvantages, common operations, common types, typical applications, implementation methods, and more for data structures such as arrays, linked lists, stacks, queues, hash tables, trees, heaps, and graphs.
-- **Algorithms**: The definition, advantages and disadvantages, efficiency, application scenarios, problem-solving steps, and example problems of algorithms such as searching, sorting, divide and conquer, backtracking, dynamic programming, and greedy algorithms.
+- **Phân tích độ phức tạp**: Các tiêu chí và phương pháp đánh giá cấu trúc dữ liệu và thuật toán. Phương pháp tính độ phức tạp thời gian và độ phức tạp không gian, các loại phổ biến, ví dụ, v.v.
+- **Cấu trúc dữ liệu**: Các phương pháp phân loại kiểu dữ liệu cơ bản và cấu trúc dữ liệu. Định nghĩa, ưu điểm và nhược điểm, các thao tác phổ biến, các loại thường gặp, ứng dụng điển hình, phương pháp triển khai và nhiều nội dung khác về các cấu trúc dữ liệu như mảng, linked list, stack, queue, hash table, cây, heap và đồ thị.
+- **Thuật toán**: Định nghĩa, ưu điểm và nhược điểm, hiệu quả, các tình huống ứng dụng, các bước giải quyết vấn đề và các bài toán ví dụ của những thuật toán như tìm kiếm, sắp xếp, chia để trị, backtracking, quy hoạch động và thuật toán tham lam.
 
-![Main content of this book](about_the_book.assets/hello_algo_mindmap.png)
+![Nội dung chính của cuốn sách này](about_the_book.assets/hello_algo_mindmap.png)
 
-## Acknowledgements
+## Lời cảm ơn
 
-This book has been continuously improved through the joint efforts of many contributors in the open-source community. Thanks to every contributor who invested time and effort, they are (in the order automatically generated by GitHub): krahets, coderonion, Gonglja, nuomi1, Reanon, justin-tse, hpstory, danielsss, curtishd, night-cruise, S-N-O-R-L-A-X, rongyi, msk397, gvenusleo, khoaxuantu, rivertwilight, K3v123, gyt95, zhuoqinyue, yuelinxin, Zuoxun, mingXta, Phoenix0415, FangYuan33, GN-Yu, longsizhuo, pengchzn, QiLOL, Cathay-Chen, guowei-gong, xBLACKICEx, IsChristina, JoseHung, qualifier1024, hello-ikun, magentaqin, Guanngxu, thomasq0, sunshinesDL, L-Super, Transmigration-zhou, WSL0809, Slone123c, lhxsm, yuan0221, what-is-me, theNefelibatas, Shyam-Chen, sangxiaai, longranger2, codeberg-user, xiongsp, JeffersonHuang, prinpal, seven1240, Wonderdch, malone6, xiaomiusa87, gaofer, bluebean-cloud, a16su, SamJin98, hongyun-robot, nanlei, XiaChuerwu, yd-j, iron-irax, mgisr, steventimes, junminhong, heshuyue, danny900714, Nigh, Dr-XYZ, MolDuM, XC-Zero, reeswell, PXG-XPG, NI-SW, Horbin-Magician, Enlightenus, YangXuanyi, xjr7670, beatrix-chan, DullSword, qq909244296, iStig, boloboloda, hts0000, gledfish, fbigm, echo1937, jiaxianhua, wenjianmin, keshida, kilikilikid, lclc6, lwbaptx, linyejoe2, liuxjerry, szu17dmy, dshlstarr, Yucao-cy, coderlef, czruby, bongbongbakudan, beintentional, ZongYangL, ZhongYuuu, ZhongGuanbin, hezhizhen, linzeyan, ZJKung, JTCPOWI, KawaiiAsh, luluxia, xb534, ztkuaikuai, yw-1021, ElaBosak233, baagod, zhouLion, yishangzhang, yi427, yanedie, yabo083, weibk, wangwang105, th1nk3r-ing, tao363, 4yDX3906, syd168, sslmj2020, smilelsb, siqyka, selear, sdshaoda, Xi-Row, popozhu, nuquist19, noobcodemaker, XiaoK29, chadyi, lyl625760, lucaswangdev, llql1211, 0130w, shanghai-Jerry, EJackYang, Javesun99, eltociear, lipusheng, KNChiu, BlindTerran, ShiMaRing, lovelock, FreddieLi, FloranceYeh, fanchenggang, gltianwen, goerll, nedchu, curly210102, CuB3y0nd, KraHsu, CarrotDLaw, youshaoXG, bubble9um, Asashishi, Asa0oo0o0o, fanenr, eagleanurag, akshiterate, 52coder, foursevenlove, KorsChen, hopkings2008, yang-le, realwujing, Evilrabbit520, Umer-Jahangir, Turing-1024-Lee, Suremotoo, paoxiaomooo, Chieko-Seren, Senrian, Allen-Scai, 19santosh99, ymmmas, Risuntsy, Richard-Zhang1019, RafaelCaso, qingpeng9802, primexiao, Urbaner3, codetypess, nidhoggfgg, MwumLi, CreatorMetaSky, martinx, ZnYang2018, hugtyftg, logan-qiu, psychelzh, Kunchen-Luo, Keynman, and KeiichiKasai.
+Cuốn sách này đã không ngừng được hoàn thiện nhờ nỗ lực chung của nhiều contributor trong cộng đồng mã nguồn mở. Xin cảm ơn mọi contributor đã dành thời gian và công sức; danh sách dưới đây được sắp xếp theo thứ tự GitHub tự động tạo: krahets, coderonion, Gonglja, nuomi1, Reanon, justin-tse, hpstory, danielsss, curtishd, night-cruise, S-N-O-R-L-A-X, rongyi, msk397, gvenusleo, khoaxuantu, rivertwilight, K3v123, gyt95, zhuoqinyue, yuelinxin, Zuoxun, mingXta, Phoenix0415, FangYuan33, GN-Yu, longsizhuo, pengchzn, QiLOL, Cathay-Chen, guowei-gong, xBLACKICEx, IsChristina, JoseHung, qualifier1024, hello-ikun, magentaqin, Guanngxu, thomasq0, sunshinesDL, L-Super, Transmigration-zhou, WSL0809, Slone123c, lhxsm, yuan0221, what-is-me, theNefelibatas, Shyam-Chen, sangxiaai, longranger2, codeberg-user, xiongsp, JeffersonHuang, prinpal, seven1240, Wonderdch, malone6, xiaomiusa87, gaofer, bluebean-cloud, a16su, SamJin98, hongyun-robot, nanlei, XiaChuerwu, yd-j, iron-irax, mgisr, steventimes, junminhong, heshuyue, danny900714, Nigh, Dr-XYZ, MolDuM, XC-Zero, reeswell, PXG-XPG, NI-SW, Horbin-Magician, Enlightenus, YangXuanyi, xjr7670, beatrix-chan, DullSword, qq909244296, iStig, boloboloda, hts0000, gledfish, fbigm, echo1937, jiaxianhua, wenjianmin, keshida, kilikilikid, lclc6, lwbaptx, linyejoe2, liuxjerry, szu17dmy, dshlstarr, Yucao-cy, coderlef, czruby, bongbongbakudan, beintentional, ZongYangL, ZhongYuuu, ZhongGuanbin, hezhizhen, linzeyan, ZJKung, JTCPOWI, KawaiiAsh, luluxia, xb534, ztkuaikuai, yw-1021, ElaBosak233, baagod, zhouLion, yishangzhang, yi427, yanedie, yabo083, weibk, wangwang105, th1nk3r-ing, tao363, 4yDX3906, syd168, sslmj2020, smilelsb, siqyka, selear, sdshaoda, Xi-Row, popozhu, nuquist19, noobcodemaker, XiaoK29, chadyi, lyl625760, lucaswangdev, llql1211, 0130w, shanghai-Jerry, EJackYang, Javesun99, eltociear, lipusheng, KNChiu, BlindTerran, ShiMaRing, lovelock, FreddieLi, FloranceYeh, fanchenggang, gltianwen, goerll, nedchu, curly210102, CuB3y0nd, KraHsu, CarrotDLaw, youshaoXG, bubble9um, Asashishi, Asa0oo0o0o, fanenr, eagleanurag, akshiterate, 52coder, foursevenlove, KorsChen, hopkings2008, yang-le, realwujing, Evilrabbit520, Umer-Jahangir, Turing-1024-Lee, Suremotoo, paoxiaomooo, Chieko-Seren, Senrian, Allen-Scai, 19santosh99, ymmmas, Risuntsy, Richard-Zhang1019, RafaelCaso, qingpeng9802, primexiao, Urbaner3, codetypess, nidhoggfgg, MwumLi, CreatorMetaSky, martinx, ZnYang2018, hugtyftg, logan-qiu, psychelzh, Kunchen-Luo, Keynman và KeiichiKasai.
 
-The code review work for this book was completed by coderonion, curtishd, Gonglja, gvenusleo, hpstory, justin-tse, khoaxuantu, krahets, night-cruise, nuomi1, Reanon and rongyi (in alphabetical order). Thanks to them for the time and effort they put in; they helped keep the code consistent and standardized across the different language versions.
+Công việc code review cho cuốn sách này được thực hiện bởi coderonion, curtishd, Gonglja, gvenusleo, hpstory, justin-tse, khoaxuantu, krahets, night-cruise, nuomi1, Reanon và rongyi (theo thứ tự bảng chữ cái). Xin cảm ơn họ vì thời gian và công sức đã bỏ ra; họ đã giúp duy trì tính nhất quán và chuẩn hóa của mã nguồn giữa các phiên bản ngôn ngữ khác nhau.
 
-The English version of this book was reviewed by yuelinxin, K3v123, magentaqin, QiLOL, Phoenix0415, SamJin98, yanedie, RafaelCaso, pengchzn and thomasq0; the Japanese version was reviewed by eltociear; the Russian version was reviewed by И. А. Шевкун and Yuyan Huang; and the Traditional Chinese version was reviewed by Shyam-Chen and Dr-XYZ. Thanks to their contributions, this book is able to serve a broader readership, and we are deeply grateful to them.
+Phiên bản tiếng Anh của cuốn sách này được yuelinxin, K3v123, magentaqin, QiLOL, Phoenix0415, SamJin98, yanedie, RafaelCaso, pengchzn và thomasq0 review; phiên bản tiếng Nhật được eltociear review; phiên bản tiếng Nga được И. А. Шевкун và Yuyan Huang review; còn phiên bản tiếng Hoa phồn thể được Shyam-Chen và Dr-XYZ review. Nhờ những đóng góp của họ, cuốn sách này có thể phục vụ nhiều độc giả hơn, và chúng tôi vô cùng biết ơn họ.
 
-The ePub ebook generation tool for this book was developed by zhongfq. We thank him for his contribution, which provides readers with a more flexible way to read.
+Công cụ tạo ebook ePub cho cuốn sách này được zhongfq phát triển. Xin cảm ơn đóng góp của anh, nhờ đó độc giả có thêm một cách đọc linh hoạt hơn.
 
-During the creation of this book, I received help from many people.
+Trong quá trình viết cuốn sách này, tôi đã nhận được sự giúp đỡ của rất nhiều người.
 
-- Thanks to my mentor at the company, Dr. Li Xi, who encouraged me to "take action quickly" during a conversation, strengthening my determination to write this book;
-- Thanks to my girlfriend Bubble, the first reader of this book, who provided many valuable suggestions from the perspective of an algorithm beginner, making this book more approachable for beginners;
-- Thanks to Tengbao, Qibao, and Feibao for coming up with a creative name for this book, evoking everyone's fond memories of writing their first line of code "Hello World!";
-- Thanks to Xiaoquan for providing professional help in intellectual property rights, which played an important role in the improvement of this open-source book;
-- Thanks to Sutong for designing the beautiful cover and logo for this book, and for patiently revising them many times at my perfectionist insistence;
-- Thanks to @squidfunk for the typesetting suggestions, as well as for developing the open-source documentation theme [Material-for-MkDocs](https://github.com/squidfunk/mkdocs-material).
+- Cảm ơn người cố vấn của tôi tại công ty, Dr. Li Xi, người đã khuyến khích tôi “nhanh chóng bắt tay vào hành động” trong một cuộc trò chuyện, củng cố quyết tâm viết cuốn sách này;
+- Cảm ơn bạn gái tôi, Bubble, độc giả đầu tiên của cuốn sách, người đã đưa ra nhiều đề xuất quý báu từ góc nhìn của một người mới bắt đầu học thuật toán, giúp cuốn sách trở nên dễ tiếp cận hơn với người mới;
+- Cảm ơn Tengbao, Qibao và Feibao đã nghĩ ra một cái tên sáng tạo cho cuốn sách này, gợi lên những ký ức thân thương của mọi người về lần đầu viết dòng mã “Hello World!”;
+- Cảm ơn Xiaoquan đã hỗ trợ chuyên môn về quyền sở hữu trí tuệ, đóng vai trò quan trọng trong việc hoàn thiện cuốn sách mã nguồn mở này;
+- Cảm ơn Sutong đã thiết kế bìa và logo đẹp mắt cho cuốn sách, đồng thời kiên nhẫn chỉnh sửa chúng nhiều lần theo yêu cầu cầu toàn của tôi;
+- Cảm ơn @squidfunk vì những đề xuất về dàn trang, cũng như đã phát triển theme tài liệu mã nguồn mở [Material-for-MkDocs](https://github.com/squidfunk/mkdocs-material).
 
-During the writing process, I read many textbooks and articles on data structures and algorithms. These works served as excellent models for this book and helped ensure the accuracy and quality of its content. I would like to thank all the teachers and predecessors for their outstanding contributions!
+Trong quá trình viết, tôi đã đọc nhiều giáo trình và bài viết về cấu trúc dữ liệu và thuật toán. Những tác phẩm này là những hình mẫu tuyệt vời cho cuốn sách và giúp đảm bảo tính chính xác cũng như chất lượng nội dung. Tôi xin cảm ơn tất cả các thầy cô và những người đi trước vì những đóng góp xuất sắc của họ!
 
-This book advocates a hands-on approach to learning, and in this respect I was deeply inspired by [Dive into Deep Learning](https://github.com/d2l-ai/d2l-zh). I highly recommend this excellent work to all readers.
+Cuốn sách này đề cao phương pháp học thông qua thực hành, và về phương diện này, tôi đã nhận được nhiều cảm hứng từ [Dive into Deep Learning](https://github.com/d2l-ai/d2l-zh). Tôi nhiệt liệt giới thiệu tác phẩm xuất sắc này đến tất cả độc giả.
 
-**Heartfelt thanks to my parents. It is your support and encouragement that gave me the opportunity to pursue this enjoyable project**.
+**Xin chân thành cảm ơn cha mẹ tôi. Chính sự ủng hộ và động viên của cha mẹ đã cho tôi cơ hội theo đuổi dự án thú vị này**.

@@ -1,9 +1,9 @@
-# Stacks and Queues
+# Ngăn xếp và Hàng đợi
 
-![Stacks and Queues](../assets/covers/chapter_stack_and_queue.jpg)
+![Ngăn xếp và Hàng đợi](../assets/covers/chapter_stack_and_queue.jpg)
 
 !!! abstract
 
-    A stack is like cats piled on top of one another, while a queue is like cats lining up.
+    Ngăn xếp giống như những chú mèo xếp chồng lên nhau, còn hàng đợi giống như những chú mèo xếp thành hàng.
 
-    They represent the logical relationships of LIFO (Last In, First Out) and FIFO (First In, First Out), respectively.
+    Chúng lần lượt thể hiện các mối quan hệ logic LIFO (Last In, First Out) và FIFO (First In, First Out).

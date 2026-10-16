@@ -1,10 +1,10 @@
-# Summary
+# Tóm tắt
 
-### Key Review
+### Đánh giá chính
 
-- Binary search relies on ordered data and searches by repeatedly halving the search interval. It requires the input data to be sorted and applies only to arrays or array-based data structures.
-- Brute-force search locates data by traversing the data structure. Linear search applies to arrays and linked lists, while breadth-first search and depth-first search apply to graphs and trees. These algorithms are broadly applicable and require no data preprocessing, but their relatively high time complexity is $O(n)$.
-- Hash-based search, tree search, and binary search are efficient search methods that can quickly locate target elements in specific data structures. Such algorithms are highly efficient with time complexity reaching $O(\log n)$ or even $O(1)$, but typically require additional data structures.
-- In practice, we need to analyze factors such as data scale, search performance requirements, and data query and update frequency to choose the appropriate search method.
-- Linear search is suitable for small datasets or data that is updated frequently; binary search is suitable for large sorted datasets; hash-based search is suitable when high query efficiency is required and range queries are unnecessary; tree search is suitable for large dynamic datasets that must maintain order and support range queries.
-- Replacing linear search with hash-based search is a commonly used strategy to optimize runtime, reducing time complexity from $O(n)$ to $O(1)$.
+- Tìm kiếm nhị phân dựa trên dữ liệu có thứ tự và tìm kiếm bằng cách liên tục chia đôi khoảng tìm kiếm. Phương pháp này yêu cầu dữ liệu đầu vào đã được sắp xếp và chỉ áp dụng cho mảng hoặc các cấu trúc dữ liệu dựa trên mảng.
+- Tìm kiếm vét cạn định vị dữ liệu bằng cách duyệt qua cấu trúc dữ liệu. Tìm kiếm tuyến tính áp dụng cho mảng và danh sách liên kết, trong khi tìm kiếm theo chiều rộng và tìm kiếm theo chiều sâu áp dụng cho đồ thị và cây. Các thuật toán này có phạm vi áp dụng rộng và không yêu cầu tiền xử lý dữ liệu, nhưng có độ phức tạp thời gian tương đối cao là $O(n)$.
+- Tìm kiếm dựa trên hash, tìm kiếm trên cây và tìm kiếm nhị phân là các phương pháp tìm kiếm hiệu quả, có thể nhanh chóng định vị các phần tử mục tiêu trong những cấu trúc dữ liệu cụ thể. Các thuật toán này có hiệu suất cao, với độ phức tạp thời gian đạt $O(\log n)$ hoặc thậm chí $O(1)$, nhưng thường yêu cầu các cấu trúc dữ liệu bổ sung.
+- Trong thực tế, chúng ta cần phân tích các yếu tố như quy mô dữ liệu, yêu cầu về hiệu suất tìm kiếm, cũng như tần suất truy vấn và cập nhật dữ liệu để lựa chọn phương pháp tìm kiếm phù hợp.
+- Tìm kiếm tuyến tính phù hợp với các tập dữ liệu nhỏ hoặc dữ liệu được cập nhật thường xuyên; tìm kiếm nhị phân phù hợp với các tập dữ liệu lớn đã được sắp xếp; tìm kiếm dựa trên hash phù hợp khi yêu cầu hiệu suất truy vấn cao và không cần truy vấn theo phạm vi; tìm kiếm trên cây phù hợp với các tập dữ liệu động lớn cần duy trì thứ tự và hỗ trợ truy vấn theo phạm vi.
+- Thay thế tìm kiếm tuyến tính bằng tìm kiếm dựa trên hash là một chiến lược thường được sử dụng để tối ưu hóa runtime, giảm độ phức tạp thời gian từ $O(n)$ xuống $O(1)$.

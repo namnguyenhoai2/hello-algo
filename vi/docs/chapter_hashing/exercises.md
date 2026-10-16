@@ -1,21 +1,21 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### Searching After a Hash Collision
+### Tìm kiếm sau khi xảy ra va chạm băm
 
-A hash table has 5 buckets and uses the hash function $h(x)=x \bmod 5$. When a collision occurs, elements are placed one after another in a list within that bucket.
-Insert `[1, 6, 11, 7]` in order:
+Một hash table có 5 bucket và sử dụng hàm băm $h(x)=x \bmod 5$. Khi xảy ra va chạm, các phần tử được đặt lần lượt trong một danh sách bên trong bucket đó.  
+Chèn `[1, 6, 11, 7]` theo thứ tự:
 
 <!-- numbered-subquestions -->
 
-1. Write the contents of buckets 0–4.
-2. When searching for 6, which bucket is checked first, and which elements are examined in order?
-3. Based on the bucket contents from Question 1, do later insertions overwrite earlier ones? Explain using this collision-resolution method.
+1. Viết nội dung của các bucket 0–4.
+2. Khi tìm kiếm 6, bucket nào được kiểm tra trước, và các phần tử được xét theo thứ tự nào?
+3. Dựa trên nội dung bucket ở Câu 1, các lần chèn sau có ghi đè lên các lần chèn trước không? Hãy giải thích bằng phương pháp xử lý va chạm này.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. Because $1\bmod5=6\bmod5=11\bmod5=1$, while $7\bmod5=2$, the buckets are:
+    1. Vì $1\bmod5=6\bmod5=11\bmod5=1$, còn $7\bmod5=2$, các bucket là:
 
         ```text
         0: []
@@ -25,77 +25,76 @@ Insert `[1, 6, 11, 7]` in order:
         4: []
         ```
 
-    2. A search for 6 first goes to bucket 1, then compares 1 and 6 in order. The target is found on the second comparison.
+    2. Tìm kiếm 6 trước tiên đi đến bucket 1, sau đó lần lượt so sánh 1 và 6. Giá trị cần tìm được thấy ở lần so sánh thứ hai.
 
-    3. Equal hash values mean only that the elements go into the same bucket, not that the elements are equal. Separate chaining keeps all colliding elements in the bucket
-        and compares them one at a time during a search, so 1, 6, and 11 do not overwrite one another.
+    3. Các giá trị băm bằng nhau chỉ có nghĩa là các phần tử được đưa vào cùng một bucket, không có nghĩa là các phần tử bằng nhau. Separate chaining giữ lại tất cả các phần tử bị va chạm trong bucket
+        và so sánh từng phần tử một trong quá trình tìm kiếm, vì vậy 1, 6 và 11 không ghi đè lên nhau.
 
-### Where Do Elements Go After a Hash Table Expands?
+### Các phần tử đi đâu sau khi hash table mở rộng?
 
-A hash table using separate chaining originally has 5 buckets and the hash function $h(x)=x\bmod5$.
-The keys `[1, 6, 11]` are all in bucket 1.
+Một hash table sử dụng separate chaining ban đầu có 5 bucket và hàm băm $h(x)=x\bmod5$.  
+Các key `[1, 6, 11]` đều nằm trong bucket 1.
 
-The table is now expanded to 7 buckets, and the hash function becomes $h(x)=x\bmod7$:
+Bây giờ table được mở rộng thành 7 bucket, và hàm băm trở thành $h(x)=x\bmod7$:
 
 <!-- numbered-subquestions -->
 
-1. Calculate the new bucket number for 1, 6, and 11.
-2. Which buckets contain elements after the expansion?
-3. During the expansion, can the list from the old bucket 1 simply be copied into the new bucket 1? Explain using the results from Questions 1 and 2.
+1. Tính số bucket mới cho 1, 6 và 11.
+2. Những bucket nào chứa các phần tử sau khi mở rộng?
+3. Trong quá trình mở rộng, có thể פשוט sao chép danh sách từ bucket 1 cũ sang bucket 1 mới không? Hãy giải thích bằng kết quả từ Câu 1 và Câu 2.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The new bucket numbers are:
+    1. Số bucket mới là:
 
         - $1\bmod7=1$;
         - $6\bmod7=6$;
         - $11\bmod7=4$.
 
-    2. Bucket 1 stores 1, bucket 4 stores 11, and bucket 6 stores 6. The three keys are no longer crowded into the same bucket.
+    2. Bucket 1 lưu 1, bucket 4 lưu 11, và bucket 6 lưu 6. Ba key không còn tập trung trong cùng một bucket.
 
-    3. The list cannot be copied as is. A bucket number is calculated by taking the key modulo the number of buckets. When the bucket count changes from 5 to 7, a key's bucket number may change,
-        so the position of every key must be recalculated. If the old bucket 1 were copied unchanged, later searches using the new formula would go to bucket 6 for 6 and bucket 4 for 11
-        and would fail to find them.
+    3. Không thể sao chép nguyên trạng danh sách. Số bucket được tính bằng cách lấy key modulo số lượng bucket. Khi số lượng bucket thay đổi từ 5 thành 7, số bucket của một key có thể thay đổi,
+        vì vậy phải tính lại vị trí của mọi key. Nếu bucket 1 cũ được sao chép mà không thay đổi, các lần tìm kiếm sau đó sử dụng công thức mới sẽ đi đến bucket 6 với 6 và bucket 4 với 11
+        và sẽ không tìm thấy chúng.
 
-### Can 11 Still Be Found After Deleting 6?
+### 11 vẫn có thể được tìm thấy sau khi xóa 6 không?
 
-A hash table has 5 positions with indices `0–4` and uses the hash function $h(x)=x\bmod5$.
-When a collision occurs, it searches to the right from the index produced by the hash function for the first empty position.
+Một hash table có 5 vị trí với các chỉ số `0–4` và sử dụng hàm băm $h(x)=x\bmod5$.  
+Khi xảy ra va chạm, table tìm sang phải từ chỉ số do hàm băm tạo ra để tìm vị trí trống đầu tiên.
 
-Insert `[1, 6, 11]` in order:
+Chèn `[1, 6, 11]` theo thứ tự:
 
 <!-- numbered-subquestions -->
 
-1. At which index is each number ultimately stored?
-2. When searching for 11, which indices are examined in order?
-3. Suppose deleting 6 changes its position directly to an "unused empty position," and a search stops whenever it reaches an empty position.
-    What happens when searching for 11 afterward? Is this search result correct? If there is a problem, how can it be avoided?
+1. Cuối cùng mỗi số được lưu tại chỉ số nào?
+2. Khi tìm kiếm 11, những chỉ số nào được kiểm tra theo thứ tự?
+3. Giả sử việc xóa 6 thay đổi trực tiếp vị trí của nó thành “vị trí trống chưa từng được sử dụng”, và quá trình tìm kiếm dừng lại mỗi khi gặp một vị trí trống. Điều gì xảy ra khi tìm kiếm 11 sau đó? Kết quả tìm kiếm này có chính xác không? Nếu có vấn đề, có thể tránh vấn đề đó bằng cách nào?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The number 1 is stored at index 1. The number 6 also maps to index 1, so after the collision it is stored at index 2.
-        The number 11 also starts at index 1, skips the occupied indices 1 and 2, and is ultimately stored at index 3.
+    1. Số 1 được lưu tại chỉ số 1. Số 6 cũng ánh xạ đến chỉ số 1, nên sau khi xảy ra va chạm, nó được lưu tại chỉ số 2.
+        Số 11 cũng bắt đầu tại chỉ số 1, bỏ qua các chỉ số 1 và 2 đang bị chiếm dụng, rồi cuối cùng được lưu tại chỉ số 3.
 
-    2. A search for 11 examines indices `1, 2, 3` in order and finds it at index 3.
+    2. Tìm kiếm 11 kiểm tra các chỉ số `1, 2, 3` theo thứ tự và tìm thấy nó tại chỉ số 3.
 
-    3. If index 2 is changed to mean "never used," a search for 11 checks index 1 and then stops at index 2,
-        incorrectly concluding that 11 is absent. Deletion should leave a "deleted" marker.
-        A search that reaches this marker continues to the next index (wrapping from index 4 to index 0), while a later insertion may still reuse the position.
+    3. Nếu chỉ số 2 được thay đổi để mang nghĩa “chưa từng được sử dụng”, quá trình tìm kiếm 11 sẽ kiểm tra chỉ số 1 rồi dừng lại ở chỉ số 2,
+        kết luận sai rằng 11 không tồn tại. Khi xóa, nên để lại một marker “đã xóa”.
+        Quá trình tìm kiếm khi gặp marker này sẽ tiếp tục đến chỉ số tiếp theo (quay vòng từ chỉ số 4 về chỉ số 0), trong khi một lần chèn sau đó vẫn có thể sử dụng lại vị trí này.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Compare the Character Counts of Two Strings
+### So sánh số lần xuất hiện của các ký tự trong hai chuỗi
 
-Given two strings `s` and `t` containing only lowercase English letters,
-you may rearrange the characters in `s` in any order, but you may not add, remove, or replace characters.
+Cho hai chuỗi `s` và `t` chỉ chứa các chữ cái tiếng Anh viết thường,
+bạn có thể sắp xếp lại các ký tự trong `s` theo bất kỳ thứ tự nào, nhưng không được thêm, xóa hoặc thay thế ký tự.
 
-Determine whether the rearranged string can form `t`. Return `true` if it can and `false` otherwise.
-Use a hash table to record how many times each letter occurs. Do not sort the characters in the strings.
+Hãy xác định xem chuỗi sau khi sắp xếp lại có thể tạo thành `t` hay không. Trả về `true` nếu có thể và `false` nếu không thể.
+Sử dụng hash table để ghi lại số lần xuất hiện của mỗi chữ cái. Không được sắp xếp các ký tự trong các chuỗi.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. If the two strings have different lengths, they cannot contain each character the same number of times
-    2. Use a hash table to record the count of each letter; increment the corresponding count while scanning s
-    3. Decrement the corresponding count while scanning t; the strings contain each character the same number of times only if every count is 0 at the end
+    1. Nếu hai chuỗi có độ dài khác nhau, chúng không thể chứa mỗi ký tự với cùng số lần xuất hiện
+    2. Sử dụng hash table để ghi lại số lần xuất hiện của mỗi chữ cái; tăng count tương ứng trong khi duyệt s
+    3. Giảm count tương ứng trong khi duyệt t; hai chuỗi chứa mỗi ký tự với cùng số lần xuất hiện chỉ khi mọi count đều bằng 0 ở cuối
 
 [LeetCode](https://leetcode.com/problems/valid-anagram/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

@@ -1,57 +1,57 @@
-# Binary Search Insertion Point
+# Vị trí chèn trong tìm kiếm nhị phân
 
-Binary search can be used not only to search for target elements, but also to solve many variant problems, such as finding the insertion position of a target element.
+Tìm kiếm nhị phân không chỉ được dùng để tìm các phần tử đích mà còn có thể giải quyết nhiều bài toán biến thể, chẳng hạn như tìm vị trí chèn của một phần tử đích.
 
-## Case Without Duplicate Elements
+## Trường hợp không có phần tử trùng lặp
 
 !!! question
 
-    Given a sorted array `nums` of length $n$ and an element `target`, where the array contains no duplicate elements, insert `target` into `nums` while maintaining its sorted order. If `target` already exists in the array, insert it to its left. Return the index of `target` after insertion. An example is shown below.
+    Cho một mảng đã sắp xếp `nums` có độ dài $n$ và một phần tử `target`, trong đó mảng không chứa phần tử trùng lặp, hãy chèn `target` vào `nums` mà vẫn duy trì thứ tự sắp xếp. Nếu `target` đã tồn tại trong mảng, hãy chèn nó vào bên trái phần tử đó. Trả về chỉ số của `target` sau khi chèn. Ví dụ được minh họa bên dưới.
 
-![Binary search insertion point example data](binary_search_insertion.assets/binary_search_insertion_example.png)
+![Dữ liệu ví dụ về vị trí chèn trong tìm kiếm nhị phân](binary_search_insertion.assets/binary_search_insertion_example.png)
 
-If we want to reuse the binary search code from the previous section, we need to answer the following two questions.
+Nếu muốn sử dụng lại mã tìm kiếm nhị phân ở phần trước, chúng ta cần trả lời hai câu hỏi sau.
 
-**Question 1**: When the array contains `target`, is the insertion point index the same as that element's index?
+**Câu hỏi 1**: Khi mảng chứa `target`, chỉ số vị trí chèn có giống với chỉ số của phần tử đó không?
 
-The problem requires inserting `target` to the left of equal elements, which means the newly inserted `target` replaces the position of the original `target`. In other words, **when the array contains `target`, the insertion point index is the index of that `target`**.
+Bài toán yêu cầu chèn `target` vào bên trái các phần tử bằng nó, nghĩa là `target` mới được chèn sẽ thay thế vị trí của `target` ban đầu. Nói cách khác, **khi mảng chứa `target`, chỉ số vị trí chèn chính là chỉ số của `target` đó**.
 
-**Question 2**: When the array does not contain `target`, what is the insertion point index?
+**Câu hỏi 2**: Khi mảng không chứa `target`, chỉ số vị trí chèn là gì?
 
-To analyze this further, consider the binary search process: when `nums[m] < target`, $i$ moves, meaning that pointer $i$ is approaching elements greater than or equal to `target`. Similarly, pointer $j$ is always approaching elements less than or equal to `target`.
+Để phân tích sâu hơn, hãy xem xét quá trình tìm kiếm nhị phân: khi `nums[m] < target`, $i$ di chuyển, nghĩa là con trỏ $i$ đang tiến đến các phần tử lớn hơn hoặc bằng `target`. Tương tự, con trỏ $j$ luôn tiến đến các phần tử nhỏ hơn hoặc bằng `target`.
 
-Therefore, when the binary search ends, $i$ must point to the first element greater than `target`, and $j$ must point to the rightmost element less than `target`. **It follows that when the array does not contain `target`, the insertion index is $i$**. The code is shown below:
+Do đó, khi tìm kiếm nhị phân kết thúc, $i$ phải trỏ đến phần tử đầu tiên lớn hơn `target`, còn $j$ phải trỏ đến phần tử ngoài cùng bên phải nhỏ hơn `target`. **Suy ra rằng khi mảng không chứa `target`, chỉ số chèn là $i$**. Mã được trình bày bên dưới:
 
 ```src
 [file]{binary_search_insertion}-[class]{}-[func]{binary_search_insertion_simple}
 ```
 
-## Case with Duplicate Elements
+## Trường hợp có phần tử trùng lặp
 
 !!! question
 
-    Based on the previous problem, assume the array may contain duplicate elements, with everything else remaining the same.
+    Dựa trên bài toán trước, giả sử mảng có thể chứa các phần tử trùng lặp, còn mọi điều kiện khác giữ nguyên.
 
-Suppose there are multiple `target` elements in the array. Ordinary binary search can only return the index of one `target`, **and cannot determine how many `target` elements are to the left and right of that element**.
+Giả sử trong mảng có nhiều phần tử `target`. Tìm kiếm nhị phân thông thường chỉ có thể trả về chỉ số của một `target`, **và không thể xác định có bao nhiêu phần tử `target` nằm bên trái và bên phải phần tử đó**.
 
-The problem requires inserting the target element at the leftmost position, **so we need to find the index of the leftmost `target` in the array**. A straightforward initial approach is to follow the steps shown in the figure below:
+Bài toán yêu cầu chèn phần tử đích vào vị trí ngoài cùng bên trái, **vì vậy chúng ta cần tìm chỉ số của `target` ngoài cùng bên trái trong mảng**. Một cách tiếp cận ban đầu đơn giản là thực hiện theo các bước được minh họa trong hình bên dưới:
 
-1. Perform binary search to obtain the index of any `target`, denoted as $k$.
-2. Starting from index $k$, perform linear traversal to the left, and return when the leftmost `target` is found.
+1. Thực hiện tìm kiếm nhị phân để lấy chỉ số của một `target` bất kỳ, ký hiệu là $k$.
+2. Bắt đầu từ chỉ số $k$, duyệt tuyến tính sang trái và trả về khi tìm thấy `target` ngoài cùng bên trái.
 
-![Linear search for insertion point of duplicate elements](binary_search_insertion.assets/binary_search_insertion_naive.png)
+![Tìm kiếm tuyến tính vị trí chèn của các phần tử trùng lặp](binary_search_insertion.assets/binary_search_insertion_naive.png)
 
-Although this method works, it includes linear search, resulting in a time complexity of $O(n)$. When the array contains many duplicate `target` elements, this method is very inefficient.
+Mặc dù phương pháp này hoạt động, nó có sử dụng tìm kiếm tuyến tính, dẫn đến độ phức tạp thời gian là $O(n)$. Khi mảng chứa nhiều phần tử `target` trùng lặp, phương pháp này rất kém hiệu quả.
 
-Now consider extending the binary search code. As shown in the figure below, the overall process remains unchanged: in each iteration, we first compute the midpoint index $m$, then compare `target` with `nums[m]`, leading to the following cases:
+Bây giờ hãy xem xét việc mở rộng mã tìm kiếm nhị phân. Như minh họa trong hình bên dưới, quy trình tổng thể không thay đổi: trong mỗi lần lặp, trước tiên chúng ta tính chỉ số giữa $m$, sau đó so sánh `target` với `nums[m]`, dẫn đến các trường hợp sau:
 
-- When `nums[m] < target` or `nums[m] > target`, it means `target` has not been found yet, so use the standard interval-shrinking operation of binary search to **move pointers $i$ and $j$ closer to `target`**.
-- When `nums[m] == target`, it means elements less than `target` are in the interval $[i, m - 1]$, so use $j = m - 1$ to shrink the interval, thereby **moving pointer $j$ closer to elements less than `target`**.
+- Khi `nums[m] < target` hoặc `nums[m] > target`, điều đó có nghĩa là vẫn chưa tìm thấy `target`, vì vậy hãy sử dụng thao tác thu hẹp khoảng tiêu chuẩn của tìm kiếm nhị phân để **di chuyển các con trỏ $i$ và $j$ đến gần `target` hơn**.
+- Khi `nums[m] == target`, điều đó có nghĩa là các phần tử nhỏ hơn `target` nằm trong khoảng $[i, m - 1]$, vì vậy hãy sử dụng $j = m - 1$ để thu hẹp khoảng, qua đó **di chuyển con trỏ $j$ đến gần các phần tử nhỏ hơn `target` hơn**.
 
-After the loop completes, $i$ points to the leftmost `target`, and $j$ points to the rightmost element less than `target`, **so index $i$ is the insertion point**.
+Sau khi vòng lặp hoàn tất, $i$ trỏ đến `target` ngoài cùng bên trái, còn $j$ trỏ đến phần tử ngoài cùng bên phải nhỏ hơn `target`, **do đó chỉ số $i$ chính là vị trí chèn**.
 
 === "<1>"
-    ![Steps for binary search insertion point of duplicate elements](binary_search_insertion.assets/binary_search_insertion_step1.png)
+    ![Các bước tìm kiếm nhị phân vị trí chèn của các phần tử trùng lặp](binary_search_insertion.assets/binary_search_insertion_step1.png)
 
 === "<2>"
     ![binary_search_insertion_step2](binary_search_insertion.assets/binary_search_insertion_step2.png)
@@ -74,9 +74,9 @@ After the loop completes, $i$ points to the leftmost `target`, and $j$ points to
 === "<8>"
     ![binary_search_insertion_step8](binary_search_insertion.assets/binary_search_insertion_step8.png)
 
-Observe the following code: the branches `nums[m] > target` and `nums[m] == target` perform the same operation, so they can be merged.
+Hãy quan sát đoạn mã sau: các nhánh `nums[m] > target` và `nums[m] == target` thực hiện cùng một thao tác, vì vậy có thể gộp chúng lại.
 
-Even so, we can still keep the conditional branches expanded, as the logic is clearer and more readable.
+Tuy vậy, chúng ta vẫn có thể giữ nguyên các nhánh điều kiện riêng biệt, vì logic sẽ rõ ràng và dễ đọc hơn.
 
 ```src
 [file]{binary_search_insertion}-[class]{}-[func]{binary_search_insertion}
@@ -84,8 +84,8 @@ Even so, we can still keep the conditional branches expanded, as the logic is cl
 
 !!! tip
 
-    The code in this section uses the "closed interval" approach throughout. Interested readers can implement the "left-closed, right-open" approach themselves.
+    Mã trong phần này luôn sử dụng cách tiếp cận "khoảng đóng". Bạn đọc quan tâm có thể tự triển khai cách tiếp cận "đóng bên trái, mở bên phải".
 
-Overall, binary search is simply a matter of setting separate search targets for pointers $i$ and $j$. The target may be a specific element (such as `target`) or a range of elements (such as elements less than `target`).
+Nhìn chung, tìm kiếm nhị phân chỉ đơn giản là thiết lập các mục tiêu tìm kiếm riêng cho hai con trỏ $i$ và $j$. Mục tiêu có thể là một phần tử cụ thể (chẳng hạn như `target`) hoặc một khoảng các phần tử (chẳng hạn như các phần tử nhỏ hơn `target`).
 
-With each iteration of binary search, pointers $i$ and $j$ gradually approach their preset targets. Ultimately, they either find the answer or stop after crossing the boundary.
+Sau mỗi lần lặp của tìm kiếm nhị phân, các con trỏ $i$ và $j$ dần tiến đến những mục tiêu đã đặt trước. Cuối cùng, chúng либо tìm thấy đáp án hoặc dừng lại sau khi vượt qua biên.

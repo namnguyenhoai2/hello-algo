@@ -1,11 +1,11 @@
-# Bubble Sort
+# Sắp xếp nổi bọt
 
-<u>Bubble sort</u> sorts an array by continuously comparing and swapping adjacent elements. This process resembles bubbles rising from the bottom to the top, hence the name bubble sort.
+<u>Sắp xếp nổi bọt</u> sắp xếp một mảng bằng cách liên tục so sánh và hoán đổi các phần tử liền kề. Quá trình này giống như những bong bóng nổi từ dưới lên trên, nên được gọi là sắp xếp nổi bọt.
 
-As shown in the figure below, the bubbling process can be simulated using element swaps: starting from the leftmost end of the array and traversing to the right, compare each pair of adjacent elements, and if "left element > right element", swap them. After the traversal is complete, the largest element is moved to the rightmost end of the array.
+Như trong hình bên dưới, quá trình nổi bọt có thể được mô phỏng bằng cách hoán đổi các phần tử: bắt đầu từ đầu bên trái của mảng và duyệt sang phải, so sánh từng cặp phần tử liền kề; nếu "phần tử bên trái > phần tử bên phải", hãy hoán đổi chúng. Sau khi duyệt xong, phần tử lớn nhất sẽ được đưa đến cuối cùng bên phải của mảng.
 
 === "<1>"
-    ![Simulating bubble sort using element swaps](bubble_sort.assets/bubble_operation_step1.png)
+    ![Mô phỏng sắp xếp nổi bọt bằng cách hoán đổi các phần tử](bubble_sort.assets/bubble_operation_step1.png)
 
 === "<2>"
     ![bubble_operation_step2](bubble_sort.assets/bubble_operation_step2.png)
@@ -25,35 +25,35 @@ As shown in the figure below, the bubbling process can be simulated using elemen
 === "<7>"
     ![bubble_operation_step7](bubble_sort.assets/bubble_operation_step7.png)
 
-## Algorithm Flow
+## Quy trình thuật toán
 
-Assume the array has length $n$. The steps of bubble sort are shown in the figure below.
+Giả sử mảng có độ dài $n$. Các bước của thuật toán sắp xếp nổi bọt được trình bày trong hình bên dưới.
 
-1. First, perform "bubbling" on $n$ elements, **swapping the largest element of the array to its correct position**.
-2. Next, perform "bubbling" on the remaining $n - 1$ elements, **swapping the second largest element to its correct position**.
-3. And so on. After $n - 1$ rounds of "bubbling", **the largest $n - 1$ elements have all been swapped to their correct positions**.
-4. The only remaining element must be the smallest element, requiring no sorting, so the array sorting is complete.
+1. Trước tiên, thực hiện quá trình "nổi bọt" trên $n$ phần tử, **hoán đổi phần tử lớn nhất của mảng đến đúng vị trí của nó**.
+2. Tiếp theo, thực hiện quá trình "nổi bọt" trên $n - 1$ phần tử còn lại, **hoán đổi phần tử lớn thứ hai đến đúng vị trí của nó**.
+3. Cứ tiếp tục như vậy. Sau $n - 1$ lượt "nổi bọt", **$n - 1$ phần tử lớn nhất đều đã được hoán đổi đến đúng vị trí của chúng**.
+4. Phần tử duy nhất còn lại chắc chắn là phần tử nhỏ nhất và không cần sắp xếp, do đó quá trình sắp xếp mảng hoàn tất.
 
-![Bubble sort flow](bubble_sort.assets/bubble_sort_overview.png)
+![Quy trình sắp xếp nổi bọt](bubble_sort.assets/bubble_sort_overview.png)
 
-Example code is as follows:
+Mã ví dụ như sau:
 
 ```src
 [file]{bubble_sort}-[class]{}-[func]{bubble_sort}
 ```
 
-## Efficiency Optimization
+## Tối ưu hóa hiệu suất
 
-We can observe that if no swaps occur during a round of "bubbling", the array is already sorted and the algorithm can return immediately. Therefore, we can add a flag `flag` to detect this situation and terminate as soon as it occurs.
+Ta có thể nhận thấy rằng nếu không có phép hoán đổi nào xảy ra trong một lượt "nổi bọt", mảng đã được sắp xếp và thuật toán có thể trả về ngay lập tức. Do đó, ta có thể thêm một flag `flag` để phát hiện tình huống này và kết thúc ngay khi nó xảy ra.
 
-After this optimization, the worst-case and average-case time complexities of bubble sort remain $O(n^2)$; however, when the input array is already sorted, the best-case time complexity becomes $O(n)$.
+Sau khi tối ưu hóa, độ phức tạp thời gian trong trường hợp xấu nhất và trường hợp trung bình của thuật toán sắp xếp nổi bọt vẫn là $O(n^2)$; tuy nhiên, khi mảng đầu vào đã được sắp xếp, độ phức tạp thời gian trong trường hợp tốt nhất sẽ trở thành $O(n)$.
 
 ```src
 [file]{bubble_sort}-[class]{}-[func]{bubble_sort_with_flag}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity is $O(n^2)$; adaptive**: In successive rounds of "bubbling", the traversed portion of the array has lengths $n - 1$, $n - 2$, $\dots$, $2$, $1$, for a total of $(n - 1) n / 2$. After introducing the `flag` optimization, the best-case time complexity can reach $O(n)$.
-- **Space complexity of $O(1)$, in-place sorting**: Pointers $i$ and $j$ use a constant amount of extra space.
-- **Stable sorting**: Equal elements are not swapped during "bubbling".
+- **Độ phức tạp thời gian là $O(n^2)$; thích nghi**: Trong các lượt "nổi bọt" liên tiếp, phần mảng được duyệt có độ dài lần lượt là $n - 1$, $n - 2$, $\dots$, $2$, $1$, với tổng là $(n - 1) n / 2$. Sau khi áp dụng tối ưu hóa `flag`, độ phức tạp thời gian trong trường hợp tốt nhất có thể đạt $O(n)$.
+- **Độ phức tạp không gian là $O(1)$, sắp xếp tại chỗ**: Các con trỏ $i$ và $j$ sử dụng một lượng không gian bổ sung không đổi.
+- **Sắp xếp ổn định**: Các phần tử bằng nhau không được hoán đổi trong quá trình "nổi bọt".

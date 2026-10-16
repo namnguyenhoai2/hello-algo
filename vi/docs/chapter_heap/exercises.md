@@ -1,64 +1,64 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### How Does the Heap Change After Inserting 10?
+### Heap thay đổi như thế nào sau khi chèn 10?
 
-The array `[9, 7, 8, 3, 5]` represents a max heap. Now insert the number 10.
-
-<!-- numbered-subquestions -->
-
-1. First append 10 to the end of the array. What is the value of its parent node?
-2. Starting from the new node, perform bottom-to-top heapify and write the array after each swap.
-3. What is the final top element of the heap? How many swaps occur in total?
-
-??? success "Answer"
-
-    1. After 10 is appended, its index is 5, so its parent's index is
-        $\lfloor(5-1)/2\rfloor=2$. The parent node's value is 8.
-
-    2. Since 10 is greater than 8, the array after the first swap is `[9, 7, 10, 3, 5, 8]`.
-        Since 10 is also greater than its parent 9, the array after the second swap is `[10, 7, 9, 3, 5, 8]`.
-        The value 10 has now reached the root node, so heapification is complete.
-
-    3. The final top element is 10, and 2 swaps occur in total.
-
-### Check Parent–Child Relationships in a Min Heap
-
-The array `[1, 4, 3, 7, 6, 2]` represents a complete binary tree. In a min heap, every parent node must be no greater than its children.
-For index $i$, the left and right child indices are $2i+1$ and $2i+2$, respectively.
+Mảng `[9, 7, 8, 3, 5]` biểu diễn một max heap. Bây giờ hãy chèn số 10.
 
 <!-- numbered-subquestions -->
 
-1. What are the indices and values of the children of index 2?
-2. The node at index 2 has value 3. Does it violate the min-heap rule with its child? If so, which two elements should be swapped?
-3. Based on your answer to Question 2, write the array after the swap if the rule is violated; otherwise, explain why no swap is needed. Finally, check the remaining parent–child relationships.
+1. Trước tiên, thêm 10 vào cuối mảng. Giá trị của nút cha của nó là bao nhiêu?
+2. Bắt đầu từ nút mới, thực hiện heapify từ dưới lên và viết mảng sau mỗi lần hoán đổi.
+3. Phần tử đầu của heap cuối cùng là gì? Tổng cộng có bao nhiêu lần hoán đổi?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The left child of index 2 is at index 5 and has value 2. The right child's index is 6, but the array has length 6, so the right child does not exist.
+    1. Sau khi thêm 10, chỉ số của nó là 5, nên chỉ số của nút cha là
+        $\lfloor(5-1)/2\rfloor=2$. Giá trị của nút cha là 8.
 
-    2. The parent value 3 is greater than the child value 2, violating the min-heap rule. The elements at indices 2 and 5 should be swapped.
+    2. Vì 10 lớn hơn 8, mảng sau lần hoán đổi đầu tiên là `[9, 7, 10, 3, 5, 8]`.
+        Vì 10 cũng lớn hơn nút cha 9, mảng sau lần hoán đổi thứ hai là `[10, 7, 9, 3, 5, 8]`.
+        Giá trị 10 hiện đã đạt đến nút gốc, nên quá trình heapify hoàn tất.
 
-    3. After the swap, the array is `[1, 4, 2, 7, 6, 3]`. Check each relationship:
-        `1 ≤ 4`, `1 ≤ 2`; `4 ≤ 7`, `4 ≤ 6`; and `2 ≤ 3`.
-        Every parent is now no greater than its children, so the min-heap rule is satisfied.
+    3. Phần tử đầu cuối cùng là 10, và tổng cộng có 2 lần hoán đổi.
 
-### Keep the Three Largest Numbers with a Min Heap
+### Kiểm tra quan hệ cha–con trong min heap
 
-To keep the 3 largest numbers from the data stream `[4, 1, 7, 3, 8]`, maintain a min heap containing no more than 3 elements.
+Mảng `[1, 4, 3, 7, 6, 2]` biểu diễn một cây nhị phân hoàn chỉnh. Trong một min heap, mọi nút cha phải nhỏ hơn hoặc bằng các nút con của nó.
+Với chỉ số $i$, chỉ số của nút con trái và nút con phải lần lượt là $2i+1$ và $2i+2$.
 
-First insert the first 3 numbers into the min heap in order. Once the heap is full, for each new number:
-if it is greater than the top element, remove the top and insert the new number; otherwise, leave the heap unchanged.
+<!-- numbered-subquestions -->
 
-After each number is read, write the numbers kept in the heap and the top element.
-Write the kept numbers as a set; you do not need to give their order in the heap array.
+1. Các nút con của chỉ số 2 có những chỉ số và giá trị nào?
+2. Nút tại chỉ số 2 có giá trị 3. Nó có vi phạm quy tắc min heap với nút con của mình không? Nếu có, cần hoán đổi hai phần tử nào?
+3. Dựa trên câu trả lời cho Câu hỏi 2, hãy viết mảng sau khi hoán đổi nếu quy tắc bị vi phạm; nếu không, hãy giải thích tại sao không cần hoán đổi. Cuối cùng, kiểm tra các quan hệ cha–con còn lại.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    The result after each number is read is:
+    1. Nút con trái của chỉ số 2 ở chỉ số 5 và có giá trị 2. Chỉ số của nút con phải là 6, nhưng mảng có độ dài 6, nên nút con phải không tồn tại.
 
-    | Number read | Numbers kept | Top |
+    2. Giá trị của nút cha là 3, lớn hơn giá trị 2 của nút con, nên vi phạm quy tắc min heap. Cần hoán đổi các phần tử tại chỉ số 2 và 5.
+
+    3. Sau khi hoán đổi, mảng là `[1, 4, 2, 7, 6, 3]`. Kiểm tra từng quan hệ:
+        `1 ≤ 4`, `1 ≤ 2`; `4 ≤ 7`, `4 ≤ 6`; và `2 ≤ 3`.
+        Giờ đây mọi nút cha đều nhỏ hơn hoặc bằng các nút con của nó, nên quy tắc min heap được thỏa mãn.
+
+### Giữ lại ba số lớn nhất bằng min heap
+
+Để giữ lại 3 số lớn nhất từ luồng dữ liệu `[4, 1, 7, 3, 8]`, hãy duy trì một min heap chứa không quá 3 phần tử.
+
+Trước tiên, lần lượt chèn 3 số đầu tiên vào min heap. Khi heap đã đầy, với mỗi số mới:
+nếu số đó lớn hơn phần tử đầu, hãy xóa phần tử đầu và chèn số mới; nếu không, giữ nguyên heap.
+
+Sau khi đọc mỗi số, hãy viết các số được giữ lại trong heap và phần tử đầu.
+Viết các số được giữ lại dưới dạng một tập hợp; không cần ghi thứ tự của chúng trong mảng heap.
+
+??? success "Đáp án"
+
+    Kết quả sau khi đọc mỗi số là:
+
+    | Số được đọc | Các số được giữ lại | Phần tử đầu |
     | --- | --- | --- |
     | 4 | `{4}` | 4 |
     | 1 | `{1, 4}` | 1 |
@@ -66,21 +66,21 @@ Write the kept numbers as a set; you do not need to give their order in the heap
     | 3 | `{3, 4, 7}` | 3 |
     | 8 | `{4, 7, 8}` | 4 |
 
-    Once the heap is full, its top is the smallest of the numbers currently kept. A new number replaces the top only when it is greater than the top.
-    The final set `{4, 7, 8}` contains exactly the 3 largest numbers.
+    Khi heap đã đầy, phần tử đầu của nó là số nhỏ nhất trong các số hiện đang được giữ lại. Một số mới chỉ thay thế phần tử đầu khi nó lớn hơn phần tử đầu.
+    Tập hợp cuối cùng `{4, 7, 8}` chứa chính xác 3 số lớn nhất.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Find the Kth Largest Element in an Array
+### Tìm phần tử lớn thứ K trong một mảng
 
-Given an integer array `nums` and an integer $k$, where $1 \le k \le n$ and $n$ is the array's length, return the element that would appear at position $k$ if the array were arranged from largest to smallest.
+Cho một mảng số nguyên `nums` và một số nguyên $k$, trong đó $1 \le k \le n$ và $n$ là độ dài của mảng, hãy trả về phần tử sẽ xuất hiện ở vị trí $k$ nếu mảng được sắp xếp từ lớn đến nhỏ.
 
-Count duplicate elements separately. For example, the second-largest element of `[5, 5, 2]` is still 5. Use a min heap containing no more than $k$ elements.
+Đếm các phần tử trùng lặp riêng biệt. Ví dụ, phần tử lớn thứ hai của `[5, 5, 2]` vẫn là 5. Sử dụng một min heap chứa không quá $k$ phần tử.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. The kth largest element is the smallest among the k largest numbers
-    2. Insert each number into the min heap, and remove the smallest value whenever the heap's size exceeds k
-    3. After the traversal, the heap contains the k largest numbers, and its top is the answer
+    1. Phần tử lớn thứ k là phần tử nhỏ nhất trong k số lớn nhất
+    2. Chèn từng số vào min heap và xóa giá trị nhỏ nhất bất cứ khi nào kích thước heap vượt quá k
+    3. Sau khi duyệt qua mảng, heap chứa k số lớn nhất và phần tử đầu của nó là đáp án
 
 [LeetCode](https://leetcode.com/problems/kth-largest-element-in-an-array/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

@@ -1,41 +1,41 @@
-# Binary Tree Traversal
+# Duyệt cây nhị phân
 
-From a physical structure perspective, a tree is a data structure based on linked lists. Hence, its traversal method involves accessing nodes one by one through pointers. However, a tree is a non-linear data structure, which makes traversing a tree more complex than traversing a linked list, requiring the assistance of search algorithms.
+Xét về cấu trúc vật lý, cây là một cấu trúc dữ liệu dựa trên danh sách liên kết. Do đó, phương thức duyệt cây bao gồm việc truy cập từng nút thông qua các con trỏ. Tuy nhiên, cây là một cấu trúc dữ liệu phi tuyến, khiến việc duyệt cây phức tạp hơn so với duyệt danh sách liên kết và cần đến sự hỗ trợ của các thuật toán tìm kiếm.
 
-The common traversal methods for binary trees include level-order traversal, pre-order traversal, in-order traversal, and post-order traversal.
+Các phương thức duyệt cây nhị phân phổ biến gồm duyệt theo thứ tự mức, duyệt tiền thứ tự, duyệt trung thứ tự và duyệt hậu thứ tự.
 
-## Level-Order Traversal
+## Duyệt theo thứ tự mức
 
-As shown in the figure below, <u>level-order traversal</u> traverses the binary tree from top to bottom, layer by layer. Within each level, it visits nodes from left to right.
+Như trong hình bên dưới, <u>duyệt theo thứ tự mức</u> duyệt cây nhị phân từ trên xuống dưới, theo từng tầng. Trong mỗi tầng, các nút được thăm từ trái sang phải.
 
-Level-order traversal is essentially <u>breadth-first traversal</u>, also known as <u>breadth-first search (BFS)</u>, which proceeds outward level by level.
+Duyệt theo thứ tự mức về bản chất là <u>duyệt theo chiều rộng</u>, còn được gọi là <u>tìm kiếm theo chiều rộng (BFS)</u>, tiến ra ngoài theo từng tầng.
 
-![Level-order traversal of a binary tree](binary_tree_traversal.assets/binary_tree_bfs.png)
+![Duyệt cây nhị phân theo thứ tự mức](binary_tree_traversal.assets/binary_tree_bfs.png)
 
-### Code Implementation
+### Cài đặt bằng mã
 
-Breadth-first traversal is typically implemented with the help of a "queue". The queue follows the "first in, first out" rule, while breadth-first traversal follows the "layer-by-layer progression" rule; the underlying ideas of the two are consistent. The implementation code is as follows:
+Duyệt theo chiều rộng thường được triển khai với sự trợ giúp của một "queue". Queue tuân theo quy tắc "vào trước, ra trước", trong khi duyệt theo chiều rộng tuân theo quy tắc "tiến triển theo từng tầng"; ý tưởng nền tảng của hai khái niệm này là nhất quán. Mã triển khai như sau:
 
 ```src
 [file]{binary_tree_bfs}-[class]{}-[func]{level_order}
 ```
 
-### Complexity Analysis
+### Phân tích độ phức tạp
 
-- **Time complexity is $O(n)$**: All nodes are visited once, using $O(n)$ time, where $n$ is the number of nodes.
-- **Space complexity is $O(n)$**: In the worst case, i.e., a full binary tree, before traversing to the bottom level, the queue contains at most $(n + 1) / 2$ nodes simultaneously, occupying $O(n)$ space.
+- **Độ phức tạp thời gian là $O(n)$**: Tất cả các nút được thăm đúng một lần, sử dụng $O(n)$ thời gian, trong đó $n$ là số lượng nút.
+- **Độ phức tạp không gian là $O(n)$**: Trong trường hợp xấu nhất, tức là một cây nhị phân đầy đủ, trước khi duyệt đến tầng dưới cùng, queue chứa đồng thời nhiều nhất $(n + 1) / 2$ nút, chiếm $O(n)$ không gian.
 
-## Preorder, Inorder, and Postorder Traversal
+## Duyệt tiền thứ tự, trung thứ tự và hậu thứ tự
 
-Correspondingly, preorder, inorder, and postorder traversals all belong to <u>depth-first traversal</u>, also known as <u>depth-first search (DFS)</u>, which goes as deep as possible before backtracking.
+Tương ứng, duyệt tiền thứ tự, trung thứ tự và hậu thứ tự đều thuộc <u>duyệt theo chiều sâu</u>, còn được gọi là <u>tìm kiếm theo chiều sâu (DFS)</u>, đi sâu nhất có thể trước khi quay lui.
 
-The figure below shows how depth-first traversal works on a binary tree. **Depth-first traversal is like "walking" around the perimeter of the entire binary tree**, encountering three positions at each node, corresponding to preorder, inorder, and postorder traversal.
+Hình bên dưới cho thấy cách duyệt theo chiều sâu hoạt động trên một cây nhị phân. **Duyệt theo chiều sâu giống như "đi bộ" quanh chu vi của toàn bộ cây nhị phân**, gặp ba vị trí tại mỗi nút, tương ứng với duyệt tiền thứ tự, trung thứ tự và hậu thứ tự.
 
-![Preorder, inorder, and postorder traversal of a binary tree](binary_tree_traversal.assets/binary_tree_dfs.png)
+![Duyệt tiền thứ tự, trung thứ tự và hậu thứ tự của cây nhị phân](binary_tree_traversal.assets/binary_tree_dfs.png)
 
-### Code Implementation
+### Cài đặt bằng mã
 
-Depth-first search is usually implemented based on recursion:
+Tìm kiếm theo chiều sâu thường được triển khai dựa trên đệ quy:
 
 ```src
 [file]{binary_tree_dfs}-[class]{}-[func]{post_order}
@@ -43,15 +43,15 @@ Depth-first search is usually implemented based on recursion:
 
 !!! tip
 
-    Depth-first search can also be implemented iteratively, and interested readers can explore this on their own.
+    Tìm kiếm theo chiều sâu cũng có thể được triển khai theo cách lặp, và bạn đọc quan tâm có thể tự tìm hiểu thêm.
 
-The figure below shows the recursive process of preorder traversal of a binary tree, which can be divided into two opposite phases: "descending" and "returning".
+Hình bên dưới cho thấy quá trình đệ quy của phép duyệt tiền thứ tự trên một cây nhị phân, có thể được chia thành hai giai đoạn đối lập: "đi xuống" và "quay về".
 
-1. "Descending" means making a new recursive call, during which the program visits the next node.
-2. "Returning" means the function call returns, indicating that the current node has been fully processed.
+1. "Đi xuống" nghĩa là thực hiện một lời gọi đệ quy mới, trong đó chương trình thăm nút tiếp theo.
+2. "Quay về" nghĩa là lời gọi hàm trả về, cho biết nút hiện tại đã được xử lý hoàn toàn.
 
 === "<1>"
-    ![The recursive process of preorder traversal](binary_tree_traversal.assets/preorder_step1.png)
+    ![Quá trình đệ quy của phép duyệt tiền thứ tự](binary_tree_traversal.assets/preorder_step1.png)
 
 === "<2>"
     ![preorder_step2](binary_tree_traversal.assets/preorder_step2.png)
@@ -83,7 +83,7 @@ The figure below shows the recursive process of preorder traversal of a binary t
 === "<11>"
     ![preorder_step11](binary_tree_traversal.assets/preorder_step11.png)
 
-### Complexity Analysis
+### Phân tích độ phức tạp
 
-- **Time complexity is $O(n)$**: All nodes are visited once, using $O(n)$ time.
-- **Space complexity is $O(n)$**: In the worst case, i.e., the tree degenerates into a linked list, the recursion depth reaches $n$, and the system occupies $O(n)$ stack frame space.
+- **Độ phức tạp thời gian là $O(n)$**: Tất cả các nút được thăm đúng một lần, sử dụng $O(n)$ thời gian.
+- **Độ phức tạp không gian là $O(n)$**: Trong trường hợp xấu nhất, tức là cây suy biến thành một danh sách liên kết, độ sâu đệ quy đạt đến $n$ và hệ thống sử dụng $O(n)$ không gian cho các stack frame.

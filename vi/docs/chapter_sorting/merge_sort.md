@@ -1,23 +1,23 @@
 # Merge Sort
 
-<u>Merge sort</u> is a sorting algorithm based on a divide-and-conquer strategy, consisting of the "divide" and "merge" phases shown in the figure below.
+<u>Merge sort</u> là một thuật toán sắp xếp dựa trên chiến lược chia để trị, gồm hai giai đoạn "chia" và "trộn" được minh họa trong hình dưới đây.
 
-1. **Divide phase**: Recursively split the array at the midpoint, reducing the problem of sorting a long array to the problem of sorting shorter arrays.
-2. **Merge phase**: When a sub-array has length 1, stop dividing and start merging, continuously combining the shorter sorted sub-arrays on the left and right into a longer sorted array until the process is complete.
+1. **Giai đoạn chia**: Đệ quy chia mảng tại điểm giữa, chuyển bài toán sắp xếp một mảng dài thành bài toán sắp xếp các mảng ngắn hơn.
+2. **Giai đoạn trộn**: Khi một mảng con có độ dài bằng 1, dừng việc chia và bắt đầu trộn, liên tục kết hợp các mảng con ngắn đã được sắp xếp ở bên trái và bên phải thành một mảng dài hơn đã được sắp xếp cho đến khi hoàn tất.
 
-![Divide and merge phases of merge sort](merge_sort.assets/merge_sort_overview.png)
+![Các giai đoạn chia và trộn của merge sort](merge_sort.assets/merge_sort_overview.png)
 
-## Algorithm Flow
+## Quy trình thuật toán
 
-As shown in the figure below, the "divide phase" recursively splits the array from the midpoint into two sub-arrays from top to bottom.
+Như minh họa trong hình dưới đây, "giai đoạn chia" đệ quy chia mảng từ điểm giữa thành hai mảng con theo thứ tự từ trên xuống dưới.
 
-1. Calculate the array midpoint `mid`, recursively divide the left sub-array (interval `[left, mid]`) and right sub-array (interval `[mid + 1, right]`).
-2. Repeat step `1.` recursively until a sub-array has length 1.
+1. Tính điểm giữa của mảng `mid`, đệ quy chia mảng con bên trái (khoảng `[left, mid]`) và mảng con bên phải (khoảng `[mid + 1, right]`).
+2. Lặp lại đệ quy bước `1.` cho đến khi một mảng con có độ dài bằng 1.
 
-The "merge phase" merges the left and right sub-arrays into a sorted array from bottom to top. Note that merging starts from sub-arrays of length 1, so every sub-array involved in this phase is already sorted.
+"Giai đoạn trộn" hợp nhất các mảng con bên trái và bên phải thành một mảng đã được sắp xếp theo thứ tự từ dưới lên trên. Lưu ý rằng việc trộn bắt đầu từ các mảng con có độ dài bằng 1, vì vậy mọi mảng con tham gia vào giai đoạn này đều đã được sắp xếp.
 
 === "<1>"
-    ![Merge sort steps](merge_sort.assets/merge_sort_step1.png)
+    ![Các bước merge sort](merge_sort.assets/merge_sort_step1.png)
 
 === "<2>"
     ![merge_sort_step2](merge_sort.assets/merge_sort_step2.png)
@@ -46,28 +46,28 @@ The "merge phase" merges the left and right sub-arrays into a sorted array from 
 === "<10>"
     ![merge_sort_step10](merge_sort.assets/merge_sort_step10.png)
 
-The recursive order of merge sort is consistent with the post-order traversal of a binary tree.
+Thứ tự đệ quy của merge sort nhất quán với phép duyệt hậu thứ tự (post-order traversal) của cây nhị phân.
 
-- **Post-order traversal**: First recursively traverse the left subtree, then recursively traverse the right subtree, and finally process the root node.
-- **Merge sort**: First recursively process the left sub-array, then recursively process the right sub-array, and finally perform the merge.
+- **Duyệt hậu thứ tự**: Trước tiên đệ quy duyệt cây con bên trái, sau đó đệ quy duyệt cây con bên phải và cuối cùng xử lý nút gốc.
+- **Merge sort**: Trước tiên đệ quy xử lý mảng con bên trái, sau đó đệ quy xử lý mảng con bên phải và cuối cùng thực hiện thao tác trộn.
 
-The implementation of merge sort is shown in the code below. Note that the interval to be merged in `nums` is `[left, right]`, while the corresponding interval in `tmp` is `[0, right - left]`.
+Phần triển khai merge sort được trình bày trong đoạn code dưới đây. Lưu ý rằng khoảng cần trộn trong `nums` là `[left, right]`, trong khi khoảng tương ứng trong `tmp` là `[0, right - left]`.
 
 ```src
 [file]{merge_sort}-[class]{}-[func]{merge_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-- **Time complexity is $O(n \log n)$; merge sort is non-adaptive**: The divide phase produces a recursion tree of height $\log n$, and the total number of operations performed during merging at each level is $n$, so the overall time complexity is $O(n \log n)$.
-- **Space complexity is $O(n)$; merge sort is not in-place**: The recursion depth is $\log n$, which uses $O(\log n)$ stack-frame space. The merge operation requires an auxiliary array, which uses $O(n)$ additional space.
-- **Stable sort**: During merging, the relative order of equal elements remains unchanged.
+- **Độ phức tạp thời gian là $O(n \log n)$; merge sort không thích nghi (non-adaptive)**: Giai đoạn chia tạo ra một cây đệ quy có chiều cao $\log n$, và tổng số thao tác được thực hiện trong quá trình trộn ở mỗi mức là $n$, vì vậy độ phức tạp thời gian tổng thể là $O(n \log n)$.
+- **Độ phức tạp không gian là $O(n)$; merge sort không phải là thuật toán in-place**: Độ sâu đệ quy là $\log n$, sử dụng không gian $O(\log n)$ cho các stack frame. Thao tác trộn yêu cầu một mảng phụ, sử dụng thêm không gian $O(n)$.
+- **Sắp xếp ổn định**: Trong quá trình trộn, thứ tự tương đối của các phần tử bằng nhau không thay đổi.
 
-## Linked List Sorting
+## Sắp xếp danh sách liên kết
 
-For linked lists, merge sort has significant advantages over other sorting algorithms, **and it can reduce the space complexity of the sorting task to $O(1)$**.
+Đối với danh sách liên kết, merge sort có những ưu điểm đáng kể so với các thuật toán sắp xếp khác, **đồng thời có thể giảm độ phức tạp không gian của tác vụ sắp xếp xuống còn $O(1)$**.
 
-- **Divide phase**: Iteration can be used instead of recursion to split the linked list, thereby eliminating the stack-frame space used by recursion.
-- **Merge phase**: In linked lists, node insertion and deletion require only pointer updates, so the merge phase (merging two short sorted linked lists into one longer sorted linked list) does not require creating an additional linked list.
+- **Giai đoạn chia**: Có thể sử dụng phép lặp thay cho đệ quy để chia danh sách liên kết, qua đó loại bỏ không gian stack frame được sử dụng bởi đệ quy.
+- **Giai đoạn trộn**: Trong danh sách liên kết, việc chèn và xóa nút chỉ yêu cầu cập nhật con trỏ, vì vậy giai đoạn trộn (hợp nhất hai danh sách liên kết ngắn đã được sắp xếp thành một danh sách liên kết dài hơn đã được sắp xếp) không yêu cầu tạo thêm một danh sách liên kết.
 
-The specific implementation details are quite complex, and interested readers can consult related materials for learning.
+Các chi tiết triển khai cụ thể khá phức tạp; những độc giả quan tâm có thể tham khảo các tài liệu liên quan để tìm hiểu.

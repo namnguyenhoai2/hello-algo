@@ -1,57 +1,57 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### Which Element Leaves a Stack or Queue First?
+### Phần tử nào rời khỏi Stack hoặc Queue trước?
 
-Prepare an empty stack `S` and an empty queue `Q`. Perform the same sequence of operations on each one:
+Chuẩn bị một stack rỗng `S` và một queue rỗng `Q`. Thực hiện cùng một chuỗi thao tác trên mỗi cấu trúc:
 
-Step 1: Add `A`.
-Step 2: Add `B`.
-Step 3: Remove and record one element.
-Step 4: Add `C`.
-Step 5: Keep removing and recording elements until the container is empty.
+Bước 1: Thêm `A`.  
+Bước 2: Thêm `B`.  
+Bước 3: Xóa và ghi lại một phần tử.  
+Bước 4: Thêm `C`.  
+Bước 5: Tiếp tục xóa và ghi lại các phần tử cho đến khi container rỗng.
 
-Write the order in which elements are removed from `S` and from `Q`. Explain the difference using "last-in-first-out" or "first-in-first-out."
+Viết thứ tự các phần tử được xóa khỏi `S` và `Q`. Giải thích sự khác biệt bằng các khái niệm "last-in-first-out" hoặc "first-in-first-out".
 
-??? success "Answer"
+??? success "Đáp án"
 
-    The removal order for stack `S` is `B, C, A`. After the elements `A, B` are added, the most recently added element, `B`, is popped first. After `C` is added,
-    `C, A` are popped in that order. This is "last-in-first-out."
+    Thứ tự xóa của stack `S` là `B, C, A`. Sau khi thêm các phần tử `A, B`, phần tử được thêm gần nhất, `B`, được pop trước. Sau khi thêm `C`,
+    `C, A` được pop theo thứ tự đó. Đây là "last-in-first-out."
 
-    The removal order for queue `Q` is `A, B, C`. After the elements `A, B` are added, the earliest added element, `A`, is removed first.
-    After `C` is added, `B, C` are removed in that order. This is "first-in-first-out."
+    Thứ tự xóa của queue `Q` là `A, B, C`. Sau khi thêm các phần tử `A, B`, phần tử được thêm sớm nhất, `A`, được xóa trước.
+    Sau khi thêm `C`, `B, C` được xóa theo thứ tự đó. Đây là "first-in-first-out."
 
-### What Happens When the Rear Passes the End of the Array?
+### Điều gì xảy ra khi rear vượt qua cuối mảng?
 
-A queue is implemented with a circular array of length 5, whose indices are `0–4`.
-Currently, `front = 3` and `size = 2`; `A, B` are stored at indices 3 and 4, respectively.
+Một queue được triển khai bằng một mảng vòng có độ dài 5, với các chỉ số là `0–4`.
+Hiện tại, `front = 3` và `size = 2`; `A, B` được lưu lần lượt tại các chỉ số 3 và 4.
 
 <!-- numbered-subquestions -->
 
-1. When `C` is enqueued, at which index should `C` be stored? What is `size` after the enqueue?
-2. Next, dequeue once. Which element is removed? What are the new values of `front` and `size`?
-3. What is the logical order from the front to the rear now? Does dequeuing require moving the other elements in the array? Why or why not?
+1. Khi `C` được enqueue, `C` nên được lưu tại chỉ số nào? `size` sẽ có giá trị gì sau thao tác enqueue?
+2. Tiếp theo, thực hiện dequeue một lần. Phần tử nào bị xóa? Giá trị mới của `front` và `size` là gì?
+3. Thứ tự logic từ front đến rear hiện tại là gì? Dequeue có cần di chuyển các phần tử khác trong mảng không? Tại sao?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The new element's position is
+    1. Vị trí của phần tử mới là
         `(front + size) % 5 = (3 + 2) % 5 = 0`,
-        so `C` is stored at index 0. After the enqueue, `size = 3`.
+        nên `C` được lưu tại chỉ số 0. Sau thao tác enqueue, `size = 3`.
 
-    2. Dequeuing removes the current front element, `A`. The new front index is
-        `(3 + 1) % 5 = 4`, so `front = 4` and `size = 2`.
+    2. Dequeue xóa phần tử front hiện tại, `A`. Chỉ số front mới là
+        `(3 + 1) % 5 = 4`, vì vậy `front = 4` và `size = 2`.
 
-    3. The logical order of valid elements is `B, C`, with `B` at index 4 and `C` at index 0.
-        Dequeuing requires only changing `front` and `size`. The circular array uses the remainder operation to wrap the index back to the beginning,
-        so there is no need to shift all the other elements forward.
+    3. Thứ tự logic của các phần tử hợp lệ là `B, C`, với `B` ở chỉ số 4 và `C` ở chỉ số 0.
+        Dequeue chỉ cần thay đổi `front` và `size`. Mảng vòng sử dụng phép toán lấy phần dư để đưa chỉ số quay lại đầu mảng,
+        vì vậy không cần dịch chuyển tất cả các phần tử khác về phía trước.
 
-### Operations at Both Ends of a Deque
+### Các thao tác ở cả hai đầu của Deque
 
-Here, `push_first` adds an element at the front, `push_last` adds one at the rear,
-`pop_first` removes one from the front, and `pop_last` removes one from the rear.
+Ở đây, `push_first` thêm một phần tử ở front, `push_last` thêm một phần tử ở rear,
+`pop_first` xóa một phần tử ở front, còn `pop_last` xóa một phần tử ở rear.
 
-Perform the following operations on an empty deque `deq`:
+Thực hiện các thao tác sau trên một deque rỗng `deq`:
 
 1. `push_last(A)`
 2. `push_last(B)`
@@ -62,38 +62,38 @@ Perform the following operations on an empty deque `deq`:
 
 <!-- numbered-subquestions -->
 
-1. Which elements are returned by the two pop operations?
-2. After all operations are complete, which elements remain from front to rear?
-3. Examine the six operations. Can a queue that allows insertion only at the rear and removal only at the front perform all of them? If not, identify the operations it cannot perform. Then state whether a deque can perform them and explain why.
+1. Hai thao tác pop trả về những phần tử nào?
+2. Sau khi hoàn tất tất cả các thao tác, những phần tử nào còn lại theo thứ tự từ front đến rear?
+3. Xem xét sáu thao tác trên. Một queue chỉ cho phép chèn ở rear và xóa ở front có thể thực hiện tất cả các thao tác này không? Nếu không, hãy xác định các thao tác mà nó không thể thực hiện. Sau đó cho biết deque có thể thực hiện chúng hay không và giải thích lý do.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    After the first three steps, the deque from front to rear is `[C, A, B]`.
+    Sau ba bước đầu tiên, deque theo thứ tự từ front đến rear là `[C, A, B]`.
 
     <!-- numbered-subquestions -->
 
-    1. `pop_last()` removes `B`. After `D` is added, the deque is `[C, A, D]`,
-        and `pop_first()` then removes `C`.
+    1. `pop_last()` xóa `B`. Sau khi thêm `D`, deque là `[C, A, D]`,
+        và `pop_first()` sau đó xóa `C`.
 
-    2. `[A, D]` remains.
+    2. `[A, D]` còn lại.
 
-    3. A queue that permits insertion only at the rear and removal only at the front cannot perform all the operations.
-        Step 3, `push_first(C)`, requires insertion at the front, and Step 4, `pop_last()`, requires removal at the rear. Both are outside the operations supported by such a queue.
-        A deque permits insertion and removal at both ends, so it can perform all six operations.
+    3. Một queue chỉ cho phép chèn ở rear và xóa ở front không thể thực hiện tất cả các thao tác.
+        Bước 3, `push_first(C)`, yêu cầu chèn ở front, còn Bước 4, `pop_last()`, yêu cầu xóa ở rear. Cả hai thao tác đều nằm ngoài các thao tác mà queue đó hỗ trợ.
+        Deque cho phép chèn và xóa ở cả hai đầu, nên có thể thực hiện cả sáu thao tác.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Check a Bracket Sequence
+### Kiểm tra chuỗi dấu ngoặc
 
-Given a string `s` containing only the three types of brackets `()`, `[]`, and `{}`, use a stack to determine whether the string is valid.
+Cho một chuỗi `s` chỉ chứa ba loại dấu ngoặc `()`, `[]` và `{}`, hãy sử dụng stack để xác định xem chuỗi có hợp lệ hay không.
 
-A valid sequence must satisfy both conditions: every closing bracket matches the type of the most recent unmatched opening bracket,
-and no unmatched opening bracket remains after the traversal. Return a Boolean value for the result.
+Một chuỗi hợp lệ phải thỏa mãn cả hai điều kiện: mọi dấu ngoặc đóng đều khớp với loại dấu ngoặc mở chưa được ghép gần nhất,
+và không còn dấu ngoặc mở nào chưa được ghép sau khi duyệt. Trả về một giá trị Boolean cho kết quả.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. You can create a mapping from each closing bracket to its matching opening bracket
-    2. When you encounter a closing bracket, first check whether the stack is empty, and then check whether the top matches
-    3. The stack must also be empty after the traversal
+    1. Bạn có thể tạo một mapping từ mỗi dấu ngoặc đóng đến dấu ngoặc mở tương ứng
+    2. Khi gặp một dấu ngoặc đóng, trước tiên hãy kiểm tra xem stack có rỗng không, sau đó kiểm tra xem phần tử trên cùng có khớp không
+    3. Stack cũng phải rỗng sau khi duyệt
 
 [LeetCode](https://leetcode.com/problems/valid-parentheses/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

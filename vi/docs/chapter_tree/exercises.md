@@ -1,43 +1,43 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### Complete, Full, and Perfect Binary Trees
+### Cây nhị phân hoàn chỉnh, đầy đủ và hoàn hảo
 
-The following two arrays represent binary trees in level order, where `None` marks an empty position:
+Hai mảng sau biểu diễn các cây nhị phân theo thứ tự theo từng mức, trong đó `None` đánh dấu một vị trí trống:
 
-- Tree A: `[1, 2, 3, 4, 5, 6]`
-- Tree B: `[1, 2, 3, None, None, 6, 7]`
-
-<!-- numbered-subquestions -->
-
-1. Which tree is a complete binary tree?
-2. Which tree is a full binary tree, meaning every non-leaf node has two children?
-3. Is either tree a perfect binary tree? Explain the reason for each tree.
-
-??? success "Answer"
-
-    1. Tree A is a complete binary tree. Only its lowest level is not full, and the nodes on that level occupy consecutive positions from left to right.
-        Tree B is not complete because there are empty positions on the left of the lowest level while nodes still appear on the right.
-
-    2. Tree B is a full binary tree: nodes 1 and 3 each have two children, and all other nodes are leaves.
-        Tree A is not full because node 3 has only one child, its left child 6.
-
-    3. Neither tree is perfect because the lowest level of each tree is not completely filled.
-
-### Three Traversal Orders for the Same Tree
-
-Store the array `[1, 2, 3, 4, 5, 6, 7]` in level order in a complete binary tree.
+- Cây A: `[1, 2, 3, 4, 5, 6]`
+- Cây B: `[1, 2, 3, None, None, 6, 7]`
 
 <!-- numbered-subquestions -->
 
-1. Draw the tree.
-2. Write its preorder, inorder, and postorder traversal sequences.
-3. In the inorder sequence, which parts of the tree correspond to the subsequences to the left and right of root node 1?
+1. Cây nào là cây nhị phân hoàn chỉnh?
+2. Cây nào là cây nhị phân đầy đủ, nghĩa là mọi nút không phải nút lá đều có hai nút con?
+3. Có cây nào là cây nhị phân hoàn hảo không? Giải thích lý do đối với từng cây.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The tree is:
+    1. Cây A là cây nhị phân hoàn chỉnh. Chỉ mức thấp nhất của cây chưa đầy đủ, và các nút ở mức đó nằm ở các vị trí liên tiếp từ trái sang phải.
+        Cây B không hoàn chỉnh vì có các vị trí trống ở bên trái của mức thấp nhất trong khi các nút vẫn xuất hiện ở bên phải.
+
+    2. Cây B là cây nhị phân đầy đủ: các nút 1 và 3 mỗi nút có hai nút con, còn tất cả các nút khác đều là nút lá.
+        Cây A không đầy đủ vì nút 3 chỉ có một nút con, là nút con bên trái 6.
+
+    3. Không cây nào là cây nhị phân hoàn hảo vì mức thấp nhất của mỗi cây chưa được lấp đầy hoàn toàn.
+
+### Ba thứ tự duyệt trên cùng một cây
+
+Lưu mảng `[1, 2, 3, 4, 5, 6, 7]` theo thứ tự theo từng mức trong một cây nhị phân hoàn chỉnh.
+
+<!-- numbered-subquestions -->
+
+1. Vẽ cây.
+2. Viết các chuỗi duyệt preorder, inorder và postorder của cây.
+3. Trong chuỗi inorder, các phần nào của cây tương ứng với các chuỗi con ở bên trái và bên phải của nút gốc 1?
+
+??? success "Đáp án"
+
+    1. Cây là:
 
         ```text
               1
@@ -47,80 +47,80 @@ Store the array `[1, 2, 3, 4, 5, 6, 7]` in level order in a complete binary tree
          4   5 6   7
         ```
 
-    2. The preorder traversal is `1, 2, 4, 5, 3, 6, 7`;
-        the inorder traversal is `4, 2, 5, 1, 6, 3, 7`;
-        the postorder traversal is `4, 5, 2, 6, 7, 3, 1`.
+    2. Duyệt preorder là `1, 2, 4, 5, 3, 6, 7`;
+        duyệt inorder là `4, 2, 5, 1, 6, 3, 7`;
+        duyệt postorder là `4, 5, 2, 6, 7, 3, 1`.
 
-    3. The sequence `4, 2, 5` to the left of root node 1 is the inorder traversal of the left subtree;
-        the sequence `6, 3, 7` to its right is the inorder traversal of the right subtree.
+    3. Chuỗi `4, 2, 5` ở bên trái nút gốc 1 là phép duyệt inorder của cây con bên trái;
+        chuỗi `6, 3, 7` ở bên phải nút đó là phép duyệt inorder của cây con bên phải.
 
-### Compare Two Binary Search Trees
+### So sánh hai cây tìm kiếm nhị phân
 
-Insert each of the following sequences from left to right into an empty binary search tree:
+Chèn từng chuỗi sau, từ trái sang phải, vào một cây tìm kiếm nhị phân rỗng:
 
-- Sequence A: `[4, 2, 6, 1, 3, 5, 7]`
-- Sequence B: `[1, 2, 3, 4, 5, 6, 7]`
+- Chuỗi A: `[4, 2, 6, 1, 3, 5, 7]`
+- Chuỗi B: `[1, 2, 3, 4, 5, 6, 7]`
 
 <!-- numbered-subquestions -->
 
-1. For each tree, write the nodes visited when searching for 7.
-2. If height is measured by the number of edges from the root node to the farthest leaf node, what is the height of each tree?
-3. Based on the first two questions, is searching for 7 equally efficient in the two trees? Explain using the trees' shapes and search paths.
+1. Với mỗi cây, hãy viết các nút được truy cập khi tìm kiếm 7.
+2. Nếu chiều cao được đo bằng số cạnh từ nút gốc đến nút lá xa nhất, chiều cao của mỗi cây là bao nhiêu?
+3. Dựa trên hai câu hỏi đầu, việc tìm kiếm 7 có hiệu quả như nhau trong hai cây không? Giải thích dựa trên hình dạng của cây và các đường đi khi tìm kiếm.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. In the tree built from Sequence A, the search path is `4 → 6 → 7`.
-        In the tree built from Sequence B, the search path is `1 → 2 → 3 → 4 → 5 → 6 → 7`.
+    1. Trong cây được tạo từ Chuỗi A, đường đi khi tìm kiếm là `4 → 6 → 7`.
+        Trong cây được tạo từ Chuỗi B, đường đi khi tìm kiếm là `1 → 2 → 3 → 4 → 5 → 6 → 7`.
 
-    2. Every level of the first tree is full, and its height is 2. The second tree has only right children, and its height is 6.
+    2. Mọi mức của cây thứ nhất đều đầy đủ, và chiều cao của cây là 2. Cây thứ hai chỉ có các nút con bên phải, và chiều cao của cây là 6.
 
-    3. Searching for 7 is not equally efficient in the two trees. The insertion order changes the shape and height of a binary search tree. The search visits only 3 nodes in the first tree
-        but all 7 nodes in the second. The taller the tree, the more nodes may need to be compared along a path in the worst case.
+    3. Việc tìm kiếm 7 không có hiệu quả như nhau trong hai cây. Thứ tự chèn làm thay đổi hình dạng và chiều cao của cây tìm kiếm nhị phân. Phép tìm kiếm chỉ truy cập 3 nút trong cây thứ nhất
+        nhưng truy cập cả 7 nút trong cây thứ hai. Cây càng cao thì trong trường hợp xấu nhất, càng có nhiều nút có thể cần được so sánh dọc theo một đường đi.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Maximum Depth of a Binary Tree
+### Độ sâu lớn nhất của cây nhị phân
 
-You are given the root node `root` of a binary tree. Each node contains an integer value and references to its left and right children.
+Bạn được cung cấp nút gốc `root` của một cây nhị phân. Mỗi nút chứa một giá trị nguyên và các tham chiếu đến nút con bên trái và bên phải.
 
-The maximum depth is the **number of nodes** on the path from the root node to the farthest leaf node. Return the maximum depth of the tree; the maximum depth of an empty tree is 0.
-Use recursion.
+Độ sâu lớn nhất là **số nút** trên đường đi từ nút gốc đến nút lá xa nhất. Hãy trả về độ sâu lớn nhất của cây; độ sâu lớn nhất của một cây rỗng là 0.
+Sử dụng đệ quy.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. Depth is measured by the number of nodes in this exercise, so a tree containing only a root node has a maximum depth of 1
-    2. Let the recursive function return the maximum depth of the subtree rooted at the current node
-    3. Return 0 for an empty node; for a nonempty node, return max(depth(left), depth(right)) + 1
+    1. Trong bài tập này, độ sâu được đo bằng số nút, vì vậy một cây chỉ chứa nút gốc có độ sâu lớn nhất là 1
+    2. Cho hàm đệ quy trả về độ sâu lớn nhất của cây con có gốc là nút hiện tại
+    3. Trả về 0 đối với một nút rỗng; với một nút không rỗng, trả về max(depth(left), depth(right)) + 1
 
 [LeetCode](https://leetcode.com/problems/maximum-depth-of-binary-tree/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
 
-### Traverse a Binary Tree Level by Level
+### Duyệt cây nhị phân theo từng mức
 
-Given the root node `root` of a binary tree, use a queue to visit all nodes level by level from top to bottom and from left to right within each level.
+Cho nút gốc `root` của một cây nhị phân, hãy sử dụng queue để truy cập tất cả các nút theo từng mức, từ trên xuống dưới và từ trái sang phải trong mỗi mức.
 
-Return a two-dimensional array: the first subarray stores the values at the root's level, the second stores the values at the next level, and so on.
-If the tree is empty, return an empty array.
+Trả về một mảng hai chiều: mảng con thứ nhất lưu các giá trị ở mức của nút gốc, mảng con thứ hai lưu các giá trị ở mức tiếp theo, v.v.
+Nếu cây rỗng, hãy trả về một mảng rỗng.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. Level-order traversal visits earlier enqueued nodes first, so use a queue
-    2. At the beginning of each round, all nodes currently in the queue belong to the same level
-    3. First record the queue's length, then remove exactly that many nodes and enqueue their children
+    1. Phép duyệt theo thứ tự theo từng mức truy cập các nút được đưa vào queue sớm hơn trước, vì vậy hãy sử dụng queue
+    2. Khi bắt đầu mỗi lượt, tất cả các nút hiện có trong queue đều thuộc cùng một mức
+    3. Trước tiên, ghi lại độ dài của queue, sau đó xóa chính xác số nút đó và đưa các nút con của chúng vào queue
 
 [LeetCode](https://leetcode.com/problems/binary-tree-level-order-traversal/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
 
-### Kth Smallest Element in a Binary Search Tree
+### Phần tử nhỏ thứ k trong cây tìm kiếm nhị phân
 
-A binary search tree contains `n` nodes with distinct values.
-If all node values are arranged from smallest to largest, their positions are numbered starting from 1.
+Một cây tìm kiếm nhị phân chứa `n` nút có các giá trị phân biệt.
+Nếu tất cả giá trị của các nút được sắp xếp từ nhỏ đến lớn, vị trí của chúng được đánh số bắt đầu từ 1.
 
-Given the root node `root` and an integer `k` satisfying `1 <= k <= n`, return the value at position `k`.
-Find the answer directly during an inorder traversal rather than collecting all node values first.
+Cho nút gốc `root` và một số nguyên `k` thỏa mãn `1 <= k <= n`, hãy trả về giá trị ở vị trí `k`.
+Tìm trực tiếp đáp án trong khi duyệt inorder thay vì thu thập trước tất cả giá trị của các nút.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. An inorder traversal of a binary search tree visits node values from smallest to largest
-    2. Inorder traversal processes the left subtree, the current node, and then the right subtree; increment the count when visiting the current node
-    3. When the count first equals k, the current node's value is the answer, so no further traversal is needed
+    1. Phép duyệt inorder của cây tìm kiếm nhị phân truy cập các giá trị của nút từ nhỏ đến lớn
+    2. Phép duyệt inorder xử lý cây con bên trái, nút hiện tại rồi đến cây con bên phải; tăng bộ đếm khi truy cập nút hiện tại
+    3. Khi bộ đếm lần đầu tiên bằng k, giá trị của nút hiện tại là đáp án, vì vậy không cần duyệt thêm
 
 [LeetCode](https://leetcode.com/problems/kth-smallest-element-in-a-bst/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

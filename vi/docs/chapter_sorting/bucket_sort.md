@@ -1,45 +1,45 @@
-# Bucket Sort
+# Sắp xếp theo bucket
 
-The sorting algorithms discussed earlier are all comparison-based sorting algorithms, which sort by comparing the relative order of elements. The worst-case time complexity of such algorithms has a lower bound of $\Omega(n \log n)$. Next, we will explore several non-comparison sorting algorithms, whose time complexity can be linear.
+Các thuật toán sắp xếp được thảo luận trước đây đều là thuật toán sắp xếp dựa trên so sánh, tức là sắp xếp bằng cách so sánh thứ tự tương đối của các phần tử. Độ phức tạp thời gian trong trường hợp xấu nhất của các thuật toán này có cận dưới là $\Omega(n \log n)$. Tiếp theo, chúng ta sẽ tìm hiểu một số thuật toán sắp xếp không dựa trên so sánh, có độ phức tạp thời gian tuyến tính.
 
-<u>Bucket sort</u> is a typical application of the divide-and-conquer strategy. It works by creating a sequence of ordered buckets, each corresponding to a data range, and distributing the data evenly among them. The elements within each bucket are then sorted separately. Finally, all buckets are merged in order.
+<u>Sắp xếp theo bucket</u> là một ứng dụng điển hình của chiến lược chia để trị. Thuật toán tạo ra một dãy các bucket có thứ tự, mỗi bucket tương ứng với một phạm vi dữ liệu, rồi phân phối dữ liệu đồng đều vào các bucket đó. Sau đó, các phần tử trong từng bucket được sắp xếp riêng. Cuối cùng, tất cả các bucket được gộp lại theo thứ tự.
 
-## Algorithm Flow
+## Quy trình thuật toán
 
-Consider an array of length $n$, whose elements are floating-point numbers in the range $[0, 1)$. The flow of bucket sort is shown in the figure below.
+Xét một mảng có độ dài $n$, trong đó các phần tử là số thực trong phạm vi $[0, 1)$. Quy trình của bucket sort được minh họa trong hình dưới đây.
 
-1. Initialize $k$ buckets and distribute the $n$ elements into the $k$ buckets.
-2. Sort each bucket separately (here we use the built-in sorting function of the programming language).
-3. Merge the results in order from smallest to largest bucket.
+1. Khởi tạo $k$ bucket và phân phối $n$ phần tử vào $k$ bucket.
+2. Sắp xếp riêng từng bucket (ở đây chúng ta sử dụng hàm sắp xếp tích hợp của ngôn ngữ lập trình).
+3. Gộp các kết quả theo thứ tự từ bucket nhỏ nhất đến bucket lớn nhất.
 
-![Bucket sort algorithm flow](bucket_sort.assets/bucket_sort_overview.png)
+![Quy trình thuật toán sắp xếp theo bucket](bucket_sort.assets/bucket_sort_overview.png)
 
-The code is as follows:
+Mã nguồn như sau:
 
 ```src
 [file]{bucket_sort}-[class]{}-[func]{bucket_sort}
 ```
 
-## Algorithm Characteristics
+## Đặc điểm của thuật toán
 
-Bucket sort is suitable for processing very large datasets. For example, suppose the input contains 1 million elements, and limited memory prevents the system from loading all of them at once. In that case, the data can be divided into 1000 buckets, each bucket can be sorted separately, and the results can then be merged.
+Bucket sort phù hợp để xử lý các tập dữ liệu rất lớn. Ví dụ, giả sử đầu vào chứa 1 triệu phần tử và bộ nhớ hạn chế khiến hệ thống không thể tải tất cả phần tử cùng lúc. Khi đó, dữ liệu có thể được chia thành 1000 bucket, mỗi bucket được sắp xếp riêng, sau đó các kết quả được gộp lại.
 
-- **Time complexity is $O(n + k)$**: Assuming the elements are evenly distributed across the buckets, each bucket contains $\frac{n}{k}$ elements. If sorting a single bucket takes $O(\frac{n}{k} \log\frac{n}{k})$ time, then sorting all buckets takes $O(n \log\frac{n}{k})$ time. **When the number of buckets $k$ is relatively large, the time complexity approaches $O(n)$**. Merging the results requires traversing all buckets and elements, which takes $O(n + k)$ time. In the worst case, all data is placed into a single bucket, and sorting that bucket takes $O(n^2)$ time.
-- **Space complexity is $O(n + k)$, and bucket sort is not in-place**: It requires extra space for $k$ buckets and a total of $n$ elements.
-- Whether bucket sort is stable depends on whether the algorithm for sorting elements within buckets is stable.
+- **Độ phức tạp thời gian là $O(n + k)$**: Giả sử các phần tử được phân phối đồng đều giữa các bucket, mỗi bucket chứa $\frac{n}{k}$ phần tử. Nếu việc sắp xếp một bucket mất $O(\frac{n}{k} \log\frac{n}{k})$ thời gian, thì việc sắp xếp tất cả các bucket mất $O(n \log\frac{n}{k})$ thời gian. **Khi số lượng bucket $k$ tương đối lớn, độ phức tạp thời gian tiến gần đến $O(n)$**. Việc gộp các kết quả yêu cầu duyệt qua tất cả bucket và phần tử, mất $O(n + k)$ thời gian. Trong trường hợp xấu nhất, toàn bộ dữ liệu được đưa vào một bucket duy nhất, và việc sắp xếp bucket đó mất $O(n^2)$ thời gian.
+- **Độ phức tạp không gian là $O(n + k)$ và bucket sort không phải là thuật toán in-place**: Thuật toán cần thêm không gian cho $k$ bucket và tổng cộng $n$ phần tử.
+- Bucket sort có ổn định hay không phụ thuộc vào việc thuật toán dùng để sắp xếp các phần tử trong bucket có ổn định hay không.
 
-## How to Achieve Even Distribution
+## Cách đạt được phân phối đồng đều
 
-In theory, bucket sort can achieve $O(n)$ time complexity. **The key is to distribute the elements evenly across the buckets**, because real-world data is often not uniformly distributed. For example, suppose we want to divide all products on Taobao evenly into 10 buckets by price range, but the price distribution is uneven: there are many products priced below 100 yuan and very few priced above 1000 yuan. If the price range is divided evenly into 10 intervals, the numbers of products in the buckets will differ greatly.
+Về lý thuyết, bucket sort có thể đạt độ phức tạp thời gian $O(n)$. **Điểm mấu chốt là phân phối các phần tử đồng đều giữa các bucket**, vì dữ liệu trong thực tế thường không được phân phối đồng đều. Ví dụ, giả sử chúng ta muốn chia đều tất cả sản phẩm trên Taobao thành 10 bucket theo khoảng giá, nhưng phân phối giá không đồng đều: có rất nhiều sản phẩm có giá dưới 100 nhân dân tệ và rất ít sản phẩm có giá trên 1000 nhân dân tệ. Nếu chia đều phạm vi giá thành 10 khoảng, số lượng sản phẩm trong các bucket sẽ chênh lệch rất lớn.
 
-To achieve a more even distribution, we can first choose a rough boundary and partition the data into 3 buckets. **After that, buckets containing more products can be further divided into 3 buckets until the numbers of elements in all buckets are roughly equal**.
+Để đạt được phân phối đồng đều hơn, trước tiên chúng ta có thể chọn một ranh giới tương đối và chia dữ liệu thành 3 bucket. **Sau đó, các bucket chứa nhiều sản phẩm hơn có thể tiếp tục được chia thành 3 bucket cho đến khi số lượng phần tử trong tất cả các bucket xấp xỉ bằng nhau**.
 
-As shown in the figure below, this method essentially builds a recursion tree whose goal is to make the leaf nodes as balanced as possible. Of course, the data does not have to be split into 3 buckets in every round; the specific partitioning strategy can be chosen flexibly based on the characteristics of the data.
+Như trong hình dưới đây, phương pháp này về bản chất xây dựng một cây đệ quy với mục tiêu làm cho các node lá cân bằng nhất có thể. Tất nhiên, dữ liệu không nhất thiết phải được chia thành 3 bucket trong mỗi vòng; có thể linh hoạt lựa chọn chiến lược phân hoạch cụ thể dựa trên đặc điểm của dữ liệu.
 
-![Recursively dividing buckets](bucket_sort.assets/scatter_in_buckets_recursively.png)
+![Chia bucket đệ quy](bucket_sort.assets/scatter_in_buckets_recursively.png)
 
-If we know the probability distribution of product prices in advance, **we can set the price boundaries for each bucket according to that distribution**. Notably, the data distribution does not need to be measured exactly; it can also be approximated with a probability model chosen to fit the characteristics of the data.
+Nếu biết trước phân phối xác suất của giá sản phẩm, **chúng ta có thể đặt các ranh giới giá cho từng bucket dựa trên phân phối đó**. Đáng chú ý là không cần đo chính xác phân phối dữ liệu; cũng có thể xấp xỉ bằng một mô hình xác suất được lựa chọn để phù hợp với đặc điểm của dữ liệu.
 
-As shown in the figure below, we assume that product prices follow a normal distribution, which allows us to reasonably set price intervals to evenly distribute products to each bucket.
+Như trong hình dưới đây, giả sử giá sản phẩm tuân theo phân phối chuẩn, cho phép chúng ta thiết lập các khoảng giá một cách hợp lý để phân phối đồng đều sản phẩm vào từng bucket.
 
-![Dividing buckets based on probability distribution](bucket_sort.assets/scatter_in_buckets_distribution.png)
+![Chia bucket dựa trên phân phối xác suất](bucket_sort.assets/scatter_in_buckets_distribution.png)
