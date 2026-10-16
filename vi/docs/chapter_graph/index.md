@@ -1,9 +1,9 @@
-# Graph
+# Đồ thị
 
-![Graph](../assets/covers/chapter_graph.jpg)
+![Đồ thị](../assets/covers/chapter_graph.jpg)
 
 !!! abstract
 
-    In the journey of life, we are like nodes, connected by countless invisible edges.
+    Trong hành trình của cuộc đời, chúng ta giống như những nút, được kết nối bởi vô số cạnh vô hình.
 
-    Each encounter and parting leaves a unique mark on this vast network graph.
+    Mỗi lần gặp gỡ và chia ly đều để lại một dấu ấn riêng trên đồ thị mạng lưới rộng lớn này.

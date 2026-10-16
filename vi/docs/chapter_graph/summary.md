@@ -1,31 +1,31 @@
-# Summary
+# Tóm tắt
 
-### Key Review
+### Đánh giá chính
 
-- Graphs consist of vertices and edges and can be represented as a set of vertices and a set of edges.
-- Compared with the linear relationships modeled by linked lists and the divide-and-conquer relationships modeled by trees, the network relationships modeled by graphs offer much greater flexibility and are therefore more complex.
-- In directed graphs, edges have direction; in connected graphs, every vertex is reachable from any other vertex; and in weighted graphs, each edge carries a weight.
-- Adjacency matrices use matrices to represent graphs, where each row (column) represents a vertex, and matrix elements represent edges, using $1$ or $0$ to indicate whether two vertices have an edge or not. Adjacency matrices are highly efficient for addition, deletion, lookup, and modification operations, but consume significant space.
-- Adjacency lists use multiple linked lists to represent a graph: the $i$-th linked list corresponds to vertex $i$ and stores all vertices adjacent to it. Compared with adjacency matrices, adjacency lists use less space, but edge lookups are less efficient because the linked list must be traversed.
-- When linked lists in adjacency lists become too long, they can be converted to red-black trees or hash tables, thereby improving lookup efficiency.
-- From an algorithmic perspective, adjacency matrices embody "trading space for time", while adjacency lists embody "trading time for space".
-- Graphs can be used to model various real-world systems, such as social networks and subway lines.
-- Trees are a special case of graphs, and tree traversal is a special case of graph traversal.
-- Breadth-first search in graphs explores from near to far, expanding layer by layer, and is typically implemented with a queue.
-- Depth-first search in graphs follows a path as deep as possible and backtracks when it can go no farther, and is commonly implemented with recursion.
+- Đồ thị gồm các đỉnh và cạnh, đồng thời có thể được biểu diễn dưới dạng một tập hợp các đỉnh và một tập hợp các cạnh.
+- So với các mối quan hệ tuyến tính được mô hình hóa bằng linked list và các mối quan hệ chia để trị được mô hình hóa bằng cây, các mối quan hệ mạng được mô hình hóa bằng đồ thị linh hoạt hơn nhiều, do đó cũng phức tạp hơn.
+- Trong đồ thị có hướng, các cạnh có hướng; trong đồ thị liên thông, mọi đỉnh đều có thể đi tới từ bất kỳ đỉnh nào khác; và trong đồ thị có trọng số, mỗi cạnh mang một trọng số.
+- Ma trận kề sử dụng ma trận để biểu diễn đồ thị, trong đó mỗi hàng (cột) biểu diễn một đỉnh, còn các phần tử ma trận biểu diễn các cạnh; dùng $1$ hoặc $0$ để cho biết hai đỉnh có cạnh nối hay không. Ma trận kề có hiệu suất rất cao đối với các thao tác thêm, xóa, tra cứu và sửa đổi, nhưng tiêu tốn nhiều không gian.
+- Danh sách kề sử dụng nhiều linked list để biểu diễn một đồ thị: linked list thứ $i$ tương ứng với đỉnh $i$ và lưu trữ tất cả các đỉnh kề với nó. So với ma trận kề, danh sách kề sử dụng ít không gian hơn, nhưng việc tra cứu cạnh kém hiệu quả hơn vì phải duyệt linked list.
+- Khi các linked list trong danh sách kề trở nên quá dài, có thể chuyển chúng thành red-black tree hoặc hash table, từ đó cải thiện hiệu suất tra cứu.
+- Xét từ góc độ thuật toán, ma trận kề thể hiện việc “đánh đổi không gian lấy thời gian”, còn danh sách kề thể hiện việc “đánh đổi thời gian lấy không gian”.
+- Đồ thị có thể được dùng để mô hình hóa nhiều hệ thống trong thế giới thực, chẳng hạn như mạng xã hội và các tuyến tàu điện ngầm.
+- Cây là một trường hợp đặc biệt của đồ thị, còn việc duyệt cây là một trường hợp đặc biệt của việc duyệt đồ thị.
+- Breadth-first search trong đồ thị khám phá từ gần đến xa, mở rộng theo từng lớp và thường được triển khai bằng queue.
+- Depth-first search trong đồ thị đi theo một đường đi sâu nhất có thể và quay lui khi không thể đi xa hơn, thường được triển khai bằng recursion.
 
-### Q & A
+### Hỏi & Đáp
 
-**Q**: Is a path defined as a sequence of vertices or a sequence of edges?
+**Q**: Một path được định nghĩa là một chuỗi các đỉnh hay một chuỗi các cạnh?
 
-The definitions in different language versions of Wikipedia are inconsistent: the English version states "a path is a sequence of edges", while the Chinese version states "a path is a sequence of vertices". The following is the original English text: In graph theory, a path in a graph is a finite or infinite sequence of edges which joins a sequence of vertices.
+Các định nghĩa trong những phiên bản Wikipedia bằng các ngôn ngữ khác nhau không thống nhất: phiên bản tiếng Anh nêu rằng “a path is a sequence of edges”, trong khi phiên bản tiếng Trung nêu rằng “a path is a sequence of vertices”. Dưới đây là nguyên văn tiếng Anh: In graph theory, a path in a graph is a finite or infinite sequence of edges which joins a sequence of vertices.
 
-In this text, a path is viewed as a sequence of edges, not a sequence of vertices. This is because there may be multiple edges connecting two vertices, in which case each edge corresponds to a path.
+Trong tài liệu này, path được xem là một chuỗi các cạnh, không phải một chuỗi các đỉnh. Nguyên nhân là có thể có nhiều cạnh nối cùng hai đỉnh; khi đó, mỗi cạnh tương ứng với một path.
 
-**Q**: In a disconnected graph, will there be unreachable vertices?
+**Q**: Trong một đồ thị không liên thông, có tồn tại các đỉnh không thể đi tới không?
 
-In a disconnected graph, if you start from one vertex, at least one other vertex will be unreachable. To traverse a disconnected graph, you need multiple starting points so that all connected components are covered.
+Trong một đồ thị không liên thông, nếu bắt đầu từ một đỉnh, sẽ có ít nhất một đỉnh khác không thể đi tới. Để duyệt một đồ thị không liên thông, bạn cần nhiều điểm bắt đầu để bao phủ tất cả các thành phần liên thông.
 
-**Q**: In an adjacency list, is there any required ordering for the vertices adjacent to a given vertex?
+**Q**: Trong một danh sách kề, các đỉnh kề với một đỉnh nhất định có bắt buộc phải được sắp xếp theo thứ tự nào không?
 
-They can appear in any order. In practice, however, they may need to be sorted according to specific rules, such as the order in which vertices were added or the order of vertex values, which helps when quickly finding a vertex with some extreme value.
+Chúng có thể xuất hiện theo bất kỳ thứ tự nào. Tuy nhiên, trong thực tế, chúng có thể cần được sắp xếp theo các quy tắc cụ thể, chẳng hạn như thứ tự các đỉnh được thêm vào hoặc thứ tự của các giá trị đỉnh, nhằm hỗ trợ việc nhanh chóng tìm một đỉnh có giá trị cực trị nào đó.

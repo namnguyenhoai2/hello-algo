@@ -1,22 +1,22 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### Represent the Same Graph in Two Ways
+### Biểu diễn cùng một đồ thị theo hai cách
 
-An undirected graph has four vertices, `A, B, C, D`, and the edges
+Một đồ thị vô hướng có bốn đỉnh, `A, B, C, D`, và các cạnh
 `A-B, A-C, B-C, C-D`.
 
 <!-- numbered-subquestions -->
 
-1. Write its adjacency list.
-2. Fill in its adjacency matrix using only 0s and 1s.
-3. To determine whether `A` and `D` are directly connected, which graph representation requires checking only one stored entry?
-4. If a graph has many vertices but few edges, which representation usually uses less space?
+1. Viết danh sách kề của đồ thị.
+2. Điền ma trận kề bằng cách chỉ sử dụng các số 0 và 1.
+3. Để xác định `A` và `D` có được nối trực tiếp hay không, biểu diễn đồ thị nào chỉ yêu cầu kiểm tra một phần tử đã lưu?
+4. Nếu một đồ thị có nhiều đỉnh nhưng ít cạnh, biểu diễn nào thường sử dụng ít không gian hơn?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The adjacency list is:
+    1. Danh sách kề là:
 
         ```text
         A: B, C
@@ -25,7 +25,7 @@ An undirected graph has four vertices, `A, B, C, D`, and the edges
         D: C
         ```
 
-    2. The adjacency matrix is:
+    2. Ma trận kề là:
 
         | | A | B | C | D |
         | --- | --- | --- | --- | --- |
@@ -34,70 +34,70 @@ An undirected graph has four vertices, `A, B, C, D`, and the edges
         | C | 1 | 1 | 0 | 1 |
         | D | 0 | 0 | 1 | 0 |
 
-    3. In an adjacency matrix, you can directly check row `A`, column `D`, making it well suited to determining whether any two vertices are directly connected.
+    3. Trong ma trận kề, bạn có thể kiểm tra trực tiếp hàng `A`, cột `D`, vì vậy ma trận kề rất phù hợp để xác định liệu hai đỉnh bất kỳ có được nối trực tiếp hay không.
 
-    4. When a graph has many vertices but few edges, an adjacency list records only the edges that actually exist. It usually uses less space than an adjacency matrix, which reserves a position for every pair of vertices.
+    4. Khi một đồ thị có nhiều đỉnh nhưng ít cạnh, danh sách kề chỉ ghi lại những cạnh thực sự tồn tại. Vì vậy, nó thường sử dụng ít không gian hơn ma trận kề, vốn dành sẵn một vị trí cho mọi cặp đỉnh.
 
-### Breadth-First and Depth-First Traversal Orders
+### Thứ tự duyệt theo chiều rộng và chiều sâu
 
-An undirected graph has vertices `A, B, C, D, E` and edges
+Một đồ thị vô hướng có các đỉnh `A, B, C, D, E` và các cạnh
 `A-B, A-C, B-D, C-D, D-E`.
 
-Start at A. Whenever there are several unvisited adjacent vertices, choose them in alphabetical order:
+Bắt đầu từ A. Khi có nhiều đỉnh kề chưa được duyệt, hãy chọn chúng theo thứ tự bảng chữ cái:
 
 <!-- numbered-subquestions -->
 
-1. Write the visit order of breadth-first traversal (BFS).
-2. Write the visit order of recursive depth-first traversal (DFS).
-3. Why must both traversals record which vertices have already been visited?
+1. Viết thứ tự duyệt theo chiều rộng (BFS).
+2. Viết thứ tự duyệt theo chiều sâu đệ quy (DFS).
+3. Tại sao cả hai phép duyệt đều phải ghi lại những đỉnh đã được duyệt?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The BFS visit order is `A, B, C, D, E`. It first visits B and C, which are one edge away from A,
-        and then visits the more distant D and E.
+    1. Thứ tự duyệt BFS là `A, B, C, D, E`. Trước tiên, nó duyệt B và C, là các đỉnh cách A một cạnh,
+        sau đó duyệt D và E, là các đỉnh ở xa hơn.
 
-    2. The DFS visit order is `A, B, D, C, E`. It repeatedly enters an unvisited adjacent vertex,
-        first following `A → B → D → C`. When C has no new adjacent vertex, it returns to D and then visits E.
+    2. Thứ tự duyệt DFS là `A, B, D, C, E`. Nó liên tục đi vào một đỉnh kề chưa được duyệt,
+        trước tiên đi theo `A → B → D → C`. Khi C không còn đỉnh kề mới nào, nó quay lại D rồi duyệt E.
 
-    3. The graph contains a cycle, such as `A-B-D-C-A`. Without recording visited vertices,
-        a traversal could repeatedly visit the same vertices around the cycle and fail to terminate normally.
+    3. Đồ thị chứa một chu trình, chẳng hạn như `A-B-D-C-A`. Nếu không ghi lại các đỉnh đã được duyệt,
+        phép duyệt có thể liên tục duyệt lại các đỉnh quanh chu trình và không thể kết thúc bình thường.
 
-### Can One BFS Visit the Entire Graph?
+### Một BFS có thể duyệt toàn bộ đồ thị không?
 
-An undirected graph has vertices `A, B, C, D, E, F` and only the edges
+Một đồ thị vô hướng có các đỉnh `A, B, C, D, E, F` và chỉ có các cạnh
 `A-B, B-C, D-E`.
 
 <!-- numbered-subquestions -->
 
-1. Which vertices can one BFS starting at A visit?
-2. Based on Question 1, has this BFS visited every vertex in the graph? Why or why not?
-3. Suppose you scan all vertices in alphabetical order and start a new BFS whenever you reach an unvisited vertex.
-    What is the starting vertex of each BFS? Into how many mutually disconnected parts (connected components) is the graph divided?
+1. Một BFS bắt đầu từ A có thể duyệt những đỉnh nào?
+2. Dựa trên Câu hỏi 1, BFS này đã duyệt mọi đỉnh trong đồ thị chưa? Tại sao?
+3. Giả sử bạn quét tất cả các đỉnh theo thứ tự bảng chữ cái và bắt đầu một BFS mới mỗi khi gặp một đỉnh chưa được duyệt.
+    Đỉnh bắt đầu của mỗi BFS là gì? Đồ thị được chia thành bao nhiêu phần không liên thông với nhau (thành phần liên thông)?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. Starting from A, the traversal can visit only `A, B, C`.
+    1. Bắt đầu từ A, phép duyệt chỉ có thể duyệt `A, B, C`.
 
-    2. It has not visited every vertex. `D, E` form another connected part, while F is an isolated vertex.
-        None of them has a path to A, so they cannot be reached from A.
+    2. Phép duyệt chưa duyệt mọi đỉnh. `D, E` tạo thành một phần liên thông khác, còn F là một đỉnh cô lập.
+        Không có đỉnh nào trong số đó có đường đi đến A, nên chúng không thể được tiếp cận từ A.
 
-    3. The three BFS traversals start at `A, D, F`, and visit
-        `{A, B, C}`, `{D, E}`, and `{F}`, respectively. Therefore, the graph has 3 connected components.
+    3. Ba phép duyệt BFS bắt đầu tại `A, D, F`, và lần lượt duyệt
+        `{A, B, C}`, `{D, E}`, và `{F}`. Vì vậy, đồ thị có 3 thành phần liên thông.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Determine Whether a Path Exists in an Undirected Graph
+### Xác định liệu có tồn tại đường đi trong đồ thị vô hướng hay không
 
-You are given an undirected graph with $n$ vertices numbered from $0$ to $n-1$. Each entry `[u, v]` in the array `edges` represents an undirected edge between vertices `u` and `v`.
+Bạn được cho một đồ thị vô hướng có $n$ đỉnh được đánh số từ $0$ đến $n-1$. Mỗi phần tử `[u, v]` trong mảng `edges` biểu diễn một cạnh vô hướng giữa các đỉnh `u` và `v`.
 
-You are also given a starting vertex `source` and a destination vertex `destination`. First build an adjacency list from `edges`, then use BFS or DFS
-to determine whether a path exists from `source` to `destination`. Return `true` if one exists and `false` otherwise.
-The graph may contain cycles and may be disconnected.
+Bạn cũng được cho một đỉnh bắt đầu `source` và một đỉnh đích `destination`. Trước tiên, hãy xây dựng danh sách kề từ `edges`, sau đó sử dụng BFS hoặc DFS
+để xác định liệu có đường đi từ `source` đến `destination` hay không. Trả về `true` nếu có đường đi và `false` nếu không.
+Đồ thị có thể chứa các chu trình và có thể không liên thông.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. Add every undirected edge in both directions
-    2. The graph may contain cycles, so you must record which vertices have already been visited
-    3. Starting from source, return true if you encounter destination; if the traversal ends without reaching it, return false
+    1. Thêm mọi cạnh vô hướng theo cả hai hướng
+    2. Đồ thị có thể chứa các chu trình, vì vậy bạn phải ghi lại những đỉnh đã được duyệt
+    3. Bắt đầu từ source, trả về true nếu gặp destination; nếu phép duyệt kết thúc mà không đến được đỉnh đó, hãy trả về false
 
 [LeetCode](https://leetcode.com/problems/find-if-path-exists-in-graph/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
