@@ -1,28 +1,28 @@
-# Maximum Product Cutting Problem
+# Bài toán cắt thành tích lớn nhất
 
 !!! question
 
-    Given a positive integer $n$, split it into the sum of at least two positive integers and find the maximum product of the resulting integers, as shown in the figure below.
+    Cho một số nguyên dương $n$, hãy chia nó thành tổng của ít nhất hai số nguyên dương và tìm tích lớn nhất của các số nguyên nhận được, như minh họa trong hình dưới đây.
 
-![Problem definition of max product cutting](max_product_cutting_problem.assets/max_product_cutting_definition.png)
+![Định nghĩa bài toán cắt thành tích lớn nhất](max_product_cutting_problem.assets/max_product_cutting_definition.png)
 
-Suppose we split $n$ into $m$ integer factors, where the $i$-th factor is denoted as $n_i$, that is
+Giả sử chúng ta chia $n$ thành $m$ thừa số nguyên, trong đó thừa số thứ $i$ được ký hiệu là $n_i$, tức là
 
 $$
 n = \sum_{i=1}^{m}n_i
 $$
 
-The goal of this problem is to find the maximum product of all integer factors, namely
+Mục tiêu của bài toán này là tìm tích lớn nhất của tất cả các thừa số nguyên, cụ thể là
 
 $$
 \max(\prod_{i=1}^{m}n_i)
 $$
 
-We need to determine how many parts $m$ there should be and what each $n_i$ should be.
+Chúng ta cần xác định số phần $m$ và giá trị của từng $n_i$.
 
-### Determining the Greedy Strategy
+### Xác định chiến lược tham lam
 
-As a rule of thumb, the product of two integers is often greater than their sum. Suppose we split off a factor of $2$ from $n$; the resulting product is $2(n-2)$. We compare this product with $n$:
+Theo kinh nghiệm, tích của hai số nguyên thường lớn hơn tổng của chúng. Giả sử chúng ta tách một thừa số $2$ khỏi $n$; tích nhận được là $2(n-2)$. Ta so sánh tích này với $n$:
 
 $$
 \begin{aligned}
@@ -32,54 +32,54 @@ n & \geq 4
 \end{aligned}
 $$
 
-As shown in the figure below, when $n \geq 4$, splitting out a $2$ will increase the product, **which indicates that integers greater than or equal to $4$ should all be split**.
+Như minh họa trong hình dưới đây, khi $n \geq 4$, việc tách một $2$ sẽ làm tăng tích, **điều này cho thấy mọi số nguyên lớn hơn hoặc bằng $4$ đều nên được tiếp tục tách**.
 
-**Greedy strategy one**: If the splitting scheme contains a factor $\geq 4$, it should be split further. The final splitting scheme should contain only the factors $1$, $2$, and $3$.
+**Chiến lược tham lam một**: Nếu phương án phân chia chứa một thừa số $\geq 4$, thừa số đó nên được tiếp tục tách. Phương án phân chia cuối cùng chỉ nên chứa các thừa số $1$, $2$ và $3$.
 
-![Splitting causes product to increase](max_product_cutting_problem.assets/max_product_cutting_greedy_infer1.png)
+![Việc tách làm tăng tích](max_product_cutting_problem.assets/max_product_cutting_greedy_infer1.png)
 
-Next, consider which factor is optimal. Among the three factors $1$, $2$, and $3$, clearly $1$ is the worst, because $1 \times (n-1) < n$ always holds, meaning splitting out $1$ will actually decrease the product.
+Tiếp theo, hãy xem thừa số nào là tối ưu. Trong ba thừa số $1$, $2$ và $3$, rõ ràng $1$ là lựa chọn tệ nhất, vì $1 \times (n-1) < n$ luôn đúng, nghĩa là việc tách một $1$ thực tế sẽ làm giảm tích.
 
-As shown in the figure below, when $n = 6$, we have $3 \times 3 > 2 \times 2 \times 2$. **This means that splitting out $3$ is better than splitting out $2$**.
+Như minh họa trong hình dưới đây, khi $n = 6$, ta có $3 \times 3 > 2 \times 2 \times 2$. **Điều này có nghĩa là tách một $3$ tốt hơn tách một $2$**.
 
-**Greedy strategy two**: In the splitting scheme, there should be at most two $2$s, because three $2$s can always be replaced by two $3$s to obtain a larger product.
+**Chiến lược tham lam hai**: Trong phương án phân chia, có nhiều nhất hai số $2$, vì ba số $2$ luôn có thể được thay thế bằng hai số $3$ để thu được tích lớn hơn.
 
-![Optimal splitting factor](max_product_cutting_problem.assets/max_product_cutting_greedy_infer2.png)
+![Thừa số phân chia tối ưu](max_product_cutting_problem.assets/max_product_cutting_greedy_infer2.png)
 
-In summary, the following greedy strategies can be derived.
+Tóm lại, có thể rút ra các chiến lược tham lam sau:
 
-1. Input integer $n$, continuously split out factor $3$ until the remainder is $0$, $1$, or $2$.
-2. When the remainder is $0$, it means $n$ is a multiple of $3$, so no further action is needed.
-3. When the remainder is $2$, do not split it further; keep it as is.
-4. When the remainder is $1$, since $2 \times 2 > 1 \times 3$, replace the final $3$ and the remaining $1$ with two $2$s.
+1. Nhập số nguyên $n$, liên tục tách thừa số $3$ cho đến khi phần dư là $0$, $1$ hoặc $2$.
+2. Khi phần dư là $0$, điều đó có nghĩa là $n$ là bội của $3$, nên không cần thực hiện thêm thao tác nào.
+3. Khi phần dư là $2$, không tiếp tục tách nó; giữ nguyên giá trị đó.
+4. Khi phần dư là $1$, vì $2 \times 2 > 1 \times 3$, hãy thay thế $3$ cuối cùng và phần dư $1$ bằng hai số $2$.
 
-### Code Implementation
+### Cài đặt bằng code
 
-As shown in the figure below, we do not need loops to split the integer. Instead, we use integer division to obtain the number of $3$s, denoted by $a$, and the modulo operation to obtain the remainder $b$, giving:
+Như minh họa trong hình dưới đây, chúng ta không cần dùng vòng lặp để tách số nguyên. Thay vào đó, ta sử dụng phép chia nguyên để lấy số lượng số $3$, ký hiệu là $a$, và phép toán modulo để lấy phần dư $b$, từ đó có:
 
 $$
 n = 3 a + b
 $$
 
-Please note that for the edge case of $n \leq 3$, a $1$ must be split out, with product $1 \times (n - 1)$.
+Lưu ý rằng với trường hợp đặc biệt $n \leq 3$, cần tách một $1$, khi đó tích là $1 \times (n - 1)$.
 
 ```src
 [file]{max_product_cutting}-[class]{}-[func]{max_product_cutting}
 ```
 
-![Calculation method for max product cutting](max_product_cutting_problem.assets/max_product_cutting_greedy_calculation.png)
+![Phương pháp tính toán cho bài toán cắt thành tích lớn nhất](max_product_cutting_problem.assets/max_product_cutting_greedy_calculation.png)
 
-**The time complexity depends on how exponentiation is implemented in the programming language**. Taking Python as an example, there are three commonly used ways to compute powers.
+**Độ phức tạp thời gian phụ thuộc vào cách lũy thừa được triển khai trong ngôn ngữ lập trình**. Lấy Python làm ví dụ, có ba cách thường dùng để tính lũy thừa.
 
-- Both the operator `**` and the function `pow()` have time complexity $O(\log⁡ a)$.
-- The function `math.pow()` internally calls the C library's `pow()` function, which performs floating-point exponentiation, with time complexity $O(1)$.
+- Cả toán tử `**` và hàm `pow()` đều có độ phức tạp thời gian là $O(\log⁡ a)$.
+- Hàm `math.pow()` bên trong gọi hàm `pow()` của thư viện C, hàm này thực hiện phép lũy thừa số thực động với độ phức tạp thời gian là $O(1)$.
 
-Variables $a$ and $b$ use a constant amount of extra space, **therefore the space complexity is $O(1)$**.
+Các biến $a$ và $b$ sử dụng một lượng không gian bổ sung không đổi, **do đó độ phức tạp không gian là $O(1)$**.
 
-### Correctness Proof
+### Chứng minh tính đúng đắn
 
-We use proof by contradiction and consider only the case where $n \geq 4$.
+Chúng ta sử dụng phương pháp chứng minh phản chứng và chỉ xét trường hợp $n \geq 4$.
 
-1. **All factors $\leq 3$**: Suppose the optimal splitting scheme includes a factor $x \geq 4$. Then it can be further split into $2(x-2)$ to obtain a larger (or equal) product. This contradicts the assumption.
-2. **The splitting scheme does not contain $1$**: Suppose the optimal splitting scheme includes a factor of $1$. Then it can be merged into another factor to obtain a larger product. This contradicts the assumption.
-3. **The splitting scheme contains at most two $2$s**: Suppose the optimal splitting scheme includes three $2$s. Then they can be replaced by two $3$s, yielding a larger product. This contradicts the assumption.
+1. **Mọi thừa số đều $\leq 3$**: Giả sử phương án phân chia tối ưu chứa một thừa số $x \geq 4$. Khi đó, thừa số này có thể được tiếp tục tách thành $2(x-2)$ để thu được tích lớn hơn hoặc bằng. Điều này mâu thuẫn với giả định.
+2. **Phương án phân chia không chứa $1$**: Giả sử phương án phân chia tối ưu chứa một thừa số $1$. Khi đó, có thể gộp nó vào một thừa số khác để thu được tích lớn hơn. Điều này mâu thuẫn với giả định.
+3. **Phương án phân chia chứa nhiều nhất hai số $2$**: Giả sử phương án phân chia tối ưu chứa ba số $2$. Khi đó, có thể thay thế chúng bằng hai số $3$, qua đó thu được tích lớn hơn. Điều này mâu thuẫn với giả định.

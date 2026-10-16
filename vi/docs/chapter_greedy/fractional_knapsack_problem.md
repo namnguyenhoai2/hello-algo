@@ -1,52 +1,52 @@
-# Fractional Knapsack Problem
+# Bài toán ba lô phân số
 
 !!! question
 
-    Given $n$ items, where the weight of the $i$-th item is $wgt[i-1]$ and its value is $val[i-1]$, and a knapsack with capacity $cap$. Each item can be selected only once, **but a fraction of an item may be selected, with its value proportional to the selected weight**. What is the maximum total value that can be placed in the knapsack under the capacity constraint? An example is shown in the figure below.
+    Cho $n$ vật phẩm, trong đó trọng lượng của vật phẩm thứ $i$ là $wgt[i-1]$ và giá trị của nó là $val[i-1]$, cùng một chiếc ba lô có sức chứa $cap$. Mỗi vật phẩm chỉ có thể được chọn một lần, **nhưng có thể chọn một phần của vật phẩm, với giá trị tỷ lệ thuận với trọng lượng được chọn**. Giá trị tổng lớn nhất có thể đặt vào ba lô dưới ràng buộc về sức chứa là bao nhiêu? Ví dụ được minh họa trong hình dưới đây.
 
-![Example data for the fractional knapsack problem](fractional_knapsack_problem.assets/fractional_knapsack_example.png)
+![Dữ liệu ví dụ cho bài toán ba lô phân số](fractional_knapsack_problem.assets/fractional_knapsack_example.png)
 
-The fractional knapsack problem is very similar overall to the 0-1 knapsack problem, with states including the current item $i$ and capacity $c$, and the goal being to maximize value under the limited knapsack capacity.
+Nhìn chung, bài toán ba lô phân số rất giống bài toán ba lô 0-1, với các trạng thái bao gồm vật phẩm hiện tại $i$ và sức chứa $c$, mục tiêu là tối đa hóa giá trị trong giới hạn sức chứa của ba lô.
 
-The difference is that this problem allows selecting only a fraction of an item. As shown in the figure below, **we can split an item arbitrarily and compute its value in proportion to the selected weight**.
+Điểm khác biệt là bài toán này cho phép chọn một phần của vật phẩm. Như minh họa trong hình dưới đây, **ta có thể chia một vật phẩm tùy ý và tính giá trị của nó tỷ lệ với trọng lượng được chọn**.
 
-1. For item $i$, its value per unit weight is $val[i-1] / wgt[i-1]$, referred to as unit value.
-2. Suppose we put a portion of item $i$ with weight $w$ into the knapsack, then the value added to the knapsack is $w \times val[i-1] / wgt[i-1]$.
+1. Với vật phẩm $i$, giá trị trên mỗi đơn vị trọng lượng là $val[i-1] / wgt[i-1]$, được gọi là giá trị đơn vị.
+2. Giả sử ta đặt một phần của vật phẩm $i$ có trọng lượng $w$ vào ba lô, khi đó giá trị được thêm vào ba lô là $w \times val[i-1] / wgt[i-1]$.
 
-![Value of items per unit weight](fractional_knapsack_problem.assets/fractional_knapsack_unit_value.png)
+![Giá trị trên mỗi đơn vị trọng lượng của các vật phẩm](fractional_knapsack_problem.assets/fractional_knapsack_unit_value.png)
 
-### Greedy Strategy Determination
+### Xác định chiến lược tham lam
 
-Maximizing the total value in the knapsack **essentially means prioritizing items with higher value per unit weight**. From this observation, we can derive the greedy strategy shown in the figure below.
+Tối đa hóa tổng giá trị trong ba lô **về bản chất có nghĩa là ưu tiên các vật phẩm có giá trị trên mỗi đơn vị trọng lượng cao hơn**. Từ nhận xét này, ta có thể suy ra chiến lược tham lam được minh họa trong hình dưới đây.
 
-1. Sort items by unit value from high to low.
-2. Iterate through all items, **greedily selecting the item with the highest unit value in each round**.
-3. If the remaining knapsack capacity is insufficient, use a portion of the current item to fill the knapsack.
+1. Sắp xếp các vật phẩm theo giá trị đơn vị từ cao xuống thấp.
+2. Duyệt qua tất cả các vật phẩm, **tham lam chọn vật phẩm có giá trị đơn vị cao nhất ở mỗi lượt**.
+3. Nếu sức chứa còn lại của ba lô không đủ, sử dụng một phần của vật phẩm hiện tại để lấp đầy ba lô.
 
-![Greedy strategy for the fractional knapsack problem](fractional_knapsack_problem.assets/fractional_knapsack_greedy_strategy.png)
+![Chiến lược tham lam cho bài toán ba lô phân số](fractional_knapsack_problem.assets/fractional_knapsack_greedy_strategy.png)
 
-### Code Implementation
+### Cài đặt bằng mã
 
-We define an `Item` class so that items can be sorted by unit value. We then iterate through the sorted items greedily, stopping once the knapsack is full and returning the result:
+Ta định nghĩa một `Item` để các vật phẩm có thể được sắp xếp theo giá trị đơn vị. Sau đó, ta tham lam duyệt qua các vật phẩm đã sắp xếp, dừng lại khi ba lô đầy và trả về kết quả:
 
 ```src
 [file]{fractional_knapsack}-[class]{}-[func]{fractional_knapsack}
 ```
 
-Built-in sorting algorithms usually take $O(n \log n)$ time, and their space complexity is usually $O(\log n)$ or $O(n)$, depending on the specific implementation of the programming language.
+Các thuật toán sắp xếp dựng sẵn thường có thời gian chạy $O(n \log n)$, và độ phức tạp không gian thường là $O(\log n)$ hoặc $O(n)$, tùy thuộc vào cách cài đặt cụ thể của ngôn ngữ lập trình.
 
-Apart from sorting, in the worst case the entire item list needs to be traversed, **therefore the time complexity is $O(n)$**, where $n$ is the number of items.
+Ngoài thao tác sắp xếp, trong trường hợp xấu nhất, toàn bộ danh sách vật phẩm cần được duyệt qua, **do đó độ phức tạp thời gian là $O(n)$**, trong đó $n$ là số lượng vật phẩm.
 
-Since an `Item` object list is initialized, **the space complexity is $O(n)$**.
+Vì một danh sách đối tượng `Item` được khởi tạo, **độ phức tạp không gian là $O(n)$**.
 
-### Correctness Proof
+### Chứng minh tính đúng đắn
 
-We use proof by contradiction. Suppose item $x$ has the highest unit value, and some algorithm produces an optimal value `res`, but the resulting solution does not include item $x$.
+Ta sử dụng phương pháp chứng minh phản chứng. Giả sử vật phẩm $x$ có giá trị đơn vị cao nhất, và một thuật toán tạo ra giá trị tối ưu `res`, nhưng nghiệm thu được không bao gồm vật phẩm $x$.
 
-Now remove one unit of weight from any item in the knapsack and replace it with one unit of weight from item $x$. Since item $x$ has the highest unit value, the total value after the replacement must be greater than `res`. **This contradicts the assumption that `res` is optimal, proving that any optimal solution must include item $x$**.
+Bây giờ, lấy một đơn vị trọng lượng từ bất kỳ vật phẩm nào trong ba lô và thay thế nó bằng một đơn vị trọng lượng của vật phẩm $x$. Vì vật phẩm $x$ có giá trị đơn vị cao nhất, tổng giá trị sau khi thay thế chắc chắn phải lớn hơn `res`. **Điều này mâu thuẫn với giả định rằng `res` là tối ưu, qua đó chứng minh rằng mọi nghiệm tối ưu đều phải bao gồm vật phẩm $x$**.
 
-We can construct the same contradiction for the other items in the solution as well. In summary, **items with higher unit value are always the better choice**, which proves that the greedy strategy is effective.
+Ta cũng có thể xây dựng phản chứng tương tự cho các vật phẩm khác trong nghiệm. Tóm lại, **các vật phẩm có giá trị đơn vị cao hơn luôn là lựa chọn tốt hơn**, qua đó chứng minh chiến lược tham lam là hiệu quả.
 
-As shown in the figure below, if we treat item weight and unit value as the horizontal and vertical axes of a two-dimensional chart, then the fractional knapsack problem can be viewed as "finding the maximum area enclosed within a bounded interval on the horizontal axis." This analogy helps explain the effectiveness of the greedy strategy from a geometric perspective.
+Như minh họa trong hình dưới đây, nếu xem trọng lượng vật phẩm và giá trị đơn vị lần lượt là trục ngang và trục dọc của một biểu đồ hai chiều, thì bài toán ba lô phân số có thể được xem là “tìm diện tích lớn nhất được bao quanh trong một khoảng bị giới hạn trên trục ngang”. Sự tương đồng này giúp giải thích tính hiệu quả của chiến lược tham lam từ góc nhìn hình học.
 
-![Geometric representation of the fractional knapsack problem](fractional_knapsack_problem.assets/fractional_knapsack_area_chart.png)
+![Biểu diễn hình học của bài toán ba lô phân số](fractional_knapsack_problem.assets/fractional_knapsack_area_chart.png)
