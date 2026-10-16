@@ -1,45 +1,45 @@
-# Backtracking Algorithm
+# Thuật toán quay lui
 
-<u>The backtracking algorithm</u> is a method for solving problems through exhaustive search. Its core idea is to start from an initial state and exhaustively search all possible solutions. When a correct solution is found, it is recorded. This process continues until a solution is found or all possible choices have been tried without finding a solution.
+<u>Thuật toán quay lui</u> là một phương pháp giải bài toán bằng cách tìm kiếm toàn diện. Ý tưởng cốt lõi là bắt đầu từ một trạng thái ban đầu và tìm kiếm toàn diện tất cả các nghiệm có thể có. Khi tìm thấy một nghiệm đúng, nghiệm đó sẽ được ghi lại. Quá trình này tiếp tục cho đến khi tìm thấy một nghiệm hoặc tất cả các lựa chọn có thể đã được thử mà không tìm thấy nghiệm nào.
 
-The backtracking algorithm typically employs "depth-first search" to traverse the solution space. In the "Binary Tree" chapter, we mentioned that preorder, inorder, and postorder traversals all belong to depth-first search. Next, we will construct a backtracking problem using preorder traversal to progressively understand how the backtracking algorithm works.
+Thuật toán quay lui thường sử dụng "tìm kiếm theo chiều sâu" để duyệt không gian nghiệm. Trong chương "Cây nhị phân", chúng ta đã đề cập rằng các phép duyệt preorder, inorder và postorder đều thuộc tìm kiếm theo chiều sâu. Tiếp theo, chúng ta sẽ xây dựng một bài toán quay lui bằng phép duyệt preorder để từng bước hiểu cách hoạt động của thuật toán quay lui.
 
-!!! question "Example 1"
+!!! question "Ví dụ 1"
 
-    Given a binary tree, search and record all nodes with value $7$, and return a list of these nodes.
+    Cho một cây nhị phân, hãy tìm kiếm và ghi lại tất cả các nút có giá trị $7$, rồi trả về một danh sách các nút này.
 
-For this problem, we perform a preorder traversal of the tree and check whether the current node's value is $7$. If it is, we add the node to the result list `res`. The relevant implementation is shown in the following figure and code:
+Với bài toán này, chúng ta thực hiện phép duyệt preorder trên cây và kiểm tra xem giá trị của nút hiện tại có phải là $7$ hay không. Nếu đúng, chúng ta thêm nút đó vào danh sách kết quả `res`. Phần triển khai tương ứng được trình bày trong hình và đoạn mã sau:
 
 ```src
 [file]{preorder_traversal_i_compact}-[class]{}-[func]{pre_order}
 ```
 
-![Search for nodes in preorder traversal](backtracking_algorithm.assets/preorder_find_nodes.png)
+![Tìm kiếm các nút bằng phép duyệt preorder](backtracking_algorithm.assets/preorder_find_nodes.png)
 
-## Attempt and Backtrack
+## Thử và quay lui
 
-**The reason it is called a backtracking algorithm is that it employs "attempt" and "backtrack" strategies when searching the solution space**. When the algorithm encounters a state where it cannot continue forward or cannot find a solution that satisfies the constraints, it will undo the previous choice, return to a previous state, and try other possible choices.
+**Sở dĩ được gọi là thuật toán quay lui là vì nó sử dụng các chiến lược "thử" và "quay lui" khi tìm kiếm trong không gian nghiệm**. Khi thuật toán gặp một trạng thái mà nó không thể tiếp tục tiến lên hoặc không thể tìm thấy nghiệm thỏa mãn các ràng buộc, nó sẽ hoàn tác lựa chọn trước đó, quay về trạng thái trước, rồi thử các lựa chọn khả dĩ khác.
 
-For Example 1, visiting each node represents an "attempt", while skipping over a leaf node or the `return` that brings the traversal back to the parent node represents a "backtrack".
+Trong Ví dụ 1, việc thăm từng nút đại diện cho một "lần thử", còn việc bỏ qua một nút lá hoặc `return` đưa phép duyệt quay lại nút cha đại diện cho một "lần quay lui".
 
-It is worth noting that **backtracking is not limited to function returns alone**. To illustrate this, let's extend Example 1 slightly.
+Cần lưu ý rằng **quay lui không chỉ giới hạn ở việc trả về từ hàm**. Để minh họa điều này, hãy mở rộng Ví dụ 1 một chút.
 
-!!! question "Example 2"
+!!! question "Ví dụ 2"
 
-    In a binary tree, search all nodes with value $7$, **and return the paths from the root node to these nodes**.
+    Trong một cây nhị phân, hãy tìm kiếm tất cả các nút có giá trị $7$, **và trả về các đường đi từ nút gốc đến những nút này**.
 
-Based on the code from Example 1, we need to use a list `path` to record the path of visited nodes. When we reach a node with value $7$, we copy `path` and add it to the result list `res`. After traversal is complete, `res` contains all the solutions. The code is as follows:
+Dựa trên đoạn mã của Ví dụ 1, chúng ta cần sử dụng một danh sách `path` để ghi lại đường đi qua các nút đã thăm. Khi đến một nút có giá trị $7$, chúng ta sao chép `path` và thêm nó vào danh sách kết quả `res`. Sau khi hoàn tất phép duyệt, `res` chứa tất cả các nghiệm. Đoạn mã như sau:
 
 ```src
 [file]{preorder_traversal_ii_compact}-[class]{}-[func]{pre_order}
 ```
 
-In each "attempt", we record the path by adding the current node to `path`; before "backtracking", we need to remove the node from `path`, **to restore the state before this attempt**.
+Trong mỗi "lần thử", chúng ta ghi lại đường đi bằng cách thêm nút hiện tại vào `path`; trước khi "quay lui", chúng ta cần xóa nút đó khỏi `path`, **để khôi phục trạng thái trước lần thử này**.
 
-Observing the process shown in the following figure, **we can understand attempt and backtrack as "advance" and "undo"**, two operations that are the reverse of each other.
+Quan sát quá trình được minh họa trong hình sau, **chúng ta có thể hiểu thử và quay lui là hai thao tác "tiến lên" và "hoàn tác"**, ngược chiều nhau.
 
 === "<1>"
-    ![Attempt and backtrack](backtracking_algorithm.assets/preorder_find_paths_step1.png)
+    ![Thử và quay lui](backtracking_algorithm.assets/preorder_find_paths_step1.png)
 
 === "<2>"
     ![preorder_find_paths_step2](backtracking_algorithm.assets/preorder_find_paths_step2.png)
@@ -71,72 +71,72 @@ Observing the process shown in the following figure, **we can understand attempt
 === "<11>"
     ![preorder_find_paths_step11](backtracking_algorithm.assets/preorder_find_paths_step11.png)
 
-## Pruning
+## Cắt tỉa
 
-Complex backtracking problems usually contain one or more constraints. **Constraints can typically be used for "pruning"**.
+Các bài toán quay lui phức tạp thường chứa một hoặc nhiều ràng buộc. **Các ràng buộc thường có thể được sử dụng để "cắt tỉa"**.
 
-!!! question "Example 3"
+!!! question "Ví dụ 3"
 
-    In a binary tree, search all nodes with value $7$ and return the paths from the root node to these nodes, **but require that the paths do not contain nodes with value $3$**.
+    Trong một cây nhị phân, hãy tìm kiếm tất cả các nút có giá trị $7$ và trả về các đường đi từ nút gốc đến những nút này, **nhưng yêu cầu các đường đi không được chứa các nút có giá trị $3$**.
 
-To satisfy the above constraints, **we need to add pruning operations**: during the search process, if we encounter a node with value $3$, we return early and do not continue searching. The code is as follows:
+Để thỏa mãn các ràng buộc trên, **chúng ta cần thêm các thao tác cắt tỉa**: trong quá trình tìm kiếm, nếu gặp một nút có giá trị $3$, chúng ta sẽ trả về sớm và không tiếp tục tìm kiếm. Đoạn mã như sau:
 
 ```src
 [file]{preorder_traversal_iii_compact}-[class]{}-[func]{pre_order}
 ```
 
-"Pruning" is a vivid term. As shown in the following figure, during the search process, **we "prune" search branches that do not satisfy the constraints**, avoiding many meaningless attempts and thus improving search efficiency.
+"Cắt tỉa" là một thuật ngữ trực quan. Như minh họa trong hình sau, trong quá trình tìm kiếm, **chúng ta "cắt tỉa" các nhánh tìm kiếm không thỏa mãn ràng buộc**, tránh nhiều lần thử vô nghĩa và nhờ đó cải thiện hiệu quả tìm kiếm.
 
-![Pruning according to constraints](backtracking_algorithm.assets/preorder_find_constrained_paths.png)
+![Cắt tỉa theo các ràng buộc](backtracking_algorithm.assets/preorder_find_constrained_paths.png)
 
-## Framework Code
+## Mã khung
 
-Next, we attempt to extract a general framework centered on backtracking's "attempt, backtrack, and pruning" to improve code generality.
+Tiếp theo, chúng ta sẽ cố gắng rút ra một mã khung tổng quát, lấy "thử, quay lui và cắt tỉa" của phép quay lui làm trọng tâm, nhằm cải thiện tính tổng quát của mã.
 
-In the following framework code, `state` represents the current state of the problem, and `choices` represents the choices available in the current state:
+Trong mã khung sau, `state` đại diện cho trạng thái hiện tại của bài toán, còn `choices` đại diện cho các lựa chọn có thể có trong trạng thái hiện tại:
 
 === "Python"
 
     ```python title=""
     def backtrack(state: State, choices: list[choice], res: list[state]):
-        """Backtracking algorithm framework"""
-        # Check if it is a solution
+        """Khung thuật toán quay lui"""
+        # Kiểm tra xem có phải là nghiệm hay không
         if is_solution(state):
-            # Record the solution
+            # Ghi lại nghiệm
             record_solution(state, res)
-            # Stop searching
+            # Dừng tìm kiếm
             return
-        # Traverse all choices
+        # Duyệt qua tất cả các lựa chọn
         for choice in choices:
-            # Pruning: check if the choice is valid
+            # Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if is_valid(state, choice):
-                # Attempt: make a choice and update the state
+                # Thử: đưa ra lựa chọn và cập nhật trạng thái
                 make_choice(state, choice)
                 backtrack(state, choices, res)
-                # Backtrack: undo the choice and restore to the previous state
+                # Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undo_choice(state, choice)
     ```
 
 === "C++"
 
     ```cpp title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     void backtrack(State *state, vector<Choice *> &choices, vector<State *> &res) {
-        // Check if it is a solution
+        // Kiểm tra xem có phải là nghiệm hay không
         if (isSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả các lựa chọn
         for (Choice choice : choices) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (isValid(state, choice)) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra lựa chọn và cập nhật trạng thái
                 makeChoice(state, choice);
                 backtrack(state, choices, res);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, choice);
             }
         }
@@ -146,23 +146,23 @@ In the following framework code, `state` represents the current state of the pro
 === "Java"
 
     ```java title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     void backtrack(State state, List<Choice> choices, List<State> res) {
-        // Check if it is a solution
+        // Kiểm tra xem có phải là nghiệm hay không
         if (isSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả các lựa chọn
         for (Choice choice : choices) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (isValid(state, choice)) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra lựa chọn và cập nhật trạng thái
                 makeChoice(state, choice);
                 backtrack(state, choices, res);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, choice);
             }
         }
@@ -172,23 +172,23 @@ In the following framework code, `state` represents the current state of the pro
 === "C#"
 
     ```csharp title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     void Backtrack(State state, List<Choice> choices, List<State> res) {
-        // Check if it is a solution
+        // Kiểm tra xem có phải là nghiệm hay không
         if (IsSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             RecordSolution(state, res);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả các lựa chọn
         foreach (Choice choice in choices) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (IsValid(state, choice)) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra lựa chọn và cập nhật trạng thái
                 MakeChoice(state, choice);
                 Backtrack(state, choices, res);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 UndoChoice(state, choice);
             }
         }
@@ -198,23 +198,23 @@ In the following framework code, `state` represents the current state of the pro
 === "Go"
 
     ```go title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     func backtrack(state *State, choices []Choice, res *[]State) {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if isSolution(state) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res)
-            // Stop searching
+            // Dừng tìm kiếm
             return
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for _, choice := range choices {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if isValid(state, choice) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 makeChoice(state, choice)
                 backtrack(state, choices, res)
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, choice)
             }
         }
@@ -224,23 +224,23 @@ In the following framework code, `state` represents the current state of the pro
 === "Swift"
 
     ```swift title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     func backtrack(state: inout State, choices: [Choice], res: inout [State]) {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if isSolution(state: state) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state: state, res: &res)
-            // Stop searching
+            // Dừng tìm kiếm
             return
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for choice in choices {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if isValid(state: state, choice: choice) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 makeChoice(state: &state, choice: choice)
                 backtrack(state: &state, choices: choices, res: &res)
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state: &state, choice: choice)
             }
         }
@@ -250,23 +250,23 @@ In the following framework code, `state` represents the current state of the pro
 === "JS"
 
     ```javascript title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     function backtrack(state, choices, res) {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if (isSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for (let choice of choices) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (isValid(state, choice)) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 makeChoice(state, choice);
                 backtrack(state, choices, res);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, choice);
             }
         }
@@ -276,23 +276,23 @@ In the following framework code, `state` represents the current state of the pro
 === "TS"
 
     ```typescript title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     function backtrack(state: State, choices: Choice[], res: State[]): void {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if (isSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for (let choice of choices) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (isValid(state, choice)) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 makeChoice(state, choice);
                 backtrack(state, choices, res);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, choice);
             }
         }
@@ -302,23 +302,23 @@ In the following framework code, `state` represents the current state of the pro
 === "Dart"
 
     ```dart title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     void backtrack(State state, List<Choice>, List<State> res) {
-      // Check if it is a solution
+      // Kiểm tra xem đây có phải là một nghiệm hay không
       if (isSolution(state)) {
-        // Record the solution
+        // Ghi lại nghiệm
         recordSolution(state, res);
-        // Stop searching
+        // Dừng tìm kiếm
         return;
       }
-      // Traverse all choices
+      // Duyệt qua tất cả lựa chọn
       for (Choice choice in choices) {
-        // Pruning: check if the choice is valid
+        // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
         if (isValid(state, choice)) {
-          // Attempt: make a choice and update the state
+          // Thử: đưa ra một lựa chọn và cập nhật trạng thái
           makeChoice(state, choice);
           backtrack(state, choices, res);
-          // Backtrack: undo the choice and restore to the previous state
+          // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
           undoChoice(state, choice);
         }
       }
@@ -328,23 +328,23 @@ In the following framework code, `state` represents the current state of the pro
 === "Rust"
 
     ```rust title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     fn backtrack(state: &mut State, choices: &Vec<Choice>, res: &mut Vec<State>) {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if is_solution(state) {
-            // Record the solution
+            // Ghi lại nghiệm
             record_solution(state, res);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for choice in choices {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if is_valid(state, choice) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 make_choice(state, choice);
                 backtrack(state, choices, res);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undo_choice(state, choice);
             }
         }
@@ -354,23 +354,23 @@ In the following framework code, `state` represents the current state of the pro
 === "C"
 
     ```c title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     void backtrack(State *state, Choice *choices, int numChoices, State *res, int numRes) {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if (isSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res, numRes);
-            // Stop searching
+            // Dừng tìm kiếm
             return;
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for (int i = 0; i < numChoices; i++) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (isValid(state, &choices[i])) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 makeChoice(state, &choices[i]);
                 backtrack(state, choices, numChoices, res, numRes);
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, &choices[i]);
             }
         }
@@ -380,23 +380,23 @@ In the following framework code, `state` represents the current state of the pro
 === "Kotlin"
 
     ```kotlin title=""
-    /* Backtracking algorithm framework */
+    /* Khung thuật toán quay lui */
     fun backtrack(state: State?, choices: List<Choice?>, res: List<State?>?) {
-        // Check if it is a solution
+        // Kiểm tra xem đây có phải là một nghiệm hay không
         if (isSolution(state)) {
-            // Record the solution
+            // Ghi lại nghiệm
             recordSolution(state, res)
-            // Stop searching
+            // Dừng tìm kiếm
             return
         }
-        // Traverse all choices
+        // Duyệt qua tất cả lựa chọn
         for (choice in choices) {
-            // Pruning: check if the choice is valid
+            // Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if (isValid(state, choice)) {
-                // Attempt: make a choice and update the state
+                // Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 makeChoice(state, choice)
                 backtrack(state, choices, res)
-                // Backtrack: undo the choice and restore to the previous state
+                // Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undoChoice(state, choice)
             }
         }
@@ -406,98 +406,98 @@ In the following framework code, `state` represents the current state of the pro
 === "Ruby"
 
     ```ruby title=""
-    ### Backtracking algorithm framework ###
+    ### Khung thuật toán quay lui ###
     def backtrack(state, choices, res)
-        # Check if it is a solution
+        # Kiểm tra xem đây có phải là một nghiệm hay không
         if is_solution?(state)
-            # Record the solution
+            # Ghi lại nghiệm
             record_solution(state, res)
             return
         end
 
-        # Traverse all choices
+        # Duyệt qua tất cả lựa chọn
         for choice in choices
-            # Pruning: check if the choice is valid
+            # Cắt tỉa: kiểm tra xem lựa chọn có hợp lệ hay không
             if is_valid?(state, choice)
-                # Attempt: make a choice and update the state
+                # Thử: đưa ra một lựa chọn và cập nhật trạng thái
                 make_choice(state, choice)
                 backtrack(state, choices, res)
-                # Backtrack: undo the choice and restore to the previous state
+                # Quay lui: hoàn tác lựa chọn và khôi phục trạng thái trước đó
                 undo_choice(state, choice)
             end
         end
     end
     ```
 
-Next, we solve Example 3 based on the framework code. The state `state` is the node traversal path, the choices `choices` are the left and right child nodes of the current node, and the result `res` is a list of paths:
+Tiếp theo, chúng ta giải Example 3 dựa trên đoạn mã khung. Trạng thái `state` là đường đi duyệt các node, các lựa chọn `choices` là node con trái và node con phải của node hiện tại, còn kết quả `res` là một danh sách các đường đi:
 
 ```src
 [file]{preorder_traversal_iii_template}-[class]{}-[func]{backtrack}
 ```
 
-As per the problem statement, we should continue searching after finding a node with value $7$. **Therefore, we need to remove the `return` statement after recording the solution**. The following figure compares the search process with and without the `return` statement.
+Theo đề bài, chúng ta cần tiếp tục tìm kiếm sau khi tìm thấy một node có giá trị $7$. **Do đó, chúng ta cần xóa câu lệnh `return` sau khi ghi lại nghiệm**. Hình dưới đây so sánh quá trình tìm kiếm có và không có câu lệnh `return`.
 
-![Comparison of search process with and without return statement](backtracking_algorithm.assets/backtrack_remove_return_or_not.png)
+![So sánh quá trình tìm kiếm có và không có câu lệnh return](backtracking_algorithm.assets/backtrack_remove_return_or_not.png)
 
-Compared to code based on preorder traversal, code based on the backtracking algorithm framework appears more verbose, but is more general. In fact, **many backtracking problems can be solved within this framework**. We only need to define `state` and `choices` for the specific problem and implement each method in the framework.
+So với đoạn mã dựa trên duyệt preorder, đoạn mã dựa trên khung thuật toán quay lui có vẻ dài hơn, nhưng tổng quát hơn. Trên thực tế, **nhiều bài toán quay lui có thể được giải trong khung này**. Chúng ta chỉ cần định nghĩa `state` và `choices` cho bài toán cụ thể rồi triển khai từng phương thức trong khung.
 
-## Common Terminology
+## Thuật ngữ phổ biến
 
-To analyze algorithmic problems more clearly, we summarize the meanings of common terminology used in backtracking algorithms and provide corresponding examples from Example 3, as shown in the following table.
+Để phân tích các bài toán thuật toán rõ ràng hơn, chúng ta tóm tắt ý nghĩa của những thuật ngữ phổ biến được sử dụng trong các thuật toán quay lui và đưa ra các ví dụ tương ứng từ Example 3, như trong bảng dưới đây.
 
-<p align="center"> Table <id> &nbsp; Common Backtracking Algorithm Terminology </p>
+<p align="center"> Bảng <id> &nbsp; Các thuật ngữ phổ biến trong thuật toán quay lui </p>
 
-| Term                      | Definition                                                                                                                   | Example 3                                                                          |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Solution (solution)       | A solution is an answer that satisfies the specific conditions of a problem; there may be one or more solutions             | All paths from root to nodes with value $7$ that satisfy the constraint            |
-| Constraint (constraint)   | A constraint is a condition in the problem that limits the feasibility of solutions, typically used for pruning              | Paths do not contain nodes with value $3$                                          |
-| State (state)             | State represents the situation of a problem at a certain moment, including the choices already made                           | The currently visited node path, i.e., the `path` list of nodes                    |
-| Attempt (attempt)         | An attempt is the process of exploring the solution space according to available choices, including making choices, updating state, and checking if it is a solution | Recursively visit left (right) child nodes, add nodes to `path`, check if node value is $7$ |
-| Backtrack (backtracking)  | Backtracking refers to undoing previous choices and returning to a previous state when encountering a state that does not satisfy constraints | Stop searching when passing over leaf nodes, ending node visits, or encountering nodes with value $3$; function returns |
-| Pruning (pruning)         | Pruning is a method of avoiding meaningless search paths according to problem characteristics and constraints, which can improve search efficiency | When encountering a node with value $3$, do not continue searching                 |
+| Thuật ngữ                 | Định nghĩa                                                                                                                   | Ví dụ 3                                                                          |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Solution (solution)       | Solution là một đáp án thỏa mãn các điều kiện cụ thể của một bài toán; có thể có một hoặc nhiều solution                  | Tất cả các đường đi từ root đến các node có giá trị $7$ và thỏa mãn constraint  |
+| Constraint (constraint)   | Constraint là một điều kiện trong bài toán giới hạn tính khả thi của các solution, thường được dùng để pruning           | Các đường đi không chứa node có giá trị $3$                                    |
+| State (state)             | State biểu thị tình huống của một bài toán tại một thời điểm nhất định, bao gồm các lựa chọn đã thực hiện                 | Đường đi qua các node hiện đang được duyệt, tức là danh sách node `path` |
+| Attempt (attempt)         | Attempt là quá trình khám phá không gian solution theo các lựa chọn hiện có, bao gồm việc đưa ra lựa chọn, cập nhật state và kiểm tra xem đó có phải là solution hay không | Đệ quy duyệt các node con bên trái (bên phải), thêm các node vào `path`, kiểm tra xem giá trị của node có phải là $7$ hay không |
+| Backtrack (backtracking)  | Backtracking là việc hoàn tác các lựa chọn trước đó và quay lại state trước đó khi gặp một state không thỏa mãn các constraint | Dừng tìm kiếm khi vượt qua các node lá, kết thúc việc duyệt node hoặc gặp node có giá trị $3$; hàm trả về |
+| Pruning (pruning)         | Pruning là phương pháp tránh các đường tìm kiếm vô nghĩa dựa trên đặc điểm và constraint của bài toán, giúp cải thiện hiệu quả tìm kiếm | Khi gặp node có giá trị $3$, không tiếp tục tìm kiếm                            |
 
 !!! tip
 
-    The concepts of problem, solution, state, etc. are universal and appear in divide-and-conquer, backtracking, dynamic programming, greedy algorithms, and others.
+    Các khái niệm như bài toán, solution, state, v.v. là những khái niệm phổ quát và xuất hiện trong divide-and-conquer, backtracking, dynamic programming, greedy algorithms và các lĩnh vực khác.
 
-## Advantages and Limitations
+## Ưu điểm và hạn chế
 
-The backtracking algorithm is essentially a depth-first search algorithm that tries all possible solutions until it finds one that satisfies the conditions. The advantage of this approach is that it can find all possible solutions, and with reasonable pruning operations, it achieves high efficiency.
+Thuật toán backtracking về bản chất là một thuật toán tìm kiếm theo chiều sâu, thử tất cả các solution khả dĩ cho đến khi tìm được một solution thỏa mãn các điều kiện. Ưu điểm của phương pháp này là có thể tìm được tất cả solution khả dĩ và, với các thao tác pruning hợp lý, đạt hiệu quả cao.
 
-However, when dealing with large-scale or complex problems, **the running efficiency of the backtracking algorithm may be unacceptable**.
+Tuy nhiên, khi xử lý các bài toán quy mô lớn hoặc phức tạp, **hiệu suất chạy của thuật toán backtracking có thể không chấp nhận được**.
 
-- **Time**: The backtracking algorithm usually needs to traverse all possibilities in the state space, and the time complexity can reach exponential or factorial order.
-- **Space**: During recursive calls, the current state needs to be saved (such as paths, auxiliary variables used for pruning, etc.), and when the depth is large, the space requirement can become very large.
+- **Thời gian**: Thuật toán backtracking thường cần duyệt qua mọi khả năng trong state space, và độ phức tạp thời gian có thể đạt cấp số mũ hoặc giai thừa.
+- **Không gian**: Trong các lời gọi đệ quy, state hiện tại cần được lưu lại (chẳng hạn như các đường đi, các biến phụ trợ dùng cho pruning, v.v.); khi độ sâu lớn, yêu cầu về không gian có thể trở nên rất lớn.
 
-Nevertheless, **the backtracking algorithm is still the best solution for certain search problems and constraint satisfaction problems**. For these problems, since we cannot predict which choices will generate valid solutions, we must traverse all possible choices. In this case, **the key is how to optimize efficiency**. There are two common efficiency optimization methods.
+Tuy vậy, **thuật toán backtracking vẫn là solution tốt nhất cho một số bài toán tìm kiếm và bài toán thỏa mãn constraint nhất định**. Với các bài toán này, vì không thể dự đoán lựa chọn nào sẽ tạo ra solution hợp lệ, chúng ta phải duyệt qua tất cả lựa chọn khả dĩ. Trong trường hợp này, **điều quan trọng là cách tối ưu hiệu quả**. Có hai phương pháp tối ưu hiệu quả phổ biến.
 
-- **Pruning**: Avoid searching paths that are guaranteed not to produce solutions, thereby saving time and space.
-- **Heuristic search**: Introduce certain strategies or estimation values during the search process to prioritize searching paths that are most likely to produce valid solutions.
+- **Pruning**: Tránh tìm kiếm các đường đi chắc chắn không thể tạo ra solution, từ đó tiết kiệm thời gian và không gian.
+- **Heuristic search**: Đưa vào một số chiến lược hoặc giá trị ước tính trong quá trình tìm kiếm để ưu tiên các đường đi có khả năng cao nhất tạo ra solution hợp lệ.
 
-## Typical Backtracking Examples
+## Các ví dụ backtracking điển hình
 
-The backtracking algorithm can be used to solve many search problems, constraint satisfaction problems, and combinatorial optimization problems.
+Thuật toán backtracking có thể được dùng để giải nhiều bài toán tìm kiếm, bài toán thỏa mãn constraint và bài toán tối ưu tổ hợp.
 
-**Search problems**: The goal of these problems is to find solutions that satisfy specific conditions.
+**Bài toán tìm kiếm**: Mục tiêu của các bài toán này là tìm các solution thỏa mãn những điều kiện cụ thể.
 
-- Permutation problem: Given a set, find all possible permutations and combinations.
-- Subset sum problem: Given a set and a target sum, find all subsets in the set whose elements sum to the target.
-- Tower of Hanoi: Given three pegs and a series of disks of different sizes, move all disks from one peg to another, moving only one disk at a time, and never placing a larger disk on a smaller disk.
+- Bài toán hoán vị: Cho một tập hợp, tìm tất cả các hoán vị và tổ hợp có thể.
+- Bài toán tổng tập con: Cho một tập hợp và một tổng mục tiêu, tìm tất cả các tập con trong tập hợp có tổng các phần tử bằng tổng mục tiêu.
+- Tháp Hà Nội: Cho ba cọc và một dãy đĩa có kích thước khác nhau, di chuyển tất cả đĩa từ một cọc này sang cọc khác, mỗi lần chỉ di chuyển một đĩa và không bao giờ đặt đĩa lớn hơn lên trên đĩa nhỏ hơn.
 
-**Constraint satisfaction problems**: The goal of these problems is to find solutions that satisfy all constraints.
+**Bài toán thỏa mãn constraint**: Mục tiêu của các bài toán này là tìm các solution thỏa mãn mọi constraint.
 
-- N-Queens: Place $n$ queens on an $n \times n$ chessboard such that they do not attack each other.
-- Sudoku: Fill numbers $1$ to $9$ in a $9 \times 9$ grid such that each row, column, and $3 \times 3$ subgrid contains no repeated digits.
-- Graph coloring: Given an undirected graph, color each vertex with the minimum number of colors such that adjacent vertices have different colors.
+- N-Queens: Đặt $n$ quân hậu trên bàn cờ $n \times n$ sao cho chúng không thể ăn nhau.
+- Sudoku: Điền các số từ $1$ đến $9$ vào một lưới $9 \times 9$ sao cho mỗi hàng, cột và vùng con $3 \times 3$ không chứa chữ số trùng lặp.
+- Tô màu đồ thị: Cho một đồ thị vô hướng, tô màu mỗi đỉnh bằng số màu ít nhất có thể sao cho các đỉnh kề nhau có màu khác nhau.
 
-**Combinatorial optimization problems**: The goal of these problems is to find an optimal solution that satisfies certain conditions in a combinatorial space.
+**Bài toán tối ưu tổ hợp**: Mục tiêu của các bài toán này là tìm một solution tối ưu thỏa mãn một số điều kiện trong không gian tổ hợp.
 
-- 0-1 Knapsack: Given a set of items and a knapsack, each item has a value and weight. Under the knapsack capacity constraint, select items to maximize total value.
-- Traveling Salesman Problem: Starting from a point in a graph, visit all other points exactly once and return to the starting point, finding the shortest path.
-- Maximum Clique: Given an undirected graph, find the largest complete subgraph, i.e., a subgraph where any two vertices are connected by an edge.
+- Bài toán Knapsack 0-1: Cho một tập hợp các vật phẩm và một chiếc ba lô, mỗi vật phẩm có một giá trị và trọng lượng. Dưới constraint về sức chứa của ba lô, chọn các vật phẩm để tối đa hóa tổng giá trị.
+- Bài toán Người du lịch (Traveling Salesman Problem): Bắt đầu từ một điểm trong đồ thị, đi qua tất cả các điểm khác đúng một lần rồi quay lại điểm bắt đầu, tìm đường đi ngắn nhất.
+- Maximum Clique: Cho một đồ thị vô hướng, tìm đồ thị con đầy đủ lớn nhất, tức là đồ thị con mà mọi cặp đỉnh đều được nối với nhau bằng một cạnh.
 
-Note that for many combinatorial optimization problems, backtracking is not the optimal solution.
+Lưu ý rằng đối với nhiều bài toán tối ưu tổ hợp, backtracking không phải là solution tối ưu.
 
-- The 0-1 Knapsack problem is usually solved using dynamic programming to achieve higher time efficiency.
-- The Traveling Salesman Problem is a famous NP-Hard problem; common solutions include genetic algorithms and ant colony algorithms.
-- The Maximum Clique problem is a classical problem in graph theory and can be solved using heuristic algorithms such as greedy algorithms.
+- Bài toán Knapsack 0-1 thường được giải bằng dynamic programming để đạt hiệu quả thời gian cao hơn.
+- Bài toán Traveling Salesman là một bài toán NP-Hard nổi tiếng; các solution phổ biến bao gồm genetic algorithms và ant colony algorithms.
+- Bài toán Maximum Clique là một bài toán kinh điển trong lý thuyết đồ thị và có thể được giải bằng các thuật toán heuristic như greedy algorithms.

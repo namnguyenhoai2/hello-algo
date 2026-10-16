@@ -1,87 +1,87 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### Will This Permutation Algorithm Miss Results?
+### Thuật toán hoán vị này có bỏ sót kết quả không?
 
-A backtracking algorithm tries to generate all permutations using `1, 2, 3` in that order. Each time it chooses a number `x`, it:
+Một thuật toán backtracking cố gắng tạo ra tất cả các hoán vị bằng cách sử dụng `1, 2, 3` theo thứ tự đó. Mỗi khi chọn một số `x`, thuật toán sẽ:
 
-1. Appends `x` to the current path.
-2. Marks `x` as "used."
-3. Recursively fills the next position.
+1. Thêm `x` vào đường đi hiện tại.
+2. Đánh dấu `x` là "đã dùng".
+3. Đệ quy điền vào vị trí tiếp theo.
 
-When the recursive call returns, the student removes only `x` from the end of the path and then tries the next number.
-
-<!-- numbered-subquestions -->
-
-1. Which permutation does the algorithm generate first? Can it still generate all 6 permutations?
-2. Before returning to the previous level, is removing only the last number from the path enough? If not, what else must be done? Explain why.
-
-??? success "Answer"
-
-    1. It first generates `[1, 2, 3]`, but it cannot generate all the permutations. Although the path becomes shorter when calls return,
-        the markers for 1, 2, and 3 all remain "used," leaving no available number for later branches.
-
-    2. It is not enough. After removing `x` from the end of the path, the algorithm must also mark `x` as "unused" again.
-        The current path and the used markers together describe the search state. A choice changes both of them, so backtracking must restore both
-        before another branch can choose `x` again.
-
-### Does the Order of Choosing Numbers Matter?
-
-You are given the sorted array `[2, 3, 5]` and target value 5. Each number may be chosen repeatedly.
-The algorithm requires the numbers along each search path to appear only in nondecreasing order.
+Khi lời gọi đệ quy trả về, sinh viên chỉ xóa `x` khỏi cuối đường đi rồi thử số tiếp theo.
 
 <!-- numbered-subquestions -->
 
-1. Which distinct combinations can be found?
-2. Why is there no need to search for the same group of numbers in different orders? What does the nondecreasing-order restriction accomplish?
-3. Suppose the current path is `[3]`, the remaining amount is 2, and the next candidate is 3. Why can the algorithm stop checking all later candidates at this level?
+1. Thuật toán tạo ra hoán vị nào đầu tiên? Nó có thể vẫn tạo ra đủ 6 hoán vị không?
+2. Trước khi quay về cấp trước đó, chỉ xóa số cuối cùng khỏi đường đi có đủ không? Nếu không, còn phải làm gì? Hãy giải thích tại sao.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The distinct combinations are `[2, 3]` and `[5]`.
+    1. Đầu tiên, thuật toán tạo ra `[1, 2, 3]`, nhưng không thể tạo ra tất cả các hoán vị. Mặc dù đường đi ngắn lại khi các lời gọi trả về,
+        các dấu đánh dấu 1, 2 và 3 vẫn đều là "đã dùng", khiến các nhánh sau không còn số nào khả dụng.
 
-    2. This exercise treats `[2, 3]` and `[3, 2]` as the same combination; the order in which numbers are selected does not create a different answer.
-        Requiring numbers in a path to appear in nondecreasing order lets the search skip duplicate arrangements such as `[3, 2]`.
+    2. Như vậy là chưa đủ. Sau khi xóa `x` khỏi cuối đường đi, thuật toán cũng phải đánh dấu `x` là "chưa dùng" một lần nữa.
+        Đường đi hiện tại và các dấu đánh dấu đã dùng cùng mô tả trạng thái tìm kiếm. Một lựa chọn thay đổi cả hai, vì vậy backtracking phải khôi phục cả hai
+        trước khi một nhánh khác có thể chọn lại `x`.
 
-    3. The remaining amount is 2, while candidate 3 is already greater than 2. Because the array is sorted,
-        all later candidates are even larger and cannot be added to the current combination, so the algorithm can stop checking this level immediately.
+### Thứ tự chọn các số có quan trọng không?
 
-### Where Can the Next Queen Be Placed?
-
-Place queens row by row on a `4 × 4` chessboard, with both row and column indices starting at 0.
-Queens have already been placed at `(0, 1)` and `(1, 3)`. The next queen must be placed in row 2.
+Bạn được cho mảng đã sắp xếp `[2, 3, 5]` và giá trị đích là 5. Mỗi số có thể được chọn nhiều lần.
+Thuật toán yêu cầu các số trên mỗi đường tìm kiếm chỉ xuất hiện theo thứ tự không giảm.
 
 <!-- numbered-subquestions -->
 
-1. Which columns are ruled out because they already contain a queen?
-2. Among the remaining columns, which positions are ruled out because they share a diagonal with an existing queen?
-3. Which positions in row 2 remain available to try?
+1. Có thể tìm thấy những tổ hợp phân biệt nào?
+2. Tại sao không cần tìm cùng một nhóm số theo các thứ tự khác nhau? Việc giới hạn theo thứ tự không giảm mang lại tác dụng gì?
+3. Giả sử đường đi hiện tại là `[3]`, lượng còn lại là 2 và ứng viên tiếp theo là 3. Tại sao thuật toán có thể dừng kiểm tra tất cả các ứng viên phía sau ở cấp này?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. Columns 1 and 3 already contain queens, so positions `(2, 1)` and `(2, 3)` are ruled out.
+    1. Các tổ hợp phân biệt là `[2, 3]` và `[5]`.
 
-    2. Among the remaining positions, `(2, 2)` lies on the same diagonal as `(1, 3)`, so it is also ruled out.
-        Position `(2, 0)` shares neither a column nor a diagonal with either existing queen.
+    2. Bài tập này xem `[2, 3]` và `[3, 2]` là cùng một tổ hợp; thứ tự chọn các số không tạo ra một đáp án khác.
+        Yêu cầu các số trong một đường đi xuất hiện theo thứ tự không giảm cho phép quá trình tìm kiếm bỏ qua các cách sắp xếp trùng lặp như `[3, 2]`.
 
-    3. The only position to try in row 2 is `(2, 0)`.
+    3. Lượng còn lại là 2, trong khi ứng viên 3 đã lớn hơn 2. Vì mảng đã được sắp xếp,
+        tất cả các ứng viên phía sau còn lớn hơn nữa và không thể được thêm vào tổ hợp hiện tại, nên thuật toán có thể dừng kiểm tra cấp này ngay lập tức.
 
-        This step shows only that the current placement is valid. If the board cannot be completed later, the algorithm must still backtrack and try an earlier alternative.
+### Quân hậu tiếp theo có thể được đặt ở đâu?
 
-## Programming Exercises
+Đặt các quân hậu theo từng hàng trên bàn cờ `4 × 4`, với cả chỉ số hàng và cột đều bắt đầu từ 0.
+Các quân hậu đã được đặt tại `(0, 1)` và `(1, 3)`. Quân hậu tiếp theo phải được đặt ở hàng 2.
 
-### Permutations of Distinct Elements
+<!-- numbered-subquestions -->
 
-The integer array `nums` contains at least one element, and all its elements are distinct.
-List every possible order formed by using each element exactly once, and return each order as an array.
-The permutations may appear in any order in the result.
-Use backtracking, with a Boolean array recording whether the element at each position has already been selected for the current permutation.
+1. Những cột nào bị loại vì đã có quân hậu?
+2. Trong các cột còn lại, những vị trí nào bị loại vì nằm trên cùng đường chéo với một quân hậu hiện có?
+3. Những vị trí nào ở hàng 2 vẫn còn có thể thử?
 
-??? tip "Hints"
+??? success "Đáp án"
 
-    1. The recursion depth indicates which position of the permutation is currently being filled
-    2. At each level, try only elements that have not yet been used
-    3. When the path's length equals the length of `nums`, add a copy of the path to the answer
+    1. Các cột 1 và 3 đã có quân hậu, vì vậy các vị trí `(2, 1)` và `(2, 3)` bị loại.
+
+    2. Trong các vị trí còn lại, `(2, 2)` nằm trên cùng đường chéo với `(1, 3)`, nên cũng bị loại.
+        Vị trí `(2, 0)` không cùng cột hay đường chéo với bất kỳ quân hậu nào trong hai quân hậu hiện có.
+
+    3. Vị trí duy nhất có thể thử ở hàng 2 là `(2, 0)`.
+
+        Bước này chỉ cho thấy vị trí hiện tại là hợp lệ. Nếu sau đó không thể hoàn tất bàn cờ, thuật toán vẫn phải backtrack và thử một lựa chọn trước đó.
+
+## Bài tập lập trình
+
+### Hoán vị của các phần tử phân biệt
+
+Mảng số nguyên `nums` chứa ít nhất một phần tử và tất cả các phần tử đều khác nhau.
+Hãy liệt kê mọi thứ tự có thể tạo thành bằng cách sử dụng mỗi phần tử đúng một lần, rồi trả về từng thứ tự dưới dạng một mảng.
+Các hoán vị có thể xuất hiện theo bất kỳ thứ tự nào trong kết quả.
+Hãy sử dụng backtracking, với một mảng Boolean ghi lại liệu phần tử tại mỗi vị trí đã được chọn cho hoán vị hiện tại hay chưa.
+
+??? tip "Gợi ý"
+
+    1. Độ sâu đệ quy cho biết vị trí nào của hoán vị hiện đang được điền
+    2. Ở mỗi cấp, chỉ thử các phần tử chưa được sử dụng
+    3. Khi độ dài của đường đi bằng độ dài của `nums`, hãy thêm một bản sao của đường đi vào đáp án
 
 [LeetCode](https://leetcode.com/problems/permutations/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

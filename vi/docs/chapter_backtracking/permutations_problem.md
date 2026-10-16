@@ -1,95 +1,95 @@
-# Permutations Problem
+# Bài toán hoán vị
 
-The permutations problem is a classic application of backtracking algorithms. It is defined as finding all possible arrangements of elements in a given collection (such as an array or string).
+Bài toán hoán vị là một ứng dụng kinh điển của các thuật toán quay lui. Bài toán được định nghĩa là tìm tất cả các cách sắp xếp có thể có của các phần tử trong một tập hợp cho trước (chẳng hạn như một mảng hoặc chuỗi).
 
-The table below shows several example datasets, including input arrays and their corresponding permutations.
+Bảng dưới đây trình bày một số bộ dữ liệu ví dụ, bao gồm các mảng đầu vào và các hoán vị tương ứng của chúng.
 
-<p align="center"> Table <id> &nbsp; Permutations Examples </p>
+<p align="center"> Bảng <id> &nbsp; Các ví dụ về hoán vị </p>
 
-| Input Array | All Permutations                                                   |
-| :---------- | :----------------------------------------------------------------- |
-| $[1]$       | $[1]$                                                              |
-| $[1, 2]$    | $[1, 2], [2, 1]$                                                   |
-| $[1, 2, 3]$ | $[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]$ |
+| Mảng đầu vào | Tất cả các hoán vị                                                  |
+| :----------- | :------------------------------------------------------------------ |
+| $[1]$        | $[1]$                                                               |
+| $[1, 2]$     | $[1, 2], [2, 1]$                                                    |
+| $[1, 2, 3]$  | $[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]$ |
 
-## Case with Distinct Elements
+## Trường hợp các phần tử phân biệt
 
 !!! question
 
-    Given an integer array with no duplicate elements, return all possible permutations.
+    Cho một mảng số nguyên không chứa phần tử trùng lặp, hãy trả về tất cả các hoán vị có thể có.
 
-From the perspective of backtracking algorithms, **we can imagine the process of generating permutations as the result of a series of choices**. Suppose the input array is $[1, 2, 3]$. If we first choose $1$, then choose $3$, and finally choose $2$, we obtain the permutation $[1, 3, 2]$. Backtracking means undoing a choice and then trying other choices.
+Từ góc nhìn của các thuật toán quay lui, **chúng ta có thể hình dung quá trình tạo hoán vị là kết quả của một chuỗi lựa chọn**. Giả sử mảng đầu vào là $[1, 2, 3]$. Nếu trước tiên chọn $1$, sau đó chọn $3$, và cuối cùng chọn $2$, ta thu được hoán vị $[1, 3, 2]$. Quay lui nghĩa là hoàn tác một lựa chọn rồi thử các lựa chọn khác.
 
-From the perspective of backtracking code, the candidate set `choices` consists of all elements in the input array, and the state `state` is the elements that have been chosen so far. Note that each element can only be chosen once, **therefore all elements in `state` should be unique**.
+Từ góc nhìn của mã quay lui, tập ứng viên `choices` bao gồm tất cả các phần tử trong mảng đầu vào, còn trạng thái `state` là các phần tử đã được chọn cho đến thời điểm hiện tại. Lưu ý rằng mỗi phần tử chỉ có thể được chọn một lần, **do đó tất cả các phần tử trong `state` phải là duy nhất**.
 
-As shown in the figure below, we can unfold the search process into a recursion tree, where each node in the tree represents the current state `state`. Starting from the root node, after three rounds of choices, we reach a leaf node, and each leaf node corresponds to a permutation.
+Như trong hình dưới đây, chúng ta có thể triển khai quá trình tìm kiếm thành một cây đệ quy, trong đó mỗi nút trong cây biểu diễn trạng thái hiện tại `state`. Bắt đầu từ nút gốc, sau ba lượt lựa chọn, ta đạt đến một nút lá, và mỗi nút lá tương ứng với một hoán vị.
 
-![Recursion tree of permutations](permutations_problem.assets/permutations_i.png)
+![Cây đệ quy của các hoán vị](permutations_problem.assets/permutations_i.png)
 
-### Pruning Duplicate Choices
+### Cắt tỉa các lựa chọn trùng lặp
 
-To ensure that each element is chosen only once, we consider introducing a boolean array `selected`, where `selected[i]` indicates whether `choices[i]` has been chosen. We implement the following pruning operation based on it.
+Để bảo đảm mỗi phần tử chỉ được chọn một lần, chúng ta cân nhắc sử dụng một mảng Boolean `selected`, trong đó `selected[i]` cho biết liệu `choices[i]` đã được chọn hay chưa. Dựa trên đó, chúng ta thực hiện thao tác cắt tỉa sau:
 
-- After making a choice `choices[i]`, we set `selected[i]` to $\text{True}$, indicating that it has been chosen.
-- When traversing the candidate list `choices`, we skip all nodes that have been chosen, which is pruning.
+- Sau khi đưa ra một lựa chọn `choices[i]`, chúng ta đặt `selected[i]` thành $\text{True}$, cho biết phần tử đó đã được chọn.
+- Khi duyệt qua danh sách ứng viên `choices`, chúng ta bỏ qua tất cả các nút đã được chọn; đây chính là thao tác cắt tỉa.
 
-As shown in the figure below, suppose we choose $1$ in the first round, $3$ in the second round, and $2$ in the third round. Then we need to prune the branch of element $1$ in the second round and prune the branches of elements $1$ and $3$ in the third round.
+Như trong hình dưới đây, giả sử chúng ta chọn $1$ ở lượt đầu tiên, $3$ ở lượt thứ hai và $2$ ở lượt thứ ba. Khi đó, chúng ta cần cắt tỉa nhánh của phần tử $1$ ở lượt thứ hai, đồng thời cắt tỉa các nhánh của phần tử $1$ và $3$ ở lượt thứ ba.
 
-![Pruning example of permutations](permutations_problem.assets/permutations_i_pruning.png)
+![Ví dụ cắt tỉa các hoán vị](permutations_problem.assets/permutations_i_pruning.png)
 
-Observing the above figure, we find that this pruning operation reduces the search space size from $O(n^n)$ to $O(n!)$.
+Quan sát hình trên, chúng ta thấy thao tác cắt tỉa này làm giảm kích thước không gian tìm kiếm từ $O(n^n)$ xuống còn $O(n!)$.
 
-### Code Implementation
+### Triển khai mã
 
-After understanding the above information, we can fill in the blanks in the template code. To shorten the overall code, we do not implement each function in the template separately, but instead unfold them in the `backtrack()` function:
+Sau khi hiểu các thông tin trên, chúng ta có thể điền vào những chỗ trống trong mã mẫu. Để rút gọn toàn bộ mã, chúng ta không triển khai riêng từng hàm trong mã mẫu mà thay vào đó triển khai trực tiếp chúng trong hàm `backtrack()`:
 
 ```src
 [file]{permutations_i}-[class]{}-[func]{permutations_i}
 ```
 
-## Case with Duplicate Elements
+## Trường hợp có phần tử trùng lặp
 
 !!! question
 
-    Given an integer array that **may contain duplicate elements**, return all unique permutations.
+    Cho một mảng số nguyên **có thể chứa các phần tử trùng lặp**, hãy trả về tất cả các hoán vị duy nhất.
 
-Suppose the input array is $[1, 1, 2]$. To distinguish the two duplicate elements $1$, we denote the second $1$ as $\hat{1}$.
+Giả sử mảng đầu vào là $[1, 1, 2]$. Để phân biệt hai phần tử $1$ trùng lặp, chúng ta ký hiệu phần tử $1$ thứ hai là $\hat{1}$.
 
-As shown in the figure below, half of the permutations generated by the above method are duplicates.
+Như trong hình dưới đây, một nửa số hoán vị được tạo ra bằng phương pháp trên là các hoán vị trùng lặp.
 
-![Duplicate permutations](permutations_problem.assets/permutations_ii.png)
+![Các hoán vị trùng lặp](permutations_problem.assets/permutations_ii.png)
 
-So how do we remove duplicate permutations? The most direct approach is to use a hash set to directly deduplicate the permutation results. However, this is not elegant because **the search branches that generate duplicate permutations are unnecessary and should be identified and pruned early**, which can further improve algorithm efficiency.
+Vậy làm thế nào để loại bỏ các hoán vị trùng lặp? Cách tiếp cận trực tiếp nhất là sử dụng một hash set để khử trùng lặp trực tiếp các kết quả hoán vị. Tuy nhiên, cách này không thật sự tối ưu vì **các nhánh tìm kiếm tạo ra những hoán vị trùng lặp là không cần thiết và nên được xác định, cắt tỉa sớm**, qua đó tiếp tục cải thiện hiệu quả của thuật toán.
 
-### Pruning Equal Elements
+### Cắt tỉa các phần tử bằng nhau
 
-Observe the figure below. In the first round, choosing $1$ or choosing $\hat{1}$ is equivalent. All permutations generated under these two choices are duplicates. Therefore, we should prune $\hat{1}$.
+Quan sát hình dưới đây. Ở lượt đầu tiên, việc chọn $1$ hoặc chọn $\hat{1}$ là tương đương. Tất cả các hoán vị được tạo ra từ hai lựa chọn này đều trùng lặp. Vì vậy, chúng ta nên cắt tỉa $\hat{1}$.
 
-Similarly, after choosing $2$ in the first round, the $1$ and $\hat{1}$ in the second round also produce duplicate branches, so the second round's $\hat{1}$ should also be pruned.
+Tương tự, sau khi chọn $2$ ở lượt đầu tiên, $1$ và $\hat{1}$ ở lượt thứ hai cũng tạo ra các nhánh trùng lặp, do đó $\hat{1}$ ở lượt thứ hai cũng nên được cắt tỉa.
 
-Essentially, **our goal is to ensure that multiple equal elements are chosen only once in a certain round of choices**.
+Về bản chất, **mục tiêu của chúng ta là bảo đảm nhiều phần tử bằng nhau chỉ được chọn một lần trong một lượt lựa chọn nhất định**.
 
-![Pruning duplicate permutations](permutations_problem.assets/permutations_ii_pruning.png)
+![Cắt tỉa các hoán vị trùng lặp](permutations_problem.assets/permutations_ii_pruning.png)
 
-### Code Implementation
+### Triển khai mã
 
-Building on the code from the previous problem, we initialize a hash set `duplicated` in each round of choices to record which elements have already been tried in that round, and prune equal elements:
+Dựa trên mã của bài toán trước, chúng ta khởi tạo một hash set `duplicated` trong mỗi lượt lựa chọn để ghi lại các phần tử đã được thử trong lượt đó, đồng thời cắt tỉa các phần tử bằng nhau:
 
 ```src
 [file]{permutations_ii}-[class]{}-[func]{permutations_ii}
 ```
 
-Assuming elements are pairwise distinct, there are $n!$ (factorial) permutations of $n$ elements. When recording results, we need to copy a list of length $n$, using $O(n)$ time. **Therefore, the time complexity is $O(n! \cdot n)$**.
+Giả sử các phần tử đôi một phân biệt, có $n!$ (giai thừa) hoán vị của $n$ phần tử. Khi ghi lại kết quả, chúng ta cần sao chép một danh sách có độ dài $n$, sử dụng thời gian $O(n)$. **Do đó, độ phức tạp thời gian là $O(n! \cdot n)$**.
 
-The maximum recursion depth is $n$, using $O(n)$ stack frame space. `selected` uses $O(n)$ space. At most $n$ `duplicated` sets exist simultaneously, using $O(n^2)$ space. **Therefore, the space complexity is $O(n^2)$**.
+Độ sâu đệ quy tối đa là $n$, sử dụng không gian $O(n)$ cho các stack frame. `selected` sử dụng không gian $O(n)$. Có nhiều nhất $n$ tập `duplicated` tồn tại đồng thời, sử dụng không gian $O(n^2)$. **Do đó, độ phức tạp không gian là $O(n^2)$**.
 
-### Comparison of Two Pruning Methods
+### So sánh hai phương pháp cắt tỉa
 
-Note that although both `selected` and `duplicated` are used for pruning, they have different objectives.
+Lưu ý rằng mặc dù cả `selected` và `duplicated` đều được sử dụng để cắt tỉa, chúng có các mục tiêu khác nhau.
 
-- **Pruning duplicate choices**: There is only one `selected` throughout the entire search process. It records which elements are included in the current state, and its purpose is to prevent an element from appearing repeatedly in `state`.
-- **Pruning equal elements**: Each round of choices (each `backtrack` function call) contains a `duplicated` set. It records which elements have been chosen in this round's iteration (the `for` loop), and its purpose is to ensure that equal elements are chosen only once.
+- **Cắt tỉa các lựa chọn trùng lặp**: Chỉ có một `selected` trong toàn bộ quá trình tìm kiếm. Nó ghi lại những phần tử được đưa vào trạng thái hiện tại, và mục đích của nó là ngăn một phần tử xuất hiện lặp lại trong `state`.
+- **Cắt tỉa các phần tử bằng nhau**: Mỗi lượt lựa chọn (mỗi lần gọi hàm `backtrack`) chứa một tập `duplicated`. Tập này ghi lại những phần tử đã được chọn trong vòng lặp của lượt đó (vòng lặp `for`), và mục đích của nó là bảo đảm các phần tử bằng nhau chỉ được chọn một lần.
 
-The figure below shows the effective scope of the two pruning conditions. Note that each node in the tree represents a choice, and the nodes on the path from the root to a leaf node form a permutation.
+Hình dưới đây cho thấy phạm vi tác động của hai điều kiện cắt tỉa. Lưu ý rằng mỗi nút trong cây biểu diễn một lựa chọn, còn các nút trên đường đi từ nút gốc đến nút lá tạo thành một hoán vị.
 
-![Effective scope of two pruning conditions](permutations_problem.assets/permutations_ii_pruning_summary.png)
+![Phạm vi tác động của hai điều kiện cắt tỉa](permutations_problem.assets/permutations_ii_pruning_summary.png)
