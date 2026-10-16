@@ -44,13 +44,13 @@ nav:
     - chapter_preface/index.md
     - 0.1 Về cuốn sách này: chapter_preface/about_the_book.md
     - 0.2 Cách sử dụng cuốn sách này: chapter_preface/suggestions.md
-    - 0.3 Tổng kết: chapter_preface/summary.md
+    - 0.3 Tóm tắt: chapter_preface/summary.md
   - Chương 1. Làm quen với thuật toán:
     # [icon: material/calculator-variant-outline]
     - chapter_introduction/index.md
     - 1.1 Thuật toán có ở khắp nơi: chapter_introduction/algorithms_are_everywhere.md
     - 1.2 Thuật toán là gì: chapter_introduction/what_is_dsa.md
-    - 1.3 Tổng kết: chapter_introduction/summary.md
+    - 1.3 Tóm tắt: chapter_introduction/summary.md
   - Chương 2. Phân tích độ phức tạp:
     # [icon: material/timer-sand]
     - chapter_computational_complexity/index.md
@@ -58,7 +58,7 @@ nav:
     - 2.2 Vòng lặp và đệ quy: chapter_computational_complexity/iteration_and_recursion.md
     - 2.3 Độ phức tạp thời gian: chapter_computational_complexity/time_complexity.md
     - 2.4 Độ phức tạp không gian: chapter_computational_complexity/space_complexity.md
-    - 2.5 Tổng kết: chapter_computational_complexity/summary.md
+    - 2.5 Tóm tắt: chapter_computational_complexity/summary.md
     - 2.6 Bài tập: chapter_computational_complexity/exercises.md
   - Chương 3. Cấu trúc dữ liệu:
     # [icon: material/shape-outline]
@@ -67,7 +67,7 @@ nav:
     - 3.2 Kiểu dữ liệu cơ bản: chapter_data_structure/basic_data_types.md
     - 3.3 Mã hóa số *: chapter_data_structure/number_encoding.md
     - 3.4 Mã hóa ký tự *: chapter_data_structure/character_encoding.md
-    - 3.5 Tổng kết: chapter_data_structure/summary.md
+    - 3.5 Tóm tắt: chapter_data_structure/summary.md
     - 3.6 Bài tập: chapter_data_structure/exercises.md
   - Chương 4. Mảng và danh sách liên kết:
     # [icon: material/view-list-outline]
@@ -76,7 +76,7 @@ nav:
     - 4.2 Danh sách liên kết: chapter_array_and_linkedlist/linked_list.md
     - 4.3 Danh sách: chapter_array_and_linkedlist/list.md
     - 4.4 Bộ nhớ truy cập ngẫu nhiên và bộ nhớ đệm *: chapter_array_and_linkedlist/ram_and_cache.md
-    - 4.5 Tổng kết: chapter_array_and_linkedlist/summary.md
+    - 4.5 Tóm tắt: chapter_array_and_linkedlist/summary.md
     - 4.6 Bài tập: chapter_array_and_linkedlist/exercises.md
   - Chương 5. Ngăn xếp và hàng đợi:
     # [icon: material/stack-overflow]
@@ -84,7 +84,7 @@ nav:
     - 5.1 Ngăn xếp: chapter_stack_and_queue/stack.md
     - 5.2 Hàng đợi: chapter_stack_and_queue/queue.md
     - 5.3 Hàng đợi hai đầu: chapter_stack_and_queue/deque.md
-    - 5.4 Tổng kết: chapter_stack_and_queue/summary.md
+    - 5.4 Tóm tắt: chapter_stack_and_queue/summary.md
     - 5.5 Bài tập: chapter_stack_and_queue/exercises.md
   - Chương 6. Băm:
     # [icon: material/table-search]
@@ -92,7 +92,7 @@ nav:
     - 6.1 Bảng băm: chapter_hashing/hash_map.md
     - 6.2 Va chạm băm: chapter_hashing/hash_collision.md
     - 6.3 Hàm băm: chapter_hashing/hash_algorithm.md
-    - 6.4 Tổng kết: chapter_hashing/summary.md
+    - 6.4 Tóm tắt: chapter_hashing/summary.md
     - 6.5 Bài tập: chapter_hashing/exercises.md
   - Chương 7. Cây:
     # [icon: material/graph-outline]
@@ -102,7 +102,7 @@ nav:
     - 7.3 Biểu diễn cây nhị phân bằng mảng: chapter_tree/array_representation_of_tree.md
     - 7.4 Cây tìm kiếm nhị phân: chapter_tree/binary_search_tree.md
     - 7.5 Cây AVL *: chapter_tree/avl_tree.md
-    - 7.6 Tổng kết: chapter_tree/summary.md
+    - 7.6 Tóm tắt: chapter_tree/summary.md
     - 7.7 Bài tập: chapter_tree/exercises.md
   - Chương 8. Đống:
     # [icon: material/family-tree]
@@ -110,7 +110,7 @@ nav:
     - 8.1 Đống: chapter_heap/heap.md
     - 8.2 Thao tác xây dựng đống: chapter_heap/build_heap.md
     - 8.3 Bài toán Top-k: chapter_heap/top_k.md
-    - 8.4 Tổng kết: chapter_heap/summary.md
+    - 8.4 Tóm tắt: chapter_heap/summary.md
     - 8.5 Bài tập: chapter_heap/exercises.md
   - Chương 9. Đồ thị:
     # [icon: material/graphql]
@@ -118,7 +118,7 @@ nav:
     - 9.1 Đồ thị: chapter_graph/graph.md
     - 9.2 Các thao tác cơ bản trên đồ thị: chapter_graph/graph_operations.md
     - 9.3 Duyệt đồ thị: chapter_graph/graph_traversal.md
-    - 9.4 Tổng kết: chapter_graph/summary.md
+    - 9.4 Tóm tắt: chapter_graph/summary.md
     - 9.5 Bài tập: chapter_graph/exercises.md
   - Chương 10. Tìm kiếm:
     # [icon: material/text-search]
@@ -128,7 +128,7 @@ nav:
     - 10.3 Biên trong tìm kiếm nhị phân: chapter_searching/binary_search_edge.md
     - 10.4 Chiến lược tối ưu bằng băm: chapter_searching/replace_linear_by_hashing.md
     - 10.5 Nhìn lại các thuật toán tìm kiếm: chapter_searching/searching_algorithm_revisited.md
-    - 10.6 Tổng kết: chapter_searching/summary.md
+    - 10.6 Tóm tắt: chapter_searching/summary.md
     - 10.7 Bài tập: chapter_searching/exercises.md
   - Chương 11. Sắp xếp:
     # [icon: material/sort-ascending]
@@ -143,7 +143,7 @@ nav:
     - 11.8 Sắp xếp thùng: chapter_sorting/bucket_sort.md
     - 11.9 Sắp xếp đếm: chapter_sorting/counting_sort.md
     - 11.10 Sắp xếp cơ số: chapter_sorting/radix_sort.md
-    - 11.11 Tổng kết: chapter_sorting/summary.md
+    - 11.11 Tóm tắt: chapter_sorting/summary.md
     - 11.12 Bài tập: chapter_sorting/exercises.md
   - Chương 12. Chia để trị:
     # [icon: material/set-split]
@@ -152,7 +152,7 @@ nav:
     - 12.2 Chiến lược tìm kiếm chia để trị: chapter_divide_and_conquer/binary_search_recur.md
     - 12.3 Bài toán xây dựng cây nhị phân: chapter_divide_and_conquer/build_binary_tree_problem.md
     - 12.4 Bài toán Tháp Hà Nội: chapter_divide_and_conquer/hanota_problem.md
-    - 12.5 Tổng kết: chapter_divide_and_conquer/summary.md
+    - 12.5 Tóm tắt: chapter_divide_and_conquer/summary.md
     - 12.6 Bài tập: chapter_divide_and_conquer/exercises.md
   - Chương 13. Quay lui:
     # [icon: material/map-marker-path]
@@ -161,7 +161,7 @@ nav:
     - 13.2 Bài toán hoán vị: chapter_backtracking/permutations_problem.md
     - 13.3 Bài toán tổng tập con: chapter_backtracking/subset_sum_problem.md
     - 13.4 Bài toán N quân hậu: chapter_backtracking/n_queens_problem.md
-    - 13.5 Tổng kết: chapter_backtracking/summary.md
+    - 13.5 Tóm tắt: chapter_backtracking/summary.md
     - 13.6 Bài tập: chapter_backtracking/exercises.md
   - Chương 14. Quy hoạch động:
     # [icon: material/table-pivot]
@@ -172,7 +172,7 @@ nav:
     - 14.4 Bài toán ba lô 0-1: chapter_dynamic_programming/knapsack_problem.md
     - 14.5 Bài toán ba lô không giới hạn: chapter_dynamic_programming/unbounded_knapsack_problem.md
     - 14.6 Bài toán khoảng cách chỉnh sửa: chapter_dynamic_programming/edit_distance_problem.md
-    - 14.7 Tổng kết: chapter_dynamic_programming/summary.md
+    - 14.7 Tóm tắt: chapter_dynamic_programming/summary.md
     - 14.8 Bài tập: chapter_dynamic_programming/exercises.md
   - Chương 15. Tham lam:
     # [icon: material/head-heart-outline]
@@ -181,7 +181,7 @@ nav:
     - 15.2 Bài toán ba lô phân số: chapter_greedy/fractional_knapsack_problem.md
     - 15.3 Bài toán sức chứa lớn nhất: chapter_greedy/max_capacity_problem.md
     - 15.4 Bài toán cắt để có tích lớn nhất: chapter_greedy/max_product_cutting_problem.md
-    - 15.5 Tổng kết: chapter_greedy/summary.md
+    - 15.5 Tóm tắt: chapter_greedy/summary.md
     - 15.6 Bài tập: chapter_greedy/exercises.md
   - Chương 16. Phụ lục:
     # [icon: material/help-circle-outline]

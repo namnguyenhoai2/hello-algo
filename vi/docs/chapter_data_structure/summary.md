@@ -1,4 +1,4 @@
-# Tổng kết
+# Tóm tắt
 
 ### Nội dung ôn tập chính
 

@@ -1,111 +1,111 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### When Is Dynamic Programming Appropriate?
+### Khi nào nên sử dụng Quy hoạch động?
 
-A student says, "Whenever a recurrence can be written, dynamic programming should be used."
-For each task below, decide whether dynamic programming, backtracking, or a loop or mathematical formula without a `dp` table is more appropriate. Give one key reason.
-
-<!-- numbered-subquestions -->
-
-1. Using coin denominations `[1, 3, 4]`, make an amount of 6 with the fewest coins. Each denomination may be used repeatedly.
-2. Output all permutations of `[1, 2, 3]`.
-3. Calculate $1 + 2 + \dots + n$.
-
-    For the task you consider suitable for dynamic programming, also state what `dp[i]` represents.
-
-??? success "Answer"
-
-    1. Dynamic programming is suitable. Let `dp[i]` be the minimum number of coins needed to make amount `i`.
-        For every coin `c` that does not exceed `i`, `dp[i-c] + 1` is a candidate answer,
-        and the minimum of these candidates is chosen. Different choices repeatedly encounter the same amounts, and an optimal solution for a larger amount can be built from optimal solutions for smaller amounts.
-        The answer for amount 6 is 2, using `3 + 3`.
-
-    2. Backtracking is suitable. The task requires generating all 6 permutations one by one. Backtracking can systematically make a choice, continue searching,
-        undo the choice, and then try another branch. Regardless of the method, actually outputting every permutation requires enumerating them.
-
-    3. A loop or the arithmetic-series formula is sufficient. Although the recurrence `S(i) = S(i-1) + i` can be written, calculating `S(i)` depends on only one smaller value, `S(i-1)`.
-        Each partial sum needs to be calculated only once, so there are no repeated subproblems and no need for a `dp` table. "A recurrence can be written" does not mean "dynamic programming is needed."
-
-### Calculating One Cell in a Knapsack Table
-
-Consider this 0-1 knapsack problem: item weights `wgt = [1, 2, 3]`, values `val = [5, 11, 15]`, and knapsack capacity 4.
-`dp[i][c]` is the maximum value obtainable using only the first $i$ items with a knapsack capacity limit of $c$;
-the knapsack does not have to be filled exactly.
-
-Calculate only the state `dp[3][4]`. You are given `dp[2][4] = 16` and `dp[2][1] = 5`:
+Một sinh viên nói: “Bất cứ khi nào có thể viết một recurrence, ta nên sử dụng quy hoạch động.”
+Với mỗi bài toán dưới đây, hãy quyết định quy hoạch động, quay lui hay vòng lặp hoặc công thức toán học không dùng bảng `dp` là phù hợp hơn. Nêu một lý do chính.
 
 <!-- numbered-subquestions -->
 
-1. If the third item is not selected, what is the candidate value?
-2. If the third item is selected, how much capacity remains, and what is the candidate value?
-3. What should `dp[3][4]` be? Which items does this value correspond to selecting?
+1. Sử dụng các mệnh giá tiền `[1, 3, 4]`, hãy tạo ra số tiền 6 bằng số lượng đồng xu ít nhất. Mỗi mệnh giá có thể được sử dụng nhiều lần.
+2. Xuất tất cả các hoán vị của `[1, 2, 3]`.
+3. Tính $1 + 2 + \dots + n$.
 
-??? success "Answer"
+    Với bài toán mà bạn cho là phù hợp với quy hoạch động, hãy nêu thêm `dp[i]` biểu diễn điều gì.
 
-    1. If the third item is not selected, keep the result from the first two items. The candidate value is `dp[2][4] = 16`.
+??? success "Đáp án"
 
-    2. The third item has weight 3, so capacity $4-3=1$ remains after it is placed in the knapsack. The candidate value is
+    1. Quy hoạch động là phù hợp. Gọi `dp[i]` là số lượng đồng xu tối thiểu cần để tạo ra số tiền `i`.
+        Với mỗi đồng xu `c` không vượt quá `i`, `dp[i-c] + 1` là một đáp án ứng viên,
+        và chọn giá trị nhỏ nhất trong các ứng viên này. Các lựa chọn khác nhau nhiều lần gặp lại cùng một số tiền, và một lời giải tối ưu cho số tiền lớn hơn có thể được xây dựng từ các lời giải tối ưu cho những số tiền nhỏ hơn.
+        Đáp án cho số tiền 6 là 2, sử dụng `3 + 3`.
+
+    2. Quay lui là phù hợp. Bài toán yêu cầu tạo từng hoán vị trong tổng số 6 hoán vị. Quay lui có thể lần lượt đưa ra một lựa chọn, tiếp tục tìm kiếm,
+        hoàn tác lựa chọn đó rồi thử một nhánh khác. Dù sử dụng phương pháp nào, việc thực sự xuất ra mọi hoán vị vẫn yêu cầu liệt kê tất cả chúng.
+
+    3. Một vòng lặp hoặc công thức cấp số cộng là đủ. Mặc dù có thể viết recurrence `S(i) = S(i-1) + i`, việc tính `S(i)` chỉ phụ thuộc vào một giá trị nhỏ hơn, `S(i-1)`.
+        Mỗi tổng từng phần chỉ cần được tính một lần, nên không có bài toán con nào bị lặp lại và không cần bảng `dp`. “Có thể viết recurrence” không có nghĩa là “cần dùng quy hoạch động.”
+
+### Tính một ô trong bảng Knapsack
+
+Xét bài toán knapsack 0-1: trọng số các vật phẩm `wgt = [1, 2, 3]`, giá trị `val = [5, 11, 15]`, và sức chứa knapsack là 4.
+`dp[i][c]` là giá trị lớn nhất có thể đạt được khi chỉ sử dụng $i$ vật phẩm đầu tiên với giới hạn sức chứa knapsack là $c$;
+knapsack không nhất thiết phải được lấp đầy chính xác.
+
+Chỉ tính trạng thái `dp[3][4]`. Cho trước `dp[2][4] = 16` và `dp[2][1] = 5`:
+
+<!-- numbered-subquestions -->
+
+1. Nếu không chọn vật phẩm thứ ba, giá trị ứng viên là bao nhiêu?
+2. Nếu chọn vật phẩm thứ ba, còn lại bao nhiêu sức chứa và giá trị ứng viên là bao nhiêu?
+3. `dp[3][4]` nên có giá trị bao nhiêu? Giá trị này tương ứng với việc chọn những vật phẩm nào?
+
+??? success "Đáp án"
+
+    1. Nếu không chọn vật phẩm thứ ba, giữ lại kết quả từ hai vật phẩm đầu tiên. Giá trị ứng viên là `dp[2][4] = 16`.
+
+    2. Vật phẩm thứ ba có trọng lượng 3, nên sau khi đặt vào knapsack, sức chứa còn lại là $4-3=1$. Giá trị ứng viên là
         `dp[2][1] + 15 = 5 + 15 = 20`.
 
-    3. Comparing 16 and 20 gives `dp[3][4] = 20`. This corresponds to selecting the first and third items,
-        whose total weight is $1+3=4$ and total value is $5+15=20$.
+    3. So sánh 16 và 20 cho `dp[3][4] = 20`. Điều này tương ứng với việc chọn vật phẩm thứ nhất và thứ ba,
+        có tổng trọng lượng là $1+3=4$ và tổng giá trị là $5+15=20$.
 
-        This state calculation demonstrates one "select or do not select" comparison in the 0-1 knapsack problem.
+        Việc tính trạng thái này minh họa một phép so sánh “chọn hoặc không chọn” trong bài toán knapsack 0-1.
 
-### In Which Order Should Knapsack Capacities Be Updated?
+### Nên cập nhật sức chứa knapsack theo thứ tự nào?
 
-A 0-1 knapsack problem has only one item, with weight 2 and value 5, and the knapsack has capacity 4.
-The item can be selected at most once. The initial one-dimensional array is `dp = [0, 0, 0, 0, 0]`.
+Một bài toán knapsack 0-1 chỉ có một vật phẩm, với trọng lượng 2 và giá trị 5, còn knapsack có sức chứa 4.
+Vật phẩm có thể được chọn nhiều nhất một lần. Mảng một chiều ban đầu là `dp = [0, 0, 0, 0, 0]`.
 
-A student processes the item by updating capacities from 2 to 4:
+Một sinh viên xử lý vật phẩm bằng cách cập nhật các sức chứa từ 2 đến 4:
 
-- After updating `dp[2]`, its value is 5.
-- After updating `dp[3]`, its value is also 5.
-- When updating `dp[4]`, the student uses the newly obtained `dp[2]`, producing `dp[4] = 10`.
+- Sau khi cập nhật `dp[2]`, giá trị của nó là 5.
+- Sau khi cập nhật `dp[3]`, giá trị của nó cũng là 5.
+- Khi cập nhật `dp[4]`, sinh viên sử dụng `dp[2]` vừa thu được, tạo ra `dp[4] = 10`.
 
 <!-- numbered-subquestions -->
 
-1. Is `dp[4] = 10` correct? Why or why not?
-2. Given that each item may be selected at most once, what should `dp[4]` be?
-3. When processing each item, should capacities be updated from largest to smallest or from smallest to largest? What problem does this avoid?
+1. `dp[4] = 10` có đúng không? Tại sao đúng hoặc tại sao không?
+2. Vì mỗi vật phẩm có thể được chọn nhiều nhất một lần, `dp[4]` nên có giá trị bao nhiêu?
+3. Khi xử lý từng vật phẩm, nên cập nhật các sức chứa từ lớn đến nhỏ hay từ nhỏ đến lớn? Cách này tránh được vấn đề gì?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The result is incorrect. A value of 10 is equivalent to placing the item with value 5 into the knapsack twice,
-        violating the condition that each item may be selected at most once.
+    1. Kết quả không đúng. Giá trị 10 tương đương với việc đặt vật phẩm có giá trị 5 vào knapsack hai lần,
+        vi phạm điều kiện mỗi vật phẩm chỉ có thể được chọn nhiều nhất một lần.
 
-    2. The knapsack can contain at most this one item, so the correct value of `dp[4]` is 5.
+    2. Knapsack chỉ có thể chứa nhiều nhất một vật phẩm này, nên giá trị đúng của `dp[4]` là 5.
 
-    3. Capacities should be updated from largest to smallest, in the order 4, 3, 2.
-        Then, when calculating `dp[c]`, the value read from `dp[c-2]` still comes from before the current item was processed,
-        preventing the current item from being reused during the same round.
+    3. Các sức chứa nên được cập nhật từ lớn đến nhỏ, theo thứ tự 4, 3, 2.
+        Khi đó, lúc tính `dp[c]`, giá trị đọc từ `dp[c-2]` vẫn là giá trị trước khi vật phẩm hiện tại được xử lý,
+        ngăn không cho vật phẩm hiện tại được sử dụng lại trong cùng một lượt.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Number of Ways to Climb Stairs
+### Số cách leo cầu thang
 
-A staircase has `n` steps. Each move climbs either 1 or 2 steps, and you must land exactly on step `n`.
-Calculate the number of distinct ways to reach the top. Assume `n >= 1`; ways are distinguished only by their sequence of 1-step and 2-step moves.
-Use a one-dimensional dynamic programming array. For now, do not use the space optimization that keeps only two states.
+Một cầu thang có `n` bậc. Mỗi bước đi có thể leo 1 hoặc 2 bậc, và bạn phải đặt chân chính xác lên bậc `n`.
+Hãy tính số cách khác nhau để đi đến đỉnh. Giả sử `n >= 1`; các cách chỉ được phân biệt bởi chuỗi các bước đi 1 bậc và 2 bậc.
+Sử dụng mảng quy hoạch động một chiều. Hiện tại, không sử dụng tối ưu hóa bộ nhớ chỉ giữ lại hai trạng thái.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. The last move to step i can cover only 1 or 2 steps
-    2. Therefore, dp[i] = dp[i-1] + dp[i-2]
-    3. Handle the cases where n is 1 or 2 first, then fill the table starting from step 3
+    1. Bước đi cuối cùng đến bậc i chỉ có thể bao phủ 1 hoặc 2 bậc
+    2. Do đó, dp[i] = dp[i-1] + dp[i-2]
+    3. Trước tiên xử lý các trường hợp n là 1 hoặc 2, sau đó điền bảng bắt đầu từ bậc 3
 
 [LeetCode](https://leetcode.com/problems/climbing-stairs/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }
 
-### 0-1 Knapsack
+### Knapsack 0-1
 
-You are given equal-length arrays `wgt` and `val`. Item `i` has positive integer weight `wgt[i]` and non-negative integer value `val[i]`.
-The knapsack capacity `cap` is a non-negative integer. Each item may be selected at most once. Find the maximum total value that can be placed in the knapsack
-without exceeding `cap`. Use one-dimensional dynamic programming.
+Cho hai mảng có cùng độ dài `wgt` và `val`. Vật phẩm `i` có trọng lượng nguyên dương `wgt[i]` và giá trị nguyên không âm `val[i]`.
+Sức chứa knapsack `cap` là một số nguyên không âm. Mỗi vật phẩm có thể được chọn nhiều nhất một lần. Hãy tìm tổng giá trị lớn nhất có thể đặt vào knapsack
+mà không vượt quá `cap`. Sử dụng quy hoạch động một chiều.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. Initialize an array dp of length cap + 1, where dp[c] is the maximum value for a capacity limit of c
-    2. When processing item i, compare dp[c], which does not select it, with dp[c-wgt[i]] + val[i], which does
-    3. Update capacities from largest to smallest to avoid selecting the current item repeatedly in the same round
+    1. Khởi tạo một mảng dp có độ dài cap + 1, trong đó dp[c] là giá trị lớn nhất với giới hạn sức chứa là c
+    2. Khi xử lý vật phẩm i, hãy so sánh dp[c], tức là không chọn vật phẩm đó, với dp[c-wgt[i]] + val[i], tức là có chọn vật phẩm đó
+    3. Cập nhật các sức chứa từ lớn đến nhỏ để tránh chọn lặp lại vật phẩm hiện tại trong cùng một lượt

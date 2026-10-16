@@ -1,9 +1,9 @@
-# Dynamic Programming
+# Lập trình động
 
-![Dynamic programming](../assets/covers/chapter_dynamic_programming.jpg)
+![Lập trình động](../assets/covers/chapter_dynamic_programming.jpg)
 
 !!! abstract
 
-    Streams flow into rivers, rivers flow into the sea.
+    Dòng suối chảy vào sông, sông chảy ra biển.
 
-    Dynamic programming combines solutions to small problems into the answer to a large problem, leading us step by step to the other shore of problem-solving.
+    Lập trình động kết hợp lời giải của các bài toán nhỏ để tạo thành đáp án cho một bài toán lớn, từng bước đưa chúng ta sang bờ bên kia của việc giải quyết vấn đề.

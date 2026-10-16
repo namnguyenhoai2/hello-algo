@@ -1,143 +1,143 @@
-# Dynamic Programming Problem-Solving Approach
+# Phương pháp giải bài toán Quy hoạch động
 
-The previous two sections introduced the main characteristics of dynamic programming problems. Next, let us explore two more practical issues together.
+Hai phần trước đã giới thiệu những đặc điểm chính của các bài toán quy hoạch động. Tiếp theo, hãy cùng tìm hiểu thêm hai vấn đề thực tiễn.
 
-1. How to determine whether a problem is a dynamic programming problem?
-2. What is the complete process for solving a dynamic programming problem, and where should we start?
+1. Làm thế nào để xác định một bài toán có phải là bài toán quy hoạch động hay không?
+2. Quy trình hoàn chỉnh để giải một bài toán quy hoạch động là gì, và nên bắt đầu từ đâu?
 
-## Problem Identification
+## Nhận diện bài toán
 
-Generally speaking, if a problem contains overlapping subproblems, optimal substructure, and satisfies no aftereffects, then it is usually suitable for solving with dynamic programming. However, it is difficult to directly extract these characteristics from the problem description. Therefore, we usually relax the conditions and **first observe whether the problem is suitable for solving with backtracking (exhaustive search)**.
+Nói chung, nếu một bài toán có các bài toán con chồng lấn, cấu trúc con tối ưu và thỏa mãn tính không có hậu quả về sau, thì bài toán đó thường phù hợp để giải bằng quy hoạch động. Tuy nhiên, rất khó trực tiếp nhận ra những đặc điểm này chỉ từ mô tả bài toán. Vì vậy, chúng ta thường nới lỏng các điều kiện và **trước tiên quan sát xem bài toán có phù hợp để giải bằng quay lui (tìm kiếm vét cạn) hay không**.
 
-**Problems suitable for solving with backtracking usually satisfy the "decision tree model"**, which means the problem can be described using a tree structure, where each node represents a decision and each path represents a sequence of decisions.
+**Các bài toán phù hợp để giải bằng quay lui thường thỏa mãn "mô hình cây quyết định"**, nghĩa là bài toán có thể được mô tả bằng một cấu trúc cây, trong đó mỗi nút biểu diễn một quyết định và mỗi đường đi biểu diễn một chuỗi quyết định.
 
-In other words, if a problem contains an explicit concept of decisions, and the solution is generated through a series of decisions, then it satisfies the decision tree model and can usually be solved using backtracking.
+Nói cách khác, nếu một bài toán chứa khái niệm quyết định rõ ràng và lời giải được tạo ra thông qua một chuỗi quyết định, thì bài toán đó thỏa mãn mô hình cây quyết định và thường có thể được giải bằng quay lui.
 
-On this basis, dynamic programming problems also have some positive indicators.
+Trên cơ sở đó, các bài toán quy hoạch động cũng có một số dấu hiệu tích cực.
 
-- The problem contains descriptions such as maximum (minimum) or most (least), indicating optimization.
-- The problem's state can be represented using a list, multi-dimensional matrix, or tree, and a state has a recurrence relation with its surrounding states.
+- Bài toán chứa các mô tả như lớn nhất (nhỏ nhất) hoặc nhiều nhất (ít nhất), cho thấy đây là một bài toán tối ưu hóa.
+- Trạng thái của bài toán có thể được biểu diễn bằng một danh sách, ma trận nhiều chiều hoặc cây, và một trạng thái có quan hệ truy hồi với các trạng thái xung quanh nó.
 
-Correspondingly, there are also some negative indicators.
+Tương ứng, cũng có một số dấu hiệu tiêu cực.
 
-- The goal of the problem is to find all possible solutions, rather than finding the optimal solution.
-- The problem description has obvious permutation and combination characteristics, requiring the return of specific multiple solutions.
+- Mục tiêu của bài toán là tìm tất cả các lời giải khả dĩ, thay vì tìm lời giải tối ưu.
+- Mô tả bài toán có đặc điểm rõ ràng của bài toán hoán vị và tổ hợp, yêu cầu trả về nhiều lời giải cụ thể.
 
-If a problem satisfies the decision tree model and has relatively obvious positive indicators, we can assume it is a dynamic programming problem and verify that assumption during the solving process.
+Nếu một bài toán thỏa mãn mô hình cây quyết định và có các dấu hiệu tích cực tương đối rõ ràng, chúng ta có thể giả định đó là một bài toán quy hoạch động và kiểm chứng giả định này trong quá trình giải.
 
-## Problem-Solving Steps
+## Các bước giải bài toán
 
-The problem-solving process for dynamic programming varies depending on the nature and difficulty of the problem, but generally follows these steps: describe decisions, define states, establish the $dp$ table, derive state transition equations, determine boundary conditions, etc.
+Quy trình giải bài toán quy hoạch động thay đổi tùy theo bản chất và độ khó của bài toán, nhưng nhìn chung gồm các bước sau: mô tả các quyết định, định nghĩa trạng thái, xây dựng bảng $dp$, suy ra phương trình chuyển trạng thái, xác định điều kiện biên, v.v.
 
-To illustrate the problem-solving steps more vividly, we use a classic problem "minimum path sum" as an example.
+Để minh họa sinh động hơn các bước giải bài toán, chúng ta sử dụng bài toán kinh điển "tổng đường đi nhỏ nhất" làm ví dụ.
 
 !!! question
 
-    Given an $n \times m$ two-dimensional grid `grid` in which each cell contains a non-negative integer representing its cost, a robot starts from the top-left cell and can only move down or right at each step until reaching the bottom-right cell. Return the minimum path sum from the top-left to the bottom-right.
+    Cho một lưới hai chiều $n \times m$ `grid` trong đó mỗi ô chứa một số nguyên không âm biểu diễn chi phí của ô đó. Một robot bắt đầu từ ô trên cùng bên trái và ở mỗi bước chỉ có thể di chuyển xuống hoặc sang phải cho đến khi đến ô dưới cùng bên phải. Hãy trả về tổng đường đi nhỏ nhất từ ô trên cùng bên trái đến ô dưới cùng bên phải.
 
-The figure below shows an example where the minimum path sum for the given grid is $13$.
+Hình bên dưới minh họa một ví dụ trong đó tổng đường đi nhỏ nhất của lưới đã cho là $13$.
 
-![Minimum path sum example data](dp_solution_pipeline.assets/min_path_sum_example.png)
+![Dữ liệu ví dụ về tổng đường đi nhỏ nhất](dp_solution_pipeline.assets/min_path_sum_example.png)
 
-**Step 1: Think about the decisions in each round, define the state, and thus obtain the $dp$ table**
+**Bước 1: Suy nghĩ về các quyết định trong mỗi lượt, định nghĩa trạng thái và từ đó xây dựng bảng $dp$**
 
-The decision in each round of this problem is to move one step down or right from the current cell. Let the row and column indices of the current cell be $[i, j]$. After moving down or right, the indices become $[i+1, j]$ or $[i, j+1]$. Therefore, the state should include two variables, the row index and column index, denoted as $[i, j]$.
+Quyết định trong mỗi lượt của bài toán này là di chuyển một bước xuống hoặc sang phải từ ô hiện tại. Gọi chỉ số hàng và cột của ô hiện tại lần lượt là $[i, j]$. Sau khi di chuyển xuống hoặc sang phải, các chỉ số sẽ trở thành $[i+1, j]$ hoặc $[i, j+1]$. Vì vậy, trạng thái cần chứa hai biến: chỉ số hàng và chỉ số cột, được ký hiệu là $[i, j]$.
 
-State $[i, j]$ corresponds to the subproblem: **the minimum path sum from the starting point $[0, 0]$ to $[i, j]$**, denoted as $dp[i, j]$.
+Trạng thái $[i, j]$ tương ứng với bài toán con: **tổng đường đi nhỏ nhất từ điểm bắt đầu $[0, 0]$ đến $[i, j]$**, được ký hiệu là $dp[i, j]$.
 
-From this, we obtain the two-dimensional $dp$ matrix shown in the figure below, whose size is the same as the input grid $grid$.
+Từ đó, chúng ta có ma trận $dp$ hai chiều như trong hình bên dưới, với kích thước giống với lưới đầu vào $grid$.
 
-![State definition and dp table](dp_solution_pipeline.assets/min_path_sum_solution_state_definition.png)
+![Định nghĩa trạng thái và bảng dp](dp_solution_pipeline.assets/min_path_sum_solution_state_definition.png)
 
 !!! note
 
-    The dynamic programming and backtracking processes can be described as a sequence of decisions, and the state consists of all decision variables. It should contain all variables describing the progress of problem-solving, and should contain sufficient information to derive the next state.
+    Quy hoạch động và quá trình quay lui đều có thể được mô tả dưới dạng một chuỗi quyết định, còn trạng thái bao gồm tất cả các biến quyết định. Trạng thái cần chứa tất cả các biến mô tả tiến trình giải bài toán và phải chứa đủ thông tin để suy ra trạng thái tiếp theo.
 
-    Each state corresponds to a subproblem, and we define a $dp$ table to store the solutions to all subproblems. Each independent variable of the state is a dimension of the $dp$ table. Essentially, the $dp$ table is a mapping between states and solutions to subproblems.
+    Mỗi trạng thái tương ứng với một bài toán con, và chúng ta định nghĩa một bảng $dp$ để lưu lời giải của tất cả các bài toán con. Mỗi biến độc lập của trạng thái tương ứng với một chiều của bảng $dp$. Về bản chất, bảng $dp$ là ánh xạ giữa các trạng thái và lời giải của các bài toán con.
 
-**Step 2: Identify the optimal substructure, and then derive the state transition equation**
+**Bước 2: Xác định cấu trúc con tối ưu, sau đó suy ra phương trình chuyển trạng thái**
 
-For state $[i, j]$, it can only transition from the cell above $[i-1, j]$ or the cell to the left $[i, j-1]$. Therefore, the optimal substructure is: the minimum path sum to reach $[i, j]$ is determined by the smaller of the minimum path sums of $[i, j-1]$ and $[i-1, j]$.
+Với trạng thái $[i, j]$, nó chỉ có thể chuyển tiếp từ ô phía trên $[i-1, j]$ hoặc ô bên trái $[i, j-1]$. Vì vậy, cấu trúc con tối ưu là: tổng đường đi nhỏ nhất để đến $[i, j]$ được quyết định bởi giá trị nhỏ hơn trong tổng đường đi nhỏ nhất đến $[i, j-1]$ và $[i-1, j]$.
 
-Based on the above analysis, the state transition equation shown in the figure below can be derived:
+Dựa trên phân tích trên, chúng ta có thể suy ra phương trình chuyển trạng thái như trong hình bên dưới:
 
 $$
 dp[i, j] = \min(dp[i-1, j], dp[i, j-1]) + grid[i, j]
 $$
 
-![Optimal substructure and state transition equation](dp_solution_pipeline.assets/min_path_sum_solution_state_transition.png)
+![Cấu trúc con tối ưu và phương trình chuyển trạng thái](dp_solution_pipeline.assets/min_path_sum_solution_state_transition.png)
 
 !!! note
 
-    Based on the defined $dp$ table, think about the relationship between the original problem and subproblems, and find the method to construct the optimal solution to the original problem from the optimal solutions to the subproblems, which is the optimal substructure.
+    Dựa trên bảng $dp$ đã định nghĩa, hãy suy nghĩ về mối quan hệ giữa bài toán gốc và các bài toán con, đồng thời tìm cách xây dựng lời giải tối ưu cho bài toán gốc từ các lời giải tối ưu của những bài toán con; đó chính là cấu trúc con tối ưu.
 
-    Once we identify the optimal substructure, we can use it to construct the state transition equation.
+    Sau khi xác định được cấu trúc con tối ưu, chúng ta có thể sử dụng nó để xây dựng phương trình chuyển trạng thái.
 
-**Step 3: Determine boundary conditions and state transition order**
+**Bước 3: Xác định điều kiện biên và thứ tự chuyển trạng thái**
 
-In this problem, states in the first row can only come from the state to their left, and states in the first column can only come from the state above them. Therefore, the first row $i = 0$ and first column $j = 0$ are boundary conditions.
+Trong bài toán này, các trạng thái ở hàng đầu tiên chỉ có thể đi đến từ trạng thái bên trái, còn các trạng thái ở cột đầu tiên chỉ có thể đi đến từ trạng thái phía trên. Vì vậy, hàng đầu tiên $i = 0$ và cột đầu tiên $j = 0$ là các điều kiện biên.
 
-As shown in the figure below, since each cell transitions from the cell to its left and the cell above it, we use loops to traverse the matrix, with the outer loop traversing rows and the inner loop traversing columns.
+Như trong hình bên dưới, vì mỗi ô chuyển trạng thái từ ô bên trái và ô phía trên nó, chúng ta sử dụng các vòng lặp để duyệt ma trận, trong đó vòng lặp bên ngoài duyệt các hàng và vòng lặp bên trong duyệt các cột.
 
-![Boundary conditions and state transition order](dp_solution_pipeline.assets/min_path_sum_solution_initial_state.png)
+![Điều kiện biên và thứ tự chuyển trạng thái](dp_solution_pipeline.assets/min_path_sum_solution_initial_state.png)
 
 !!! note
 
-    Boundary conditions in dynamic programming are used to initialize the $dp$ table, while in search they are used for pruning.
+    Trong quy hoạch động, điều kiện biên được dùng để khởi tạo bảng $dp$, còn trong quá trình tìm kiếm, chúng được dùng để cắt tỉa.
 
-    The core of state transition order is to ensure that when computing the solution to the current problem, all the smaller subproblems it depends on have already been computed correctly.
+    Cốt lõi của thứ tự chuyển trạng thái là bảo đảm rằng khi tính lời giải cho bài toán hiện tại, tất cả các bài toán con nhỏ hơn mà nó phụ thuộc vào đã được tính chính xác.
 
-Based on the above analysis, we can directly write the dynamic programming code. However, subproblem decomposition is a top-down approach, so implementing in the order "brute force search $\rightarrow$ memoization $\rightarrow$ dynamic programming" is more aligned with thinking habits.
+Dựa trên phân tích trên, chúng ta có thể trực tiếp viết mã quy hoạch động. Tuy nhiên, phân rã bài toán con là một cách tiếp cận từ trên xuống, vì vậy việc triển khai theo thứ tự "tìm kiếm vét cạn $\rightarrow$ memoization $\rightarrow$ quy hoạch động" phù hợp hơn với thói quen tư duy.
 
-### Method 1: Brute Force Search
+### Phương pháp 1: Tìm kiếm vét cạn
 
-Starting from state $[i, j]$, we continuously decompose it into smaller states $[i-1, j]$ and $[i, j-1]$. The recursive function includes the following elements.
+Bắt đầu từ trạng thái $[i, j]$, chúng ta liên tục phân rã nó thành các trạng thái nhỏ hơn $[i-1, j]$ và $[i, j-1]$. Hàm đệ quy bao gồm các thành phần sau:
 
-- **Recursive parameters**: state $[i, j]$.
-- **Return value**: minimum path sum from $[0, 0]$ to $[i, j]$, which is $dp[i, j]$.
-- **Termination condition**: when $i = 0$ and $j = 0$, return cost $grid[0, 0]$.
-- **Pruning**: when $i < 0$ or $j < 0$, the index is out of bounds, return cost $+\infty$, representing infeasibility.
+- **Tham số đệ quy**: trạng thái $[i, j]$.
+- **Giá trị trả về**: tổng đường đi nhỏ nhất từ $[0, 0]$ đến $[i, j]$, tức là $dp[i, j]$.
+- **Điều kiện kết thúc**: khi $i = 0$ và $j = 0$, trả về chi phí $grid[0, 0]$.
+- **Cắt tỉa**: khi $i < 0$ hoặc $j < 0$, chỉ số nằm ngoài giới hạn; trả về chi phí $+\infty$, biểu thị trạng thái không khả thi.
 
-The implementation code is as follows:
+Mã triển khai như sau:
 
 ```src
 [file]{min_path_sum}-[class]{}-[func]{min_path_sum_dfs}
 ```
 
-The figure below shows the recursion tree rooted at $dp[2, 1]$, which includes some overlapping subproblems whose number will increase sharply as the size of grid `grid` grows.
+Hình bên dưới minh họa cây đệ quy bắt nguồn từ $dp[2, 1]$, trong đó có một số bài toán con chồng lấn; số lượng của chúng sẽ tăng nhanh khi kích thước của grid `grid` tăng.
 
-Essentially, the reason for overlapping subproblems is: **there are multiple paths from the top-left corner to reach a certain cell**.
+Về bản chất, nguyên nhân của các bài toán con chồng lấn là: **có nhiều đường đi từ góc trên bên trái đến một ô nhất định**.
 
-![Brute force search recursion tree](dp_solution_pipeline.assets/min_path_sum_dfs.png)
+![Cây đệ quy của tìm kiếm vét cạn](dp_solution_pipeline.assets/min_path_sum_dfs.png)
 
-Each state has two choices, down and right, so the total number of steps from the top-left corner to the bottom-right corner is $m + n - 2$, giving a worst-case time complexity of $O(2^{m + n})$, where $n$ and $m$ are the number of rows and columns of the grid, respectively. Note that this calculation does not account for situations near the grid boundaries, where only one choice remains when reaching the grid boundary, so the actual number of paths will be somewhat less.
+Mỗi trạng thái có hai lựa chọn là đi xuống và sang phải, vì vậy tổng số bước từ góc trên bên trái đến góc dưới bên phải là $m + n - 2$, dẫn đến độ phức tạp thời gian trong trường hợp xấu nhất là $O(2^{m + n})$, trong đó $n$ và $m$ lần lượt là số hàng và số cột của lưới. Lưu ý rằng phép tính này không xét các tình huống gần biên của lưới, nơi chỉ còn một lựa chọn khi đi đến biên lưới, vì vậy số đường đi thực tế sẽ nhỏ hơn đôi chút.
 
-### Method 2: Memoization
+### Phương pháp 2: Memoization
 
-We introduce a memo list `mem` of the same size as grid `grid` to record the solutions to subproblems and prune overlapping subproblems:
+Chúng ta đưa vào một danh sách memo `mem` có cùng kích thước với grid `grid` để ghi lại lời giải của các bài toán con và cắt tỉa những bài toán con chồng lấn:
 
 ```src
 [file]{min_path_sum}-[class]{}-[func]{min_path_sum_dfs_mem}
 ```
 
-As shown in the figure below, after introducing memoization, all subproblem solutions only need to be computed once, so the time complexity depends on the total number of states, which is the grid size $O(nm)$.
+Như trong hình bên dưới, sau khi áp dụng memoization, lời giải của mỗi bài toán con chỉ cần được tính một lần. Vì vậy, độ phức tạp thời gian phụ thuộc vào tổng số trạng thái, tức là kích thước của lưới $O(nm)$.
 
-![Memoization recursion tree](dp_solution_pipeline.assets/min_path_sum_dfs_mem.png)
+![Cây đệ quy với memoization](dp_solution_pipeline.assets/min_path_sum_dfs_mem.png)
 
-### Method 3: Dynamic Programming
+### Phương pháp 3: Quy hoạch động
 
-Implement the dynamic programming solution based on iteration, as shown in the code below:
+Triển khai lời giải quy hoạch động dựa trên phép lặp, như trong đoạn mã dưới đây:
 
 ```src
 [file]{min_path_sum}-[class]{}-[func]{min_path_sum_dp}
 ```
 
-The figure below shows the state transition process for minimum path sum, which traverses the entire grid, **thus the time complexity is $O(nm)$**.
+Hình bên dưới minh họa quá trình chuyển trạng thái để tính tổng đường đi nhỏ nhất, trong đó toàn bộ lưới được duyệt, **vì vậy độ phức tạp thời gian là $O(nm)$**.
 
-The array `dp` has size $n \times m$, **thus the space complexity is $O(nm)$**.
+Mảng `dp` có kích thước $n \times m$, **vì vậy độ phức tạp không gian là $O(nm)$**.
 
 === "<1>"
-    ![Dynamic programming process for minimum path sum](dp_solution_pipeline.assets/min_path_sum_dp_step1.png)
+    ![Quá trình quy hoạch động để tính tổng đường đi nhỏ nhất](dp_solution_pipeline.assets/min_path_sum_dp_step1.png)
 
 === "<2>"
     ![min_path_sum_dp_step2](dp_solution_pipeline.assets/min_path_sum_dp_step2.png)
@@ -172,11 +172,11 @@ The array `dp` has size $n \times m$, **thus the space complexity is $O(nm)$**.
 === "<12>"
     ![min_path_sum_dp_step12](dp_solution_pipeline.assets/min_path_sum_dp_step12.png)
 
-### Space Optimization
+### Tối ưu hóa không gian
 
-Since each cell is only related to the cell to its left and the cell above it, we can use a single-row array to implement the $dp$ table.
+Vì mỗi ô chỉ liên quan đến ô bên trái và ô phía trên nó, chúng ta có thể sử dụng một mảng một hàng để triển khai bảng $dp$.
 
-Note that since the array `dp` can only represent the state of one row, we cannot initialize the first column state in advance, but rather update it when traversing each row:
+Lưu ý rằng vì mảng `dp` chỉ có thể biểu diễn trạng thái của một hàng, chúng ta không thể khởi tạo trước trạng thái của cột đầu tiên mà phải cập nhật trạng thái đó khi duyệt qua từng hàng:
 
 ```src
 [file]{min_path_sum}-[class]{}-[func]{min_path_sum_dp_comp}

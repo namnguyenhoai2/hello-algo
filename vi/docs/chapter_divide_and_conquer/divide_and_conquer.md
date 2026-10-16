@@ -1,48 +1,48 @@
-# Divide and Conquer Algorithms
+# Thuật toán chia để trị
 
-<u>Divide and conquer</u> is a very important and common algorithmic strategy. Divide and conquer is typically implemented based on recursion, consisting of two steps: "divide" and "conquer".
+<u>Chia để trị</u> là một chiến lược thuật toán rất quan trọng và phổ biến. Chia để trị thường được triển khai dựa trên đệ quy, gồm hai bước: “chia” và “trị”.
 
-1. **Divide (partition phase)**: Recursively divide the original problem into two or more subproblems until the smallest subproblem is reached.
-2. **Conquer (merge phase)**: Starting from the smallest subproblems with known solutions, merge the solutions of subproblems from bottom to top to construct the solution to the original problem.
+1. **Chia (giai đoạn phân hoạch)**: Chia đệ quy bài toán ban đầu thành hai hoặc nhiều bài toán con cho đến khi đạt đến bài toán con nhỏ nhất.
+2. **Trị (giai đoạn hợp nhất)**: Bắt đầu từ các bài toán con nhỏ nhất đã biết lời giải, hợp nhất lời giải của các bài toán con từ dưới lên để xây dựng lời giải cho bài toán ban đầu.
 
-As shown in the figure below, "merge sort" is one of the typical applications of the divide and conquer strategy.
+Như trong hình dưới đây, “merge sort” là một trong những ứng dụng điển hình của chiến lược chia để trị.
 
-1. **Divide**: Recursively divide the original array (original problem) into two subarrays (subproblems) until the subarray has only one element (smallest subproblem).
-2. **Conquer**: Merge the sorted subarrays (solutions to subproblems) from bottom to top to obtain a sorted original array (solution to the original problem).
+1. **Chia**: Chia đệ quy mảng ban đầu (bài toán ban đầu) thành hai mảng con (bài toán con) cho đến khi mảng con chỉ còn một phần tử (bài toán con nhỏ nhất).
+2. **Trị**: Hợp nhất các mảng con đã sắp xếp (lời giải của các bài toán con) từ dưới lên để thu được mảng ban đầu đã sắp xếp (lời giải cho bài toán ban đầu).
 
-![Divide and conquer strategy of merge sort](divide_and_conquer.assets/divide_and_conquer_merge_sort.png)
+![Chiến lược chia để trị của merge sort](divide_and_conquer.assets/divide_and_conquer_merge_sort.png)
 
-## How to Determine Divide and Conquer Problems
+## Cách xác định bài toán chia để trị
 
-Whether a problem is suitable for solving with divide and conquer can usually be determined based on the following criteria.
+Thông thường, có thể xác định một bài toán có phù hợp để giải bằng chia để trị hay không dựa trên các tiêu chí sau:
 
-1. **The problem can be decomposed**: The original problem can be divided into smaller, similar subproblems, and can be recursively divided in the same way.
-2. **Subproblems are independent**: There is no overlap between subproblems, they are independent of each other and can be solved independently.
-3. **Solutions of subproblems can be merged**: The solution to the original problem is obtained by merging the solutions of subproblems.
+1. **Bài toán có thể phân rã**: Bài toán ban đầu có thể được chia thành các bài toán con nhỏ hơn và tương tự nhau, đồng thời có thể tiếp tục chia đệ quy theo cùng một cách.
+2. **Các bài toán con độc lập**: Các bài toán con không chồng lấn, độc lập với nhau và có thể được giải độc lập.
+3. **Có thể hợp nhất lời giải của các bài toán con**: Lời giải của bài toán ban đầu được tạo ra bằng cách hợp nhất lời giải của các bài toán con.
 
-Clearly, merge sort satisfies these three criteria.
+Rõ ràng, merge sort đáp ứng cả ba tiêu chí này.
 
-1. **The problem can be decomposed**: Recursively divide the array (original problem) into two subarrays (subproblems).
-2. **Subproblems are independent**: Each subarray can be sorted independently (subproblems can be solved independently).
-3. **Solutions of subproblems can be merged**: Two sorted subarrays (solutions of subproblems) can be merged into one sorted array (solution of the original problem).
+1. **Bài toán có thể phân rã**: Chia đệ quy mảng (bài toán ban đầu) thành hai mảng con (bài toán con).
+2. **Các bài toán con độc lập**: Mỗi mảng con có thể được sắp xếp độc lập (các bài toán con có thể được giải độc lập).
+3. **Có thể hợp nhất lời giải của các bài toán con**: Hai mảng con đã sắp xếp (lời giải của các bài toán con) có thể được hợp nhất thành một mảng đã sắp xếp (lời giải của bài toán ban đầu).
 
-## Improving Efficiency Through Divide and Conquer
+## Cải thiện hiệu suất thông qua chia để trị
 
-**Divide and conquer can not only effectively solve algorithmic problems, but can often also improve algorithmic efficiency**. In sorting algorithms, quick sort, merge sort, and heap sort are faster than selection, bubble, and insertion sort because they apply the divide and conquer strategy.
+**Chia để trị không chỉ có thể giải quyết hiệu quả các bài toán thuật toán mà thường còn có thể cải thiện hiệu suất của thuật toán**. Trong các thuật toán sắp xếp, quick sort, merge sort và heap sort nhanh hơn selection sort, bubble sort và insertion sort vì chúng áp dụng chiến lược chia để trị.
 
-This raises the question: **Why can divide and conquer improve algorithm efficiency, and what is the underlying logic**? In other words, why is dividing a large problem into multiple subproblems, solving the subproblems, and merging their solutions more efficient than directly solving the original problem? This question can be discussed from two aspects: operation count and parallel computation.
+Điều này đặt ra câu hỏi: **Tại sao chia để trị có thể cải thiện hiệu suất của thuật toán và logic nền tảng là gì**? Nói cách khác, tại sao việc chia một bài toán lớn thành nhiều bài toán con, giải các bài toán con rồi hợp nhất lời giải của chúng lại hiệu quả hơn so với việc trực tiếp giải bài toán ban đầu? Có thể thảo luận câu hỏi này từ hai khía cạnh: số phép toán và tính toán song song.
 
-### Operation Count Optimization
+### Tối ưu hóa số phép toán
 
-Taking "bubble sort" as an example, processing an array of length $n$ requires $O(n^2)$ time. Suppose we divide the array at the midpoint into two subarrays, as shown in the figure below. The division requires $O(n)$ time, sorting each subarray requires $O((n / 2)^2)$ time, and merging the two subarrays requires $O(n)$ time, resulting in an overall time complexity of:
+Lấy “bubble sort” làm ví dụ, việc xử lý một mảng có độ dài $n$ cần thời gian $O(n^2)$. Giả sử ta chia mảng tại vị trí chính giữa thành hai mảng con, như trong hình dưới đây. Việc chia cần thời gian $O(n)$, việc sắp xếp mỗi mảng con cần thời gian $O((n / 2)^2)$, còn việc hợp nhất hai mảng con cần thời gian $O(n)$, do đó độ phức tạp thời gian tổng thể là:
 
 $$
 O(n + (\frac{n}{2})^2 \times 2 + n) = O(\frac{n^2}{2} + 2n)
 $$
 
-![Bubble sort before and after array division](divide_and_conquer.assets/divide_and_conquer_bubble_sort.png)
+![Bubble sort trước và sau khi chia mảng](divide_and_conquer.assets/divide_and_conquer_bubble_sort.png)
 
-Next, we compute the following inequality, where the left and right sides represent the total number of operations before and after division, respectively:
+Tiếp theo, ta tính bất đẳng thức sau, trong đó vế trái và vế phải lần lượt biểu thị tổng số phép toán trước và sau khi chia:
 
 $$
 \begin{aligned}
@@ -52,40 +52,40 @@ n(n - 4) & > 0
 \end{aligned}
 $$
 
-**This means that when $n > 4$, the number of operations after division is smaller, and sorting efficiency should be higher**. Note that the time complexity after division is still quadratic $O(n^2)$, but the constant term in the complexity has become smaller.
+**Điều này có nghĩa là khi $n > 4$, số phép toán sau khi chia sẽ ít hơn và hiệu suất sắp xếp sẽ cao hơn**. Lưu ý rằng độ phức tạp thời gian sau khi chia vẫn là bậc hai $O(n^2)$, nhưng hệ số không đổi trong độ phức tạp đã nhỏ hơn.
 
-Going further, **what if we continuously divide the subarrays from their midpoints into two subarrays** until the subarrays have only one element? This approach is actually "merge sort", with a time complexity of $O(n \log n)$.
+Tiến thêm một bước, **điều gì xảy ra nếu ta liên tục chia các mảng con từ vị trí chính giữa thành hai mảng con** cho đến khi các mảng con chỉ còn một phần tử? Cách tiếp cận này thực chất là “merge sort”, với độ phức tạp thời gian là $O(n \log n)$.
 
-Thinking further, **what if we set multiple division points** and evenly divide the original array into $k$ subarrays? This situation is very similar to "bucket sort", which is well-suited for sorting massive amounts of data, with a theoretical time complexity of $O(n + k)$.
+Tiếp tục suy nghĩ, **điều gì xảy ra nếu ta đặt nhiều điểm chia** và chia đều mảng ban đầu thành $k$ mảng con? Trường hợp này rất giống với “bucket sort”, vốn đặc biệt phù hợp để sắp xếp lượng dữ liệu khổng lồ, với độ phức tạp thời gian lý thuyết là $O(n + k)$.
 
-### Parallel Computation Optimization
+### Tối ưu hóa tính toán song song
 
-We know that the subproblems generated by divide and conquer are independent of each other, **so they can typically be solved in parallel**. This means divide and conquer can not only reduce the time complexity of algorithms, **but is also amenable to parallel optimization by the operating system**.
+Ta biết rằng các bài toán con được tạo ra bởi chia để trị độc lập với nhau, **vì vậy chúng thường có thể được giải song song**. Điều này có nghĩa là chia để trị không chỉ có thể giảm độ phức tạp thời gian của thuật toán mà **còn phù hợp với việc tối ưu hóa song song bởi hệ điều hành**.
 
-Parallel optimization is particularly effective in multi-core or multi-processor environments, as the system can simultaneously handle multiple subproblems, making fuller use of computing resources and significantly reducing overall runtime.
+Tối ưu hóa song song đặc biệt hiệu quả trong môi trường đa lõi hoặc đa bộ xử lý, vì hệ thống có thể đồng thời xử lý nhiều bài toán con, tận dụng tốt hơn các tài nguyên tính toán và giảm đáng kể thời gian chạy tổng thể.
 
-For example, in the "bucket sort" shown in the figure below, we evenly distribute massive data into various buckets, and the sorting tasks for all buckets can be distributed to various computing units. After completion, the results are merged.
+Ví dụ, trong “bucket sort” được minh họa ở hình dưới đây, ta phân phối đều lượng dữ liệu khổng lồ vào các bucket khác nhau, rồi phân phối các tác vụ sắp xếp của tất cả bucket cho các đơn vị tính toán khác nhau. Sau khi hoàn tất, các kết quả được hợp nhất.
 
-![Parallel computation in bucket sort](divide_and_conquer.assets/divide_and_conquer_parallel_computing.png)
+![Tính toán song song trong bucket sort](divide_and_conquer.assets/divide_and_conquer_parallel_computing.png)
 
-## Common Applications of Divide and Conquer
+## Các ứng dụng phổ biến của chia để trị
 
-On the one hand, divide and conquer can be used to solve many classic algorithmic problems.
+Một mặt, chia để trị có thể được sử dụng để giải quyết nhiều bài toán thuật toán kinh điển.
 
-- **Finding the closest pair of points**: This algorithm first divides the point set into two parts, then finds the closest pair of points in each part separately, and finally finds the closest pair of points that spans both parts.
-- **Large integer multiplication**: For example, the Karatsuba algorithm, which decomposes large integer multiplication into several smaller integer multiplications and additions.
-- **Matrix multiplication**: For example, the Strassen algorithm, which decomposes large matrix multiplication into multiple small matrix multiplications and additions.
-- **Tower of Hanoi problem**: The Tower of Hanoi problem can be solved through recursion, which is a typical application of the divide and conquer strategy.
-- **Solving inversion pairs**: In a sequence, if a preceding number is greater than a following number, these two numbers form an inversion pair. Solving the inversion pair problem can utilize the divide and conquer approach with the help of merge sort.
+- **Tìm cặp điểm gần nhất**: Thuật toán này trước tiên chia tập hợp điểm thành hai phần, sau đó tìm riêng cặp điểm gần nhất trong mỗi phần, cuối cùng tìm cặp điểm gần nhất trải qua cả hai phần.
+- **Phép nhân số nguyên lớn**: Ví dụ, thuật toán Karatsuba phân rã phép nhân các số nguyên lớn thành một số phép nhân và phép cộng các số nguyên nhỏ hơn.
+- **Phép nhân ma trận**: Ví dụ, thuật toán Strassen phân rã phép nhân các ma trận lớn thành nhiều phép nhân và phép cộng các ma trận nhỏ.
+- **Bài toán Tháp Hà Nội**: Bài toán Tháp Hà Nội có thể được giải bằng đệ quy, đây là một ứng dụng điển hình của chiến lược chia để trị.
+- **Giải bài toán cặp nghịch thế**: Trong một dãy, nếu một số đứng trước lớn hơn một số đứng sau thì hai số này tạo thành một cặp nghịch thế. Có thể giải bài toán cặp nghịch thế bằng phương pháp chia để trị với sự hỗ trợ của merge sort.
 
-On the other hand, divide and conquer is widely applied in the design of algorithms and data structures.
+Mặt khác, chia để trị được áp dụng rộng rãi trong việc thiết kế thuật toán và cấu trúc dữ liệu.
 
-- **Binary search**: Binary search divides a sorted array into two parts from the midpoint index, then decides which half to eliminate based on the comparison result between the target value and the middle element value, and performs the same binary-search step on the remaining interval.
-- **Merge sort**: Already introduced at the beginning of this section, no further elaboration needed.
-- **Quick sort**: Quick sort selects a pivot value, then divides the array into two subarrays, one with elements smaller than the pivot and the other with elements larger than the pivot, then performs the same division operation on these two parts until the subarrays have only one element.
-- **Bucket sort**: The basic idea of bucket sort is to scatter data into multiple buckets, then sort the elements within each bucket, and finally extract the elements from each bucket in sequence to obtain a sorted array.
-- **Trees**: For example, binary search trees, AVL trees, red-black trees, B-trees, B+ trees, etc. Their search, insertion, and deletion operations can all be viewed as applications of the divide and conquer strategy.
-- **Heaps**: A heap is a special complete binary tree, and its various operations, such as insertion, deletion, and heapify, actually imply the divide and conquer idea.
-- **Hash tables**: Although hash tables do not directly apply divide and conquer, some methods for resolving hash collisions indirectly apply the divide and conquer strategy. For example, long linked lists in chaining may be converted to red-black trees to improve lookup efficiency.
+- **Tìm kiếm nhị phân**: Tìm kiếm nhị phân chia một mảng đã sắp xếp thành hai phần tại chỉ số chính giữa, sau đó quyết định loại bỏ nửa nào dựa trên kết quả so sánh giữa giá trị mục tiêu và giá trị của phần tử ở giữa, rồi thực hiện cùng bước tìm kiếm nhị phân trên khoảng còn lại.
+- **Merge sort**: Đã được giới thiệu ở đầu phần này, không cần trình bày thêm.
+- **Quick sort**: Quick sort chọn một giá trị pivot, sau đó chia mảng thành hai mảng con, một mảng gồm các phần tử nhỏ hơn pivot và mảng còn lại gồm các phần tử lớn hơn pivot, rồi thực hiện cùng thao tác chia trên hai phần này cho đến khi các mảng con chỉ còn một phần tử.
+- **Bucket sort**: Ý tưởng cơ bản của bucket sort là phân tán dữ liệu vào nhiều bucket, sau đó sắp xếp các phần tử trong từng bucket và cuối cùng lần lượt lấy các phần tử từ mỗi bucket để thu được một mảng đã sắp xếp.
+- **Cây**: Ví dụ như binary search tree, cây AVL, cây đỏ-đen, B-tree, B+ tree, v.v. Các thao tác tìm kiếm, chèn và xóa của chúng đều có thể được xem là những ứng dụng của chiến lược chia để trị.
+- **Heap**: Heap là một cây nhị phân hoàn chỉnh đặc biệt, và các thao tác khác nhau của nó, chẳng hạn như chèn, xóa và heapify, thực chất đều hàm chứa ý tưởng chia để trị.
+- **Bảng băm**: Mặc dù bảng băm không trực tiếp áp dụng chia để trị, một số phương pháp xử lý xung đột băm lại gián tiếp áp dụng chiến lược chia để trị. Ví dụ, các linked list dài trong phương pháp chaining có thể được chuyển thành cây đỏ-đen để cải thiện hiệu suất tra cứu.
 
-It can be seen that **divide and conquer is a "quietly pervasive" algorithmic idea**, embedded in various algorithms and data structures.
+Có thể thấy rằng **chia để trị là một ý tưởng thuật toán “âm thầm hiện diện khắp nơi”**, được lồng ghép trong nhiều thuật toán và cấu trúc dữ liệu khác nhau.

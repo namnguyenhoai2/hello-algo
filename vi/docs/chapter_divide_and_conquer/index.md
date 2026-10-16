@@ -1,9 +1,9 @@
-# Divide and Conquer
+# Chia để trị
 
-![Divide and conquer](../assets/covers/chapter_divide_and_conquer.jpg)
+![Chia để trị](../assets/covers/chapter_divide_and_conquer.jpg)
 
 !!! abstract
 
-    Difficult problems are decomposed layer by layer, with each decomposition making them simpler.
+    Những vấn đề khó được phân rã từng lớp, và mỗi lần phân rã lại khiến chúng trở nên đơn giản hơn.
 
-    Divide and conquer reveals an important truth: start with what is simple, and nothing remains complex.
+    Chia để trị cho thấy một sự thật quan trọng: hãy bắt đầu từ những gì đơn giản, rồi sẽ không còn gì phức tạp.

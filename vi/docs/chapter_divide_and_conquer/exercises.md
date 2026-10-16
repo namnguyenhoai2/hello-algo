@@ -1,90 +1,90 @@
-# Exercises
+# Bài tập
 
-## Concept Review
+## Ôn tập khái niệm
 
-### Which Tasks Are Suitable for Divide and Conquer?
+### Những bài toán nào phù hợp với chia để trị?
 
-A student wants to solve each task below by "dividing it into two halves, solving each half separately, and then combining the results."
-Classify each task as "suitable for divide and conquer," "can use divide and conquer, but it will not reduce the total work," or "the two halves cannot be solved independently," and explain why.
+Một sinh viên muốn giải mỗi bài toán dưới đây bằng cách “chia nó thành hai nửa, giải riêng từng nửa, rồi kết hợp các kết quả”.
+Hãy phân loại mỗi bài toán là “phù hợp với chia để trị”, “có thể dùng chia để trị, nhưng sẽ không làm giảm tổng khối lượng công việc”, hoặc “không thể giải độc lập hai nửa”, và giải thích lý do.
 
 <!-- numbered-subquestions -->
 
-1. Sort an unsorted array.
-2. Find the maximum value in an array.
-3. Execute a sequence of `push(x)` and `pop()` stack operations in order, and output the element returned by each `pop()`.
+1. Sắp xếp một mảng chưa được sắp xếp.
+2. Tìm giá trị lớn nhất trong một mảng.
+3. Thực thi theo thứ tự một chuỗi gồm `push(x)` và `pop()` thao tác trên stack, rồi xuất phần tử được trả về bởi mỗi `pop()`.
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. Suitable: divide the array in half, sort each half independently, and merge them in $O(n)$ time. This is exactly merge sort.
-    2. Divide and conquer can be used, but it does not reduce the total work. The two halves still require examining all $n$ elements in total,
-        so the time complexity remains $O(n)$, just like a direct scan.
-    3. The two halves cannot be solved independently. The stack's contents at the beginning of the second half depend on the result of executing the first half,
-        so the two halves cannot be completed without knowing each other's results.
+    1. Phù hợp: chia mảng thành hai nửa, sắp xếp độc lập từng nửa, rồi trộn chúng trong thời gian $O(n)$. Đây chính là merge sort.
+    2. Có thể dùng chia để trị, nhưng không làm giảm tổng khối lượng công việc. Hai nửa vẫn cần kiểm tra tổng cộng đủ $n$ phần tử,
+        nên độ phức tạp thời gian vẫn là $O(n)$, giống như khi quét trực tiếp.
+    3. Không thể giải độc lập hai nửa. Nội dung của stack khi bắt đầu nửa thứ hai phụ thuộc vào kết quả thực thi nửa thứ nhất,
+        vì vậy không thể hoàn tất hai nửa nếu chưa biết kết quả của nhau.
 
-### How Exponentiation by Squaring Reduces Computation
+### Cách lũy thừa bằng bình phương làm giảm số phép tính
 
-The recursive function below uses divide and conquer to calculate $x^n$:
+Hàm đệ quy dưới đây sử dụng chia để trị để tính $x^n$:
 
 ```src
 [file]{fast_power}-[class]{}-[func]{fast_pow}
 ```
 
-Set `x = 3` and `n = 5`, and use this function to calculate the result:
+Đặt `x = 3` và `n = 5`, rồi dùng hàm này để tính kết quả:
 
 <!-- numbered-subquestions -->
 
-1. As the recursive calls proceed, which values does the argument `n` take in order?
-2. Starting from the deepest call, what value does each level return?
-3. Why should the recursive result be stored in `half` instead of calling the same subproblem once on each side of the multiplication?
+1. Khi các lời gọi đệ quy tiếp tục diễn ra, đối số `n` lần lượt nhận những giá trị nào?
+2. Bắt đầu từ lời gọi sâu nhất, mỗi cấp trả về giá trị nào?
+3. Tại sao nên lưu kết quả đệ quy vào `half` thay vì gọi cùng một bài toán con một lần ở mỗi phía của phép nhân?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The argument takes the values `5 → 2 → 1 → 0`. The exponent is halved at each step until the base case is reached.
+    1. Đối số nhận các giá trị `5 → 2 → 1 → 0`. Số mũ được chia đôi ở mỗi bước cho đến khi đạt đến trường hợp cơ sở.
 
-    2. When `n = 0`, the function returns 1. When `n = 1`, it returns $1×1×3=3$.
-        When `n = 2`, it returns $3×3=9$. When `n = 5`, it returns $9×9×3=243$.
+    2. Khi `n = 0`, hàm trả về 1. Khi `n = 1`, hàm trả về $1×1×3=3$.
+        Khi `n = 2`, hàm trả về $3×3=9$. Khi `n = 5`, hàm trả về $9×9×3=243$.
 
-    3. If the same subproblem were called once on each side of the multiplication, the two recursive calls would perform exactly the same calculation.
-        Storing the result in `half` means that each level makes only one recursive call, so the recursion depth is about $\log n$.
-        Making two calls would cause a great deal of repeated computation.
+    3. Nếu cùng một bài toán con được gọi một lần ở mỗi phía của phép nhân, hai lời gọi đệ quy sẽ thực hiện chính xác cùng một phép tính.
+        Lưu kết quả vào `half` nghĩa là mỗi cấp chỉ thực hiện một lời gọi đệ quy, nên độ sâu đệ quy xấp xỉ $\log n$.
+        Việc thực hiện hai lời gọi sẽ gây ra rất nhiều phép tính lặp lại.
 
-### Split Traversal Sequences into Left and Right Subtrees
+### Chia các chuỗi duyệt thành cây con trái và cây con phải
 
-A binary tree has no duplicate nodes. Its preorder and inorder traversals are:
+Một cây nhị phân không có các node trùng lặp. Các phép duyệt preorder và inorder của cây là:
 
 - Preorder: `[A, B, D, E, C]`
 - Inorder: `[D, B, E, A, C]`
 
-Split the sequences only once, at the root. You do not need to continue recursively or draw the whole tree:
+Chỉ chia các chuỗi đúng một lần, tại root. Bạn không cần tiếp tục đệ quy hoặc vẽ toàn bộ cây:
 
 <!-- numbered-subquestions -->
 
-1. Which node is the root?
-2. Which subsequences of the inorder traversal correspond to the left and right subtrees?
-3. Which subsequences of the preorder traversal correspond to the left and right subtrees? Which nodes are the root's direct children?
+1. Node nào là root?
+2. Những chuỗi con nào của phép duyệt inorder tương ứng với cây con trái và cây con phải?
+3. Những chuỗi con nào của phép duyệt preorder tương ứng với cây con trái và cây con phải? Các node con trực tiếp của root là những node nào?
 
-??? success "Answer"
+??? success "Đáp án"
 
-    1. The first node in a preorder traversal is the root, so the root is `A`.
+    1. Node đầu tiên trong phép duyệt preorder là root, nên root là `A`.
 
-    2. `A` divides the inorder traversal into two parts: `[D, B, E]` for the left subtree and `[C]` for the right subtree.
+    2. `A` chia phép duyệt inorder thành hai phần: `[D, B, E]` cho cây con trái và `[C]` cho cây con phải.
 
-    3. The left subtree contains 3 nodes, so the 3 preorder elements after the root `A` belong to the left subtree,
-        giving `[B, D, E]`. The remaining `[C]` belongs to the right subtree.
-        Therefore, the root's left child is `B`, and its right child is `C`.
+    3. Cây con trái chứa 3 node, nên 3 phần tử preorder đứng sau root `A` thuộc về cây con trái,
+        tạo thành `[B, D, E]`. Các phần tử còn lại `[C]` thuộc về cây con phải.
+        Vì vậy, node con trái của root là `B`, còn node con phải là `C`.
 
-## Programming Exercises
+## Bài tập lập trình
 
-### Exponentiation by Squaring
+### Lũy thừa bằng bình phương
 
-Given a real number `x` and an integer `n`, calculate $x^n$ without calling the language's built-in power function.
-Use recursive divide and conquer: halve the exponent at each step and reuse the result of the subproblem already calculated.
-This exercise defines $x^0=1$, including when `x = 0`. When `n < 0`, `x != 0` is guaranteed, and the answer can be transformed into $(1/x)^{-n}$.
+Cho một số thực `x` và một số nguyên `n`, hãy tính $x^n$ mà không gọi hàm power tích hợp sẵn của ngôn ngữ.
+Sử dụng chia để trị đệ quy: chia đôi số mũ ở mỗi bước và dùng lại kết quả của bài toán con đã được tính.
+Bài tập này định nghĩa $x^0=1$, kể cả khi `x = 0`. Khi `n < 0`, `x != 0` được đảm bảo, và đáp án có thể được biến đổi thành $(1/x)^{-n}$.
 
-??? tip "Hints"
+??? tip "Gợi ý"
 
-    1. When n is 0, the answer is 1
-    2. After calculating x to the power n // 2, store the result in half rather than making the recursive call a second time
-    3. When n < 0, first change x to 1 / x and then change n to -n; in C++ or Java, first convert n to a 64-bit integer to avoid overflow when negating the smallest 32-bit integer
+    1. Khi n bằng 0, đáp án là 1
+    2. Sau khi tính x lũy thừa n // 2, hãy lưu kết quả vào half thay vì thực hiện lời gọi đệ quy lần thứ hai
+    3. Khi n < 0, trước tiên đổi x thành 1 / x, rồi đổi n thành -n; trong C++ hoặc Java, trước tiên hãy chuyển n thành số nguyên 64-bit để tránh tràn số khi đổi dấu số nguyên 32-bit nhỏ nhất
 
 [LeetCode](https://leetcode.com/problems/powx-n/){ .rounded-button .exercise-button target="_blank" rel="noopener noreferrer" }

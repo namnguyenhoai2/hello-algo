@@ -1,99 +1,99 @@
-# Building a Binary Tree Problem
+# Bài toán xây dựng cây nhị phân
 
 !!! question
 
-    Given the preorder traversal `preorder` and inorder traversal `inorder` of a binary tree, construct the binary tree and return the root node of the binary tree. Assume there are no duplicate node values in the binary tree (as shown in the figure below).
+    Cho phép duyệt preorder `preorder` và phép duyệt inorder `inorder` của một cây nhị phân, hãy xây dựng cây nhị phân và trả về nút gốc của cây nhị phân đó. Giả sử cây nhị phân không có các giá trị nút trùng nhau (như trong hình bên dưới).
 
-![Example data for building a binary tree](build_binary_tree_problem.assets/build_tree_example.png)
+![Dữ liệu ví dụ để xây dựng cây nhị phân](build_binary_tree_problem.assets/build_tree_example.png)
 
-### Determining If It Is a Divide and Conquer Problem
+### Xác định xem đây có phải là bài toán Divide and Conquer hay không
 
-The original problem is defined as constructing a binary tree from `preorder` and `inorder`, which is a typical divide and conquer problem.
+Bài toán ban đầu được định nghĩa là xây dựng một cây nhị phân từ `preorder` và `inorder`, đây là một bài toán Divide and Conquer điển hình.
 
-- **The problem can be decomposed**: From a divide and conquer perspective, we can divide the original problem into two subproblems: constructing the left subtree and constructing the right subtree, plus one operation: initializing the root node. For each subtree (subproblem), we can still reuse the above division method, dividing it into smaller subtrees (subproblems) until the smallest subproblem (empty subtree) is reached.
-- **Subproblems are independent**: The left and right subtrees are independent of each other; there is no overlap between them. When constructing the left subtree, we only need to focus on the parts of the inorder and preorder traversals corresponding to the left subtree. The same applies to the right subtree.
-- **Solutions of subproblems can be merged**: Once we have the left and right subtrees (solutions of subproblems), we can link them to the root node to obtain the solution to the original problem.
+- **Bài toán có thể được phân rã**: Xét theo góc độ Divide and Conquer, chúng ta có thể chia bài toán ban đầu thành hai bài toán con: xây dựng cây con trái và xây dựng cây con phải, cùng với một thao tác: khởi tạo nút gốc. Với mỗi cây con (bài toán con), chúng ta vẫn có thể áp dụng lại phương pháp phân chia trên, tiếp tục chia thành các cây con nhỏ hơn (bài toán con) cho đến khi đạt đến bài toán con nhỏ nhất (cây con rỗng).
+- **Các bài toán con độc lập với nhau**: Cây con trái và cây con phải độc lập với nhau; giữa chúng không có phần giao nhau. Khi xây dựng cây con trái, chúng ta chỉ cần tập trung vào các phần tương ứng với cây con trái trong phép duyệt inorder và preorder. Điều tương tự cũng áp dụng cho cây con phải.
+- **Có thể hợp nhất lời giải của các bài toán con**: Sau khi có cây con trái và cây con phải (lời giải của các bài toán con), chúng ta có thể liên kết chúng với nút gốc để thu được lời giải cho bài toán ban đầu.
 
-### How to Divide Subtrees
+### Cách chia các cây con
 
-Based on the above analysis, this problem can be solved using divide and conquer, **but how do we divide the left and right subtrees through the preorder traversal `preorder` and inorder traversal `inorder`**?
+Dựa trên phân tích trên, bài toán này có thể được giải bằng Divide and Conquer, **nhưng làm thế nào để chia cây con trái và cây con phải thông qua phép duyệt preorder `preorder` và phép duyệt inorder `inorder`**?
 
-According to the definition, both `preorder` and `inorder` can be divided into three parts.
+Theo định nghĩa, cả `preorder` và `inorder` đều có thể được chia thành ba phần.
 
-- Preorder traversal: `[ Root Node | Left Subtree | Right Subtree ]`, for example, the tree in the figure above corresponds to `[ 3 | 9 | 2 1 7 ]`.
-- Inorder traversal: `[ Left Subtree | Root Node | Right Subtree ]`, for example, the tree in the figure above corresponds to `[ 9 | 3 | 1 2 7 ]`.
+- Phép duyệt preorder: `[ Root Node | Left Subtree | Right Subtree ]`, chẳng hạn, cây trong hình trên tương ứng với `[ 3 | 9 | 2 1 7 ]`.
+- Phép duyệt inorder: `[ Left Subtree | Root Node | Right Subtree ]`, chẳng hạn, cây trong hình trên tương ứng với `[ 9 | 3 | 1 2 7 ]`.
 
-Using the data from the figure above as an example, we can obtain the division results through the steps shown in the figure below.
+Sử dụng dữ liệu trong hình trên làm ví dụ, chúng ta có thể thu được kết quả phân chia thông qua các bước được minh họa trong hình bên dưới.
 
-1. The first element 3 in the preorder traversal is the value of the root node.
-2. Find the index of root node 3 in `inorder`, and use this index to divide `inorder` into `[ 9 | 3 | 1 2 7 ]`.
-3. Based on the division result of `inorder`, it is easy to determine that the left and right subtrees have 1 and 3 nodes respectively, allowing us to divide `preorder` into `[ 3 | 9 | 2 1 7 ]`.
+1. Phần tử đầu tiên 3 trong phép duyệt preorder là giá trị của nút gốc.
+2. Tìm chỉ số của nút gốc 3 trong `inorder`, rồi dùng chỉ số này để chia `inorder` thành `[ 9 | 3 | 1 2 7 ]`.
+3. Dựa trên kết quả phân chia của `inorder`, có thể dễ dàng xác định rằng cây con trái và cây con phải lần lượt có 1 và 3 nút, từ đó chia `preorder` thành `[ 3 | 9 | 2 1 7 ]`.
 
-![Dividing subtrees in preorder and inorder traversals](build_binary_tree_problem.assets/build_tree_preorder_inorder_division.png)
+![Chia các cây con trong phép duyệt preorder và inorder](build_binary_tree_problem.assets/build_tree_preorder_inorder_division.png)
 
-### Describing Subtree Intervals Based on Variables
+### Mô tả các khoảng của cây con bằng các biến
 
-Based on the above division method, **we have obtained the index intervals of the root node, left subtree, and right subtree in `preorder` and `inorder`**. To describe these index intervals, we need to use several index variables.
+Dựa trên phương pháp phân chia trên, **chúng ta đã thu được các khoảng chỉ số của nút gốc, cây con trái và cây con phải trong `preorder` và `inorder`**. Để mô tả các khoảng chỉ số này, chúng ta cần sử dụng một số biến chỉ số.
 
-- Denote the index of the current tree's root node in `preorder` as $i$.
-- Denote the index of the current tree's root node in `inorder` as $m$.
-- Denote the index interval of the current tree in `inorder` as $[l, r]$.
+- Gọi chỉ số của nút gốc của cây hiện tại trong `preorder` là $i$.
+- Gọi chỉ số của nút gốc của cây hiện tại trong `inorder` là $m$.
+- Gọi khoảng chỉ số của cây hiện tại trong `inorder` là $[l, r]$.
 
-As shown in the table below, through these variables we can represent the index of the root node in `preorder` and the index intervals of the subtrees in `inorder`.
+Như minh họa trong bảng bên dưới, thông qua các biến này, chúng ta có thể biểu diễn chỉ số của nút gốc trong `preorder` và các khoảng chỉ số của các cây con trong `inorder`.
 
-<p align="center"> Table <id> &nbsp; Indices of root node and subtrees in preorder and inorder traversals </p>
+<p align="center"> Bảng <id> &nbsp; Chỉ số của nút gốc và các cây con trong phép duyệt preorder và inorder </p>
 
-|              | Root node index in `preorder` | Subtree index interval in `inorder` |
+|              | Chỉ số nút gốc trong `preorder` | Khoảng chỉ số của cây con trong `inorder` |
 | ------------ | ----------------------------- | ----------------------------------- |
-| Current tree | $i$                           | $[l, r]$                            |
-| Left subtree | $i + 1$                       | $[l, m-1]$                          |
-| Right subtree| $i + 1 + (m - l)$             | $[m+1, r]$                          |
+| Cây hiện tại | $i$                           | $[l, r]$                            |
+| Cây con trái | $i + 1$                       | $[l, m-1]$                          |
+| Cây con phải| $i + 1 + (m - l)$             | $[m+1, r]$                          |
 
-Please note that $(m-l)$ in the right subtree root node index means "the number of nodes in the left subtree". It is recommended to understand this in conjunction with the figure below.
+Lưu ý rằng $(m-l)$ trong chỉ số nút gốc của cây con phải biểu thị “số nút trong cây con trái”. Bạn nên kết hợp với hình bên dưới để hiểu rõ hơn.
 
-![Index interval representation of root node and left and right subtrees](build_binary_tree_problem.assets/build_tree_division_pointers.png)
+![Biểu diễn khoảng chỉ số của nút gốc, cây con trái và cây con phải](build_binary_tree_problem.assets/build_tree_division_pointers.png)
 
-### Code Implementation
+### Triển khai mã
 
-To improve the efficiency of querying $m$, we use a hash table `hmap` to store the mapping from elements in the `inorder` array to their indices:
+Để tăng hiệu quả khi truy vấn $m$, chúng ta sử dụng một hash table `hmap` để lưu ánh xạ từ các phần tử trong mảng `inorder` đến các chỉ số của chúng:
 
 ```src
 [file]{build_tree}-[class]{}-[func]{build_tree}
 ```
 
-The figure below shows the recursive process of building the binary tree. Each node is established during the downward "recursion" process, while each edge (reference) is established during the upward "return" process.
+Hình bên dưới minh họa quá trình đệ quy xây dựng cây nhị phân. Mỗi nút được tạo trong quá trình “đệ quy” đi xuống, còn mỗi cạnh (reference) được tạo trong quá trình “return” đi lên.
 
 === "<1>"
-    ![Recursive process of building a binary tree](build_binary_tree_problem.assets/built_tree_step1.png)
+    ![Quá trình đệ quy xây dựng cây nhị phân](build_binary_tree_problem.assets/built_tree_step1.png)
 
 === "<2>"
-    ![built_tree_step2](build_binary_tree_problem.assets/built_tree_step2.png)
+    ![cây_đã_xây_dựng_bước_2](build_binary_tree_problem.assets/built_tree_step2.png)
 
 === "<3>"
-    ![built_tree_step3](build_binary_tree_problem.assets/built_tree_step3.png)
+    ![cây_đã_xây_dựng_bước_3](build_binary_tree_problem.assets/built_tree_step3.png)
 
 === "<4>"
-    ![built_tree_step4](build_binary_tree_problem.assets/built_tree_step4.png)
+    ![cây_đã_xây_dựng_bước_4](build_binary_tree_problem.assets/built_tree_step4.png)
 
 === "<5>"
-    ![built_tree_step5](build_binary_tree_problem.assets/built_tree_step5.png)
+    ![cây_đã_xây_dựng_bước_5](build_binary_tree_problem.assets/built_tree_step5.png)
 
 === "<6>"
-    ![built_tree_step6](build_binary_tree_problem.assets/built_tree_step6.png)
+    ![cây_đã_xây_dựng_bước_6](build_binary_tree_problem.assets/built_tree_step6.png)
 
 === "<7>"
-    ![built_tree_step7](build_binary_tree_problem.assets/built_tree_step7.png)
+    ![cây_đã_xây_dựng_bước_7](build_binary_tree_problem.assets/built_tree_step7.png)
 
 === "<8>"
-    ![built_tree_step8](build_binary_tree_problem.assets/built_tree_step8.png)
+    ![cây_đã_xây_dựng_bước_8](build_binary_tree_problem.assets/built_tree_step8.png)
 
 === "<9>"
-    ![built_tree_step9](build_binary_tree_problem.assets/built_tree_step9.png)
+    ![cây_đã_xây_dựng_bước_9](build_binary_tree_problem.assets/built_tree_step9.png)
 
-The division results of the preorder traversal `preorder` and inorder traversal `inorder` within each recursive function are shown in the figure below.
+Kết quả phân chia của phép duyệt preorder `preorder` và phép duyệt inorder `inorder` trong mỗi hàm đệ quy được minh họa trong hình bên dưới.
 
-![Division results in each recursive function](build_binary_tree_problem.assets/built_tree_overall.png)
+![Kết quả phân chia trong mỗi hàm đệ quy](build_binary_tree_problem.assets/built_tree_overall.png)
 
-Let the number of nodes in the tree be $n$. Initializing each node (executing one recursive function `dfs()`) takes $O(1)$ time. **Therefore, the overall time complexity is $O(n)$**.
+Gọi số nút trong cây là $n$. Việc khởi tạo mỗi nút (thực thi một hàm đệ quy `dfs()`) mất thời gian $O(1)$. **Do đó, độ phức tạp thời gian tổng thể là $O(n)$**.
 
-The hash table stores the mapping from `inorder` elements to their indices, with a space complexity of $O(n)$. In the worst case, when the binary tree degenerates into a linked list, the recursion depth reaches $n$, using $O(n)$ stack frame space. **Therefore, the overall space complexity is $O(n)$**.
+Hash table lưu ánh xạ từ các phần tử `inorder` đến các chỉ số của chúng, với độ phức tạp không gian là $O(n)$. Trong trường hợp xấu nhất, khi cây nhị phân suy biến thành một linked list, độ sâu đệ quy đạt $n$, sử dụng $O(n)$ không gian cho các stack frame. **Do đó, độ phức tạp không gian tổng thể là $O(n)$**.
