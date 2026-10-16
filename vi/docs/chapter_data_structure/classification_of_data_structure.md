@@ -1,48 +1,48 @@
-# Classification of Data Structures
+# Phân loại cấu trúc dữ liệu
 
-Common data structures include arrays, linked lists, stacks, queues, hash tables, trees, heaps, and graphs. They can be classified from two dimensions: "logical structure" and "physical structure".
+Các cấu trúc dữ liệu phổ biến bao gồm mảng, danh sách liên kết, stack, queue, bảng băm, cây, heap và đồ thị. Chúng có thể được phân loại theo hai khía cạnh: “cấu trúc logic” và “cấu trúc vật lý”.
 
-## Logical Structure: Linear and Non-Linear
+## Cấu trúc logic: Tuyến tính và phi tuyến
 
-**Logical structure reveals the logical relationships between data elements**. In arrays and linked lists, data is arranged in a certain order, embodying linear relationships between elements; while in trees, data is arranged hierarchically from top to bottom, showing parent-descendant relationships; graphs are composed of nodes and edges, reflecting complex network relationships.
+**Cấu trúc logic thể hiện các mối quan hệ logic giữa các phần tử dữ liệu**. Trong mảng và danh sách liên kết, dữ liệu được sắp xếp theo một thứ tự nhất định, thể hiện mối quan hệ tuyến tính giữa các phần tử; trong cây, dữ liệu được sắp xếp theo thứ bậc từ trên xuống dưới, thể hiện mối quan hệ giữa nút cha và nút hậu duệ; đồ thị được tạo thành từ các nút và cạnh, phản ánh các mối quan hệ mạng phức tạp.
 
-As shown in the figure below, logical structures can be divided into two major categories: "linear" and "non-linear". Linear structures are more intuitive, indicating that data is linearly arranged in logical relationships; non-linear structures are the opposite, arranged non-linearly.
+Như minh họa trong hình bên dưới, cấu trúc logic có thể được chia thành hai loại chính: “tuyến tính” và “phi tuyến”. Cấu trúc tuyến tính trực quan hơn, cho thấy dữ liệu được sắp xếp tuyến tính theo các mối quan hệ logic; cấu trúc phi tuyến thì ngược lại, được sắp xếp theo cách phi tuyến.
 
-- **Linear data structures**: Arrays, linked lists, stacks, queues, hash tables, where elements have a one-to-one sequential relationship.
-- **Non-linear data structures**: Trees, heaps, graphs, hash tables.
+- **Cấu trúc dữ liệu tuyến tính**: Mảng, danh sách liên kết, stack, queue, bảng băm, trong đó các phần tử có mối quan hệ tuần tự một-một.
+- **Cấu trúc dữ liệu phi tuyến**: Cây, heap, đồ thị, bảng băm.
 
-Non-linear data structures can be further divided into tree structures and network structures.
+Cấu trúc dữ liệu phi tuyến có thể được chia tiếp thành cấu trúc cây và cấu trúc mạng.
 
-- **Tree structures**: Trees, heaps, hash tables, where elements have a one-to-many relationship.
-- **Network structures**: Graphs, where elements have a many-to-many relationship.
+- **Cấu trúc cây**: Cây, heap, bảng băm, trong đó các phần tử có mối quan hệ một-nhiều.
+- **Cấu trúc mạng**: Đồ thị, trong đó các phần tử có mối quan hệ nhiều-nhiều.
 
-![Linear and non-linear data structures](classification_of_data_structure.assets/classification_logic_structure.png)
+![Cấu trúc dữ liệu tuyến tính và phi tuyến](classification_of_data_structure.assets/classification_logic_structure.png)
 
-## Physical Structure: Contiguous and Dispersed
+## Cấu trúc vật lý: Liền kề và phân tán
 
-**When an algorithm program runs, the data being processed is mainly stored in memory**. The figure below shows a computer memory stick, where each black square contains a memory space. We can imagine memory as a huge Excel spreadsheet, where each cell can store a certain amount of data.
+**Khi một chương trình thuật toán chạy, dữ liệu được xử lý chủ yếu được lưu trữ trong bộ nhớ**. Hình bên dưới minh họa một thanh bộ nhớ, trong đó mỗi ô vuông màu đen chứa một vùng nhớ. Ta có thể hình dung bộ nhớ như một bảng tính Excel khổng lồ, trong đó mỗi ô có thể lưu trữ một lượng dữ liệu nhất định.
 
-**The system accesses data at the target location through memory addresses**. As shown in the figure below, the computer assigns a number to each cell in the spreadsheet according to specific rules, ensuring that each memory space has a unique memory address. With these addresses, the program can access data in memory.
+**Hệ thống truy cập dữ liệu tại vị trí đích thông qua địa chỉ bộ nhớ**. Như minh họa trong hình bên dưới, máy tính đánh số cho từng ô trong bảng tính theo các quy tắc cụ thể, bảo đảm mỗi vùng nhớ có một địa chỉ bộ nhớ duy nhất. Nhờ các địa chỉ này, chương trình có thể truy cập dữ liệu trong bộ nhớ.
 
-![Memory stick, memory space, memory address](classification_of_data_structure.assets/computer_memory_location.png)
-
-!!! tip
-
-    It should be noted that comparing memory to an Excel spreadsheet is only a simplified analogy. The actual workings of memory are much more complex, involving concepts such as address space, memory management, cache mechanisms, virtual memory, and physical memory.
-
-Memory is a shared resource for all programs. When a block of memory is occupied by a program, it usually cannot be used by other programs at the same time. **Therefore, in the design of data structures and algorithms, memory resources are an important consideration**. For example, the peak memory occupied by an algorithm should not exceed the remaining free memory of the system; if there is a lack of contiguous large memory blocks, then the data structure chosen must be able to be stored in dispersed memory spaces.
-
-As shown in the figure below, **physical structure reflects the way data is stored in computer memory**. It can be divided into contiguous-space storage (arrays) and dispersed-space storage (linked lists). At a low level, physical structure determines how data is accessed, updated, inserted, and deleted. These two physical structures exhibit complementary characteristics in terms of time efficiency and space efficiency.
-
-![Contiguous space storage and dispersed space storage](classification_of_data_structure.assets/classification_phisical_structure.png)
-
-It is worth noting that **all data structures are implemented based on arrays, linked lists, or a combination of both**. For example, stacks and queues can be implemented using either arrays or linked lists; while the implementation of hash tables may include both arrays and linked lists.
-
-- **Can be implemented based on arrays**: Stacks, queues, hash tables, trees, heaps, graphs, matrices, tensors (arrays with dimensions $\geq 3$), etc.
-- **Can be implemented based on linked lists**: Stacks, queues, hash tables, trees, heaps, graphs, etc.
-
-After initialization, linked lists can still adjust their length during program execution, so they are also called "dynamic data structures". After initialization, the length of arrays cannot be changed, so they are also called "static data structures". It is worth noting that arrays can change length by reallocating memory, thus retaining a limited degree of flexibility.
+![Thanh bộ nhớ, vùng nhớ, địa chỉ bộ nhớ](classification_of_data_structure.assets/computer_memory_location.png)
 
 !!! tip
 
-    If you find it difficult to understand physical structure, it is recommended to read the next chapter first, and then review this section.
+    Cần lưu ý rằng việc so sánh bộ nhớ với bảng tính Excel chỉ là một phép tương tự đơn giản hóa. Cách bộ nhớ thực sự hoạt động phức tạp hơn nhiều, liên quan đến các khái niệm như không gian địa chỉ, quản lý bộ nhớ, cơ chế cache, bộ nhớ ảo và bộ nhớ vật lý.
+
+Bộ nhớ là tài nguyên dùng chung cho tất cả chương trình. Khi một vùng nhớ bị một chương trình chiếm dụng, thông thường vùng nhớ đó không thể được các chương trình khác sử dụng cùng lúc. **Vì vậy, trong quá trình thiết kế cấu trúc dữ liệu và thuật toán, tài nguyên bộ nhớ là một yếu tố quan trọng cần cân nhắc**. Ví dụ, lượng bộ nhớ cực đại mà một thuật toán sử dụng không được vượt quá dung lượng bộ nhớ trống còn lại của hệ thống; nếu thiếu các khối bộ nhớ lớn liền kề, thì cấu trúc dữ liệu được chọn phải có khả năng được lưu trữ trong các vùng nhớ phân tán.
+
+Như minh họa trong hình bên dưới, **cấu trúc vật lý phản ánh cách dữ liệu được lưu trữ trong bộ nhớ máy tính**. Cấu trúc này có thể được chia thành lưu trữ trong không gian liền kề (mảng) và lưu trữ trong không gian phân tán (danh sách liên kết). Ở cấp độ thấp, cấu trúc vật lý quyết định cách dữ liệu được truy cập, cập nhật, chèn và xóa. Hai cấu trúc vật lý này thể hiện các đặc điểm bổ trợ cho nhau về hiệu quả thời gian và hiệu quả không gian.
+
+![Lưu trữ trong không gian liền kề và lưu trữ trong không gian phân tán](classification_of_data_structure.assets/classification_phisical_structure.png)
+
+Cần lưu ý rằng **tất cả cấu trúc dữ liệu đều được triển khai dựa trên mảng, danh sách liên kết hoặc sự kết hợp của cả hai**. Ví dụ, stack và queue có thể được triển khai bằng mảng hoặc danh sách liên kết; trong khi việc triển khai bảng băm có thể bao gồm cả mảng và danh sách liên kết.
+
+- **Có thể được triển khai dựa trên mảng**: Stack, queue, bảng băm, cây, heap, đồ thị, ma trận, tensor (mảng có số chiều $\geq 3$), v.v.
+- **Có thể được triển khai dựa trên danh sách liên kết**: Stack, queue, bảng băm, cây, heap, đồ thị, v.v.
+
+Sau khi khởi tạo, danh sách liên kết vẫn có thể điều chỉnh độ dài trong quá trình chương trình thực thi, vì vậy chúng còn được gọi là “cấu trúc dữ liệu động”. Sau khi khởi tạo, độ dài của mảng không thể thay đổi, vì vậy chúng còn được gọi là “cấu trúc dữ liệu tĩnh”. Cần lưu ý rằng mảng có thể thay đổi độ dài bằng cách cấp phát lại bộ nhớ, nhờ đó vẫn giữ được một mức độ linh hoạt nhất định.
+
+!!! tip
+
+    Nếu bạn cảm thấy khó hiểu cấu trúc vật lý, bạn nên đọc chương tiếp theo trước, sau đó xem lại phần này.

@@ -1,9 +1,9 @@
-# Data Structures
+# Cấu trúc dữ liệu
 
-![Data structures](../assets/covers/chapter_data_structure.jpg)
+![Cấu trúc dữ liệu](../assets/covers/chapter_data_structure.jpg)
 
 !!! abstract
 
-    Data structures are like a sturdy and diverse framework.
+    Cấu trúc dữ liệu giống như một framework vững chắc và đa dạng.
 
-    It provides a blueprint for the orderly organization of data, upon which algorithms come to life.
+    Nó cung cấp bản thiết kế cho việc tổ chức dữ liệu một cách có trật tự, làm nền tảng để các thuật toán phát huy hiệu quả.
