@@ -69,19 +69,22 @@ theme:
 extra:
   alternate:
     - name: 简体中文
-      link: /
+      link: /hello-algo/v1.3.0/
       lang: zh
     - name: 繁體中文
-      link: /zh-hant/
+      link: /hello-algo/v1.3.0/zh-hant/
       lang: zh-Hant
     - name: English
-      link: /en/
+      link: /hello-algo/v1.3.0/en/
       lang: en
+    - name: Tiếng Việt
+      link: /hello-algo/v1.3.0/vi/
+      lang: vi
     - name: 日本語
-      link: /ja/
+      link: /hello-algo/v1.3.0/ja/
       lang: ja
     - name: Русский
-      link: /ru/
+      link: /hello-algo/v1.3.0/ru/
       lang: ru
   social:
     - icon: fontawesome/brands/github

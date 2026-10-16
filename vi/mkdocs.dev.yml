@@ -1,0 +1,8 @@
+# Cấu hình chỉ dùng để xem trước khi dịch.
+# Đọc trực tiếp nội dung nguồn, không cần đồng bộ sang build/vi/docs.
+INHERIT: mkdocs.yml
+
+docs_dir: docs
+
+theme:
+  custom_dir: ../overrides
