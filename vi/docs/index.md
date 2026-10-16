@@ -1,5 +1,5 @@
-# Hello Algo
+# Xin chào Thuật toán!
 
-Data structures and algorithms tutorial with animated illustrations and ready-to-run code.
+Hướng dẫn về cấu trúc dữ liệu và thuật toán với hình minh họa động cùng mã có thể chạy ngay.
 
-[Hello Algo](chapter_hello_algo/)
+[Xin chào Thuật toán!](chapter_hello_algo/)
