@@ -2,4 +2,4 @@
 
 アニメーション図解、ワンクリックで実行できるデータ構造とアルゴリズムのチュートリアル。
 
-[読み始める](chapter_hello_algo/)
+[読み始める](chapter_hello_algo/index.md)

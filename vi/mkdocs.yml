@@ -3,7 +3,7 @@ INHERIT: ../mkdocs.yml
 
 # Thông tin dự án
 site_name: Hello Algo
-site_url: https://docs.300baicodethieunhi.com/hello-algo/v1.3.0/
+site_url: https://docs.300baicodethieunhi.com/hello-algo/v1.3.0/index.html
 site_description: "Giáo trình cấu trúc dữ liệu và giải thuật với minh họa động và mã nguồn chạy được ngay"
 docs_dir: ../build/vi/docs
 site_dir: ../site/vi

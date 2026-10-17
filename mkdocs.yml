@@ -5,6 +5,9 @@ site_author: krahets
 site_description: 动画图解、一键运行的数据结构与算法教程
 docs_dir: build/docs
 site_dir: site
+# Generate direct file links (for example, `chapter/index.html`) so the site
+# can be browsed reliably via file:/// without a web server.
+use_directory_urls: false
 # Repository
 repo_name: krahets/hello-algo
 repo_url: https://github.com/krahets/hello-algo
